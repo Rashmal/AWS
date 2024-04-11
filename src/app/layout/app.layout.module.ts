@@ -18,6 +18,8 @@ import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { NewSideBarItemComponent } from './new-side-bar-item/new-side-bar-item.component';
+import { NewSideBarComponent } from './new-side-bar/new-side-bar.component';
 
 @NgModule({
     declarations: [
@@ -27,6 +29,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
         AppMenuComponent,
         AppSidebarComponent,
         AppLayoutComponent,
+        NewSideBarComponent,
+        NewSideBarItemComponent
     ],
     imports: [
         BrowserModule,

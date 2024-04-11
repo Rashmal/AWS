@@ -11,6 +11,8 @@ import { AppTopBarComponent } from './app.topbar.component';
 })
 export class AppLayoutComponent implements OnDestroy {
 
+    mouseEnter: boolean = false;
+
     overlayMenuOpenSubscription: Subscription;
 
     menuOutsideClickListener: any;
@@ -117,5 +119,13 @@ export class AppLayoutComponent implements OnDestroy {
         if (this.menuOutsideClickListener) {
             this.menuOutsideClickListener();
         }
+    }
+
+    mouseEnterOnSidebar(){
+        this.mouseEnter = true;
+    }
+
+    mouseLeaveOnSidebar(){
+        this.mouseEnter = false;
     }
 }

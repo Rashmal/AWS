@@ -5,8 +5,9 @@
     <!-- End of Top bar section -->
 
     <!-- Side bar section -->
-    <div class="layout-sidebar">
-        <app-sidebar></app-sidebar>
+    <div class="layout-sidebar"  (mouseenter)="mouseEnterOnSidebar()" (mouseleave)="mouseLeaveOnSidebar()">
+        <app-new-side-bar [mouseEnter]="mouseEnter"></app-new-side-bar>
+        <!-- <app-sidebar></app-sidebar> -->
     </div>
     <!-- End of Side bar section -->
 
