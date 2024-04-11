@@ -16,3 +16,26 @@ $gutter: 1rem; //for primeflex grid system
 input {
     height: 30px;
 }
+
+.p-overlaypanel .p-overlaypanel-content {
+    padding: 0;
+}
+
+.option_label {
+    width: 150px;
+    padding: 10px;
+    color: black;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+    span {
+        margin-right: auto;
+    }
+}
+
+.option_label:hover {
+    background: #004aad;
+    color: white;
+}

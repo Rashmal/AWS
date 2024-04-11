@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationRoutingModule } from './authenticationRouting.module';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
     declarations: [
@@ -11,7 +12,8 @@ import { LoginComponent } from './components/login/login.component';
     imports: [
         CommonModule,
         FormsModule,
-        AuthenticationRoutingModule
+        AuthenticationRoutingModule,
+        
     ]
 })
 export class AuthenticationModule { }

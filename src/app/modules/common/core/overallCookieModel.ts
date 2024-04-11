@@ -114,4 +114,11 @@ export class OverallCookieModel implements OverallCookieInterface {
         // Return the value
         return this.cookieObject.LoggedUserEmail;
     }
+
+    // Clearing the data from the local storage
+    ClearCookies() {
+        // Clearing the local storage
+        localStorage.removeItem(this.COOKIE_NAME_PART_1);
+        localStorage.removeItem(this.COOKIE_NAME_PART_2);
+    }
 }

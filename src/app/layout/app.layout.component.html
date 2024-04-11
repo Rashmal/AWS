@@ -1,14 +1,31 @@
+<!-- Main content section -->
 <div class="layout-wrapper" [ngClass]="containerClass">
+    <!-- Top bar section -->
     <app-topbar></app-topbar>
+    <!-- End of Top bar section -->
+
+    <!-- Side bar section -->
     <div class="layout-sidebar">
         <app-sidebar></app-sidebar>
     </div>
+    <!-- End of Side bar section -->
+
+    <!-- Main container section -->
     <div class="layout-main-container">
         <div class="layout-main">
             <router-outlet></router-outlet>
         </div>
+
+        <!-- Footer section -->
         <app-footer></app-footer>
+        <!-- End of Footer section -->
     </div>
-    <app-config></app-config>
+    <!-- End of Main container section -->
+
+    <!-- Config section -->
+    <!-- <app-config></app-config> -->
+    <!-- End of Config section -->
+
     <div class="layout-mask"></div>
 </div>
+<!-- End of Main content section -->
