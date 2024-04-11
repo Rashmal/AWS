@@ -1,0 +1,88 @@
+<!-- Login main -->
+<div class="container-fluid login_main">
+    <!-- Login card -->
+    <div class="card">
+        <!-- Login main row -->
+        <div class="row login_main_row">
+            <!-- Login banner image -->
+            <div class="col-sm-12 col-md-5 col-lg-9 banner_img">
+
+            </div>
+            <div class="overlay_text_home d-none d-lg-block d-xl-block">
+                <h3>Welcome to AWS Construction</h3>
+                <p>Access project plans, manage materials, and collaborate with your team. Secure Login for
+                    Authorized Personnel Only.</p>
+            </div>
+            <!-- End of Login banner image -->
+            <!-- Login form -->
+            <div class="col-sm-12 col-md-7 col-lg-3 login_form p-5">
+                <div class="overlay_text_home_lbl d-none d-xs-block d-sm-block d-md-block d-lg-none d-xl-none">
+                    <h3>Welcome to AWS Construction</h3>
+                    <p>Access project plans, manage materials, and collaborate with your team. Secure Login for
+                        Authorized Personnel Only.</p>
+                </div>
+
+                <h2 class="mb-4 title_label_color">USER LOGIN</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" aria-describedby="usernameHelp"
+                            maxlength="50" [(ngModel)]="user_email" [ngModelOptions]="{standalone: true}"
+                            (input)="onPasteEmailFunction($event)">
+                    </div>
+
+                    <!-- Error Message -->
+                    <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$USER$EMAIL')">
+                        <span>{{CheckErrorCode('EMPTY$USER$EMAIL').ErrorMessage}}</span>
+                    </div>
+                    <!-- End of Error Message -->
+
+                    <!-- Error Message -->
+                    <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMAIL$FORMAT')">
+                        <span>{{CheckErrorCode('EMAIL$FORMAT').ErrorMessage}}</span>
+                    </div>
+                    <!-- End of Error Message -->
+
+                    <!-- Error Message -->
+                    <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('NOT$EXISTS$USER$EMAIL')">
+                        <span>{{CheckErrorCode('NOT$EXISTS$USER$EMAIL').ErrorMessage}}</span>
+                    </div>
+                    <!-- End of Error Message -->
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" [(ngModel)]="user_password"
+                            maxlength="25" [ngModelOptions]="{standalone: true}"
+                            (input)="onPastePasswordFunction($event)">
+                    </div>
+
+                    <!-- Error Message -->
+                    <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$USER$PASSWORD')">
+                        <span>{{CheckErrorCode('EMPTY$USER$PASSWORD').ErrorMessage}}</span>
+                    </div>
+                    <!-- End of Error Message -->
+
+                    <!-- Error Message -->
+                    <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('LENGTH$USER$PASSWORD')">
+                        <span>{{CheckErrorCode('LENGTH$USER$PASSWORD').ErrorMessage}}</span>
+                    </div>
+                    <!-- End of Error Message -->
+
+                    <!-- Error Message -->
+                    <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('INVALID$LOGIN')">
+                        <span>{{CheckErrorCode('INVALID$LOGIN').ErrorMessage}}</span>
+                    </div>
+                    <!-- End of Error Message -->
+
+                    <div class="login_button_section">
+                        <button class="btn btn-primary" (click)="loginOnClick()">LOGIN</button>
+                    </div>
+                </form>
+            </div>
+            <!-- End of Login form -->
+        </div>
+        <!-- End of Login main row -->
+    </div>
+    <!-- End of Login card -->
+</div>
+<!-- End of Login main -->

@@ -1,0 +1,143 @@
+$primary-color: #ff9e4f;
+
+.login_main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(to right, #ffde59, #ff914d);
+
+    label {
+        color: $primary-color;
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        background: #ffefe3;
+    }
+
+    .form-group {
+        margin-top: 10px;
+    }
+
+    .card {
+        width: 90%;
+        height: 90%;
+        padding: 0;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .login_main_row {
+        height: 100%;
+    }
+
+    .login_form {
+        height: fit-content;
+        margin: auto;
+    }
+
+    .title_label_color {
+        text-align: center;
+        color: $primary-color;
+    }
+
+    .login_button_section {
+        margin-top: 10px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+
+        .btn-primary {
+            background-image: linear-gradient(to right, #ffde59, #ff914d);
+            border: none;
+            width: 40%;
+            height: 40px;
+            border-radius: 15px;
+        }
+    }
+
+    .text-container {
+        position: absolute;
+        color: rgb(255, 255, 255);
+        left: 37%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(41, 41, 41, 0.8);
+        padding: 0.5rem;
+        text-align: center;
+        font-size: 16px;
+        height: 100%;
+        width: 76.5%;
+    }
+
+    .error_message {
+        color: red;
+        padding: 0;
+    }
+}
+.banner_img {
+    background-image: url("../../../../../assets/demo/images/login/loginImg.jpg"); /* Replace 'your-image-url.jpg' with your image URL */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+}
+
+.overlay_text_home {
+    position: absolute;
+    height: 100%;
+    width: 68vw;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+    padding: 30px;
+    h3 {
+        font-size: 40pt;
+        color: #e76c1b;
+    }
+    p {
+        font-size: 16pt;
+        color: #e76c1b;
+    }
+}
+
+.overlay_text_home_lbl {
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+    padding: 0;
+    padding-bottom: 50pt;
+    h3 {
+        font-size: 20pt;
+        color: #e76c1b;
+    }
+    p {
+        font-size: 8pt;
+        color: #e76c1b;
+        margin-bottom: 10px;
+    }
+}
+
+// .banner_img::before {
+//     content: url("../../../../../assets/demo/images/login/loginImg.jpg");
+//     width: 100%;
+//     height: 100%;
+//     display: flex;
+//     overflow: hidden;
+// }
+
+// .banner_img::after {
+//     content: url("../../../../../assets/demo/images/login/loginImg.jpg"); // :before and :after both require content
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-image: linear-gradient(120deg, #eaee44, #33d0ff);
+//     background-color: #333;
+//     opacity: 0.7;
+// }
+
+// .banner_img > * {
+//     z-index: 100;
+// }

@@ -1,0 +1,13 @@
+
+.login_main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.banner_img {
+  background-image: url("../../../../../assets/demo/images/login/loginImg.jpg"); /* Replace 'your-image-url.jpg' with your image URL */
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}
