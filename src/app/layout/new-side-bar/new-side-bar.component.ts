@@ -35,7 +35,7 @@ export class NewSideBarComponent implements OnInit {
                     {
                         label: 'Form Layout',
                         icon: 'pi pi-fw pi-id-card',
-                        routerLink: ['/uikit/formlayout'],
+                        routerLink: ['/layout/global'],
                     },
                     {
                         label: 'Input',
