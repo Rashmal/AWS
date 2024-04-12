@@ -20,48 +20,48 @@ export class NewSideBarComponent implements OnInit {
     //Store static side menu items
     staticMenuItems: Module[] = [{
         Id: 1,
-       ModuleCode: "DSH",
-       Name: "Dashboard",
+       ModuleCode: "STAT1",
+       Name: "Global Notes",
        ModuleIcon: "pi pi-fw pi-home",
        RedirectUrl: "/layout/dashboard",
         IsDisable: false
       },
       {
         Id: 2,
-       ModuleCode: "MD1",
-       Name: "Module 1",
+       ModuleCode: "STAT2",
+       Name: "Dashboard",
        ModuleIcon: "pi pi-fw pi-id-card",
        RedirectUrl: "/layout/global",
         IsDisable: false
       },
       {
         Id: 3,
-       ModuleCode: "MD2",
-       Name: "Module 2",
+       ModuleCode: "STAT3",
+       Name: "View/Add Appoiment",
        ModuleIcon: "pi pi-fw pi-check-square",
        RedirectUrl: "/layout/dashboard",
         IsDisable: false
       },
       {
         Id: 4,
-       ModuleCode: "MD3",
-       Name: "Module 3",
+       ModuleCode: "STAT4",
+       Name: "Request / New",
        ModuleIcon: "pi pi-fw pi-bookmark",
        RedirectUrl: "/layout/dashboard",
         IsDisable: false
       },
       {
         Id: 5,
-       ModuleCode: "MD4",
-       Name: "Module 4",
+       ModuleCode: "STAT5",
+       Name: "Document Repository",
        ModuleIcon: "pi pi-fw pi-exclamation-circle",
        RedirectUrl: "/layout/dashboard",
         IsDisable: false
       },
       {
         Id: 6,
-       ModuleCode: "MD5",
-       Name: "Module 5",
+       ModuleCode: "STAT6",
+       Name: "Trello",
        ModuleIcon: "pi pi-fw pi-box",
        RedirectUrl: "/layout/dashboard",
         IsDisable: false

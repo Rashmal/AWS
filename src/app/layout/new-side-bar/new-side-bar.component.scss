@@ -8,21 +8,23 @@
 }
 
 
-.menu_item_main{
+.menu_item_main {
     text-decoration: none;
 
-    .single_item{
+    .single_item {
         display: flex;
         align-items: center;
         width: 100%;
         margin-bottom: 10px;
-        .item_icon{
+
+        .item_icon {
             display: flex;
             justify-content: center;
-           
-           
+
+
         }
-        .item_label{
+
+        .item_label {
             width: 100%;
             margin-left: 10px;
             display: flex;
@@ -32,26 +34,93 @@
     }
 }
 
-.full_width{
+.menu_item_expand {
+    text-decoration: none;
+
+    .gbl_n_icon {
+       
+
+        .single_item {
+            background-color: #0b4e7d;
+            border-radius: 30px;
+            color: #ffffff;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0px 10px;
+            justify-content: space-between;
+            .noti_count{
+                text-decoration: none;
+                height: 20px;
+                width: max-content;
+                background-color: #c30505;
+                display: flex;
+                align-items: center;
+                padding: 0px 5px;
+                border-radius: 8px;
+                
+                    font-weight: bold;
+                    text-decoration: none;
+                    font-size: 11px;
+               
+            }
+
+            .glbl_n_label{
+                color: #ffffff;
+            }
+
+        }
+    }
+    .req_new{
+       
+       
+    
+        .single_item {
+            background-color: #21BA45;
+            border-radius: 30px;
+            color: #ffffff;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0px 10px;
+            justify-content: space-between;
+            
+
+        }
+    }
+}
+
+.full_width {
     width: 100%;
 }
-.auto_width{
+
+.auto_width {
     width: auto;
 }
 
-.margin_left_10{
+.margin_left_10 {
     margin-left: 10px;
 }
 
-.margin_right_10{
+.margin_right_10 {
     margin-right: 10px;
 }
-.margin_left_13{
+
+.margin_left_13 {
     margin-left: 13px;
 }
-.margin_right_13{
+
+.margin_right_13 {
     margin-right: 13px;
 }
-::ng-deep .pi-fw{
+
+.flex_center_static{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+::ng-deep .pi-fw {
     font-size: 20px;
 }
