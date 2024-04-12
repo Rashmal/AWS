@@ -3,7 +3,8 @@
 
     <!--Global notes and others-->
     <div class="flex_center_static">
-        <div *ngFor="let item of staticMenuItems; let i = index"
+        <div [pTooltip]="item.Name"
+        tooltipPosition="right" *ngFor="let item of staticMenuItems; let i = index"
             [style.width]="item.ModuleCode == 'STAT1' ? '100%':  item.ModuleCode == 'STAT4' ? '45%' : 'auto'"
             [ngClass]="[!mouseEnter ? 'menu_item_main' : 'menu_item_expand', (item.ModuleCode == 'STAT4' && mouseEnter)?'req_new_ind':'']"
             [style.margin-top.px]="i == 0 ? 10 : 0"
