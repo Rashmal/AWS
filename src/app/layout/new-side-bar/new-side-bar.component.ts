@@ -9,11 +9,15 @@ import { LayoutService } from '../service/app.layout.service';
 export class NewSideBarComponent implements OnInit {
     //On mouse enter on side bar
     @Input() mouseEnter: boolean = false;
+    // Store the model list objects
     model: any[] = [];
 
-    constructor(public layoutService: LayoutService) {}
+    // Constructor
+    constructor(public layoutService: LayoutService) { }
 
+    // Ng on init function
     ngOnInit() {
+        // Initialize the model list
         this.model = [
             {
                 label: 'Home',
@@ -287,5 +291,6 @@ export class NewSideBarComponent implements OnInit {
                 ],
             },
         ];
+        // End of Initialize the model list
     }
 }

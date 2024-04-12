@@ -1,12 +1,22 @@
-<ul class="layout-menu">
+<!-- Main content section -->
+<ul class="layout-menu new_side_bar">
+    <!-- Logo section -->
+    <div class="logo_section">
+        <img src="../../../assets/images/logo_aws.png">
+    </div>
+    <!-- End of Logo section -->
+
+    <!-- Looping through the menu items -->
     <ng-container *ngFor="let item of model; let i = index;">
-        
-        <app-new-side-bar-item *ngIf="!item.separator" [mouseEnter]="mouseEnter" [item]="item" [index]="i" [root]="true"></app-new-side-bar-item>
+        <!-- Display the menu item -->
+        <app-new-side-bar-item *ngIf="!item.separator" [mouseEnter]="mouseEnter" [item]="item" [index]="i"
+            [root]="true"></app-new-side-bar-item>
+        <!-- End of Display the menu item -->
+
+        <!-- Menu separator -->
         <li *ngIf="item.separator" class="menu-separator"></li>
+        <!-- End of Menu separator -->
     </ng-container>
-    <li *ngIf="false">
-        <a href="https://www.primefaces.org/primeblocks-ng/#/">
-            <img src="assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'banner-primeblocks' : 'banner-primeblocks-dark'}}.png" alt="Prime Blocks" class="w-full mt-3"/>
-        </a>
-    </li>
+    <!-- End of Looping through the menu items -->
 </ul>
+<!-- End of Main content section -->

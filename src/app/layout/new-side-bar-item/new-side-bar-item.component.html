@@ -1,8 +1,12 @@
-<div *ngIf="mouseEnter && root && item.visible !== false" class="layout-menuitem-root-text">{{item.label}}</div>
+<!-- Main content section -->
+<div *ngIf="mouseEnter && root && item.visible !== false" class="layout-menuitem-root-text">
+    {{item.label}}
+</div>
+
 <a *ngIf="(!item.routerLink || item.items) && item.visible !== false" [attr.href]="item.url" (click)="itemClick($event)"
     [ngClass]="item.class" [attr.target]="item.target" tabindex="0" pRipple>
     <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
-    <span *ngIf="mouseEnter" class="layout-menuitem-text">{{item.label}}</span>
+    <span *ngIf="mouseEnter" class="layout-menuitem-text">{{item.label}} 11</span>
     <i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
 </a>
 <a *ngIf="(item.routerLink && !item.items) && item.visible !== false" (click)="itemClick($event)" [ngClass]="item.class"
@@ -23,3 +27,4 @@
             [class]="child.badgeClass"></app-new-side-bar-item>
     </ng-template>
 </ul>
+<!-- End of Main content section -->
