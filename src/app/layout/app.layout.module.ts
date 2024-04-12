@@ -20,8 +20,8 @@ import { AppLayoutComponent } from "./app.layout.component";
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { NewSideBarItemComponent } from './new-side-bar-item/new-side-bar-item.component';
 import { NewSideBarComponent } from './new-side-bar/new-side-bar.component';
+import { NewTopBarComponent } from './new-top-bar/new-top-bar.component';
 import { TooltipModule } from 'primeng/tooltip';
-
 @NgModule({
     declarations: [
         AppMenuitemComponent,
@@ -31,7 +31,8 @@ import { TooltipModule } from 'primeng/tooltip';
         AppSidebarComponent,
         AppLayoutComponent,
         NewSideBarComponent,
-        NewSideBarItemComponent
+        NewSideBarItemComponent,
+        NewTopBarComponent
     ],
     imports: [
         BrowserModule,

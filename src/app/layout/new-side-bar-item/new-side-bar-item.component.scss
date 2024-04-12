@@ -1,0 +1,29 @@
+.menu_item_main{
+    text-decoration: none;
+
+    .single_item{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 10px;
+        .item_icon{
+            display: flex;
+            justify-content: center;
+           
+        }
+        .item_label{
+            margin-left: 10px;
+        }
+    }
+}
+
+.full_width{
+    width: 100%;
+}
+.auto_width{
+    width: auto;
+}
+
+::ng-deep .pi-fw{
+    font-size: 20px;
+}

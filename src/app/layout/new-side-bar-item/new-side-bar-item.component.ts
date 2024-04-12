@@ -17,6 +17,7 @@ import { Subscription, filter } from 'rxjs';
 import { LayoutService } from '../service/app.layout.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { MenuService } from '../app.menu.service';
+import { Module } from 'src/app/modules/common/core/module';
 
 @Component({
     selector: 'app-new-side-bar-item',
@@ -44,7 +45,7 @@ import { MenuService } from '../app.menu.service';
     ],
 })
 export class NewSideBarItemComponent implements OnInit {
-    @Input() item: any;
+    @Input() item: Module;
 
     @Input() index!: number;
 
@@ -98,7 +99,7 @@ export class NewSideBarItemComponent implements OnInit {
         this.router.events
             .pipe(filter((event) => event instanceof NavigationEnd))
             .subscribe((params) => {
-                if (this.item.routerLink) {
+                if (this.item.RouterLink) {
                     this.updateActiveStateFromRoute();
                 }
             });
@@ -109,13 +110,13 @@ export class NewSideBarItemComponent implements OnInit {
             ? this.parentKey + '-' + this.index
             : String(this.index);
 
-        if (this.item.routerLink) {
+        if (this.item.RouterLink) {
             this.updateActiveStateFromRoute();
         }
     }
 
     updateActiveStateFromRoute() {
-        let activeRoute = this.router.isActive(this.item.routerLink[0], {
+        let activeRoute = this.router.isActive(this.item.RouterLink[0], {
             paths: 'exact',
             queryParams: 'ignored',
             matrixParams: 'ignored',
@@ -132,20 +133,12 @@ export class NewSideBarItemComponent implements OnInit {
 
     itemClick(event: Event) {
         // avoid processing disabled items
-        if (this.item.disabled) {
+        if (this.item.Disabled) {
             event.preventDefault();
             return;
         }
 
-        // execute command
-        if (this.item.command) {
-            this.item.command({ originalEvent: event, item: this.item });
-        }
-
-        // toggle active state
-        if (this.item.items) {
-            this.active = !this.active;
-        }
+        
 
         this.menuService.onMenuStateChange({ key: this.key });
     }

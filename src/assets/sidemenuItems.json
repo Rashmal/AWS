@@ -1,0 +1,230 @@
+[
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-home",
+        "Name": "Dashboard"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-id-card",
+        "Name": "Form Layout"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-check-square",
+        "Name": "Input"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-bookmark",
+        "Name": "Float Label"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-exclamation-circle",
+        "Name": "Invalid State"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-box",
+        "Name": "Button"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-table",
+        "Name": "Table"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-list",
+        "Name": "List"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-share-alt",
+        "Name": "Tree"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-tablet",
+        "Name": "Panel"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-clone",
+        "Name": "Overlay"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-image",
+        "Name": "Media"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-bars",
+        "Name": "Menu"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-comment",
+        "Name": "Message"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-file",
+        "Name": "File"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-chart-bar",
+        "Name": "Chart"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-circle",
+        "Name": "Misc"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-eye",
+        "Name": "Free Blocks"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-globe",
+        "Name": "All Blocks"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-prime",
+        "Name": "PrimeIcons"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-desktop",
+        "Name": "PrimeFlex"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-globe",
+        "Name": "Landing"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-user",
+        "Name": "Auth"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-sign-in",
+        "Name": "Login"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-times-circle",
+        "Name": "Error"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-lock",
+        "Name": "Access Denied"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-pencil",
+        "Name": "Crud"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-calendar",
+        "Name": "Timeline"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-exclamation-circle",
+        "Name": "Not Found"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-circle-off",
+        "Name": "Empty"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-bookmark",
+        "Name": "Submenu 1"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-bookmark",
+        "Name": "Submenu 1.1"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-bookmark",
+        "Name": "Submenu 1.2"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-bookmark",
+        "Name": "Submenu 2"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-bookmark",
+        "Name": "Submenu 2.1"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-bookmark",
+        "Name": "Submenu 2.2"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-question",
+        "Name": "Documentation"
+    },
+    {
+        "Id": 0,
+        "ModuleCode": "",
+        "ModuleIcon": "pi pi-fw pi-search",
+        "Name": "View Source"
+    }
+]
