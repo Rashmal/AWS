@@ -32,7 +32,7 @@
             <i class="pi pi-user"></i>
             <span>Profile</span>
         </button> -->
-        <button class="p-link layout-topbar-button" (click)="opSettingsList.toggle($event)">
+        <button class="p-link layout-topbar-button" (click)="opSettingsList.toggle($event)" pTooltip="Settings" tooltipPosition="top">
             <i class="pi pi-cog"></i>
             <span>Settings</span>
         </button>
@@ -44,7 +44,7 @@
 <!-- Over panel section for the settings list -->
 <p-overlayPanel #opSettingsList>
     <!-- Each option -->
-    <div class="option_label" (click)="logoutOnClick()">
+    <div class="option_label" (click)="logoutOnClick()" pTooltip="Click to logout" tooltipPosition="top">
         <span>Logout</span>
         <i class="fa fa-angle-right" aria-hidden="true"></i>
     </div>

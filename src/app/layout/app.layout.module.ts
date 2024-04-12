@@ -20,6 +20,7 @@ import { AppLayoutComponent } from "./app.layout.component";
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { NewSideBarItemComponent } from './new-side-bar-item/new-side-bar-item.component';
 import { NewSideBarComponent } from './new-side-bar/new-side-bar.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import { NewSideBarComponent } from './new-side-bar/new-side-bar.component';
         RippleModule,
         RouterModule,
         AppConfigModule,
-        OverlayPanelModule 
+        OverlayPanelModule ,
+        TooltipModule
     ],
     exports: [AppLayoutComponent]
 })

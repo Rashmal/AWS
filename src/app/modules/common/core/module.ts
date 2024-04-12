@@ -3,4 +3,6 @@ export interface Module {
     ModuleCode: string;
     Name: string;
     ModuleIcon: string;
+    RedirectUrl: string;
+    IsDisable: boolean;
 }
