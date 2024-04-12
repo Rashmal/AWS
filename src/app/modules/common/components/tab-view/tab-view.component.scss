@@ -1,0 +1,50 @@
+.tab-custom-element {
+    display: flex;
+    padding: 0;
+
+    .disabled_tab {
+        opacity: 0.5;
+        cursor: not-allowed !important;
+    }
+
+    .tab-section {
+        border: 1px solid #ccc;
+        height: auto;
+        align-items: center;
+        display: flex;
+        margin: 0 !important;
+        top: 0 !important;
+        padding: 0.042em 0.35em;
+        background-color: #fff;
+        max-height: 35px;
+        cursor: pointer;
+    }
+
+    span {
+        color: #333;
+        padding: 0.26em 0.35em;
+    }
+
+    .selected-tab {
+        background-color: #4e7ac1 !important;
+
+        span,
+        i {
+            color: white !important;
+        }
+    }
+
+    .settings_tab {
+        padding-left: 8px;
+        padding-right: 10px;
+        i {
+            color: #4e7ac1;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .tab-custom-element {
+        display: block;
+    }
+}

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GlobalNotesComponent } from './global-notes/global-notes.component';
 import { GlobalNotesRoutingModule } from './globalNotesRouting.module';
+import { TabViewComponent } from '../common/components/tab-view/tab-view.component';
 
 @NgModule({
     declarations: [
@@ -11,7 +12,8 @@ import { GlobalNotesRoutingModule } from './globalNotesRouting.module';
     imports: [
         CommonModule,
         FormsModule,
-        GlobalNotesRoutingModule
+        GlobalNotesRoutingModule,
+        TabViewComponent
     ]
 })
 export class GlobalNotesModule { }

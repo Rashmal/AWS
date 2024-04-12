@@ -1,1 +1,33 @@
-<p>global-notes works!</p>
+<!-- Main content details -->
+<div class="col-12 global_notes">
+
+    <!-- Header section -->
+    <div class="col-12 no_side_padding header_section">
+        <!-- Header title -->
+        <span class="module_title">
+            Global Notes
+        </span>
+        <!-- End of Header title -->
+    </div>
+    <!-- End of Header section -->
+
+    <!-- Tab view section -->
+    <div class="col-12 no_side_padding top_bar_common">
+        <!-- Tabs section -->
+        <app-tab-view #TabviewSectionRef (onChangeTab)="onChangeTab($event)" [TabViewList]="TabViewList"
+            [SelectedTab]="tabSelection">
+        </app-tab-view>
+        <!-- End of Tabs section -->
+    </div>
+    <!-- End of Tab view section -->
+
+    <!-- Display the tab content section -->
+    <div class="col-12 no_side_padding tab_content">
+        <!-- Routing section -->
+        <router-outlet></router-outlet>
+        <!-- End of Routing section -->
+    </div>
+    <!-- End of Display the tab content section -->
+
+</div>
+<!-- End of Main content details -->
