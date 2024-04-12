@@ -99,7 +99,7 @@ export class NewSideBarItemComponent implements OnInit {
         this.router.events
             .pipe(filter((event) => event instanceof NavigationEnd))
             .subscribe((params) => {
-                if (this.item.RouterLink) {
+                if (this.item.RedirectUrl) {
                     this.updateActiveStateFromRoute();
                 }
             });
@@ -110,13 +110,13 @@ export class NewSideBarItemComponent implements OnInit {
             ? this.parentKey + '-' + this.index
             : String(this.index);
 
-        if (this.item.RouterLink) {
+        if (this.item.RedirectUrl) {
             this.updateActiveStateFromRoute();
         }
     }
 
     updateActiveStateFromRoute() {
-        let activeRoute = this.router.isActive(this.item.RouterLink[0], {
+        let activeRoute = this.router.isActive(this.item.RedirectUrl[0], {
             paths: 'exact',
             queryParams: 'ignored',
             matrixParams: 'ignored',
@@ -133,7 +133,7 @@ export class NewSideBarItemComponent implements OnInit {
 
     itemClick(event: Event) {
         // avoid processing disabled items
-        if (this.item.Disabled) {
+        if (this.item.IsDisable) {
             event.preventDefault();
             return;
         }

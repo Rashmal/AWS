@@ -1,6 +1,31 @@
 <!-- Main content section -->
 <ul class="layout-menu new_side_bar">
    
+    <!--Global notes and others-->
+    <div  *ngFor="let item of staticMenuItems; let i = index" class="menu_item_main" [style.margin-top.px]="i == 0 ? 10 : 0">
+        <a (click)="itemClick($event)" class="menu_item_main" [routerLink]="item.RedirectUrl" routerLinkActive="active-route" pRipple>
+            <!--Single Item section-->
+            <div class="single_item"  >
+                <!--Item icon-->
+                <div class="item_icon" [ngClass]="mouseEnter ? 'auto_width margin_left_13' : 'full_width '">
+                    <i [ngClass]="item.ModuleIcon" class="layout-menuitem-icon"></i>
+                </div>
+                <!--End of Item icon-->
+        
+               
+        
+        
+            </div>
+            <!--End of Single Item section-->
+        
+        
+        </a>
+
+    </div>
+    
+
+    <!--End of Global notes and others-->
+
     
 
     <!-- Looping through the menu items -->
