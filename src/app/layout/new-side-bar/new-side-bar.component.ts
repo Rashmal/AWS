@@ -23,7 +23,7 @@ export class NewSideBarComponent implements OnInit {
        ModuleCode: "STAT1",
        Name: "Global Notes",
        ModuleIcon: "pi pi-fw pi-home",
-       RedirectUrl: "/layout/dashboard",
+       RedirectUrl: "/layout/global",
         IsDisable: false
       },
       {

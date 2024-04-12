@@ -7,7 +7,6 @@
     }
 }
 
-
 .menu_item_main {
     text-decoration: none;
 
@@ -20,8 +19,6 @@
         .item_icon {
             display: flex;
             justify-content: center;
-
-
         }
 
         .item_label {
@@ -38,8 +35,6 @@
     text-decoration: none;
 
     .gbl_n_icon {
-       
-
         .single_item {
             background-color: #0b4e7d;
             border-radius: 30px;
@@ -49,7 +44,7 @@
             align-items: center;
             padding: 0px 10px;
             justify-content: space-between;
-            .noti_count{
+            .noti_count {
                 text-decoration: none;
                 height: 20px;
                 width: max-content;
@@ -58,25 +53,20 @@
                 align-items: center;
                 padding: 0px 5px;
                 border-radius: 8px;
-                
-                    font-weight: bold;
-                    text-decoration: none;
-                    font-size: 11px;
-               
+
+                font-weight: bold;
+                text-decoration: none;
+                font-size: 11px;
             }
 
-            .glbl_n_label{
+            .glbl_n_label {
                 color: #ffffff;
             }
-
         }
     }
-    .req_new{
-       
-       
-    
+    .req_new {
         .single_item {
-            background-color: #21BA45;
+            background-color: #21ba45;
             border-radius: 30px;
             color: #ffffff;
             height: 30px;
@@ -84,9 +74,23 @@
             align-items: center;
             padding: 0px 10px;
             justify-content: space-between;
-            
-
         }
+    }
+}
+
+.req_new_ind {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 5px;
+}
+
+.divider_hr {
+    padding-left: 5px;
+    padding-right: 5px;
+    hr {
+        margin-top: 5px;
+        margin-bottom: 10px;
     }
 }
 
@@ -114,7 +118,7 @@
     margin-right: 13px;
 }
 
-.flex_center_static{
+.flex_center_static {
     display: flex;
     align-items: center;
     flex-wrap: wrap;

@@ -26,7 +26,8 @@
     }
 
     .selected-tab {
-        background-color: #4e7ac1 !important;
+        background-color: #126095  !important;
+        font-weight: bold;
 
         span,
         i {
@@ -38,7 +39,7 @@
         padding-left: 8px;
         padding-right: 10px;
         i {
-            color: #4e7ac1;
+            color: #126095 ;
         }
     }
 }

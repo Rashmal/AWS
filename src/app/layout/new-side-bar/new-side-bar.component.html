@@ -3,16 +3,18 @@
 
     <!--Global notes and others-->
     <div class="flex_center_static">
-        <div *ngFor="let item of staticMenuItems; let i = index" [style.width]="item.ModuleCode == 'STAT1' ? '100%':  item.ModuleCode == 'STAT4' ? '45%' : 'auto'"
-            [ngClass]="!mouseEnter ? 'menu_item_main' : 'menu_item_expand'" [style.margin-top.px]="i == 0 ? 10 : 0"
-            [style.margin-bottom.px]="item.ModuleCode == 'STAT1' ? 10 : 0"
-            >
+        <div *ngFor="let item of staticMenuItems; let i = index"
+            [style.width]="item.ModuleCode == 'STAT1' ? '100%':  item.ModuleCode == 'STAT4' ? '45%' : 'auto'"
+            [ngClass]="[!mouseEnter ? 'menu_item_main' : 'menu_item_expand', (item.ModuleCode == 'STAT4' && mouseEnter)?'req_new_ind':'']"
+            [style.margin-top.px]="i == 0 ? 10 : 0"
+            [style.margin-bottom.px]="item.ModuleCode == 'STAT1' && mouseEnter ? 10 : 0">
             <a (click)="itemClick($event)" [routerLink]="item.RedirectUrl" routerLinkActive="active-route" pRipple
                 [ngClass]="item.ModuleCode == 'STAT1' ? 'gbl_n_icon' : item.ModuleCode == 'STAT4' ? 'req_new' : ''">
                 <!--Single Item section-->
                 <div class="single_item">
                     <!--Item icon-->
-                    <div *ngIf="item.ModuleCode != 'STAT4'" class="item_icon" [ngClass]="mouseEnter ? 'auto_width' : 'full_width '">
+                    <div *ngIf="item.ModuleCode != 'STAT4' || (item.ModuleCode == 'STAT4' && !mouseEnter)"
+                        class="item_icon" [ngClass]="mouseEnter ? 'auto_width' : 'full_width '">
                         <i [ngClass]="item.ModuleIcon" class="layout-menuitem-icon"></i>
                     </div>
                     <!--End of Item icon-->
@@ -44,7 +46,9 @@
     </div>
     <!--End of Global notes and others-->
 
-
+    <div class="divider_hr">
+        <hr/>
+    </div>
 
     <!-- Looping through the menu items -->
     <ng-container *ngFor="let item of sideMenuItems; let i = index;">
