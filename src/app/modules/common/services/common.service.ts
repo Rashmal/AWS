@@ -5,6 +5,8 @@ import { API$DOMAIN } from 'src/app/core/apiConfigurations';
 import { Priority } from '../core/priority';
 import { Status } from '../core/status';
 import { Module } from '../core/module';
+import { Router } from '@angular/router';
+import { ErrorMessage } from '../core/errorMessage';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class CommonService {
   private GetModuleListUrl = API$DOMAIN + 'api/Common/GetModuleList';
 
   // Constructor
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
 
   }
 
@@ -29,6 +31,7 @@ export class CommonService {
 
     return this.http.get<boolean>(this.CheckEmailExistsUrl, { params: my_params }).pipe(
       catchError(error => {
+        debugger
         return this.handleError('CheckEmailExists', error)
       })
     );
@@ -82,6 +85,15 @@ export class CommonService {
   //----------- Common methods------------------//
   //The function of handling the error
   private handleError(methodName: string, exception: Error) {
+    // Creating the error message object 
+    let errorMessage: ErrorMessage = {
+      Name: exception.name,
+      Message: exception.message,
+      StatusText: exception['statusText'],
+      Url: exception['url']
+    };
+    // Redirect to the error message
+    this.router.navigate(['errorMessage'], { state: { response: errorMessage } });
     return ('Server error');
   }
 

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
 import { API$DOMAIN } from 'src/app/core/apiConfigurations';
 import { AccessLevel } from '../core/authenticationModals/accessLevel';
+import { Router } from '@angular/router';
+import { ErrorMessage } from '../../common/core/errorMessage';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class AuthenticationService {
   private GetUserAccessLevelsUrl = API$DOMAIN + 'api/Authentication/GetUserAccessLevels';
 
   // Constructor
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
 
   }
 
@@ -61,6 +63,15 @@ export class AuthenticationService {
   //----------- Common methods------------------//
   //The function of handling the error
   private handleError(methodName: string, exception: Error) {
+    // Creating the error message object 
+    let errorMessage: ErrorMessage = {
+      Name: exception.name,
+      Message: exception.message,
+      StatusText: exception['statusText'],
+      Url: exception['url']
+    };
+    // Redirect to the error message
+    this.router.navigate(['errorMessage'], { state: { response: errorMessage } });
     return ('Server error');
   }
 }

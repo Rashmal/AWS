@@ -1,0 +1,51 @@
+<!-- Main content section -->
+<div class="col-12 error_message">
+    <!-- Image section -->
+    <div class="col-12 image_section">
+        <img src="../../../../../assets/images/sad_face.png">
+    </div>
+    <!-- End of Image section -->
+
+    <!-- Title section -->
+    <div class="title_section">
+        <h1>You have encountered an Error in the AWS</h1>
+        <h5>Please contact the Admin with a screenshot of the error message</h5>
+    </div>
+    <!-- End of Title section -->
+
+    <!-- Navigate to the login page -->
+    <div class="col-12 login_button_section">
+        <button (click)="loginClick()">Click here to Login</button>
+    </div>
+    <!-- End of Navigate to the login page -->
+
+    <!-- Error message details -->
+    <div class="error_message_box">
+        <!-- Row label -->
+        <div class="bold_text">Name:</div>
+        <div>{{errorMessage.Name}}</div>
+        <!-- End of Row label -->
+
+        <!-- Row label -->
+        <div class="bold_text">StatusText:</div>
+        <div>{{errorMessage.StatusText}}</div>
+        <!-- End of Row label -->
+
+        <!-- Row label -->
+        <div class="bold_text">Url:</div>
+        <div>{{errorMessage.Url}}</div>
+        <!-- End of Row label -->
+
+        <!-- Row label -->
+        <div class="bold_text">Message:</div>
+        <div>{{errorMessage.Message}}</div>
+        <!-- End of Row label -->
+    </div>
+
+    <!-- Below image section -->
+    <div class="user_image">
+        <img src="../../../../../assets/images/user.png">
+    </div>
+    <!-- End of Below image section -->
+</div>
+<!-- End of Main content section -->

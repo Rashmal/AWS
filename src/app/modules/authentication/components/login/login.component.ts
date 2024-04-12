@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // Unsubscribe all
+    
     this.authenticationModel.UnsubscribeAll();
   }
 
@@ -72,6 +73,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     // Check if the email exists in the DB
     this.commonModel.CheckEmailExistsService(this.user_email).then(
       (data) => {
+        debugger
         // Getting the email validation
         let emailExists: boolean = <boolean>data;
         // Check if the email exists

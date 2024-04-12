@@ -1,0 +1,61 @@
+.error_message {
+    background-image: linear-gradient(to right, #ffde59, #ff914d);
+    height: 100vh;
+
+    .title_section {
+        color: white;
+        text-align: center;
+        padding-top: 20pt;
+    }
+
+    .image_section {
+        display: flex;
+        justify-content: center;
+        padding-top: 20pt;
+        img {
+            width: 9vw;
+        }
+    }
+
+    .error_message_box {
+        color: black;
+        background: white;
+        border: solid thin white;
+        width: fit-content;
+        max-width: 50vw;
+        padding: 10px;
+        border-radius: 5px;
+        margin: auto;
+        margin-top: 20pt;
+        overflow-y: auto;
+        max-height: 80vh;
+    }
+
+    .bold_text {
+        font-weight: bold;
+    }
+
+    .user_image {
+        img {
+            position: fixed;
+            height: 19vw;
+            right: 2vw;
+        }
+    }
+
+    .login_button_section {
+        display: flex;
+        justify-content: center;
+        button {
+            background-image: linear-gradient(to right, #ffde59, #ff914d);
+            border: none;
+            width: auto;
+            height: 40px;
+            border-radius: 15px;
+            color: white;
+            border: solid thin black;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+}

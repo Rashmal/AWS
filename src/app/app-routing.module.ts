@@ -2,6 +2,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
+import { ErrorMessageComponent } from './modules/common/components/error-message/error-message.component';
 
 @NgModule({
     imports: [
@@ -23,6 +24,7 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
             // { path: 'layout', loadChildren: () => import('./modules/layout/appDasboard.layout.module').then(m => m.AppDashboardLayoutModule) },
             { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
             { path: 'notfound', component: NotfoundComponent },
+            { path: 'errorMessage', component: ErrorMessageComponent },
             { path: '**', redirectTo: '/notfound' },
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })
     ],

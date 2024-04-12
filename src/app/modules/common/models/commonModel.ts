@@ -27,7 +27,7 @@ export class CommonModel {
         var promise = new Promise((resolve, reject) => {
             this.allSubscriptions.push(this.commonService.CheckEmailExists(userEmail).subscribe(
                 data => {
-                    let returnData = <boolean>data;;
+                    let returnData = <boolean>data;
                     // Resolve the promise
                     resolve(returnData);
                 })
