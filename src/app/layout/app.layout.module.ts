@@ -22,6 +22,8 @@ import { NewSideBarItemComponent } from './new-side-bar-item/new-side-bar-item.c
 import { NewSideBarComponent } from './new-side-bar/new-side-bar.component';
 import { NewTopBarComponent } from './new-top-bar/new-top-bar.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { RouterTestingModule } from "@angular/router/testing";
+
 @NgModule({
     declarations: [
         AppMenuitemComponent,
@@ -49,6 +51,7 @@ import { TooltipModule } from 'primeng/tooltip';
         AppConfigModule,
         OverlayPanelModule ,
         TooltipModule
+       
     ],
     exports: [AppLayoutComponent]
 })

@@ -32,6 +32,4 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // Check if the 
-
 });

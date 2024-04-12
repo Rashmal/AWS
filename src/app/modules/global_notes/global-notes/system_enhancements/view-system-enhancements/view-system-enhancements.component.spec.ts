@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ViewSystemEnhancementsComponent } from './view-system-enhancements.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { SystemEnhancementsRoutingModule } from '../systemEnhancementsRouting.module';
 
 describe('ViewSystemEnhancementsComponent', () => {
   let component: ViewSystemEnhancementsComponent;
@@ -8,10 +11,17 @@ describe('ViewSystemEnhancementsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ViewSystemEnhancementsComponent]
+      imports: [
+        CommonModule,
+        FormsModule,
+        SystemEnhancementsRoutingModule
+      ],
+      declarations: [
+        ViewSystemEnhancementsComponent
+      ]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ViewSystemEnhancementsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
