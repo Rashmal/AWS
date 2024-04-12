@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AuthenticationRoutingModule } from '../../authenticationRouting.module';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -8,10 +12,17 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginComponent]
-    })
-    .compileComponents();
-    
+      imports: [
+        CommonModule,
+        FormsModule,
+        AuthenticationRoutingModule,
+        HttpClientModule
+      ],
+      declarations: [
+        LoginComponent
+      ]
+    }).compileComponents();
+
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +31,7 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // Check if the 
+
 });

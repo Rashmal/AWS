@@ -7,6 +7,7 @@ import { IErrorMessage } from 'src/app/modules/common/core/iErrorMessage';
 import { Router } from '@angular/router';
 import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
 import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
+import { LOGIN$USER_EMAIL$LIMIT, LOGIN$USER_PASSWORD$LIMIT } from 'src/app/core/apiConfigurations';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   errorMessagesList: IErrorMessage[] = [];
   // Store the cookie interface
   overallCookieInterface: OverallCookieInterface;
+  // Store the email list
+  emailLimit: number = LOGIN$USER_EMAIL$LIMIT;
+  // Store the password list
+  passwordLimit: number = LOGIN$USER_PASSWORD$LIMIT;
 
   // Constructor
   constructor(private authenticationService: AuthenticationService, private commonService: CommonService,
@@ -191,7 +196,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     // Removing the special characters
     currentText = currentText.replace(/[^a-zA-Z0-9@_.]/g, "")
     // Cutting the extra characters from the word
-    this.user_email = currentText.substr(0, 50);
+    this.user_email = currentText.substr(0, this.emailLimit);
   }
 
   // On change event of the password input
@@ -199,7 +204,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     // Getting the current text
     let currentText = event.target.value;
     // Cutting the extra characters from the word
-    this.user_password = currentText.substr(0, 50);
+    this.user_password = currentText.substr(0, this.passwordLimit);
   }
 
 }

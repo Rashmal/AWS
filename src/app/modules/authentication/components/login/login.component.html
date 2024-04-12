@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" id="username" aria-describedby="usernameHelp"
-                            maxlength="50" [(ngModel)]="user_email" [ngModelOptions]="{standalone: true}"
+                            maxlength="{{emailLimit}}" [(ngModel)]="user_email" [ngModelOptions]="{standalone: true}"
                             (input)="onPasteEmailFunction($event)">
                     </div>
 
@@ -52,7 +52,7 @@
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" [(ngModel)]="user_password"
-                            maxlength="25" [ngModelOptions]="{standalone: true}"
+                            maxlength="{{passwordLimit}}" [ngModelOptions]="{standalone: true}"
                             (input)="onPastePasswordFunction($event)">
                     </div>
 
