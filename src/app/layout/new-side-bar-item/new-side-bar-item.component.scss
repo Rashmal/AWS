@@ -10,9 +10,14 @@
             display: flex;
             justify-content: center;
            
+           
         }
         .item_label{
+            width: 100%;
             margin-left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
     }
 }
@@ -24,6 +29,19 @@
     width: auto;
 }
 
+.margin_left_10{
+    margin-left: 10px;
+}
+
+.margin_right_10{
+    margin-right: 10px;
+}
+.margin_left_13{
+    margin-left: 13px;
+}
+.margin_right_13{
+    margin-right: 13px;
+}
 ::ng-deep .pi-fw{
     font-size: 20px;
 }

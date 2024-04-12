@@ -3,6 +3,7 @@ import { LayoutService } from '../service/app.layout.service';
 import { Module } from 'src/app/modules/common/core/module';
 import { CommonModel } from 'src/app/modules/common/models/commonModel';
 import { CommonService } from 'src/app/modules/common/services/common.service';
+import { MenuService } from '../app.menu.service';
 
 @Component({
     selector: 'app-new-side-bar',
@@ -16,10 +17,61 @@ export class NewSideBarComponent implements OnInit {
     model: any[] = [];
     //Store side menu content
     sideMenuItems: Module[] = [];
+    //Store static side menu items
+    staticMenuItems: Module[] = [{
+        Id: 1,
+       ModuleCode: "DSH",
+       Name: "Dashboard",
+       ModuleIcon: "pi pi-fw pi-home",
+       RedirectUrl: "/layout/dashboard",
+        IsDisable: false
+      },
+      {
+        Id: 2,
+       ModuleCode: "MD1",
+       Name: "Module 1",
+       ModuleIcon: "pi pi-fw pi-id-card",
+       RedirectUrl: "/layout/global",
+        IsDisable: false
+      },
+      {
+        Id: 3,
+       ModuleCode: "MD2",
+       Name: "Module 2",
+       ModuleIcon: "pi pi-fw pi-check-square",
+       RedirectUrl: "/layout/dashboard",
+        IsDisable: false
+      },
+      {
+        Id: 4,
+       ModuleCode: "MD3",
+       Name: "Module 3",
+       ModuleIcon: "pi pi-fw pi-bookmark",
+       RedirectUrl: "/layout/dashboard",
+        IsDisable: false
+      },
+      {
+        Id: 5,
+       ModuleCode: "MD4",
+       Name: "Module 4",
+       ModuleIcon: "pi pi-fw pi-exclamation-circle",
+       RedirectUrl: "/layout/dashboard",
+        IsDisable: false
+      },
+      {
+        Id: 6,
+       ModuleCode: "MD5",
+       Name: "Module 5",
+       ModuleIcon: "pi pi-fw pi-box",
+       RedirectUrl: "/layout/dashboard",
+        IsDisable: false
+      }];
     //Store models
     commonModel: CommonModel;
+    //store key
+    key: string = '';
     // Constructor
-    constructor(public layoutService: LayoutService, private commonService: CommonService) {
+    constructor(public layoutService: LayoutService, private commonService: CommonService, private menuService: MenuService) {
         this.commonModel = new CommonModel(this.commonService);
     }
 
@@ -42,5 +94,17 @@ export class NewSideBarComponent implements OnInit {
                
             }
         );
+    }
+
+    itemClick(event: Event, item?: any) {
+        // avoid processing disabled items
+        if (item.IsDisable) {
+            event.preventDefault();
+            return;
+        }
+
+        
+
+        this.menuService.onMenuStateChange({ key: this.key });
     }
 }

@@ -3,6 +3,6 @@ export interface Module {
     ModuleCode: string;
     Name: string;
     ModuleIcon: string;
-    RouterLink?: string;
-    Disabled?: boolean;
+    RedirectUrl?: string;
+    IsDisable?: boolean;
 }

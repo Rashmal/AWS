@@ -1,17 +1,22 @@
 <!-- Main content section -->
 
-<a (click)="itemClick($event)" class="menu_item_main" [routerLink]="'/layout/global'" routerLinkActive="active-route" pRipple>
+<a (click)="itemClick($event)" class="menu_item_main" [routerLink]="item.RedirectUrl" routerLinkActive="active-route" pRipple>
     <!--Single Item section-->
     <div class="single_item" [style.margin-top.px]="index == 0 ? 20 : 0" >
         <!--Item icon-->
-        <div class="item_icon" [ngClass]="mouseEnter ? 'auto_width' : 'full_width'">
+        <div class="item_icon" [ngClass]="mouseEnter ? 'auto_width margin_left_13' : 'full_width '">
             <i [ngClass]="item.ModuleIcon" class="layout-menuitem-icon"></i>
         </div>
         <!--End of Item icon-->
 
         <!--Item label-->
         <div *ngIf="mouseEnter" class="item_label">
+           <div>
             <span class="layout-menuitem-text">{{item.Name}}</span>
+           </div>
+           <div class="margin_right_13">
+            <span>></span>
+           </div>
         </div>
         <!--End of Item label-->
 

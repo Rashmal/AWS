@@ -1,230 +1,202 @@
 [
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-home",
-        "Name": "Dashboard"
+      "Id": 1,
+      "ModuleCode": "DSH",
+      "Name": "Dashboard",
+      "ModuleIcon": "pi pi-fw pi-home",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-id-card",
-        "Name": "Form Layout"
+      "Id": 2,
+      "ModuleCode": "MD1",
+      "Name": "Module 1",
+      "ModuleIcon": "pi pi-fw pi-id-card",
+      "RedirectUrl": "/layout/global",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-check-square",
-        "Name": "Input"
+      "Id": 3,
+      "ModuleCode": "MD2",
+      "Name": "Module 2",
+      "ModuleIcon": "pi pi-fw pi-check-square",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-bookmark",
-        "Name": "Float Label"
+      "Id": 4,
+      "ModuleCode": "MD3",
+      "Name": "Module 3",
+      "ModuleIcon": "pi pi-fw pi-bookmark",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-exclamation-circle",
-        "Name": "Invalid State"
+      "Id": 5,
+      "ModuleCode": "MD4",
+      "Name": "Module 4",
+      "ModuleIcon": "pi pi-fw pi-exclamation-circle",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-box",
-        "Name": "Button"
+      "Id": 6,
+      "ModuleCode": "MD5",
+      "Name": "Module 5",
+      "ModuleIcon": "pi pi-fw pi-box",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-table",
-        "Name": "Table"
+      "Id": 7,
+      "ModuleCode": "MD6",
+      "Name": "Module 6",
+      "ModuleIcon": "pi pi-fw pi-table",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-list",
-        "Name": "List"
+      "Id": 8,
+      "ModuleCode": "MD7",
+      "Name": "Module 7",
+      "ModuleIcon": "pi pi-fw pi-list",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-share-alt",
-        "Name": "Tree"
+      "Id": 9,
+      "ModuleCode": "MD8",
+      "Name": "Module 8",
+      "ModuleIcon": "pi pi-fw pi-share-alt",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-tablet",
-        "Name": "Panel"
+      "Id": 10,
+      "ModuleCode": "MD9",
+      "Name": "Module 9",
+      "ModuleIcon": "pi pi-fw pi-tablet",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-clone",
-        "Name": "Overlay"
+      "Id": 11,
+      "ModuleCode": "MD10",
+      "Name": "Module 10",
+      "ModuleIcon": "pi pi-fw pi-clone",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-image",
-        "Name": "Media"
+      "Id": 12,
+      "ModuleCode": "MD11",
+      "Name": "Module 11",
+      "ModuleIcon": "pi pi-fw pi-image",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-bars",
-        "Name": "Menu"
+      "Id": 13,
+      "ModuleCode": "MD12",
+      "Name": "Module 12",
+      "ModuleIcon": "pi pi-fw pi-bars",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-comment",
-        "Name": "Message"
+      "Id": 14,
+      "ModuleCode": "MD13",
+      "Name": "Module 13",
+      "ModuleIcon": "pi pi-fw pi-comment",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-file",
-        "Name": "File"
+      "Id": 15,
+      "ModuleCode": "MD14",
+      "Name": "Module 14",
+      "ModuleIcon": "pi pi-fw pi-file",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-chart-bar",
-        "Name": "Chart"
+      "Id": 16,
+      "ModuleCode": "MD15",
+      "Name": "Module 15",
+      "ModuleIcon": "pi pi-fw pi-chart-bar",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-circle",
-        "Name": "Misc"
+      "Id": 17,
+      "ModuleCode": "MD16",
+      "Name": "Module 16",
+      "ModuleIcon": "pi pi-fw pi-circle",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-eye",
-        "Name": "Free Blocks"
+      "Id": 18,
+      "ModuleCode": "MD17",
+      "Name": "Module 17",
+      "ModuleIcon": "pi pi-fw pi-eye",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-globe",
-        "Name": "All Blocks"
+      "Id": 19,
+      "ModuleCode": "MD18",
+      "Name": "Module 18",
+      "ModuleIcon": "pi pi-fw pi-globe",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-prime",
-        "Name": "PrimeIcons"
+      "Id": 20,
+      "ModuleCode": "MD19",
+      "Name": "Module 19",
+      "ModuleIcon": "pi pi-fw pi-prime",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-desktop",
-        "Name": "PrimeFlex"
+      "Id": 21,
+      "ModuleCode": "MD20",
+      "Name": "Module 20",
+      "ModuleIcon": "pi pi-fw pi-desktop",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-globe",
-        "Name": "Landing"
+      "Id": 22,
+      "ModuleCode": "MD21",
+      "Name": "Module 21",
+      "ModuleIcon": "pi pi-fw pi-globe",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-user",
-        "Name": "Auth"
+      "Id": 23,
+      "ModuleCode": "MD22",
+      "Name": "Module 22",
+      "ModuleIcon": "pi pi-fw pi-user",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-sign-in",
-        "Name": "Login"
+      "Id": 24,
+      "ModuleCode": "MD23",
+      "Name": "Module 23",
+      "ModuleIcon": "pi pi-fw pi-sign-in",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     },
     {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-times-circle",
-        "Name": "Error"
-    },
-    {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-lock",
-        "Name": "Access Denied"
-    },
-    {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-pencil",
-        "Name": "Crud"
-    },
-    {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-calendar",
-        "Name": "Timeline"
-    },
-    {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-exclamation-circle",
-        "Name": "Not Found"
-    },
-    {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-circle-off",
-        "Name": "Empty"
-    },
-    {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-bookmark",
-        "Name": "Submenu 1"
-    },
-    {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-bookmark",
-        "Name": "Submenu 1.1"
-    },
-    {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-bookmark",
-        "Name": "Submenu 1.2"
-    },
-    {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-bookmark",
-        "Name": "Submenu 2"
-    },
-    {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-bookmark",
-        "Name": "Submenu 2.1"
-    },
-    {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-bookmark",
-        "Name": "Submenu 2.2"
-    },
-    {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-question",
-        "Name": "Documentation"
-    },
-    {
-        "Id": 0,
-        "ModuleCode": "",
-        "ModuleIcon": "pi pi-fw pi-search",
-        "Name": "View Source"
+      "Id": 25,
+      "ModuleCode": "MD24",
+      "Name": "Module 24",
+      "ModuleIcon": "pi pi-fw pi-times-circle",
+      "RedirectUrl": "/layout/dashboard",
+      "IsDisable": false
     }
-]
+  ]
