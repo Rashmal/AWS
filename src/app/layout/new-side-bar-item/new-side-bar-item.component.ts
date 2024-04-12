@@ -1,6 +1,7 @@
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
     HostBinding,
     Input,
     OnInit,
@@ -75,7 +76,7 @@ export class NewSideBarItemComponent implements OnInit {
                     if (value.routeEvent) {
                         this.active =
                             value.key === this.key ||
-                            value.key.startsWith(this.key + '-')
+                                value.key.startsWith(this.key + '-')
                                 ? true
                                 : false;
                     } else {
@@ -138,7 +139,7 @@ export class NewSideBarItemComponent implements OnInit {
             return;
         }
 
-        
+
 
         this.menuService.onMenuStateChange({ key: this.key });
     }

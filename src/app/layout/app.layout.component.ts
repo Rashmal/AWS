@@ -4,6 +4,8 @@ import { filter, Subscription } from 'rxjs';
 import { LayoutService } from "./service/app.layout.service";
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppTopBarComponent } from './app.topbar.component';
+import { NewSideBarComponent } from './new-side-bar/new-side-bar.component';
+import { NewTopBarComponent } from './new-top-bar/new-top-bar.component';
 
 @Component({
     selector: 'app-layout',
@@ -19,9 +21,9 @@ export class AppLayoutComponent implements OnDestroy {
 
     profileMenuOutsideClickListener: any;
 
-    @ViewChild(AppSidebarComponent) appSidebar!: AppSidebarComponent;
+    @ViewChild(NewSideBarComponent) appSidebar!: NewSideBarComponent;
 
-    @ViewChild(AppTopBarComponent) appTopbar!: AppTopBarComponent;
+    @ViewChild(NewTopBarComponent) appTopbar!: NewTopBarComponent;
 
     constructor(public layoutService: LayoutService, public renderer: Renderer2, public router: Router) {
         this.overlayMenuOpenSubscription = this.layoutService.overlayOpen$.subscribe(() => {

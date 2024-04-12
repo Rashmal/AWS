@@ -90,6 +90,10 @@ export class LayoutService {
         }
     }
 
+    hideMenuToggle(){
+        this.state.overlayMenuActive = false;
+    }
+
     showProfileSidebar() {
         this.state.profileSidebarVisible = !this.state.profileSidebarVisible;
         if (this.state.profileSidebarVisible) {

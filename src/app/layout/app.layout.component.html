@@ -6,7 +6,7 @@
     <!-- End of Top bar section -->
 
     <!-- Side bar section -->
-    <div class="layout-sidebar"  (mouseenter)="mouseEnterOnSidebar()" (mouseleave)="mouseLeaveOnSidebar()">
+    <div class="layout-sidebar" (mouseenter)="mouseEnterOnSidebar()" (mouseleave)="mouseLeaveOnSidebar()">
         <app-new-side-bar [mouseEnter]="mouseEnter"></app-new-side-bar>
         <!-- <app-sidebar></app-sidebar> -->
     </div>
@@ -28,6 +28,6 @@
     <!-- <app-config></app-config> -->
     <!-- End of Config section -->
 
-    <div class="layout-mask"></div>
+    <div class="layout-mask" (click)="layoutService.hideMenuToggle()"></div>
 </div>
 <!-- End of Main content section -->
