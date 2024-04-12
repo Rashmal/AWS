@@ -81,4 +81,19 @@ export class CommonModel {
         // return the promise
         return promise;
     }
+
+    // Getting the module list
+    GetModuleListServiceLocal() {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetModuleListLocal().subscribe(
+                data => {
+                    let returnData = <Module[]>data;;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
 }

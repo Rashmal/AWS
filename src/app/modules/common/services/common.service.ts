@@ -71,6 +71,14 @@ export class CommonService {
     );
   }
 
+  // Getting the module list
+  GetModuleListLocal() {
+    // Setting the params
+    let my_params = new HttpParams();
+
+    return this.http.get<Module[]>('assets/sidemenuItems.json');
+  }
+
   //----------- Common methods------------------//
   //The function of handling the error
   private handleError(methodName: string, exception: Error) {
