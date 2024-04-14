@@ -39,3 +39,22 @@ input {
     background: #126095;
     color: white;
 }
+
+.p-dropdown {
+    height: 30px;
+    min-width: 200px;
+}
+
+.p-dropdown .p-dropdown-label {
+    padding: 5px;
+}
+
+.p-dropdown-items-wrapper ul {
+    padding: 5px;
+    margin: 0;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+    padding: 5px;
+    height: 30px;
+}

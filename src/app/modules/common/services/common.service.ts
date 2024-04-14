@@ -7,6 +7,7 @@ import { Status } from '../core/status';
 import { Module } from '../core/module';
 import { Router } from '@angular/router';
 import { ErrorMessage } from '../core/errorMessage';
+import { BasicUserDetails } from '../../authentication/core/authenticationModals/basicUserDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class CommonService {
   private GetPriorityListUrl = API$DOMAIN + 'api/Common/GetPriorityList';
   private GetStatusListUrl = API$DOMAIN + 'api/Common/GetStatusList';
   private GetModuleListUrl = API$DOMAIN + 'api/Common/GetModuleList';
+  private GetAllStaffListUrl = API$DOMAIN + 'api/Common/GetAllStaffList';
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
@@ -80,6 +82,18 @@ export class CommonService {
     let my_params = new HttpParams();
 
     return this.http.get<Module[]>('assets/sidemenuItems.json');
+  }
+
+  // Getting all the staff list
+  GetAllStaffList() {
+    // Setting the params
+    let my_params = new HttpParams();
+
+    return this.http.get<BasicUserDetails[]>(this.GetAllStaffListUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAllStaffList', error)
+      })
+    );
   }
 
   //----------- Common methods------------------//

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { GlobalNotesComponent } from './global-notes/global-notes.component';
 import { GlobalNotesRoutingModule } from './globalNotesRouting.module';
 import { TabViewComponent } from '../common/components/tab-view/tab-view.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { TabViewComponent } from '../common/components/tab-view/tab-view.compone
         CommonModule,
         FormsModule,
         GlobalNotesRoutingModule,
-        TabViewComponent
+        TabViewComponent,
+        CalendarModule 
     ]
 })
 export class GlobalNotesModule { }

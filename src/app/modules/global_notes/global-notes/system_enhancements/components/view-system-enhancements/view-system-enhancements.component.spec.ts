@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ViewSystemEnhancementsComponent } from './view-system-enhancements.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SystemEnhancementsRoutingModule } from '../systemEnhancementsRouting.module';
+import { SystemEnhancementsRoutingModule } from '../../systemEnhancementsRouting.module';
 
 describe('ViewSystemEnhancementsComponent', () => {
   let component: ViewSystemEnhancementsComponent;

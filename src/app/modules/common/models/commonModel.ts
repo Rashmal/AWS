@@ -3,6 +3,7 @@ import { CommonService } from "../services/common.service";
 import { Priority } from "../core/priority";
 import { Status } from "../core/status";
 import { Module } from "../core/module";
+import { BasicUserDetails } from "../../authentication/core/authenticationModals/basicUserDetails";
 
 export class CommonModel {
     //Store subscriptions
@@ -88,6 +89,21 @@ export class CommonModel {
             this.allSubscriptions.push(this.commonService.GetModuleListLocal().subscribe(
                 data => {
                     let returnData = <Module[]>data;;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all the staff list
+    GetAllStaffListService() {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAllStaffList().subscribe(
+                data => {
+                    let returnData = <BasicUserDetails[]>data;
                     // Resolve the promise
                     resolve(returnData);
                 })

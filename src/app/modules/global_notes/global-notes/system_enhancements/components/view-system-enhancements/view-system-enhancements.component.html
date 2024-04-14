@@ -1,0 +1,179 @@
+<!-- Main content section -->
+<div class="col-xl-12 view_system_enhancement_list">
+    <!-- Title and Filter section -->
+    <div class="col-xl-12 title_filter_section">
+        <!-- Title section -->
+        <div class="marginRight5 marginBottom5 marginTop5 main_title_width">
+            <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
+            <span class="module_title">System Enhancement</span>
+        </div>
+        <!-- End of Title section -->
+
+        <!-- Add button section -->
+        <div class="marginRight5 marginBottom5 marginTop5">
+            <button class="add_button">+Add new</button>
+        </div>
+        <!-- End of Add button section -->
+
+        <!-- Staff dropdown list -->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+            *ngIf="viewStaffDropdownList && viewStaffDropdownList.length > 0">
+            <div class="label_section">
+                <span class="marginRight5">Staff</span>
+            </div>
+            <p-dropdown [options]="viewStaffDropdownList" [(ngModel)]="filter.StaffId"></p-dropdown>
+        </div>
+        <!-- End of Staff dropdown list -->
+
+        <!-- Priority dropdown list -->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+            *ngIf="viewPriorityDropdownList && viewPriorityDropdownList.length > 0">
+            <div class="label_section">
+                <span class="marginRight5">Priority</span>
+            </div>
+            <p-dropdown [options]="viewPriorityDropdownList" [(ngModel)]="filter.PriorityId"></p-dropdown>
+        </div>
+        <!-- End of Priority dropdown list -->
+
+        <!-- Start date section-->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5">
+            <div class="label_section">
+                <span class="marginRight5">Start</span>
+            </div>
+            <p-calendar [(ngModel)]="filter.StartDate" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
+        </div>
+        <!-- End of Start date section -->
+    </div>
+    <!-- End of Title and Filter section -->
+
+    <!-- Search and Filter section -->
+    <div class="col-xl-12 title_filter_section">
+        <!-- Search box section -->
+        <div class="display_flex_center marginRight5 marginBottom5 marginTop5 main_title_width">
+            <!-- Search input box -->
+            <input type="search" placeholder="Search...">
+            <!-- End of Search input box -->
+
+            <!-- Search icon -->
+            <div class="ash_color_button">
+                <!-- Icon-->
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <!-- End of Icon-->
+            </div>
+            <!-- End of Search icon -->
+
+            <!-- Erase icon -->
+            <div class="ash_color_button">
+                <!-- Icon-->
+                <i class="fa fa-eraser" aria-hidden="true"></i>
+                <!-- End of Icon-->
+            </div>
+            <!-- End of Erase icon -->
+        </div>
+        <!-- End of Search box section -->
+
+        <!-- No of records per page dropdown -->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+            *ngIf="recordsPerPage && recordsPerPage.length > 0">
+            <p-dropdown [options]="recordsPerPage" [(ngModel)]="filter.RecordsPerPage"></p-dropdown>
+        </div>
+        <!-- End of No of records per page dropdown -->
+
+        <!-- Status dropdown list -->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+            *ngIf="viewStatusDropdownList && viewStatusDropdownList.length > 0">
+            <div class="label_section">
+                <span class="marginRight5">Status</span>
+            </div>
+            <p-dropdown [options]="viewStatusDropdownList" [(ngModel)]="filter.StatusId"></p-dropdown>
+        </div>
+        <!-- End of Status dropdown list -->
+
+        <!-- Modules dropdown list -->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+            *ngIf="viewModulesDropdownList && viewModulesDropdownList.length > 0">
+            <div class="label_section">
+                <span class="marginRight5">Module</span>
+            </div>
+            <p-dropdown [options]="viewModulesDropdownList" [(ngModel)]="filter.ModuleId"></p-dropdown>
+        </div>
+        <!-- End of Modules dropdown list -->
+
+        <!-- End date section-->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5">
+            <div class="label_section">
+                <span class="marginRight5">End</span>
+            </div>
+            <p-calendar [(ngModel)]="filter.EndDate" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
+        </div>
+        <!-- End of End date section -->
+    </div>
+    <!-- End of Search and Filter section -->
+
+    <!-- Stat boxes section -->
+    <div class="col-xl-12 stats_boxes_section">
+        <!-- Loop through the stat boxes list -->
+        <div class="stat_box_section" *ngFor="let statBox of statBoxesList"
+            [style.borderColor]="statBox.LabelColorCode">
+            <!-- Count section -->
+            <div>
+                {{statBox.LabelValue}}
+            </div>
+            <!-- End of Count section -->
+
+            <!-- Stat box label section -->
+            <div>
+                <span>{{statBox.LabelName}}</span>
+            </div>
+            <!-- End of Stat box label section -->
+        </div>
+        <!-- End of Loop through the stat boxes list -->
+    </div>
+    <!-- End of Stat boxes section -->
+
+    <!-- Table section -->
+    <div class="col-xl-12">
+        <!-- Prime ng table -->
+        <p-table [value]="displayModuleList" dataKey="name" [tableStyle]="{ 'min-width': '60rem' }">
+            <!-- Header section -->
+            <ng-template pTemplate="header">
+                <!-- Header row section -->
+                <tr>
+                    <th>No:</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Est.Hrs.</th>
+                    <th>Priority</th>
+                    <th>Requested By</th>
+                    <th>Action</th>
+                </tr>
+                <!-- End of Header row section -->
+            </ng-template>
+            <!-- End of Header section -->
+
+            <!-- Modules table body section -->
+            <ng-template pTemplate="body" let-productData let-rowIndex="rowIndex">
+                <!-- Body row section -->
+                <tr>
+                    <td>
+                        <div class="module_row">
+                            {{(rowIndex+1)}}
+                        </div>
+                    </td>
+                    <td colspan="8">
+                        <div class="module_row">
+                            {{productData['Name']}}
+                        </div>
+                    </td>
+                </tr>
+                <!-- End of Body row section -->
+            </ng-template>
+            <!-- End of Modules table body section -->
+        </p-table>
+        <!-- End of Prime ng table -->
+    </div>
+    <!-- End of Table section -->
+</div>
+<!-- End of Main content section -->

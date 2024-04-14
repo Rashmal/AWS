@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ViewSystemEnhancementsComponent } from './view-system-enhancements/view-system-enhancements.component';
 import { SystemEnhancementsRoutingModule } from './systemEnhancementsRouting.module';
+import { ViewSystemEnhancementsComponent } from './components/view-system-enhancements/view-system-enhancements.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
     declarations: [
@@ -11,7 +14,10 @@ import { SystemEnhancementsRoutingModule } from './systemEnhancementsRouting.mod
     imports: [
         CommonModule,
         FormsModule,
-        SystemEnhancementsRoutingModule
+        SystemEnhancementsRoutingModule,
+        DropdownModule,
+        CalendarModule,
+        TableModule 
     ]
 })
 export class SystemEnhancementsModule { }

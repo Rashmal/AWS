@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ViewBugFixesComponent } from './view-bug-fixes/view-bug-fixes.component';
+import { ViewBugFixesComponent } from './components/view-bug-fixes/view-bug-fixes.component';
 
 @NgModule({
     imports: [RouterModule.forChild([

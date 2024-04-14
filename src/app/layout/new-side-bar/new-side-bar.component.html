@@ -3,13 +3,12 @@
 
     <!--Global notes and others-->
     <div class="flex_center_static">
-        <div [pTooltip]="item.Name"
-        tooltipPosition="right" *ngFor="let item of staticMenuItems; let i = index"
+        <div [pTooltip]="item.Name" tooltipPosition="right" *ngFor="let item of staticMenuItems; let i = index"
             [style.width]="item.ModuleCode == 'STAT1' ? '95%':  item.ModuleCode == 'STAT4' ? '45%' : 'auto'"
             [ngClass]="[!mouseEnter ? 'menu_item_main' : 'menu_item_expand', (item.ModuleCode == 'STAT4' && mouseEnter)?'req_new_ind':'']"
             [style.margin-top.px]="i == 0 ? 10 : 0"
             [style.margin-bottom.px]="item.ModuleCode == 'STAT1' && mouseEnter ? 10 : 0">
-            <a (click)="itemClick($event)" [routerLink]="item.RedirectUrl" routerLinkActive="active-route" pRipple
+            <a (click)="itemClick($event,item)" [routerLink]="item.RedirectUrl" routerLinkActive="active-route" pRipple
                 [ngClass]="item.ModuleCode == 'STAT1' ? 'gbl_n_icon' : item.ModuleCode == 'STAT4' ? 'req_new' : ''">
                 <!--Single Item section-->
                 <div class="single_item">
@@ -48,7 +47,7 @@
     <!--End of Global notes and others-->
 
     <div class="divider_hr">
-        <hr/>
+        <hr />
     </div>
 
     <!-- Looping through the menu items -->
