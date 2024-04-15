@@ -1,11 +1,15 @@
 <!-- Main content section -->
-<div class="col-xl-12 manage_system_enhancement">
+<div class="col-xl-12 manage_system_enhancement" *ngIf="systemEnhancement">
     <!-- Title section -->
     <div class="col-xl-12 title_filter_section">
         <!-- Title section -->
         <div class="marginRight5 marginBottom5 marginTop5">
             <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
-            <span class="module_title">Add System Enhancement</span>
+            <span class="module_title" *ngIf="systemEnhancement.Id && systemEnhancement.Id == ''">Add System
+                Enhancement</span>
+            <span class="module_title" *ngIf="systemEnhancement.Id && systemEnhancement.Id !== ''">
+                Edit - {{systemEnhancement.Title}}
+            </span>
         </div>
         <!-- End of Title section -->
     </div>
@@ -43,7 +47,7 @@
                 <!-- Status dropdown section -->
                 <div>
                     <p-dropdown [options]="viewStatusDropdownList"
-                        [(ngModel)]="systemEnhancement.ModuleId"></p-dropdown>
+                        [(ngModel)]="systemEnhancement.StatusId"></p-dropdown>
                 </div>
                 <!-- End of Status dropdown section -->
             </div>
@@ -76,9 +80,15 @@
 
                 <!-- Estimated hours input -->
                 <div>
-                    <input type="number">
+                    <input type="number" [(ngModel)]="systemEnhancement.EstimatedHours">
                 </div>
                 <!-- End of Estimated hours input -->
+
+                <!-- Error Message -->
+                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$EST$HOURS')">
+                    <span>{{CheckErrorCode('EMPTY$EST$HOURS').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
             </div>
             <!-- End of Estimated hours section -->
         </div>
@@ -96,9 +106,16 @@
 
                 <!-- Title input -->
                 <div>
-                    <input type="text" class="full_width">
+                    <input type="text" class="full_width" [(ngModel)]="systemEnhancement.Title"
+                        maxlength="{{titleLimit}}" (input)="onPasteTitleFunction($event)">
                 </div>
                 <!-- End of Title input -->
+
+                <!-- Error Message -->
+                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$TITLE')">
+                    <span>{{CheckErrorCode('EMPTY$TITLE').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
             </div>
             <!-- End of Title section -->
 
@@ -117,6 +134,12 @@
                         (onClick)="assignedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
                 </div>
                 <!-- End of Staff dropdown section -->
+
+                <!-- Error Message -->
+                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$ASS$STAFF')">
+                    <span>{{CheckErrorCode('EMPTY$ASS$STAFF').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
             </div>
             <!-- End of Assigned staff section -->
 
@@ -130,11 +153,17 @@
 
                 <!-- Staff dropdown section -->
                 <div class="staff_multi_selection">
-                    <p-multiSelect [options]="viewManagedStaffDropdownList"
+                    <p-multiSelect [options]="viewRequestedStaffDropdownList"
                         [(ngModel)]="systemEnhancement.RequestedStaffList" optionLabel="FullName" display="chip"
                         (onClick)="requestedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
                 </div>
                 <!-- End of Staff dropdown section -->
+
+                <!-- Error Message -->
+                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$REQ$STAFF')">
+                    <span>{{CheckErrorCode('EMPTY$REQ$STAFF').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
             </div>
             <!-- End of Requested staff section -->
         </div>
@@ -155,6 +184,12 @@
                     <p-editor [(ngModel)]="systemEnhancement.Description" [style]="{ height: '320px' }"></p-editor>
                 </div>
                 <!-- End of Description input -->
+
+                <!-- Error Message -->
+                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$DESCRIPTION')">
+                    <span>{{CheckErrorCode('EMPTY$DESCRIPTION').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
             </div>
             <!-- End of Description section -->
 
@@ -165,9 +200,7 @@
                     <span>Start/Started</span>
                 </div>
                 <!-- End of Label section -->
-
-                <p-calendar [(ngModel)]="systemEnhancement.StartDate" [iconDisplay]="'input'"
-                    [showIcon]="true"></p-calendar>
+                <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
             </div>
             <!-- End of Start date section -->
 
@@ -179,8 +212,7 @@
                 </div>
                 <!-- End of Label section -->
 
-                <p-calendar [(ngModel)]="systemEnhancement.EndDate" [iconDisplay]="'input'"
-                    [showIcon]="true"></p-calendar>
+                <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
             </div>
             <!-- End of End date section -->
         </div>
@@ -193,11 +225,17 @@
         <!-- Footer inner section -->
         <div class="footer_inner_section">
             <!-- Close button -->
-            <button class="close_btn">Close</button>
+            <button class="close_btn" (click)="closeOnClickFunction()" pTooltip="Back to list"
+                tooltipPosition="top">Close</button>
             <!-- End of Close button -->
 
             <!-- Save button -->
-            <button class="save_btn">Save Detail</button>
+            <button class="save_btn" (click)="saveOnClickFunction()"
+                pTooltip="{{(systemEnhancement.Id && systemEnhancement.Id !== '')?'Update button':'Save button'}}"
+                tooltipPosition="top">
+                <span *ngIf="!(systemEnhancement.Id && systemEnhancement.Id !== '')">Save Detail</span>
+                <span *ngIf="systemEnhancement.Id && systemEnhancement.Id !== ''">Update Detail</span>
+            </button>
             <!-- End of Save button -->
         </div>
         <!-- End of Footer inner section -->
