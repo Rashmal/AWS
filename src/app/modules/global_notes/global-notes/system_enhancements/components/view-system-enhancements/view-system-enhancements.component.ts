@@ -11,7 +11,11 @@ import { CommonService } from 'src/app/modules/common/services/common.service';
 import { SystemEnhancementModel } from '../../models/systemEnhancementModel';
 import { SystemEnhancementsService } from '../../services/system-enhancements.service';
 import { DisplayModule } from 'src/app/modules/common/core/displayModule';
+import { Router } from '@angular/router';
 import { ViewSystemEnhancement } from '../../core/systemEnhancementModels/viewSystemEnhancement';
+
+
+
 
 @Component({
   selector: 'app-view-system-enhancements',
@@ -58,7 +62,9 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   systemEnhancementList: ViewSystemEnhancement[] = [];
 
   // Constructor
-  constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService) {
+  constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService,
+    private route: Router
+  ) {
     // Initialize the model
     this.commonModel = new CommonModel(this.commonService);
     this.systemEnhancementModel = new SystemEnhancementModel(this.systemEnhancementsService);
@@ -230,7 +236,13 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     // End of Calling the model to retrieve the data
   }
 
-  //Click on module row
+ // On click event of the add new system enhancement
+  addNewSystemEnhancementClick() {
+    // Routing to the new enhancement page
+    this.route.navigate(['/layout/global/globalNotes/systemEnhancements/manageSystemEnhancement']);
+  }
+
+//Click on module row
   clickOnModule(module: DisplayModule){
     // Set selected module
     this.filter.ModuleId = module.Id;
@@ -257,5 +269,4 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   deep<T extends object>(source: T): T {
     return JSON.parse(JSON.stringify(source))
   }
-
 }

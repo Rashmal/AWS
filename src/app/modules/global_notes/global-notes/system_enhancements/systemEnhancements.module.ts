@@ -7,10 +7,14 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
+import { ManageSystemEnhancementComponent } from './components/manage-system-enhancement/manage-system-enhancement.component';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { EditorModule } from 'primeng/editor';
 
 @NgModule({
     declarations: [
-        ViewSystemEnhancementsComponent
+        ViewSystemEnhancementsComponent,
+        ManageSystemEnhancementComponent
     ],
     imports: [
         CommonModule,
@@ -19,7 +23,9 @@ import { PaginatorModule } from 'primeng/paginator';
         DropdownModule,
         CalendarModule,
         TableModule,
-        PaginatorModule 
+        PaginatorModule,
+        MultiSelectModule,
+        EditorModule 
     ]
 })
 export class SystemEnhancementsModule { }
