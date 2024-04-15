@@ -12,6 +12,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { EditorModule } from 'primeng/editor';
 import { DateChangeHistoryComponent } from './components/date-change-history/date-change-history.component';
 import { ManageCommentsSystemEnhancementComponent } from './components/manage-comments-system-enhancement/manage-comments-system-enhancement.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { ManageCommentsSystemEnhancementComponent } from './components/manage-co
         TableModule,
         PaginatorModule,
         MultiSelectModule,
-        EditorModule 
+        EditorModule,
+        TooltipModule
     ]
 })
 export class SystemEnhancementsModule { }

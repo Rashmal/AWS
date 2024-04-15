@@ -29,8 +29,14 @@
         </div>
         <!-- End of Loop through the comments -->
 
+        <!-- Empty message place holder -->
+        <div class="col-xl-12 default_message_container" *ngIf="viewSystemEnhancementComment.length == 0">
+            <span class="default_message">No Records To Display</span>
+        </div>
+        <!-- End of Empty message place holder -->
+
         <!-- Paginator section -->
-        <div>
+        <div *ngIf="totalRecords > 0">
             <p-paginator (onPageChange)="onPageChangeComments($event)" [rows]="filter.RecordsPerPage"
                 [totalRecords]="totalRecords"></p-paginator>
         </div>
@@ -66,7 +72,8 @@
 
     <!-- Add reply button -->
     <div class="marginTop5">
-        <button class="add_reply_btn" (click)="addReplyOnClick()">Add Reply</button>
+        <button class="add_reply_btn" (click)="addReplyOnClick()" pTooltip="Add reply" tooltipPosition="top">Add
+            Reply</button>
     </div>
     <!-- End of Add reply button -->
 
@@ -75,7 +82,7 @@
         <!-- Footer inner section -->
         <div class="footer_inner_section">
             <!-- Back to list button -->
-            <button class="close_btn" (click)="backToListOnClickFunction()">
+            <button class="close_btn" (click)="backToListOnClickFunction()" pTooltip="Back to list" tooltipPosition="top">
                 <span>Back to list</span>
             </button>
             <!-- End of Back to list button -->

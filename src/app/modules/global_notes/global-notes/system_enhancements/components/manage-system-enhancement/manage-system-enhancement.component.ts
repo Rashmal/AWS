@@ -66,6 +66,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    debugger
     // Getting the passed params
     let paramObject = this.location.getState();
     if (paramObject['SystemEnhancementID']) {

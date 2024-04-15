@@ -249,13 +249,13 @@
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 action_button">
                             <!--Comments button-->
-                            <button class="button_green"><i class="fa fa-comments" aria-hidden="true"></i></button>
+                            <button class="button_green" (click)="commentOnClickFunction(enhancement)"><i class="fa fa-comments" aria-hidden="true"></i></button>
                             <!--End of Comments button-->
                             <!--Change history button-->
-                            <button class="button_orange"><i class="fa fa-history" aria-hidden="true"></i></button>
+                            <button class="button_orange" (click)="changeDateHistoryOnClick(enhancement)"><i class="fa fa-history" aria-hidden="true"></i></button>
                             <!--End of Change history button-->
                             <!--Edit button-->
-                            <button class="button_blue"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                            <button class="button_blue" (click)="editOnClickFunction(enhancement)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                             <!--End of Edit button-->
                             <!--Delete button-->
                             <button class="button_red"><i class="fa fa-trash" aria-hidden="true"></i></button>

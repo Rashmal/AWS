@@ -225,12 +225,15 @@
         <!-- Footer inner section -->
         <div class="footer_inner_section">
             <!-- Close button -->
-            <button class="close_btn" (click)="closeOnClickFunction()">Close</button>
+            <button class="close_btn" (click)="closeOnClickFunction()" pTooltip="Back to list"
+                tooltipPosition="top">Close</button>
             <!-- End of Close button -->
 
             <!-- Save button -->
-            <button class="save_btn" (click)="saveOnClickFunction()">
-                <span *ngIf="systemEnhancement.Id && systemEnhancement.Id == ''">Save Detail</span>
+            <button class="save_btn" (click)="saveOnClickFunction()"
+                pTooltip="{{(systemEnhancement.Id && systemEnhancement.Id !== '')?'Update button':'Save button'}}"
+                tooltipPosition="top">
+                <span *ngIf="!(systemEnhancement.Id && systemEnhancement.Id !== '')">Save Detail</span>
                 <span *ngIf="systemEnhancement.Id && systemEnhancement.Id !== ''">Update Detail</span>
             </button>
             <!-- End of Save button -->

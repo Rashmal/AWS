@@ -58,7 +58,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   statBoxesList: StatisticsBoxData[] = [];
   // Storing the display module list
   displayModuleList: DisplayModule[] = [];
-  
+
   // Store view system enhancement
   systemEnhancementList: ViewSystemEnhancement[] = [];
   // Store display table data
@@ -229,38 +229,56 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         // Getting the staff list
         this.displayModuleList = <DisplayModule[]>data;
         // Check module list is not undefined
-        if(this.displayModuleList){
+        if (this.displayModuleList) {
           // Set first module selected
           this.clickOnModule(this.displayModuleList[0]);
         }
-       
+
       }
     );
     // End of Calling the model to retrieve the data
   }
 
   // Generate display table
-  generateDisplayTable(){
+  generateDisplayTable() {
     // Empty display table
     this.displayTable = [];
     //Add content to display table
     this.displayModuleList.forEach(item => {
-      this.displayTable.push({Module: item, ExpandedContent: item.Id == this.filter.ModuleId ? this.systemEnhancementList : []});
+      this.displayTable.push({ Module: item, ExpandedContent: item.Id == this.filter.ModuleId ? this.systemEnhancementList : [] });
     });
   }
 
- // On click event of the add new system enhancement
+  // On click event of the add new system enhancement
   addNewSystemEnhancementClick() {
     // Routing to the new enhancement page
-    //this.route.navigate(['/layout/global/globalNotes/systemEnhancements/manageSystemEnhancement']);
+    this.route.navigate(['/layout/global/globalNotes/systemEnhancements/manageSystemEnhancement']);
     // Passing params
     //this.route.navigate(['/layout/global/globalNotes/systemEnhancements/manageSystemEnhancement'], { state: { SystemEnhancementID: 'A27104EA-10A0-4439-8C00-369575CD2399', SystemEnhancementTitle: 'Test Enhancement Rashmal 1' } });
     //this.route.navigate(['/layout/global/globalNotes/systemEnhancements/changeDateEnhancement'], { state: { SystemEnhancementID: '57C5B0A3-40CC-4E91-B33B-17B8D844848F' } });
-    this.route.navigate(['/layout/global/globalNotes/systemEnhancements/commentsSystemEnhancement'], { state: { SystemEnhancementID: '57C5B0A3-40CC-4E91-B33B-17B8D844848F', SystemEnhancementTitle: 'Test Enhancement Rashmal 1' } });
+
   }
 
-//Click on module row
-  clickOnModule(module: DisplayModule){
+  // On click function of the comments
+  commentOnClickFunction(enhancement: ViewSystemEnhancement) {
+    // Routing the page
+    this.route.navigate(['/layout/global/globalNotes/systemEnhancements/commentsSystemEnhancement'], { state: { SystemEnhancementID: enhancement.Id, SystemEnhancementTitle: enhancement.Title } });
+  }
+
+  // On click function of the change date history
+  changeDateHistoryOnClick(enhancement: ViewSystemEnhancement) {
+    // Routing the page
+    this.route.navigate(['/layout/global/globalNotes/systemEnhancements/changeDateEnhancement'], { state: { SystemEnhancementID: enhancement.Id } });
+  }
+
+  // On click function of edit
+  editOnClickFunction(enhancement: ViewSystemEnhancement) {
+    // Routing the page
+    this.route.navigate(['/layout/global/globalNotes/systemEnhancements/manageSystemEnhancement'], { state: { SystemEnhancementID: enhancement.Id, SystemEnhancementTitle: enhancement.Title } });
+  }
+
+  //Click on module row
+  clickOnModule(module: DisplayModule) {
     // Set selected module
     this.filter.ModuleId = module.Id;
     // Retrieve system enhancement list for selected module
@@ -268,7 +286,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   }
 
   // Get system enhancement display list
-  getSystemEnhancementDisplayList(){
+  getSystemEnhancementDisplayList() {
     // Clear the list
     this.systemEnhancementList = [];
     // Calling the model to retrieve the data
@@ -284,16 +302,16 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   }
 
   // Get requesters names
-  getRequestByNames(enhancement: ViewSystemEnhancement){
-    
+  getRequestByNames(enhancement: ViewSystemEnhancement) {
+
   }
 
   //on change module list paginator
-  onPageChange(event: any){}
+  onPageChange(event: any) { }
 
   //on change enhancement list paginator
-  onEnhancementPageChange(event: any){}
-  
+  onEnhancementPageChange(event: any) { }
+
 
 
   // Making a deep copy

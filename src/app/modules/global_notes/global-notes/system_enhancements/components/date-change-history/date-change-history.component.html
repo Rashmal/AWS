@@ -166,8 +166,14 @@
             </p-table>
             <!-- End of prime ng table -->
 
+            <!-- Empty message place holder -->
+            <div class="col-xl-12 default_message_container" *ngIf="viewSystemEnhancementChangeDate.length == 0">
+                <span class="default_message">No Records To Display</span>
+            </div>
+            <!-- End of Empty message place holder -->
+
             <!-- Paginator section -->
-            <div>
+            <div *ngIf="viewSystemEnhancementChangeDate.length > 0">
                 <p-paginator (onPageChange)="onPageChangeDateHistory($event)" [rows]="filter.RecordsPerPage"
                     [totalRecords]="totalRecords"></p-paginator>
             </div>
@@ -187,11 +193,12 @@
         <!-- Footer inner section -->
         <div class="footer_inner_section">
             <!-- Close button -->
-            <button class="close_btn" (click)="closeOnClickFunction()">Close</button>
+            <button class="close_btn" (click)="closeOnClickFunction()" pTooltip="Close button"
+                tooltipPosition="top">Close</button>
             <!-- End of Close button -->
 
             <!-- Save button -->
-            <button class="save_btn" (click)="saveOnClickFunction()">
+            <button class="save_btn" (click)="saveOnClickFunction()" pTooltip="Save button" tooltipPosition="top">
                 <span>Save</span>
             </button>
             <!-- End of Save button -->
