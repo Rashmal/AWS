@@ -6,6 +6,7 @@ import { ViewSystemEnhancementsComponent } from './components/view-system-enhanc
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { TableModule } from 'primeng/table';
         SystemEnhancementsRoutingModule,
         DropdownModule,
         CalendarModule,
-        TableModule 
+        TableModule,
+        PaginatorModule 
     ]
 })
 export class SystemEnhancementsModule { }

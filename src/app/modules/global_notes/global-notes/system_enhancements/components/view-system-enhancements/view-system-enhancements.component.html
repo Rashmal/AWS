@@ -158,13 +158,14 @@
                 <!-- Body row section -->
                 <tr>
                     <td>
-                        <div class="module_row">
+                        <div class="module_row paddingLeft5 cursor_pointer">
                             {{(rowIndex+1)}}
                         </div>
                     </td>
                     <td colspan="8">
-                        <div class="module_row">
-                            {{productData['Name']}}
+                        <div class="module_row module_display_section paddingRight5 cursor_pointer">
+                            <span>{{productData['Name']}}</span>
+                            <i class="fa fa-angle-double-down" aria-hidden="true"></i>
                         </div>
                     </td>
                 </tr>
@@ -173,6 +174,11 @@
             <!-- End of Modules table body section -->
         </p-table>
         <!-- End of Prime ng table -->
+
+        <!-- Pagination section -->
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="120"
+            [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+        <!-- End of Pagination section -->
     </div>
     <!-- End of Table section -->
 </div>
