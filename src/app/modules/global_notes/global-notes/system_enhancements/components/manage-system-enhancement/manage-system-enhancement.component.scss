@@ -1,0 +1,121 @@
+.manage_system_enhancement {
+    .marginRight5 {
+        margin-right: 5px;
+    }
+
+    .marginBottom5 {
+        margin-bottom: 5px;
+    }
+
+    .marginTop5 {
+        margin-top: 5px;
+    }
+
+    .paddingLeft5 {
+        padding-left: 5px;
+    }
+
+    .paddingRight5 {
+        padding-right: 5px;
+    }
+
+    .title_filter_section {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 5px;
+        border-bottom: solid thin #cccccc;
+    }
+
+    .module_title {
+        font-size: 15pt;
+        font-weight: bold;
+    }
+
+    .title_icon_color {
+        color: #5e17eb;
+        font-size: 17pt;
+        margin-right: 5px;
+    }
+
+    .body_content_section {
+        padding: 5px;
+    }
+
+    .each_label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .first_row_section {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+
+        .each_section {
+            min-width: 300px;
+            padding-right: 10px;
+        }
+
+        .each_section_merged {
+            width: 600px;
+            padding-right: 10px;
+        }
+    }
+
+    input {
+        height: 30px;
+        border-color: #cccccc;
+        outline: none;
+        border-width: 1px;
+        border-radius: 6px;
+        width: 200px;
+    }
+
+    .full_width {
+        width: 100%;
+    }
+
+    .footer_section {
+        padding: 5px;
+
+        .footer_inner_section {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    }
+
+    .close_btn {
+        height: 30px;
+        width: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #d9d9d9;
+        color: #545454;
+        border-radius: 5px;
+        margin-left: 5px;
+        font-size: 10pt;
+        border-color: #d9d9d9;
+        cursor: pointer;
+    }
+
+    .save_btn {
+        height: 30px;
+        width: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #21ba45;
+        color: white;
+        border-radius: 5px;
+        margin-left: 5px;
+        font-size: 10pt;
+        border-color: #21ba45;
+        cursor: pointer;
+    }
+}

@@ -11,7 +11,7 @@
 
         <!-- Add button section -->
         <div class="marginRight5 marginBottom5 marginTop5">
-            <button class="add_button">+Add new</button>
+            <button class="add_button" (click)="addNewSystemEnhancementClick()">+Add new</button>
         </div>
         <!-- End of Add button section -->
 
@@ -174,11 +174,6 @@
             <!-- End of Modules table body section -->
         </p-table>
         <!-- End of Prime ng table -->
-
-        <!-- Pagination section -->
-        <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="120"
-            [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
-        <!-- End of Pagination section -->
     </div>
     <!-- End of Table section -->
 </div>

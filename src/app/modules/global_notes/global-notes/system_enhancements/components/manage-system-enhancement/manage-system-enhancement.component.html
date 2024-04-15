@@ -1,0 +1,207 @@
+<!-- Main content section -->
+<div class="col-xl-12 manage_system_enhancement">
+    <!-- Title section -->
+    <div class="col-xl-12 title_filter_section">
+        <!-- Title section -->
+        <div class="marginRight5 marginBottom5 marginTop5">
+            <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
+            <span class="module_title">Add System Enhancement</span>
+        </div>
+        <!-- End of Title section -->
+    </div>
+    <!-- End of Title section -->
+
+    <!-- Body content section -->
+    <div class="body_content_section">
+        <!-- First row section -->
+        <div class="col-xl-12 first_row_section marginBottom5">
+            <!-- Priority dropdown section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Priority</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Priority dropdown section -->
+                <div>
+                    <p-dropdown [options]="viewPriorityDropdownList"
+                        [(ngModel)]="systemEnhancement.PriorityId"></p-dropdown>
+                </div>
+                <!-- End of Priority dropdown section -->
+            </div>
+            <!-- End of Priority dropdown section -->
+
+            <!-- Status dropdown section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Status</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Status dropdown section -->
+                <div>
+                    <p-dropdown [options]="viewStatusDropdownList"
+                        [(ngModel)]="systemEnhancement.ModuleId"></p-dropdown>
+                </div>
+                <!-- End of Status dropdown section -->
+            </div>
+            <!-- End of Status dropdown section -->
+
+            <!-- Module dropdown section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Module</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Module dropdown section -->
+                <div>
+                    <p-dropdown [options]="viewModulesDropdownList"
+                        [(ngModel)]="systemEnhancement.ModuleId"></p-dropdown>
+                </div>
+                <!-- End of Module dropdown section -->
+            </div>
+            <!-- End of Module dropdown section -->
+
+            <!-- Estimated hours section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Estimated Hours</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Estimated hours input -->
+                <div>
+                    <input type="number">
+                </div>
+                <!-- End of Estimated hours input -->
+            </div>
+            <!-- End of Estimated hours section -->
+        </div>
+        <!-- End of First row section -->
+
+        <!-- Second row section -->
+        <div class="col-xl-12 first_row_section marginBottom5">
+            <!-- Title section -->
+            <div class="each_section_merged">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Title</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Title input -->
+                <div>
+                    <input type="text" class="full_width">
+                </div>
+                <!-- End of Title input -->
+            </div>
+            <!-- End of Title section -->
+
+            <!-- Assigned staff section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Assigned Staff</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Staff dropdown section -->
+                <div class="staff_multi_selection">
+                    <p-multiSelect [options]="viewManagedStaffDropdownList"
+                        [(ngModel)]="systemEnhancement.AssignedStaffList" optionLabel="FullName" display="chip"
+                        (onClick)="assignedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
+                </div>
+                <!-- End of Staff dropdown section -->
+            </div>
+            <!-- End of Assigned staff section -->
+
+            <!-- Requested staff section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Requested Staff</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Staff dropdown section -->
+                <div class="staff_multi_selection">
+                    <p-multiSelect [options]="viewManagedStaffDropdownList"
+                        [(ngModel)]="systemEnhancement.RequestedStaffList" optionLabel="FullName" display="chip"
+                        (onClick)="requestedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
+                </div>
+                <!-- End of Staff dropdown section -->
+            </div>
+            <!-- End of Requested staff section -->
+        </div>
+        <!-- End of Second row section -->
+
+        <!-- Third row section -->
+        <div class="col-xl-12 first_row_section">
+            <!-- Description section -->
+            <div class="each_section_merged">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Enhancement</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Description input -->
+                <div>
+                    <p-editor [(ngModel)]="systemEnhancement.Description" [style]="{ height: '320px' }"></p-editor>
+                </div>
+                <!-- End of Description input -->
+            </div>
+            <!-- End of Description section -->
+
+            <!-- Start date section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Start/Started</span>
+                </div>
+                <!-- End of Label section -->
+
+                <p-calendar [(ngModel)]="systemEnhancement.StartDate" [iconDisplay]="'input'"
+                    [showIcon]="true"></p-calendar>
+            </div>
+            <!-- End of Start date section -->
+
+            <!-- End date section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>End/Completed</span>
+                </div>
+                <!-- End of Label section -->
+
+                <p-calendar [(ngModel)]="systemEnhancement.EndDate" [iconDisplay]="'input'"
+                    [showIcon]="true"></p-calendar>
+            </div>
+            <!-- End of End date section -->
+        </div>
+        <!-- End of Third row section -->
+    </div>
+    <!-- End of Body content section -->
+
+    <!-- Footer button section -->
+    <div class="col-xl-12 footer_section">
+        <!-- Footer inner section -->
+        <div class="footer_inner_section">
+            <!-- Close button -->
+            <button class="close_btn">Close</button>
+            <!-- End of Close button -->
+
+            <!-- Save button -->
+            <button class="save_btn">Save Detail</button>
+            <!-- End of Save button -->
+        </div>
+        <!-- End of Footer inner section -->
+    </div>
+    <!-- End of Footer button section -->
+</div>
+<!-- End of Main content section -->

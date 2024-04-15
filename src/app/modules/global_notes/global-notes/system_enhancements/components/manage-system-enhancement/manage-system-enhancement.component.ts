@@ -1,58 +1,38 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
-import { NO$OF$RECORDS$PER$PAGE } from 'src/app/core/apiConfigurations';
-import { BasicUserDetails } from 'src/app/modules/authentication/core/authenticationModals/basicUserDetails';
-import { Filter } from 'src/app/modules/common/core/filters';
-import { Priority } from 'src/app/modules/common/core/priority';
-import { StatisticsBoxData } from 'src/app/modules/common/core/statisticsBoxData';
-import { Status } from 'src/app/modules/common/core/status';
 import { CommonModel } from 'src/app/modules/common/models/commonModel';
 import { CommonService } from 'src/app/modules/common/services/common.service';
 import { SystemEnhancementModel } from '../../models/systemEnhancementModel';
 import { SystemEnhancementsService } from '../../services/system-enhancements.service';
-import { DisplayModule } from 'src/app/modules/common/core/displayModule';
-import { Router } from '@angular/router';
+import { Priority } from 'src/app/modules/common/core/priority';
+import { SystemEnhancement } from '../../core/systemEnhancementModels/systemEnhancement';
+import { Status } from 'src/app/modules/common/core/status';
+import { BasicUserDetails } from 'src/app/modules/authentication/core/authenticationModals/basicUserDetails';
 
 @Component({
-  selector: 'app-view-system-enhancements',
+  selector: 'app-manage-system-enhancement',
   standalone: false,
-  templateUrl: './view-system-enhancements.component.html',
-  styleUrl: './view-system-enhancements.component.scss'
+  templateUrl: './manage-system-enhancement.component.html',
+  styleUrl: './manage-system-enhancement.component.scss'
 })
-export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
-
-  // Store the staff dropdown view list
-  viewStaffDropdownList: SelectItem[] = [];
+export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
   // Store the priority dropdown view list
   viewPriorityDropdownList: SelectItem[] = [];
   // Store the status dropdown view list
   viewStatusDropdownList: SelectItem[] = [];
   // Store the module dropdown view list
   viewModulesDropdownList: SelectItem[] = [];
-  // Store the filter object
-  filter: Filter = {
-    Id: '',
-    CurrentPage: 1,
-    EndDate: new Date(),
-    ModuleId: -1,
-    ParentId: 0,
-    PriorityId: -1,
-    RecordsPerPage: 10,
-    SearchQuery: '',
-    StaffId: '-1',
-    StartDate: new Date(),
-    StatusId: -1
-  };
+  // Store the managed staff dropdown view list
+  viewManagedStaffDropdownList: BasicUserDetails[] = [];
+  // Store the requested staff dropdown view list
+  viewRequestedStaffDropdownList: BasicUserDetails[] = [];
   // Store the Common model
   commonModel: CommonModel;
   // Store the System Enhancement model
   systemEnhancementModel: SystemEnhancementModel;
-  // Store records per page
-  recordsPerPage: SelectItem[] = NO$OF$RECORDS$PER$PAGE;
-  // Storing the stats boxes
-  statBoxesList: StatisticsBoxData[] = [];
-  // Storing the display module list
-  displayModuleList: DisplayModule[] = [];
+  // Store the system enhancement object
+  systemEnhancement: SystemEnhancement;
 
   // Constructor
   constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService,
@@ -69,43 +49,44 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // Getting all the staff list
-    this.getAllStaffList();
+    // Initialize the object
+    this.systemEnhancement = {
+      Id: '',
+      AddedUserId: '',
+      Title: '',
+      Description: '',
+      StartDate: new Date(),
+      EndDate: new Date(),
+      ModuleId: 0,
+      PriorityId: 0,
+      StatusId: 0,
+      EstimatedHours: 0,
+      AssignedStaffList: [],
+      RequestedStaffList: []
+    };
     // Getting all the priority list
     this.getAllPriorityList();
     // Getting all the status list
     this.getAllStatusList();
     // Getting all the module list
     this.getAllModulesList();
-    // Getting all the stat boxes list
-    this.getAllStatBoxesList();
-    // Getting all the display module list
-    this.getAllSystemEnhancementModuleList();
+    // Getting all the staff list
+    this.getAllStaffList();
   }
 
   // Getting all the staff list
   getAllStaffList() {
     // Clear the list
-    this.viewStaffDropdownList = [];
+    this.viewManagedStaffDropdownList = [];
+    this.viewRequestedStaffDropdownList = [];
     // Calling the model to retrieve the data
     this.commonModel.GetAllStaffListService().then(
       (data) => {
         // Getting the staff list
         let staffListLocal: BasicUserDetails[] = <BasicUserDetails[]>data;
-        // Setting the all option
-        this.viewStaffDropdownList.push({
-          label: 'All',
-          value: '-1'
-        });
-        // Loop through the list
-        for (let i = 0; i < staffListLocal.length; i++) {
-          // Setting the option
-          this.viewStaffDropdownList.push({
-            label: staffListLocal[i].FirstName + " " + staffListLocal[i].LastName,
-            value: staffListLocal[i].Id
-          });
-        }
-        // End of Loop through the list
+        // Setting the option
+        this.viewManagedStaffDropdownList = staffListLocal;
+        this.viewRequestedStaffDropdownList = staffListLocal;
       }
     );
     // End of Calling the model to retrieve the data
@@ -120,11 +101,6 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
       (data) => {
         // Getting the staff list
         let priorityListLocal: Priority[] = <Priority[]>data;
-        // Setting the all option
-        this.viewPriorityDropdownList.push({
-          label: 'All',
-          value: -1
-        });
         // Loop through the list
         for (let i = 0; i < priorityListLocal.length; i++) {
           // Setting the option
@@ -134,6 +110,9 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
           });
         }
         // End of Loop through the list
+
+        // Setting the default selection
+        this.systemEnhancement.PriorityId = this.viewPriorityDropdownList[0].value;
       }
     );
     // End of Calling the model to retrieve the data
@@ -148,11 +127,6 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
       (data) => {
         // Getting the staff list
         let statusListLocal: Status[] = <Status[]>data;
-        // Setting the all option
-        this.viewStatusDropdownList.push({
-          label: 'All',
-          value: -1
-        });
         // Loop through the list
         for (let i = 0; i < statusListLocal.length; i++) {
           // Setting the option
@@ -162,6 +136,9 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
           });
         }
         // End of Loop through the list
+
+        // Setting the default selection
+        this.systemEnhancement.StatusId = this.viewStatusDropdownList[0].value;
       }
     );
     // End of Calling the model to retrieve the data
@@ -176,11 +153,6 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
       (data) => {
         // Getting the staff list
         let modulesListLocal: Status[] = <Status[]>data;
-        // Setting the all option
-        this.viewModulesDropdownList.push({
-          label: 'All',
-          value: -1
-        });
         // Loop through the list
         for (let i = 0; i < modulesListLocal.length; i++) {
           // Setting the option
@@ -190,43 +162,21 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
           });
         }
         // End of Loop through the list
+
+        // Setting the default selection
+        this.systemEnhancement.ModuleId = this.viewModulesDropdownList[0].value;
       }
     );
     // End of Calling the model to retrieve the data
   }
 
-  // Getting all the stat boxes list
-  getAllStatBoxesList() {
-    // Clear the list
-    this.statBoxesList = [];
-    // Calling the model to retrieve the data
-    this.systemEnhancementModel.GetStatBoxes().then(
-      (data) => {
-        // Getting the staff list
-        this.statBoxesList = <StatisticsBoxData[]>data;
-      }
-    );
-    // End of Calling the model to retrieve the data
+  // On click event of assigned staff
+  assignedStaffOnClick(elm) {
+    this.systemEnhancement.AssignedStaffList = elm.value;
   }
 
-  // Getting all the display module list
-  getAllSystemEnhancementModuleList() {
-    // Clear the list
-    this.displayModuleList = [];
-    // Calling the model to retrieve the data
-    this.systemEnhancementModel.GetSystemEnhancementDisplayModulesService(this.filter).then(
-      (data) => {
-        // Getting the staff list
-        this.displayModuleList = <DisplayModule[]>data;
-      }
-    );
-    // End of Calling the model to retrieve the data
+  // On click event of requested staff
+  requestedStaffOnClick(elm) {
+    this.systemEnhancement.RequestedStaffList = elm.value;
   }
-
-  // On click event of the add new system enhancement
-  addNewSystemEnhancementClick() {
-    // Routing to the new enhancement page
-    this.route.navigate(['/layout/global/globalNotes/systemEnhancements/manageSystemEnhancement']);
-  }
-
 }

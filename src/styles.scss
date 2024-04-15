@@ -54,7 +54,40 @@ input {
     margin: 0;
 }
 
-.p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
     padding: 5px;
     height: 30px;
+}
+
+.staff_multi_selection .p-multiselect {
+    min-height: 30px;
+    width: 200px;
+}
+
+.staff_multi_selection .p-multiselect-header {
+    display: none !important;
+}
+
+.staff_multi_selection .p-multiselect-items {
+    padding: 0;
+    margin: 0;
+}
+
+.staff_multi_selection .p-multiselect .p-multiselect-label {
+    padding: 4.5px;
+}
+
+.staff_multi_selection .p-multiselect.p-multiselect-chip .p-multiselect-token {
+    border-radius: 5px;
+    padding: 2px;
+    margin-right: 0.5rem;
+    background: #e5e7eb;
+    color: #4b5563;
+    font-size: 9pt;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.staff_multi_selection p-multiselectitem .p-checkbox {
+    display: none;
 }
