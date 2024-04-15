@@ -111,19 +111,141 @@
         align-items: center;
         display: flex;
         height: 30px;
+
+        span {
+            font-weight: bold;
+        }
+
+        i {
+            font-weight: bold;
+        }
+    }
+
+    .enh_module_row_w {
+        background: #f5f5f5;
+        align-items: center;
+        display: flex;
+        height: 30px;
+    }
+
+    .enh_module_row_g {
+        background: #ebeaea;
+        align-items: center;
+        display: flex;
+        height: 30px;
     }
 
     .module_display_section {
         justify-content: space-between;
         display: flex;
         align-items: center;
+        div{
+            width: 100%;
+        }
+        span{
+            width: 100%;
+        }
     }
 
-    .table_row{
+    .expanded_content_title {
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+
+        
+            color: #126095;
+        
+    }
+
+    .expanded_content_title:hover {
+        
+            text-decoration: underline;
+        
+    }
+
+    .table_row {
         cursor: pointer;
+    }
+
+    .table_row:hover {
+        .module_row {
+            background-color: #b3b3b3;
+        }
+    }
+
+    .action_button {
+        .button_green {
+            height: 30px;
+            width: 33px;
+            border-radius: 3px;
+            border: none;
+            color: #ffffff;
+            background-color: #21BA45;
+           
+        }
+        .button_orange {
+            height: 30px;
+            width: 33px;
+            border-radius: 3px;
+            border: none;
+            color: #ffffff;
+            background-color: #EBB32C;
+           
+        }
+        .button_blue {
+            height: 30px;
+            width: 33px;
+            border-radius: 3px;
+            border: none;
+            color: #ffffff;
+            background-color: #126095;
+           
+        }
+        .button_red {
+            height: 30px;
+            width: 33px;
+            border-radius: 3px;
+            border: none;
+            color: #ffffff;
+            background-color: #FF5757;
+           
+        }
+        .button_grey {
+            height: 30px;
+            width: 33px;
+            border-radius: 3px;
+            border: none;
+            color: #ffffff;
+            background-color: #A6A6A6;
+           
+        }
+        
+    }
+
+    .justify_center{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .action_column{
+        width: 200px;
+    }
+
+    .title_content{
+        width: 100%;
+        display: flex;
+       div{
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+       }
     }
 }
 
+.text_center{
+    text-align: center;
+}
 ::ng-deep thead th {
     padding: 5px;
 }

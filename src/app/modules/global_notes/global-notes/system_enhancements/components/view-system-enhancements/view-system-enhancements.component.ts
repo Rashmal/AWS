@@ -13,6 +13,7 @@ import { SystemEnhancementsService } from '../../services/system-enhancements.se
 import { DisplayModule } from 'src/app/modules/common/core/displayModule';
 import { Router } from '@angular/router';
 import { ViewSystemEnhancement } from '../../core/systemEnhancementModels/viewSystemEnhancement';
+import { DisplayTable } from '../../core/systemEnhancementModels/displayContent';
 
 
 
@@ -60,6 +61,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   
   // Store view system enhancement
   systemEnhancementList: ViewSystemEnhancement[] = [];
+  // Store display table data
+  displayTable: DisplayTable[] = [];
 
   // Constructor
   constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService,
@@ -236,6 +239,16 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     // End of Calling the model to retrieve the data
   }
 
+  // Generate display table
+  generateDisplayTable(){
+    // Empty display table
+    this.displayTable = [];
+    //Add content to display table
+    this.displayModuleList.forEach(item => {
+      this.displayTable.push({Module: item, ExpandedContent: item.Id == this.filter.ModuleId ? this.systemEnhancementList : []});
+    });
+  }
+
  // On click event of the add new system enhancement
   addNewSystemEnhancementClick() {
     // Routing to the new enhancement page
@@ -259,11 +272,25 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
       (data) => {
         // Getting the staff list
         this.systemEnhancementList = <ViewSystemEnhancement[]>data;
-       
+        // Generate display table with module list and enhancement list
+        this.generateDisplayTable();
       }
     );
     // End of Calling the model to retrieve the data
   }
+
+  // Get requesters names
+  getRequestByNames(enhancement: ViewSystemEnhancement){
+    
+  }
+
+  //on change module list paginator
+  onPageChange(event: any){}
+
+  //on change enhancement list paginator
+  onEnhancementPageChange(event: any){}
+  
+
 
   // Making a deep copy
   deep<T extends object>(source: T): T {
