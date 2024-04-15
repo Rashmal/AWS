@@ -11,6 +11,7 @@ import { CommonService } from 'src/app/modules/common/services/common.service';
 import { SystemEnhancementModel } from '../../models/systemEnhancementModel';
 import { SystemEnhancementsService } from '../../services/system-enhancements.service';
 import { DisplayModule } from 'src/app/modules/common/core/displayModule';
+import { ViewSystemEnhancement } from '../../core/systemEnhancementModels/viewSystemEnhancement';
 
 @Component({
   selector: 'app-view-system-enhancements',
@@ -52,6 +53,9 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   statBoxesList: StatisticsBoxData[] = [];
   // Storing the display module list
   displayModuleList: DisplayModule[] = [];
+  
+  // Store view system enhancement
+  systemEnhancementList: ViewSystemEnhancement[] = [];
 
   // Constructor
   constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService) {
@@ -215,9 +219,43 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
       (data) => {
         // Getting the staff list
         this.displayModuleList = <DisplayModule[]>data;
+        // Check module list is not undefined
+        if(this.displayModuleList){
+          // Set first module selected
+          this.clickOnModule(this.displayModuleList[0]);
+        }
+       
       }
     );
     // End of Calling the model to retrieve the data
+  }
+
+  //Click on module row
+  clickOnModule(module: DisplayModule){
+    // Set selected module
+    this.filter.ModuleId = module.Id;
+    // Retrieve system enhancement list for selected module
+    this.getSystemEnhancementDisplayList();
+  }
+
+  // Get system enhancement display list
+  getSystemEnhancementDisplayList(){
+    // Clear the list
+    this.systemEnhancementList = [];
+    // Calling the model to retrieve the data
+    this.systemEnhancementModel.GetSystemEnhancementDisplayListService(this.filter).then(
+      (data) => {
+        // Getting the staff list
+        this.systemEnhancementList = <ViewSystemEnhancement[]>data;
+       
+      }
+    );
+    // End of Calling the model to retrieve the data
+  }
+
+  // Making a deep copy
+  deep<T extends object>(source: T): T {
+    return JSON.parse(JSON.stringify(source))
   }
 
 }

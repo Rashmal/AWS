@@ -52,8 +52,8 @@
     }
 
     .add_button {
-        background: #4c7fc8;
-        border: solid 1px #4c7fc8;
+        background: #126095;
+        border: solid 1px #126095;
         border-radius: 6px;
         width: 100%;
         height: 30px;
@@ -115,6 +115,10 @@
         justify-content: space-between;
         display: flex;
         align-items: center;
+    }
+
+    .table_row{
+        cursor: pointer;
     }
 }
 

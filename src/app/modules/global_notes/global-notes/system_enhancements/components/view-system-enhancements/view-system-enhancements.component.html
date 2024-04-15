@@ -154,32 +154,69 @@
             <!-- End of Header section -->
 
             <!-- Modules table body section -->
-            <ng-template pTemplate="body" let-productData let-rowIndex="rowIndex">
+            <ng-template pTemplate="body" let-moduleData let-rowIndex="rowIndex">
                 <!-- Body row section -->
-                <tr>
+                <tr class="table_row" (click)="clickOnModule(moduleData)">
                     <td>
                         <div class="module_row paddingLeft5 cursor_pointer">
                             {{(rowIndex+1)}}
                         </div>
                     </td>
-                    <td colspan="8">
+                    <td colspan="9">
                         <div class="module_row module_display_section paddingRight5 cursor_pointer">
-                            <span>{{productData['Name']}}</span>
-                            <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+                            <span>{{moduleData['Name']}}</span>
+                            <i *ngIf="filter.ModuleId != moduleData['Id']" class="fa fa-angle-double-down"
+                                aria-hidden="true"></i>
+                            <i *ngIf="filter.ModuleId == moduleData['Id']" class="fa fa-angle-double-up"
+                                aria-hidden="true"></i>
+                        </div>
+                        <!-- Enhancement list for module-->
+                        <div *ngIf="filter.ModuleId == moduleData['Id'] && systemEnhancementList">
+                            <!-- Prime ng table -->
+                            <p-table [value]="systemEnhancementList" dataKey="name"
+                                [tableStyle]="{ 'min-width': '60rem' }">
+
+
+                                <!-- Modules table body section -->
+                                <ng-template pTemplate="body" let-enhancement let-eRowIndex="rowIndex">
+                                    <!-- Body row section -->
+                <tr class="table_row">
+                    <td>
+                        <div class="module_row paddingLeft5 cursor_pointer">
+                            {{(rowIndex+1)}}. {{(eRowIndex+1)}}
                         </div>
                     </td>
+                    <td >
+                        <div class="module_row module_display_section paddingRight5 cursor_pointer">
+                            <span>{{enhancement['Title']}}</span>
+                           
+                        </div>
+                        
+                    </td>
                 </tr>
-                <!-- End of Body row section -->
+
+
             </ng-template>
             <!-- End of Modules table body section -->
         </p-table>
         <!-- End of Prime ng table -->
-
-        <!-- Pagination section -->
-        <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="120"
-            [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
-        <!-- End of Pagination section -->
     </div>
-    <!-- End of Table section -->
+    <!-- End of Enhancement list for module-->
+    </td>
+    </tr>
+    <!-- End of Body row section -->
+
+
+    </ng-template>
+    <!-- End of Modules table body section -->
+    </p-table>
+    <!-- End of Prime ng table -->
+
+    <!-- Pagination section -->
+    <!-- <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="120"
+            [rowsPerPageOptions]="[10, 20, 30]"></p-paginator> -->
+    <!-- End of Pagination section -->
+</div>
+<!-- End of Table section -->
 </div>
 <!-- End of Main content section -->
