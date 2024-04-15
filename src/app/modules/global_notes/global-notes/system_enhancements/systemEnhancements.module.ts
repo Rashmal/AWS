@@ -10,11 +10,15 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ManageSystemEnhancementComponent } from './components/manage-system-enhancement/manage-system-enhancement.component';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { EditorModule } from 'primeng/editor';
+import { DateChangeHistoryComponent } from './components/date-change-history/date-change-history.component';
+import { ManageCommentsSystemEnhancementComponent } from './components/manage-comments-system-enhancement/manage-comments-system-enhancement.component';
 
 @NgModule({
     declarations: [
         ViewSystemEnhancementsComponent,
-        ManageSystemEnhancementComponent
+        ManageSystemEnhancementComponent,
+        DateChangeHistoryComponent,
+        ManageCommentsSystemEnhancementComponent
     ],
     imports: [
         CommonModule,

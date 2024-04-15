@@ -100,10 +100,10 @@ export class SystemEnhancementsService {
   }
 
   // Set System Enhancement Change date history
-  SetSystemEhancementChangeDate(systemEnhancementChangeDate: SystemEnhancementChangeDate, statusId: string) {
+  SetSystemEhancementChangeDate(systemEnhancementChangeDate: SystemEnhancementChangeDate, actionState: string) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("statusId", statusId.toString());
+      .set("actionState", actionState.toString());
 
     return this.http.post<string>(this.SetSystemEhancementChangeDateUrl, systemEnhancementChangeDate, { params: my_params }).pipe(
       catchError(error => {

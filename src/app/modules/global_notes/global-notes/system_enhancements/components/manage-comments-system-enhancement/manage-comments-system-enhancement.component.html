@@ -1,0 +1,87 @@
+<!-- Main content section -->
+<div class="col-xl-12 comments_system_enhancement">
+    <!-- Title section -->
+    <div class="col-xl-12 title_filter_section">
+        <!-- Title section -->
+        <div class="marginRight5 marginBottom5 marginTop5">
+            <i class="fa fa-commenting title_icon_color" aria-hidden="true"></i>
+            <span class="module_title">Comments - {{systemEnhancementId}} - {{systemEnhancementTitle}}</span>
+        </div>
+        <!-- End of Title section -->
+    </div>
+    <!-- End of Title section -->
+
+    <!-- Body content section -->
+    <div class="body_content_section">
+        <!-- Loop through the comments -->
+        <div class="col-xl-12 comment_view_section marginBottom10" *ngFor="let comment of viewSystemEnhancementComment">
+            <!-- Comment view section -->
+            <div class="comments_max_div">
+                <div [innerHtml]="comment.Description"></div>
+            </div>
+            <!-- End of Comment view section -->
+
+            <!-- Comment added date -->
+            <div>
+                <div class="date_section">{{comment.AddedDate | date:'dd MMM yyyy hh:mm a' }}</div>
+            </div>
+            <!-- End of Comment added date -->
+        </div>
+        <!-- End of Loop through the comments -->
+
+        <!-- Paginator section -->
+        <div>
+            <p-paginator (onPageChange)="onPageChangeComments($event)" [rows]="filter.RecordsPerPage"
+                [totalRecords]="totalRecords"></p-paginator>
+        </div>
+    </div>
+    <!-- End of Body content section -->
+
+    <!-- Top row section -->
+    <div class="marginTop5">
+        <!-- Label section -->
+        <div class="prior_label">
+            <!-- Label section -->
+            <div class="label_section">
+                <span>NEW QUESTIONS / COMMENTS</span>
+            </div>
+            <!-- End of Label section -->
+        </div>
+        <!-- End of Label section -->
+        <hr />
+    </div>
+    <!-- End of Top row section -->
+
+    <!-- Comments Entering section -->
+    <div class="marginTop5 comments_create_section">
+        <p-editor [(ngModel)]="systemEnhancementComment.Description" [style]="{ height: '320px' }"></p-editor>
+    </div>
+    <!-- End of Comments Entering section -->
+
+    <!-- Error Message -->
+    <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$DESCRIPTION')">
+        <span>{{CheckErrorCode('EMPTY$DESCRIPTION').ErrorMessage}}</span>
+    </div>
+    <!-- End of Error Message -->
+
+    <!-- Add reply button -->
+    <div class="marginTop5">
+        <button class="add_reply_btn" (click)="addReplyOnClick()">Add Reply</button>
+    </div>
+    <!-- End of Add reply button -->
+
+    <!-- Footer button section -->
+    <div class="col-xl-12 footer_section">
+        <!-- Footer inner section -->
+        <div class="footer_inner_section">
+            <!-- Back to list button -->
+            <button class="close_btn" (click)="backToListOnClickFunction()">
+                <span>Back to list</span>
+            </button>
+            <!-- End of Back to list button -->
+        </div>
+        <!-- End of Footer inner section -->
+    </div>
+    <!-- End of Footer button section -->
+</div>
+<!-- End of Main content section -->

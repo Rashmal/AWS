@@ -1,0 +1,203 @@
+<!-- Main content section -->
+<div class="col-xl-12 date_change_history">
+    <!-- Title section -->
+    <div class="col-xl-12 title_filter_section">
+        <!-- Title section -->
+        <div class="marginRight5 marginBottom5 marginTop5">
+            <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
+            <span class="module_title">Date Change History</span>
+        </div>
+        <!-- End of Title section -->
+    </div>
+    <!-- End of Title section -->
+
+    <!-- Body content section -->
+    <div class="body_content_section">
+        <!-- First row section -->
+        <div class="col-xl-12 first_row_section marginBottom5">
+            <!-- From date section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>From Date</span>
+                </div>
+                <!-- End of Label section -->
+                <p-calendar [(ngModel)]="fromDate" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
+            </div>
+            <!-- End of From date section -->
+
+            <!-- To date section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>To Date</span>
+                </div>
+                <!-- End of Label section -->
+                <p-calendar [(ngModel)]="toDate" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
+            </div>
+            <!-- End of to date section -->
+
+            <!-- Estimated hours section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Approx. Duration (hrs)</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Estimated hours input -->
+                <div>
+                    <input type="number" [(ngModel)]="systemEnhancementChangeDate.NewDuration">
+                </div>
+                <!-- End of Estimated hours input -->
+
+                <!-- Error Message -->
+                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$DURATION')">
+                    <span>{{CheckErrorCode('EMPTY$DURATION').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
+            </div>
+            <!-- End of Estimated hours section -->
+        </div>
+        <!-- End of First row section -->
+
+        <!-- Second row section -->
+        <div class="col-xl-12 first_row_section marginBottom5">
+            <!-- Description section -->
+            <div class="each_section_merged">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Reason</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Description input -->
+                <div>
+                    <p-editor [(ngModel)]="systemEnhancementChangeDate.Reason" [style]="{ height: '320px' }"></p-editor>
+                </div>
+                <!-- End of Description input -->
+
+                <!-- Error Message -->
+                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$REASON')">
+                    <span>{{CheckErrorCode('EMPTY$REASON').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
+            </div>
+            <!-- End of Description section -->
+        </div>
+        <!-- End of Second row section -->
+    </div>
+    <!-- End of Body content section -->
+
+    <!-- Previous change date histories list -->
+    <div class="previous_date_histories">
+        <!-- Title section -->
+        <div>
+            <!-- Label section -->
+            <div class="prior_label">
+                <!-- Label section -->
+                <div class="label_section">
+                    <span>PRIOR DATE CHANGES</span>
+                </div>
+                <!-- End of Label section -->
+            </div>
+            <!-- End of Label section -->
+            <hr />
+        </div>
+        <!-- End of Title section -->
+
+        <!-- Display previous change data histories -->
+        <div class="col-xl-12">
+            <!-- prime ng table -->
+            <p-table [value]="viewSystemEnhancementChangeDate" dataKey="name" [tableStyle]="{ 'min-width': '60rem' }">
+                <!-- Header section -->
+                <ng-template pTemplate="header">
+                    <!-- Header row section -->
+                    <tr>
+                        <th>Changes On</th>
+                        <th>By</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Duration</th>
+                    </tr>
+                    <!-- End of Header row section -->
+                </ng-template>
+                <!-- End of Header section -->
+
+                <!-- Data table body section -->
+                <ng-template pTemplate="body" let-productData let-rowIndex="rowIndex">
+                    <!-- Body row section -->
+                    <tr class="marginBottom5">
+                        <td>
+                            <div>
+                                {{productData.ChangedDate | date:'dd MMM yyyy'}}
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                {{productData.FirstName}} {{productData.LastName}}
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                {{productData.NewFromDate | date:'dd MMM yyyy'}}
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                {{productData.NewToDate | date:'dd MMM yyyy'}}
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                {{productData.NewDuration}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div [innerHtml]="productData.Reason">
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- End of Body row section -->
+                </ng-template>
+                <!-- End of Data table body section -->
+            </p-table>
+            <!-- End of prime ng table -->
+
+            <!-- Paginator section -->
+            <div>
+                <p-paginator (onPageChange)="onPageChangeDateHistory($event)" [rows]="filter.RecordsPerPage"
+                    [totalRecords]="totalRecords"></p-paginator>
+            </div>
+        </div>
+        <!-- End of Display previous change data histories -->
+
+        <!-- Bottom line section -->
+        <div>
+            <hr />
+        </div>
+        <!-- End of Bottom line section -->
+    </div>
+    <!-- End of Previous change date histories list -->
+
+    <!-- Footer button section -->
+    <div class="col-xl-12 footer_section">
+        <!-- Footer inner section -->
+        <div class="footer_inner_section">
+            <!-- Close button -->
+            <button class="close_btn" (click)="closeOnClickFunction()">Close</button>
+            <!-- End of Close button -->
+
+            <!-- Save button -->
+            <button class="save_btn" (click)="saveOnClickFunction()">
+                <span>Save</span>
+            </button>
+            <!-- End of Save button -->
+        </div>
+        <!-- End of Footer inner section -->
+    </div>
+    <!-- End of Footer button section -->
+</div>
+<!-- End of Main content section -->

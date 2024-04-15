@@ -104,9 +104,9 @@ export class SystemEnhancementModel {
     }
 
     // Set System Enhancement Change date history
-    SetSystemEhancementChangeDateService(systemEnhancementId: SystemEnhancementChangeDate, statusId: string) {
+    SetSystemEhancementChangeDateService(systemEnhancementId: SystemEnhancementChangeDate, actionState: string) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.SetSystemEhancementChangeDate(systemEnhancementId, statusId).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.SetSystemEhancementChangeDate(systemEnhancementId, actionState).subscribe(
                 data => {
                     let returnData = <string>data;
                     // Resolve the promise

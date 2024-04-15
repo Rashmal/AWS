@@ -226,7 +226,11 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   // On click event of the add new system enhancement
   addNewSystemEnhancementClick() {
     // Routing to the new enhancement page
-    this.route.navigate(['/layout/global/globalNotes/systemEnhancements/manageSystemEnhancement']);
+    //this.route.navigate(['/layout/global/globalNotes/systemEnhancements/manageSystemEnhancement']);
+    // Passing params
+    //this.route.navigate(['/layout/global/globalNotes/systemEnhancements/manageSystemEnhancement'], { state: { SystemEnhancementID: 'A27104EA-10A0-4439-8C00-369575CD2399', SystemEnhancementTitle: 'Test Enhancement Rashmal 1' } });
+    //this.route.navigate(['/layout/global/globalNotes/systemEnhancements/changeDateEnhancement'], { state: { SystemEnhancementID: '57C5B0A3-40CC-4E91-B33B-17B8D844848F' } });
+    this.route.navigate(['/layout/global/globalNotes/systemEnhancements/commentsSystemEnhancement'], { state: { SystemEnhancementID: '57C5B0A3-40CC-4E91-B33B-17B8D844848F', SystemEnhancementTitle: 'Test Enhancement Rashmal 1' } });
   }
 
 }
