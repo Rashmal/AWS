@@ -12,6 +12,11 @@ import { SystemEnhancementModel } from '../../models/systemEnhancementModel';
 import { SystemEnhancementsService } from '../../services/system-enhancements.service';
 import { DisplayModule } from 'src/app/modules/common/core/displayModule';
 import { Router } from '@angular/router';
+import { ViewSystemEnhancement } from '../../core/systemEnhancementModels/viewSystemEnhancement';
+import { DisplayTable } from '../../core/systemEnhancementModels/displayContent';
+
+
+
 
 @Component({
   selector: 'app-view-system-enhancements',
@@ -53,6 +58,11 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   statBoxesList: StatisticsBoxData[] = [];
   // Storing the display module list
   displayModuleList: DisplayModule[] = [];
+  
+  // Store view system enhancement
+  systemEnhancementList: ViewSystemEnhancement[] = [];
+  // Store display table data
+  displayTable: DisplayTable[] = [];
 
   // Constructor
   constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService,
@@ -218,12 +228,28 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
       (data) => {
         // Getting the staff list
         this.displayModuleList = <DisplayModule[]>data;
+        // Check module list is not undefined
+        if(this.displayModuleList){
+          // Set first module selected
+          this.clickOnModule(this.displayModuleList[0]);
+        }
+       
       }
     );
     // End of Calling the model to retrieve the data
   }
 
-  // On click event of the add new system enhancement
+  // Generate display table
+  generateDisplayTable(){
+    // Empty display table
+    this.displayTable = [];
+    //Add content to display table
+    this.displayModuleList.forEach(item => {
+      this.displayTable.push({Module: item, ExpandedContent: item.Id == this.filter.ModuleId ? this.systemEnhancementList : []});
+    });
+  }
+
+ // On click event of the add new system enhancement
   addNewSystemEnhancementClick() {
     // Routing to the new enhancement page
     //this.route.navigate(['/layout/global/globalNotes/systemEnhancements/manageSystemEnhancement']);
@@ -233,4 +259,45 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     this.route.navigate(['/layout/global/globalNotes/systemEnhancements/commentsSystemEnhancement'], { state: { SystemEnhancementID: '57C5B0A3-40CC-4E91-B33B-17B8D844848F', SystemEnhancementTitle: 'Test Enhancement Rashmal 1' } });
   }
 
+//Click on module row
+  clickOnModule(module: DisplayModule){
+    // Set selected module
+    this.filter.ModuleId = module.Id;
+    // Retrieve system enhancement list for selected module
+    this.getSystemEnhancementDisplayList();
+  }
+
+  // Get system enhancement display list
+  getSystemEnhancementDisplayList(){
+    // Clear the list
+    this.systemEnhancementList = [];
+    // Calling the model to retrieve the data
+    this.systemEnhancementModel.GetSystemEnhancementDisplayListService(this.filter).then(
+      (data) => {
+        // Getting the staff list
+        this.systemEnhancementList = <ViewSystemEnhancement[]>data;
+        // Generate display table with module list and enhancement list
+        this.generateDisplayTable();
+      }
+    );
+    // End of Calling the model to retrieve the data
+  }
+
+  // Get requesters names
+  getRequestByNames(enhancement: ViewSystemEnhancement){
+    
+  }
+
+  //on change module list paginator
+  onPageChange(event: any){}
+
+  //on change enhancement list paginator
+  onEnhancementPageChange(event: any){}
+  
+
+
+  // Making a deep copy
+  deep<T extends object>(source: T): T {
+    return JSON.parse(JSON.stringify(source))
+  }
 }
