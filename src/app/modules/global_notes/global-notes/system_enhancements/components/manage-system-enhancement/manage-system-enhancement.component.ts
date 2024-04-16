@@ -48,9 +48,12 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
   startDate: Date = new Date();
   // Store the end date
   endDate: Date = new Date();
-  // Store managing type
-  editingType: string = 'EDIT'; 
-
+// Store show loading
+  showLoading: boolean = false;
+  // Store the system enhancement Id
+  systemEnhancementId: string = "";
+// Store managing type
+  editingType: string = 'EDIT';
   // Constructor
   constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService,
     private route: Router, private location: Location
@@ -72,6 +75,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     // Getting the passed params
     let paramObject = this.location.getState();
     if (paramObject['SystemEnhancementID']) {
+      this.systemEnhancementId = paramObject['SystemEnhancementID'];
       // Initialize default data
       this.initDefaultData();
     } else {
@@ -103,6 +107,9 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
 
   // Getting the system enhancement details by Id
   getEnhancementDetailsById() {
+    // Start loading
+    this.showLoading = true;
+
     let paramObject = this.location.getState();
     // Initialize the object
     this.systemEnhancement = {
@@ -128,6 +135,8 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
         this.startDate = new Date(this.systemEnhancement.StartDate);
         // Setting the end date
         this.endDate = new Date(this.systemEnhancement.EndDate);
+        // Stop loading
+        this.showLoading = false;
       }
     );
     // End of Getting the system enhancement details by ID
@@ -183,11 +192,12 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
         // End of Loop through the list
 
         // Setting the default selection
-        if (this.systemEnhancement && this.systemEnhancement.Id != '')
-          this.systemEnhancement.PriorityId = this.viewPriorityDropdownList[0].value;
-
+        if (this.systemEnhancementId && this.systemEnhancementId != '') {
         // Getting the system enhancement details by Id
         this.getEnhancementDetailsById();
+        } else {
+          this.systemEnhancement.PriorityId = this.viewPriorityDropdownList[0].value;
+      }
       }
     );
     // End of Calling the model to retrieve the data
@@ -308,7 +318,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     this.errorMessagesList = [];
 
     // Check if the title exists
-    if (!(this.systemEnhancement.Title.trim() && this.systemEnhancement.Title.trim() != '')) {
+    if (!(this.systemEnhancement.Title && this.systemEnhancement.Title.trim() && this.systemEnhancement.Title.trim() != '')) {
       // Pushing the error message
       this.errorMessagesList.push(
         {
@@ -320,7 +330,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     // End of Check if the title exists
 
     // Check if the description exists
-    if (!(this.systemEnhancement.Description.trim() && this.systemEnhancement.Description.trim() != '')) {
+    if (!(this.systemEnhancement.Description && this.systemEnhancement.Description.trim() && this.systemEnhancement.Description.trim() != '')) {
       // Pushing the error message
       this.errorMessagesList.push(
         {

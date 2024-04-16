@@ -16,8 +16,9 @@ import { ViewSystemEnhancement } from '../../core/systemEnhancementModels/viewSy
 import { DisplayTable } from '../../core/systemEnhancementModels/displayContent';
 import { SystemEnhancement } from '../../core/systemEnhancementModels/systemEnhancement';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
+import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
 import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
-
 @Component({
     selector: 'app-view-system-enhancements',
     standalone: false,
@@ -32,6 +33,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     viewPriorityDropdownList: SelectItem[] = [];
     // Store the status dropdown view list
     viewStatusDropdownList: SelectItem[] = [];
+  // Store the status dropdown view list for mobile
+  viewStatusMobileDropdownList: SelectItem[] = [];
     // Store the module dropdown view list
     viewModulesDropdownList: SelectItem[] = [];
     // Store the filter object
@@ -63,9 +66,18 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     systemEnhancementList: ViewSystemEnhancement[] = [];
     // Store display table data
     displayTable: DisplayTable[] = [];
-    // Store dynamic dialog ref
+	// Store the status list
+  originalStatusListLocal: Status[] = [];
+  // Store the user role code
+  userRoleCode: string = "";
+  // Store the cookie interface
+  overallCookieInterface: OverallCookieInterface;
+  // Store display status options
+  displayStatusOptions: boolean = false;
+  // Store the loading
+  showLoading: boolean = false;
+// Store dynamic dialog ref
     ref: DynamicDialogRef | undefined;
-
     // Constructor
     constructor(
         private commonService: CommonService,
@@ -78,11 +90,15 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.systemEnhancementModel = new SystemEnhancementModel(
             this.systemEnhancementsService
         );
+    this.overallCookieInterface = new OverallCookieModel();
+    // Setting the user role
+    this.userRoleCode = this.overallCookieInterface.GetUserRole().toUpperCase();
     }
 
     ngOnDestroy() {
         // Unsubscribe all
         this.commonModel.UnsubscribeAll();
+    this.systemEnhancementModel.UnsubscribeAll();
     }
 
     ngOnInit(): void {
@@ -159,10 +175,12 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     getAllStatusList() {
         // Clear the list
         this.viewStatusDropdownList = [];
+    this.viewStatusMobileDropdownList = [];
         // Calling the model to retrieve the data
         this.commonModel.GetStatusListService('SE').then((data) => {
             // Getting the staff list
             let statusListLocal: Status[] = <Status[]>data;
+        this.originalStatusListLocal = statusListLocal;
             // Setting the all option
             this.viewStatusDropdownList.push({
                 label: 'All',
@@ -175,6 +193,10 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
                     label: statusListLocal[i].Name,
                     value: +statusListLocal[i].Id,
                 });
+          this.viewStatusMobileDropdownList.push({
+            label: statusListLocal[i].Name,
+            value: +statusListLocal[i].Id
+          });
             }
             // End of Loop through the list
         });
@@ -221,6 +243,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
     // Getting all the display module list
     getAllSystemEnhancementModuleList() {
+    // Start loading
+    this.showLoading = true;
         // Clear the list
         this.displayModuleList = [];
         // Calling the model to retrieve the data
@@ -234,6 +258,9 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
                   debugger
                     // Set first module selected
                     this.clickOnModule(this.displayModuleList[0]);
+        } else {
+          // Stop loading
+          this.showLoading = false;
                 }
             });
         // End of Calling the model to retrieve the data
@@ -378,6 +405,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
     // Get system enhancement display list
     getSystemEnhancementDisplayList() {
+    // Start loading
+    this.showLoading = true;
         // Clear the list
         this.systemEnhancementList = [];
         // Calling the model to retrieve the data
@@ -388,17 +417,28 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
                 this.systemEnhancementList = <ViewSystemEnhancement[]>data;
                 // Generate display table with module list and enhancement list
                 this.generateDisplayTable();
-            });
-        // End of Calling the model to retrieve the data
+    );
+
+ // Stop loading
+        this.showLoading = false;
+// End of Calling the model to retrieve the data
     }
 
     // Get requesters names
 
+<<<<<<< .mine
     getRequestByNames(enhancement: ViewSystemEnhancement) {
+=======
+  getRequestByNames(enhancement: ViewSystemEnhancement) {
+>>>>>>> .theirs
         let requestNames = '';
 
         enhancement.RequestedStaffList.forEach((item, index) => {
+<<<<<<< .mine
             if (requestNames == '') {
+=======
+      if (requestNames == '') {
+>>>>>>> .theirs
                 requestNames = item.FirstName + ' ' + item.LastName;
             } else {
                 requestNames =
@@ -419,7 +459,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.getSystemEnhancementDisplayList();
     }
 
-    // On change drop down or input to filter data
+// On change drop down or input to filter data
     onChangeFilterItem(type: string) {
         // Set filter properties according to type
         switch (type) {
@@ -468,6 +508,50 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
     // Making a deep copy
     deep<T extends object>(source: T): T {
+    return JSON.parse(JSON.stringify(source))
         return JSON.parse(JSON.stringify(source));
     }
+
+  // On Select status on click function
+  onSelectStatusOnClick(status: Status, enhancement: ViewSystemEnhancement) {
+    // Start loading
+    this.showLoading = true;
+    // Calling the model to update the status
+    this.systemEnhancementModel.UpdateSystemEnhancementStatus(enhancement.Id, status.Id).then(
+      (data) => {
+        // Refresh the list
+        this.getSystemEnhancementDisplayList();
+}
+    )
+    // End of Calling the model to update the status
+  }
+
+  // toggle the status options visible
+  toggleStatusOptionsVisible() {
+    this.displayStatusOptions = !this.displayStatusOptions;
+  }
+
+  // On change event of system enhancement
+  onChangeSystemEnhancementStatus(enhancement: ViewSystemEnhancement) {
+    // Getting the ID
+    let statusID = this.originalStatusListLocal.find(obj => obj.Name == enhancement.StatusName).Id;
+
+    // Calling the model to update the status
+    this.systemEnhancementModel.UpdateSystemEnhancementStatus(enhancement.Id, statusID).then(
+      (data) => {
+        // Refresh the list
+        this.getSystemEnhancementDisplayList();
+      }
+    )
+    // End of Calling the model to update the status
+  }
+
+  // Getting the status color code
+  getStatusColorCode(statusCode: number) {
+    if (statusCode == -1) {
+      return 'white';
+    } else {
+      return this.originalStatusListLocal.find(obj => obj.Id == statusCode).ColorCode;
+    }
+  }
 }

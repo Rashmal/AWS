@@ -239,6 +239,57 @@
         display: flex;
         justify-content: center;
     }
+
+    .status_list {
+        width: 120px !important;
+        border: solid thin black;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .status_display_section {
+        position: absolute;
+        z-index: 9;
+        display: flex;
+        align-items: center;
+        background: white;
+        width: fit-content !important;
+        margin-left: -14vw;
+        box-shadow: 2px 2px #515454;
+        display: none;
+    }
+
+    .status_display_section_mobile {
+        display: none;
+    }
+
+    .admin_display_status:hover {
+        .status_display_section {
+            display: flex;
+        }
+    }
+
+    @media screen and (max-width: 1920px) {
+        .status_display_section_mobile {
+            display: none;
+        }
+    }
+    @media screen and (max-width: 906px) {
+        .status_display_section_desktop {
+            display: none;
+        }
+        .status_display_section_mobile {
+            display: flex;
+        }
+        .admin_display_status:hover {
+            .status_display_section {
+                display: none !important;
+            }
+        }
+    }
 }
 
 .text_center {

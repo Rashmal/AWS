@@ -86,7 +86,7 @@ export class SystemEnhancementsService {
   }
 
   // Updating the status of the system enhancement
-  UpdateSystemEnhancementStatus(systemEnhancementId: string, statusId: string) {
+  UpdateSystemEnhancementStatus(systemEnhancementId: string, statusId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("systemEnhancementId", systemEnhancementId.toString())

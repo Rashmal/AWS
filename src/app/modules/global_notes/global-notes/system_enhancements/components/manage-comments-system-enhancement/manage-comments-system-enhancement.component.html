@@ -82,7 +82,8 @@
         <!-- Footer inner section -->
         <div class="footer_inner_section">
             <!-- Back to list button -->
-            <button class="close_btn" (click)="backToListOnClickFunction()" pTooltip="Back to list" tooltipPosition="top">
+            <button class="close_btn" (click)="backToListOnClickFunction()" pTooltip="Back to list"
+                tooltipPosition="top">
                 <span>Back to list</span>
             </button>
             <!-- End of Back to list button -->
@@ -92,3 +93,12 @@
     <!-- End of Footer button section -->
 </div>
 <!-- End of Main content section -->
+
+<!-- Snapzing section -->
+<div class="divLoadingWrapper" *ngIf="showLoading">
+    <div class="divLoadingBg"></div>
+    <div class="divLoadingContent">
+        <img src="../../../../../assets/images/aws_loading.gif">
+    </div>
+</div>
+<!-- End of the Snapzing section -->
