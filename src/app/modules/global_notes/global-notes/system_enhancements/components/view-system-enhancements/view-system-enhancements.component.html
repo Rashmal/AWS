@@ -40,7 +40,7 @@
             <div class="label_section">
                 <span class="marginRight5">Start</span>
             </div>
-            <p-calendar [(ngModel)]="filter.StartDate" [iconDisplay]="'input'" [showIcon]="true" (onChange)="onChangeFilterItem('START')"></p-calendar>
+            <p-calendar [(ngModel)]="filter.StartDate" [iconDisplay]="'input'" [showIcon]="true" (onSelect)="onChangeFilterItem('START')"></p-calendar>
         </div>
         <!-- End of Start date section -->
     </div>
@@ -127,7 +127,7 @@
             <div class="label_section">
                 <span class="marginRight5">End</span>
             </div>
-            <p-calendar [(ngModel)]="filter.EndDate" [iconDisplay]="'input'" [showIcon]="true" (onChange)="onChangeFilterItem('END')"></p-calendar>
+            <p-calendar [(ngModel)]="filter.EndDate" [iconDisplay]="'input'" [showIcon]="true" (onSelect)="onChangeFilterItem('END')"></p-calendar>
         </div>
         <!-- End of End date section -->
     </div>
