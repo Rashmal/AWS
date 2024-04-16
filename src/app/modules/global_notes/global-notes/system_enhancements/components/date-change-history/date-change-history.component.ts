@@ -50,6 +50,8 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
   errorMessagesList: IErrorMessage[] = [];
   // Store the cookie interface
   overallCookieInterface: OverallCookieInterface;
+  // Store loading
+  showLoading: boolean = false;
 
   // Constructor
   constructor(private route: Router, private location: Location,
@@ -88,6 +90,8 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
 
   // Getting the system enhancement details
   initSystemEnhancementDetails() {
+    // Start loading
+    this.showLoading = true;
     // Getting the system enhancement old details
     this.systemEnhancementModel.GetSystemEnhancementDetailsByIdService(this.systemEnhancementId).then(
       (data) => {
@@ -108,6 +112,8 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
 
   // Getting the change date history list
   getChangeDateHistoryList() {
+    // Start loading
+    this.showLoading = true;
     // Calling the model to retrieve the data list
     this.systemEnhancementModel.GetSystemEhancementChangeDateService(this.filter, this.systemEnhancementId).then(
       (data) => {
@@ -115,6 +121,8 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
         this.viewSystemEnhancementChangeDate = <ViewSystemEnhancementChangeDate[]>data;
         // Setting the total records
         this.totalRecords = (this.viewSystemEnhancementChangeDate.length > 0) ? this.viewSystemEnhancementChangeDate[0].Total : 0;
+        // Stop loading
+        this.showLoading = false;
       }
     );
     // End of Calling the model to retrieve the data list
@@ -134,7 +142,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
     this.errorMessagesList = [];
 
     // Check if the reason exists
-    if (!(this.systemEnhancementChangeDate.Reason.trim() && this.systemEnhancementChangeDate.Reason.trim() != '')) {
+    if (!(this.systemEnhancementChangeDate.Reason && this.systemEnhancementChangeDate.Reason.trim() && this.systemEnhancementChangeDate.Reason.trim() != '')) {
       // Pushing the error message
       this.errorMessagesList.push(
         {

@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   emailLimit: number = LOGIN$USER_EMAIL$LIMIT;
   // Store the password list
   passwordLimit: number = LOGIN$USER_PASSWORD$LIMIT;
+  // Store the loading
+  showLoading: boolean = false;
 
   // Constructor
   constructor(private authenticationService: AuthenticationService, private commonService: CommonService,
@@ -45,7 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // Unsubscribe all
-    
+
     this.authenticationModel.UnsubscribeAll();
   }
 
@@ -60,12 +62,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   // On click button of login button
   loginOnClick() {
+    // Start the loading
+    this.showLoading = true;
+
     // Validate the fields in the login page
     this.validateFields();
     // End of Validate the fields in the login page
 
     // Check if the error messages length
     if (this.errorMessagesList.length > 0) {
+      // Stop the loading
+      this.showLoading = false;
       return;
     }
     // End of Check if the error messages length
@@ -73,7 +80,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     // Check if the email exists in the DB
     this.commonModel.CheckEmailExistsService(this.user_email).then(
       (data) => {
-        debugger
         // Getting the email validation
         let emailExists: boolean = <boolean>data;
         // Check if the email exists
@@ -81,11 +87,12 @@ export class LoginComponent implements OnInit, OnDestroy {
           // Validate the login details
           this.authenticationModel.LoginAuthenticationService(this.user_email, this.user_password).then(
             (data) => {
-              debugger
               // Getting the login validation
               let loginToken: string = <string>data;
               // Check if the token is valid
               if (loginToken.includes("ERROR")) {
+                // Stop the loading
+                this.showLoading = false;
                 // Pushing the error message
                 this.errorMessagesList.push(
                   {
@@ -94,6 +101,8 @@ export class LoginComponent implements OnInit, OnDestroy {
                   }
                 );
               } else {
+                // Stop the loading
+                this.showLoading = false;
                 // Setting the user token
                 this.overallCookieInterface.SetUserToken(loginToken);
                 // Navigate to the layout
@@ -104,6 +113,8 @@ export class LoginComponent implements OnInit, OnDestroy {
           );
           // End of Validate the login details
         } else {
+          // Stop the loading
+          this.showLoading = false;
           // Pushing the error message
           this.errorMessagesList.push(
             {

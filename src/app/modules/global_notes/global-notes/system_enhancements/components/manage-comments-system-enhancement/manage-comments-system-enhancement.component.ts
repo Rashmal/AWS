@@ -47,6 +47,8 @@ export class ManageCommentsSystemEnhancementComponent implements OnInit, OnDestr
   totalRecords: number = 0;
   // Store the error messages
   errorMessagesList: IErrorMessage[] = [];
+  // Store loading
+  showLoading: boolean = false;
 
   // Constructor
   constructor(private route: Router, private location: Location,
@@ -89,6 +91,8 @@ export class ManageCommentsSystemEnhancementComponent implements OnInit, OnDestr
 
   // Getting all the comments list
   getAllCommentsList() {
+    // Start loading
+    this.showLoading = true;
     // Calling the model to retrieve all the comments list
     this.systemEnhancementModel.GetSystemEhancementCommentService(this.filter).then(
       (data) => {
@@ -96,6 +100,8 @@ export class ManageCommentsSystemEnhancementComponent implements OnInit, OnDestr
         this.viewSystemEnhancementComment = <ViewSystemEnhancementComment[]>data;
         // Setting the total
         this.totalRecords = (this.viewSystemEnhancementComment.length > 0) ? this.viewSystemEnhancementComment[0].Total : 0;
+        // Stop loading
+        this.showLoading = false;
       }
     );
     // End of Calling the model to retrieve all the comments list
@@ -115,7 +121,7 @@ export class ManageCommentsSystemEnhancementComponent implements OnInit, OnDestr
     this.errorMessagesList = [];
 
     // Check if the comment exists
-    if (!(this.systemEnhancementComment.Description.trim() && this.systemEnhancementComment.Description.trim() != '')) {
+    if (!(this.systemEnhancementComment.Description && this.systemEnhancementComment.Description.trim() && this.systemEnhancementComment.Description.trim() != '')) {
       // Pushing the error message
       this.errorMessagesList.push(
         {

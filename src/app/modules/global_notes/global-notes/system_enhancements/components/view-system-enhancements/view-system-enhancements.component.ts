@@ -75,6 +75,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   overallCookieInterface: OverallCookieInterface;
   // Store display status options
   displayStatusOptions: boolean = false;
+  // Store the loading
+  showLoading: boolean = false;
 
   // Constructor
   constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService,
@@ -91,6 +93,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // Unsubscribe all
     this.commonModel.UnsubscribeAll();
+    this.systemEnhancementModel.UnsubscribeAll();
   }
 
   ngOnInit(): void {
@@ -242,6 +245,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
   // Getting all the display module list
   getAllSystemEnhancementModuleList() {
+    // Start loading
+    this.showLoading = true;
     // Clear the list
     this.displayModuleList = [];
     // Calling the model to retrieve the data
@@ -253,6 +258,9 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         if (this.displayModuleList) {
           // Set first module selected
           this.clickOnModule(this.displayModuleList[0]);
+        } else {
+          // Stop loading
+          this.showLoading = false;
         }
 
       }
@@ -308,6 +316,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
   // Get system enhancement display list
   getSystemEnhancementDisplayList() {
+    // Start loading
+    this.showLoading = true;
     // Clear the list
     this.systemEnhancementList = [];
     // Calling the model to retrieve the data
@@ -317,6 +327,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.systemEnhancementList = <ViewSystemEnhancement[]>data;
         // Generate display table with module list and enhancement list
         this.generateDisplayTable();
+        // Stop loading
+        this.showLoading = false;
       }
     );
     // End of Calling the model to retrieve the data
@@ -351,6 +363,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
   // On Select status on click function
   onSelectStatusOnClick(status: Status, enhancement: ViewSystemEnhancement) {
+    // Start loading
+    this.showLoading = true;
     // Calling the model to update the status
     this.systemEnhancementModel.UpdateSystemEnhancementStatus(enhancement.Id, status.Id).then(
       (data) => {
