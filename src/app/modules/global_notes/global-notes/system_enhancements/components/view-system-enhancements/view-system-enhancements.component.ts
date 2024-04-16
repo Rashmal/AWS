@@ -51,6 +51,20 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         StartDate: new Date(),
         StatusId: -1,
     };
+    // Store the modules filter object
+    modulesFilter: Filter = {
+        Id: '',
+        CurrentPage: 1,
+        EndDate: new Date(),
+        ModuleId: -1,
+        ParentId: 0,
+        PriorityId: -1,
+        RecordsPerPage: 10,
+        SearchQuery: '',
+        StaffId: '-1',
+        StartDate: new Date(),
+        StatusId: -1,
+    };
     // Store the Common model
     commonModel: CommonModel;
     // Store the System Enhancement model
@@ -252,9 +266,11 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.showLoading = true;
         // Clear the list
         this.displayModuleList = [];
+        // Setting the filter
+        this.modulesFilter.ModuleId = this.filter.ModuleId;
         // Calling the model to retrieve the data
         this.systemEnhancementModel
-            .GetSystemEnhancementDisplayModulesService(this.filter)
+            .GetSystemEnhancementDisplayModulesService(this.modulesFilter)
             .then((data) => {
                 // Getting the staff list
                 this.displayModuleList = <DisplayModule[]>data;
@@ -401,9 +417,6 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
     //Click on module row
     clickOnModule() {
-        debugger
-        // Set selected module
-
         // Retrieve system enhancement list for selected module
         this.getSystemEnhancementDisplayList();
     }
@@ -542,7 +555,6 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
     // Making a deep copy
     deep<T extends object>(source: T): T {
-        return JSON.parse(JSON.stringify(source));
         return JSON.parse(JSON.stringify(source));
     }
 
