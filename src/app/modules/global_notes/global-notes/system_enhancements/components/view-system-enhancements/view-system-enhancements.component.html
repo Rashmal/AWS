@@ -86,7 +86,7 @@
             <div class="label_section">
                 <span class="marginRight5">Status</span>
             </div>
-            <p-dropdown [options]="viewStatusDropdownList" [(ngModel)]="filter.StatusId"></p-dropdown>
+            
             <!-- End of Label section -->
 
             <!-- Custom colored dropdown -->
@@ -95,14 +95,14 @@
                 <!-- Selected item styles -->
                 <ng-template pTemplate="selectedItem" let-statusObject>
                     <!-- When All is selected -->
-                    <div *ngIf="filter.StatusId == -1" [style.color]="(filter.StatusId == -1)?'black':'white'">
+                    <div *ngIf="filter.StatusId == -1" [style.color]="(filter.StatusId == -1 || filter.StatusId == 1 )?'black':'white'">
                         {{statusObject.label}}
                     </div>
                     <!-- End of When All is selected -->
 
                     <!-- When All is not selected -->
                     <div *ngIf="filter.StatusId !== -1" [style.background]="getStatusColorCode(statusObject.value)"
-                        [style.color]="(filter.StatusId == -1)?'black':'white'">
+                        [style.color]="(filter.StatusId == -1 || filter.StatusId == 1 )?'black':'white'">
                         {{statusObject.label}}
                     </div>
                     <!-- End of When All is not selected -->
@@ -331,8 +331,14 @@
                         </div>
 
                     </td>
+                   
                 </tr>
                 <!-- End of Enhancement list for module-->
+                <tr *ngIf="moduleData.ExpandedContent.length == 0 && filter.ModuleId == moduleData.Module.Id">
+                    <td colspan="9" class="text_center">
+                        There are no items matching this filter criteria.
+                    </td>
+                </tr>
                 <!-- Pagination section -->
                 <tr *ngIf="systemEnhancementList && systemEnhancementList.length > 0 && filter.ModuleId == moduleData.Module.Id && systemEnhancementList[0].Total > this.filter.RecordsPerPage">
                     <td colspan="9">
