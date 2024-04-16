@@ -347,7 +347,7 @@
         <!-- End of Prime ng table -->
 
         <!-- Pagination section -->
-        <p-paginator *ngIf="localModuleDropdownSelection == -1" (onPageChange)="onPageChange($event)" [first]="1" [rows]="10" [totalRecords]="120"></p-paginator>
+        <p-paginator *ngIf="displayModuleList && displayModuleList.length > 0 && localModuleDropdownSelection == -1 && displayModuleList[0].Total > 10" (onPageChange)="onPageChange($event)" [first]="1" [rows]="10" [totalRecords]="displayModuleList[0].Total"></p-paginator>
         <!-- End of Pagination section -->
     </div>
     <!-- End of Table section -->
