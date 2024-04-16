@@ -267,9 +267,27 @@
         display: none;
     }
 
+    .status_display_section_mobile {
+        visibility: hidden;
+    }
+
     .admin_display_status:hover {
         .status_display_section {
             display: flex;
+        }
+    }
+
+    @media screen and (max-width: 1920px) {
+        .status_display_section_mobile {
+            visibility: hidden;
+        }
+    }
+    @media screen and (max-width: 906px) {
+        .status_display_section {
+            visibility: hidden;
+        }
+        .status_display_section_mobile {
+            visibility: visible;
         }
     }
 }

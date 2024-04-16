@@ -71,6 +71,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   userRoleCode: string = "";
   // Store the cookie interface
   overallCookieInterface: OverallCookieInterface;
+  // Store display status options
+  displayStatusOptions: boolean = false;
 
   // Constructor
   constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService,
@@ -344,6 +346,26 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   onSelectStatusOnClick(status: Status, enhancement: ViewSystemEnhancement) {
     // Calling the model to update the status
     this.systemEnhancementModel.UpdateSystemEnhancementStatus(enhancement.Id, status.Id).then(
+      (data) => {
+        // Refresh the list
+        this.getSystemEnhancementDisplayList();
+      }
+    )
+    // End of Calling the model to update the status
+  }
+
+  // toggle the status options visible
+  toggleStatusOptionsVisible() {
+    this.displayStatusOptions = !this.displayStatusOptions;
+  }
+
+  // On change event of system enhancement
+  onChangeSystemEnhancementStatus(enhancement: ViewSystemEnhancement) {
+    // Getting the ID
+    let statusID = this.originalStatusListLocal.find(obj => obj.Name == enhancement.StatusName).Id;
+
+    // Calling the model to update the status
+    this.systemEnhancementModel.UpdateSystemEnhancementStatus(enhancement.Id, statusID).then(
       (data) => {
         // Refresh the list
         this.getSystemEnhancementDisplayList();

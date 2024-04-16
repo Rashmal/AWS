@@ -202,7 +202,7 @@
                         <div [ngClass]="[eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g', (userRoleCode=='AD')?'admin_display_status':'']"
                             class="module_display_section paddingRight5">
 
-                            <!-- Display the status list -->
+                            <!-- Display the status list in desktop view -->
                             <div class="status_display_section">
                                 <!-- Loop through the statuses -->
                                 <div class="status_list" [style.borderColor]="status.ColorCode"
@@ -218,9 +218,22 @@
                                 </div>
                                 <!-- End of Loop through the statuses -->
                             </div>
-                            <!-- End of Display the status list -->
+                            <!-- End of Display the status list in desktop view -->
 
-                            <span>{{enhancement.StatusName}}</span>
+                            <!-- Display the status list in desktop view -->
+                            <span class="status_display_section">{{enhancement.StatusName}}</span>
+                            <!-- End of Display the status list in desktop view -->
+
+                            <!-- Display the status list in mobile view -->
+                            <div *ngIf="userRoleCode == 'AD'">
+                                <p-dropdown [options]="viewStatusDropdownList" optionLabel="label"
+                                    [(ngModel)]="enhancement.StatusName" optionValue="label"
+                                    (onChange)="onChangeSystemEnhancementStatus(enhancement)"></p-dropdown>
+                            </div>
+                            <div *ngIf="userRoleCode !== 'AD'">
+                                <span>{{status.Name}}</span>
+                            </div>
+                            <!-- End of Display the status list in mobile view -->
 
                         </div>
 
