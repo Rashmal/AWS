@@ -34,6 +34,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   viewPriorityDropdownList: SelectItem[] = [];
   // Store the status dropdown view list
   viewStatusDropdownList: SelectItem[] = [];
+  // Store the status dropdown view list for mobile
+  viewStatusMobileDropdownList: SelectItem[] = [];
   // Store the module dropdown view list
   viewModulesDropdownList: SelectItem[] = [];
   // Store the filter object
@@ -166,6 +168,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   getAllStatusList() {
     // Clear the list
     this.viewStatusDropdownList = [];
+    this.viewStatusMobileDropdownList = [];
     // Calling the model to retrieve the data
     this.commonModel.GetStatusListService("SE").then(
       (data) => {
@@ -181,6 +184,10 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         for (let i = 0; i < statusListLocal.length; i++) {
           // Setting the option
           this.viewStatusDropdownList.push({
+            label: statusListLocal[i].Name,
+            value: +statusListLocal[i].Id
+          });
+          this.viewStatusMobileDropdownList.push({
             label: statusListLocal[i].Name,
             value: +statusListLocal[i].Id
           });

@@ -226,12 +226,12 @@
 
                             <!-- Display the status list in mobile view -->
                             <div class="status_display_section_mobile" *ngIf="userRoleCode == 'AD'">
-                                <p-dropdown [options]="viewStatusDropdownList" optionLabel="label"
+                                <p-dropdown [options]="viewStatusMobileDropdownList" optionLabel="label"
                                     [(ngModel)]="enhancement.StatusName" optionValue="label"
                                     (onChange)="onChangeSystemEnhancementStatus(enhancement)"></p-dropdown>
                             </div>
                             <div class="status_display_section_mobile" *ngIf="userRoleCode !== 'AD'">
-                                <span>{{status.Name}}</span>
+                                <span>{{enhancement.StatusName}}</span>
                             </div>
                             <!-- End of Display the status list in mobile view -->
 
