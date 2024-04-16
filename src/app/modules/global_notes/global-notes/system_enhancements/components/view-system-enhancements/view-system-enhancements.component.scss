@@ -139,10 +139,10 @@
         justify-content: space-between;
         display: flex;
         align-items: center;
-        div{
+        div {
             width: 100%;
         }
-        span{
+        span {
             width: 100%;
         }
     }
@@ -152,15 +152,11 @@
         display: flex;
         align-items: center;
 
-        
-            color: #126095;
-        
+        color: #126095;
     }
 
     .expanded_content_title:hover {
-        
-            text-decoration: underline;
-        
+        text-decoration: underline;
     }
 
     .table_row {
@@ -180,8 +176,7 @@
             border-radius: 3px;
             border: none;
             color: #ffffff;
-            background-color: #21BA45;
-           
+            background-color: #21ba45;
         }
         .button_orange {
             height: 30px;
@@ -189,8 +184,7 @@
             border-radius: 3px;
             border: none;
             color: #ffffff;
-            background-color: #EBB32C;
-           
+            background-color: #ebb32c;
         }
         .button_blue {
             height: 30px;
@@ -199,7 +193,6 @@
             border: none;
             color: #ffffff;
             background-color: #126095;
-           
         }
         .button_red {
             height: 30px;
@@ -207,8 +200,7 @@
             border-radius: 3px;
             border: none;
             color: #ffffff;
-            background-color: #FF5757;
-           
+            background-color: #ff5757;
         }
         .button_grey {
             height: 30px;
@@ -216,34 +208,45 @@
             border-radius: 3px;
             border: none;
             color: #ffffff;
-            background-color: #A6A6A6;
-           
+            background-color: #a6a6a6;
         }
-        
     }
 
-    .justify_center{
+    .justify_center {
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    .action_column{
+    .action_column {
         width: 200px;
     }
 
-    .title_content{
-        width: 100%;
-        display: flex;
-       div{
-        width: 100%;
+    .title_content {
+        max-width: 300px;
+        // width: 100%;
+        // display: flex;
+        .expanded_content_title {
+            // width: 100%;
+            // text-overflow: ellipsis;
+            // overflow: hidden;
+            // white-space: nowrap;
+        }
+    }
+
+    .ellipsis {
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
-       }
+    }
+
+    .date_column {
+        min-width: 80px;
+        display: flex;
+        justify-content: center;
     }
 }
 
-.text_center{
+.text_center {
     text-align: center;
 }
 ::ng-deep thead th {

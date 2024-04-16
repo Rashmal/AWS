@@ -134,7 +134,7 @@
     <!-- Table section -->
     <div class="col-xl-12">
         <!-- Prime ng table -->
-        <p-table [value]="displayTable" dataKey="name" [tableStyle]="{ 'min-width': '60rem' }">
+        <p-table [value]="displayTable" dataKey="name" [tableStyle]="{ 'min-width': '60rem' }" [responsive]="true">
             <!-- Header section -->
             <ng-template pTemplate="header">
                 <!-- Header row section -->
@@ -192,8 +192,9 @@
                     <td class="title_content">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="expanded_content_title paddingRight5 cursor_pointer ">
-                            {{enhancement.Title}}
-
+                            <div class="ellipsis">
+                                {{enhancement.Title}}
+                            </div>
                         </div>
 
                     </td>
@@ -208,16 +209,18 @@
                     <td class="text_center">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 ">
-                            <span>{{enhancement.StartDate| date: 'dd-MMM-yyyy'}}</span>
-
+                            <div class="ellipsis">
+                                <span>{{enhancement.StartDate| date: 'dd-MMM-yyyy'}}</span>
+                            </div>
                         </div>
 
                     </td>
                     <td class="text_center">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 ">
-                            <span>{{enhancement.EndDate| date: 'dd-MMM-yyyy'}}</span>
-
+                            <div class="ellipsis">
+                                <span>{{enhancement.EndDate| date: 'dd-MMM-yyyy'}}</span>
+                            </div>
                         </div>
 
                     </td>
@@ -249,13 +252,16 @@
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 action_button">
                             <!--Comments button-->
-                            <button class="button_green" (click)="commentOnClickFunction(enhancement)"><i class="fa fa-comments" aria-hidden="true"></i></button>
+                            <button class="button_green" (click)="commentOnClickFunction(enhancement)"><i
+                                    class="fa fa-comments" aria-hidden="true"></i></button>
                             <!--End of Comments button-->
                             <!--Change history button-->
-                            <button class="button_orange" (click)="changeDateHistoryOnClick(enhancement)"><i class="fa fa-history" aria-hidden="true"></i></button>
+                            <button class="button_orange" (click)="changeDateHistoryOnClick(enhancement)"><i
+                                    class="fa fa-history" aria-hidden="true"></i></button>
                             <!--End of Change history button-->
                             <!--Edit button-->
-                            <button class="button_blue" (click)="editOnClickFunction(enhancement)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                            <button class="button_blue" (click)="editOnClickFunction(enhancement)"><i
+                                    class="fa fa-pencil" aria-hidden="true"></i></button>
                             <!--End of Edit button-->
                             <!--Delete button-->
                             <button class="button_red"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -271,12 +277,12 @@
                 <!-- End of Enhancement list for module-->
                 <!-- Pagination section -->
                 <tr *ngIf="filter.ModuleId == moduleData.Module.Id">
-                   <td colspan="9">
-                    <p-paginator  (onPageChange)="onEnhancementPageChange($event)" [first]="1" [rows]="10" [totalRecords]="120"
-                    [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
-                   </td>
+                    <td colspan="9">
+                        <p-paginator (onPageChange)="onEnhancementPageChange($event)" [first]="1" [rows]="10"
+                            [totalRecords]="120" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+                    </td>
                 </tr>
-                
+
                 <!-- End of Pagination section -->
 
             </ng-template>
