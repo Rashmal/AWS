@@ -258,6 +258,12 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
             .then((data) => {
                 // Getting the staff list
                 this.displayModuleList = <DisplayModule[]>data;
+                //this.filter.ModuleId = this.filter.ModuleId;
+                if (this.localModuleDropdownSelection == -1) {
+                    this.filter.ModuleId = this.displayModuleList[0].Id;
+                } else {
+                    this.filter.ModuleId = this.localModuleDropdownSelection;
+                }
                 // Set first module selected
                 this.clickOnModule();
             });
@@ -397,7 +403,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     clickOnModule() {
         debugger
         // Set selected module
-        //this.filter.ModuleId = this.filter.ModuleId;
+
         // Retrieve system enhancement list for selected module
         this.getSystemEnhancementDisplayList();
     }
