@@ -221,16 +221,16 @@
                             <!-- End of Display the status list in desktop view -->
 
                             <!-- Display the status list in desktop view -->
-                            <span class="status_display_section">{{enhancement.StatusName}}</span>
+                            <span class="status_display_section_desktop">{{enhancement.StatusName}}</span>
                             <!-- End of Display the status list in desktop view -->
 
                             <!-- Display the status list in mobile view -->
-                            <div *ngIf="userRoleCode == 'AD'">
+                            <div class="status_display_section_mobile" *ngIf="userRoleCode == 'AD'">
                                 <p-dropdown [options]="viewStatusDropdownList" optionLabel="label"
                                     [(ngModel)]="enhancement.StatusName" optionValue="label"
                                     (onChange)="onChangeSystemEnhancementStatus(enhancement)"></p-dropdown>
                             </div>
-                            <div *ngIf="userRoleCode !== 'AD'">
+                            <div class="status_display_section_mobile" *ngIf="userRoleCode !== 'AD'">
                                 <span>{{status.Name}}</span>
                             </div>
                             <!-- End of Display the status list in mobile view -->

@@ -268,7 +268,7 @@
     }
 
     .status_display_section_mobile {
-        visibility: hidden;
+        display: none;
     }
 
     .admin_display_status:hover {
@@ -279,15 +279,20 @@
 
     @media screen and (max-width: 1920px) {
         .status_display_section_mobile {
-            visibility: hidden;
+            display: none;
         }
     }
     @media screen and (max-width: 906px) {
-        .status_display_section {
-            visibility: hidden;
+        .status_display_section_desktop {
+            display: none;
         }
         .status_display_section_mobile {
-            visibility: visible;
+            display: flex;
+        }
+        .admin_display_status:hover {
+            .status_display_section {
+                display: none !important;
+            }
         }
     }
 }
