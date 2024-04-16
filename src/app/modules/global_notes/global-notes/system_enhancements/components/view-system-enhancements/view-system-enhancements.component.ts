@@ -257,9 +257,9 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
                 this.displayModuleList = <DisplayModule[]>data;
                 // Check module list is not undefined
                 if (this.displayModuleList.length > 0) {
-                    debugger;
+                    debugger
                     // Set first module selected
-                    this.clickOnModule(this.displayModuleList[0]);
+                    this.clickOnModule();
                 } else {
                     // Stop loading
                     this.showLoading = false;
@@ -277,7 +277,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
             this.displayTable.push({
                 Module: item,
                 ExpandedContent:
-                    item.Id == this.filter.ModuleId
+                    (item.Id == this.filter.ModuleId || this.filter.ModuleId == -1 && item.Id == this.displayModuleList[0].Id)
                         ? this.systemEnhancementList
                         : [],
             });
@@ -398,9 +398,9 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     }
 
     //Click on module row
-    clickOnModule(module: DisplayModule) {
+    clickOnModule() {
         // Set selected module
-        this.filter.ModuleId = module.Id;
+        this.filter.ModuleId = this.filter.ModuleId;
         // Retrieve system enhancement list for selected module
         this.getSystemEnhancementDisplayList();
     }
@@ -442,7 +442,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     }
 
     //on change module list paginator
-    onPageChange(event: any) {}
+    onPageChange(event: any) { }
 
     //on change enhancement list paginator
     onEnhancementPageChange(event: any) {
