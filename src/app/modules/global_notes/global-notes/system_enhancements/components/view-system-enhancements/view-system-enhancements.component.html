@@ -118,7 +118,7 @@
             <div class="label_section">
                 <span class="marginRight5">Module</span>
             </div>
-            <p-dropdown [options]="viewModulesDropdownList" [(ngModel)]="filter.ModuleId" (onChange)="onChangeFilterItem('MODULE')"></p-dropdown>
+            <p-dropdown [options]="viewModulesDropdownList" [(ngModel)]="localModuleDropdownSelection" (onChange)="onChangeFilterItem('MODULE')"></p-dropdown>
         </div>
         <!-- End of Modules dropdown list -->
 
@@ -179,7 +179,7 @@
             <!-- Modules table body section -->
             <ng-template pTemplate="body" let-moduleData let-rowIndex="rowIndex">
                 <!-- Body row section -->
-                <tr class="table_row" (click)="clickOnModule(moduleData.Module)">
+                <tr class="table_row" (click)="filter.ModuleId = moduleData.Module.Id;clickOnModule()">
                     <td>
                         <div class="module_row paddingLeft5 cursor_pointer">
                             {{(rowIndex+1)}}
@@ -347,7 +347,7 @@
         <!-- End of Prime ng table -->
 
         <!-- Pagination section -->
-        <p-paginator *ngIf="filter.ModuleId == -1" (onPageChange)="onPageChange($event)" [first]="1" [rows]="10" [totalRecords]="120"></p-paginator>
+        <p-paginator *ngIf="localModuleDropdownSelection == -1" (onPageChange)="onPageChange($event)" [first]="1" [rows]="10" [totalRecords]="120"></p-paginator>
         <!-- End of Pagination section -->
     </div>
     <!-- End of Table section -->

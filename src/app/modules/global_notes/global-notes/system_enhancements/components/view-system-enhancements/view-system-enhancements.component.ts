@@ -78,6 +78,9 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     showLoading: boolean = false;
     // Store dynamic dialog ref
     ref: DynamicDialogRef | undefined;
+    // Store the local module dropdown
+    localModuleDropdownSelection: number = -1;
+
     // Constructor
     constructor(
         private commonService: CommonService,
@@ -255,15 +258,14 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
             .then((data) => {
                 // Getting the staff list
                 this.displayModuleList = <DisplayModule[]>data;
-                // Check module list is not undefined
-                if (this.displayModuleList.length > 0) {
-                    debugger
-                    // Set first module selected
-                    this.clickOnModule();
+                //this.filter.ModuleId = this.filter.ModuleId;
+                if (this.localModuleDropdownSelection == -1) {
+                    this.filter.ModuleId = this.displayModuleList[0].Id;
                 } else {
-                    // Stop loading
-                    this.showLoading = false;
+                    this.filter.ModuleId = this.localModuleDropdownSelection;
                 }
+                // Set first module selected
+                this.clickOnModule();
             });
         // End of Calling the model to retrieve the data
     }
@@ -399,10 +401,47 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
     //Click on module row
     clickOnModule() {
+        debugger
         // Set selected module
-        this.filter.ModuleId = this.filter.ModuleId;
+
         // Retrieve system enhancement list for selected module
         this.getSystemEnhancementDisplayList();
+    }
+
+    // Get system enhancement display list individually
+    getSystemEnhancementIndividuallyDisplayList(moduleId: number) {
+        // Start loading
+        this.showLoading = true;
+        // Clear the list
+        this.systemEnhancementList = [];
+        // Setting the filter
+        let localFilter: Filter = this.deep(this.filter);
+        // Setting the module ID
+        localFilter.ModuleId = moduleId;
+        // Calling the model to retrieve the data
+        this.systemEnhancementModel
+            .GetSystemEnhancementDisplayListService(localFilter)
+            .then((data) => {
+                // Getting the staff list
+                this.systemEnhancementList = <ViewSystemEnhancement[]>data;
+                // Generate display table with module list and enhancement list
+                // Empty display table
+                this.displayTable = [];
+                //Add content to display table
+                this.displayModuleList.forEach((item) => {
+                    this.displayTable.push({
+                        Module: item,
+                        ExpandedContent:
+                            (item.Id == moduleId)
+                                ? this.systemEnhancementList
+                                : [],
+                    });
+                });
+            });
+
+        // Stop loading
+        this.showLoading = false;
+        // End of Calling the model to retrieve the data
     }
 
     // Get system enhancement display list
@@ -415,6 +454,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.systemEnhancementModel
             .GetSystemEnhancementDisplayListService(this.filter)
             .then((data) => {
+                debugger
                 // Getting the staff list
                 this.systemEnhancementList = <ViewSystemEnhancement[]>data;
                 // Generate display table with module list and enhancement list
@@ -491,6 +531,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
         //If module changed refresh module list
         if (type == 'MODULE') {
+            this.filter.ModuleId = this.localModuleDropdownSelection;
             // Get module list
             this.getAllSystemEnhancementModuleList();
         } else {
