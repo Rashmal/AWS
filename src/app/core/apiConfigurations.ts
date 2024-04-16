@@ -17,26 +17,26 @@ export const NO$OF$RECORDS$PER$PAGE: SelectItem[] = [
     },
     {
         value: 15,
-        label: '10 records per page'
+        label: '15 records per page'
     },
     {
         value: 20,
-        label: '10 records per page'
+        label: '20 records per page'
     },
     {
         value: 25,
-        label: '10 records per page'
+        label: '25 records per page'
     },
     {
         value: 30,
-        label: '10 records per page'
+        label: '30 records per page'
     },
     {
         value: 50,
-        label: '10 records per page'
+        label: '50 records per page'
     },
     {
         value: 100,
-        label: '10 records per page'
+        label: '100 records per page'
     }
 ];

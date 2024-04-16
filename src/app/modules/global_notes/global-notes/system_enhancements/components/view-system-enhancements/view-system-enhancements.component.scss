@@ -139,12 +139,7 @@
         justify-content: space-between;
         display: flex;
         align-items: center;
-        div {
-            width: 100%;
-        }
-        span {
-            width: 100%;
-        }
+        
     }
 
     .expanded_content_title {
@@ -248,6 +243,10 @@
 
 .text_center {
     text-align: center;
+}
+
+.full_width{
+    width: 100%;
 }
 ::ng-deep thead th {
     padding: 5px;

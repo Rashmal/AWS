@@ -48,6 +48,8 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
   startDate: Date = new Date();
   // Store the end date
   endDate: Date = new Date();
+  // Store managing type
+  editingType: string = 'EDIT'; 
 
   // Constructor
   constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService,
@@ -92,6 +94,11 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
       this.initDefaultData();
     };
     // End of Getting the passed params
+
+    // Set editing type
+    if(paramObject['Type']){
+      this.editingType = paramObject['Type'];
+    } 
   }
 
   // Getting the system enhancement details by Id

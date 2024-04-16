@@ -21,7 +21,7 @@
             <div class="label_section">
                 <span class="marginRight5">Staff</span>
             </div>
-            <p-dropdown [options]="viewStaffDropdownList" [(ngModel)]="filter.StaffId"></p-dropdown>
+            <p-dropdown [options]="viewStaffDropdownList" [(ngModel)]="filter.StaffId" (onChange)="onChangeFilterItem('STAFF')"></p-dropdown>
         </div>
         <!-- End of Staff dropdown list -->
 
@@ -31,7 +31,7 @@
             <div class="label_section">
                 <span class="marginRight5">Priority</span>
             </div>
-            <p-dropdown [options]="viewPriorityDropdownList" [(ngModel)]="filter.PriorityId"></p-dropdown>
+            <p-dropdown [options]="viewPriorityDropdownList" [(ngModel)]="filter.PriorityId" (onChange)="onChangeFilterItem('PRIORITY')"></p-dropdown>
         </div>
         <!-- End of Priority dropdown list -->
 
@@ -40,7 +40,7 @@
             <div class="label_section">
                 <span class="marginRight5">Start</span>
             </div>
-            <p-calendar [(ngModel)]="filter.StartDate" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
+            <p-calendar [(ngModel)]="filter.StartDate" [iconDisplay]="'input'" [showIcon]="true" (onChange)="onChangeFilterItem('START')"></p-calendar>
         </div>
         <!-- End of Start date section -->
     </div>
@@ -51,11 +51,11 @@
         <!-- Search box section -->
         <div class="display_flex_center marginRight5 marginBottom5 marginTop5 main_title_width">
             <!-- Search input box -->
-            <input type="search" placeholder="Search...">
+            <input type="search" placeholder="Search..." >
             <!-- End of Search input box -->
 
             <!-- Search icon -->
-            <div class="ash_color_button">
+            <div class="ash_color_button" (click)="onChangeFilterItem('SEARCH')">
                 <!-- Icon-->
                 <i class="fa fa-search" aria-hidden="true"></i>
                 <!-- End of Icon-->
@@ -63,7 +63,7 @@
             <!-- End of Search icon -->
 
             <!-- Erase icon -->
-            <div class="ash_color_button">
+            <div class="ash_color_button" (click)="onChangeFilterItem('CLEAR')">
                 <!-- Icon-->
                 <i class="fa fa-eraser" aria-hidden="true"></i>
                 <!-- End of Icon-->
@@ -75,7 +75,7 @@
         <!-- No of records per page dropdown -->
         <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
             *ngIf="recordsPerPage && recordsPerPage.length > 0">
-            <p-dropdown [options]="recordsPerPage" [(ngModel)]="filter.RecordsPerPage"></p-dropdown>
+            <p-dropdown [options]="recordsPerPage" [(ngModel)]="filter.RecordsPerPage" (onChange)="onChangeFilterItem('RECORDS')"></p-dropdown>
         </div>
         <!-- End of No of records per page dropdown -->
 
@@ -85,7 +85,7 @@
             <div class="label_section">
                 <span class="marginRight5">Status</span>
             </div>
-            <p-dropdown [options]="viewStatusDropdownList" [(ngModel)]="filter.StatusId"></p-dropdown>
+            <p-dropdown [options]="viewStatusDropdownList" [(ngModel)]="filter.StatusId" (onChange)="onChangeFilterItem('STATUS')"></p-dropdown>
         </div>
         <!-- End of Status dropdown list -->
 
@@ -95,7 +95,7 @@
             <div class="label_section">
                 <span class="marginRight5">Module</span>
             </div>
-            <p-dropdown [options]="viewModulesDropdownList" [(ngModel)]="filter.ModuleId"></p-dropdown>
+            <p-dropdown [options]="viewModulesDropdownList" [(ngModel)]="filter.ModuleId" (onChange)="onChangeFilterItem('MODULE')"></p-dropdown>
         </div>
         <!-- End of Modules dropdown list -->
 
@@ -104,7 +104,7 @@
             <div class="label_section">
                 <span class="marginRight5">End</span>
             </div>
-            <p-calendar [(ngModel)]="filter.EndDate" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
+            <p-calendar [(ngModel)]="filter.EndDate" [iconDisplay]="'input'" [showIcon]="true" (onChange)="onChangeFilterItem('END')"></p-calendar>
         </div>
         <!-- End of End date section -->
     </div>
@@ -190,9 +190,10 @@
                         </div>
                     </td>
                     <td class="title_content">
-                        <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
-                            class="expanded_content_title paddingRight5 cursor_pointer ">
-                            <div class="ellipsis">
+                        <div  [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
+                            class="expanded_content_title paddingRight5 cursor_pointer " >
+                            <div class="ellipsis" (click)="titleOnClickFunction(enhancement)" pTooltip="View enhancement"
+                            tooltipPosition="top">
                                 {{enhancement.Title}}
                             </div>
                         </div>
@@ -209,8 +210,8 @@
                     <td class="text_center">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 ">
-                            <div class="ellipsis">
-                                <span>{{enhancement.StartDate| date: 'dd-MMM-yyyy'}}</span>
+                            <div class="ellipsis full_width">
+                                <span class="full_width">{{enhancement.StartDate| date: 'dd-MMM-yyyy'}}</span>
                             </div>
                         </div>
 
@@ -218,8 +219,8 @@
                     <td class="text_center">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 ">
-                            <div class="ellipsis">
-                                <span>{{enhancement.EndDate| date: 'dd-MMM-yyyy'}}</span>
+                            <div class="ellipsis full_width">
+                                <span class="full_width">{{enhancement.EndDate| date: 'dd-MMM-yyyy'}}</span>
                             </div>
                         </div>
 
@@ -264,7 +265,7 @@
                                     class="fa fa-pencil" aria-hidden="true"></i></button>
                             <!--End of Edit button-->
                             <!--Delete button-->
-                            <button class="button_red"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            <button class="button_red" (click)="deleteConfirmation(enhancement)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             <!--End of Delete button-->
                             <!--Send feature list button-->
                             <button *ngIf="false" class="button_grey"><i class="fa fa-archive" aria-hidden="true"></i></button>
@@ -276,10 +277,9 @@
                 </tr>
                 <!-- End of Enhancement list for module-->
                 <!-- Pagination section -->
-                <tr *ngIf="filter.ModuleId == moduleData.Module.Id">
+                <tr *ngIf="systemEnhancementList && systemEnhancementList.length > 0 && filter.ModuleId == moduleData.Module.Id && systemEnhancementList[0].Total > this.filter.RecordsPerPage">
                     <td colspan="9">
-                        <p-paginator (onPageChange)="onEnhancementPageChange($event)" [first]="1" [rows]="10"
-                            [totalRecords]="120" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+                        <p-paginator (onPageChange)="onEnhancementPageChange($event)" [first]="filter.CurrentPage" [rows]="filter.RecordsPerPage" [totalRecords]="systemEnhancementList[0].Total" ></p-paginator>
                     </td>
                 </tr>
 
@@ -291,8 +291,7 @@
         <!-- End of Prime ng table -->
 
         <!-- Pagination section -->
-        <p-paginator (onPageChange)="onPageChange($event)" [first]="1" [rows]="10" [totalRecords]="120"
-            [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+        <p-paginator *ngIf="filter.ModuleId == -1" (onPageChange)="onPageChange($event)" [first]="1" [rows]="10" [totalRecords]="120"></p-paginator>
         <!-- End of Pagination section -->
     </div>
     <!-- End of Table section -->

@@ -3,12 +3,21 @@
     <!-- Title section -->
     <div class="col-xl-12 title_filter_section">
         <!-- Title section -->
-        <div class="marginRight5 marginBottom5 marginTop5">
+        <div *ngIf="editingType  != 'VIEW'" class="marginRight5 marginBottom5 marginTop5">
             <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
             <span class="module_title" *ngIf="systemEnhancement.Id && systemEnhancement.Id == ''">Add System
                 Enhancement</span>
             <span class="module_title" *ngIf="systemEnhancement.Id && systemEnhancement.Id !== ''">
                 Edit - {{systemEnhancement.Title}}
+            </span>
+        </div>
+        <!-- End of Title section -->
+         <!-- Title section -->
+         <div *ngIf="editingType  == 'VIEW'" class="marginRight5 marginBottom5 marginTop5">
+            <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
+            
+            <span class="module_title" *ngIf="systemEnhancement.Id && systemEnhancement.Id !== ''">
+                View System Enhancement - {{systemEnhancement.Title}}
             </span>
         </div>
         <!-- End of Title section -->
@@ -29,7 +38,7 @@
 
                 <!-- Priority dropdown section -->
                 <div>
-                    <p-dropdown [options]="viewPriorityDropdownList"
+                    <p-dropdown [options]="viewPriorityDropdownList" [disabled]="editingType  == 'VIEW'"
                         [(ngModel)]="systemEnhancement.PriorityId"></p-dropdown>
                 </div>
                 <!-- End of Priority dropdown section -->
@@ -46,7 +55,7 @@
 
                 <!-- Status dropdown section -->
                 <div>
-                    <p-dropdown [options]="viewStatusDropdownList"
+                    <p-dropdown [options]="viewStatusDropdownList" [disabled]="editingType  == 'VIEW'"
                         [(ngModel)]="systemEnhancement.StatusId"></p-dropdown>
                 </div>
                 <!-- End of Status dropdown section -->
@@ -63,7 +72,7 @@
 
                 <!-- Module dropdown section -->
                 <div>
-                    <p-dropdown [options]="viewModulesDropdownList"
+                    <p-dropdown [options]="viewModulesDropdownList" [disabled]="editingType  == 'VIEW'"
                         [(ngModel)]="systemEnhancement.ModuleId"></p-dropdown>
                 </div>
                 <!-- End of Module dropdown section -->
@@ -80,7 +89,7 @@
 
                 <!-- Estimated hours input -->
                 <div>
-                    <input type="number" [(ngModel)]="systemEnhancement.EstimatedHours">
+                    <input type="number" [(ngModel)]="systemEnhancement.EstimatedHours" [disabled]="editingType  == 'VIEW'">
                 </div>
                 <!-- End of Estimated hours input -->
 
@@ -106,7 +115,7 @@
 
                 <!-- Title input -->
                 <div>
-                    <input type="text" class="full_width" [(ngModel)]="systemEnhancement.Title"
+                    <input type="text" class="full_width" [(ngModel)]="systemEnhancement.Title" [disabled]="editingType  == 'VIEW'"
                         maxlength="{{titleLimit}}" (input)="onPasteTitleFunction($event)">
                 </div>
                 <!-- End of Title input -->
@@ -129,7 +138,7 @@
 
                 <!-- Staff dropdown section -->
                 <div class="staff_multi_selection">
-                    <p-multiSelect [options]="viewManagedStaffDropdownList"
+                    <p-multiSelect [options]="viewManagedStaffDropdownList" [disabled]="editingType  == 'VIEW'"
                         [(ngModel)]="systemEnhancement.AssignedStaffList" optionLabel="FullName" display="chip"
                         (onClick)="assignedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
                 </div>
@@ -153,7 +162,7 @@
 
                 <!-- Staff dropdown section -->
                 <div class="staff_multi_selection">
-                    <p-multiSelect [options]="viewRequestedStaffDropdownList"
+                    <p-multiSelect [options]="viewRequestedStaffDropdownList" [disabled]="editingType  == 'VIEW'"
                         [(ngModel)]="systemEnhancement.RequestedStaffList" optionLabel="FullName" display="chip"
                         (onClick)="requestedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
                 </div>
@@ -181,7 +190,7 @@
 
                 <!-- Description input -->
                 <div>
-                    <p-editor [(ngModel)]="systemEnhancement.Description" [style]="{ height: '320px' }"></p-editor>
+                    <p-editor [(ngModel)]="systemEnhancement.Description" [style]="{ height: '320px' }" [disabled]="editingType  == 'VIEW'"></p-editor>
                 </div>
                 <!-- End of Description input -->
 
@@ -200,7 +209,7 @@
                     <span>Start/Started</span>
                 </div>
                 <!-- End of Label section -->
-                <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
+                <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true" [disabled]="editingType  == 'VIEW'"></p-calendar>
             </div>
             <!-- End of Start date section -->
 
@@ -212,7 +221,7 @@
                 </div>
                 <!-- End of Label section -->
 
-                <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
+                <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true" [disabled]="editingType  == 'VIEW'"></p-calendar>
             </div>
             <!-- End of End date section -->
         </div>
@@ -223,20 +232,27 @@
     <!-- Footer button section -->
     <div class="col-xl-12 footer_section">
         <!-- Footer inner section -->
-        <div class="footer_inner_section">
+        <div  [ngClass]="editingType  == 'VIEW' ? 'footer_inner_section_view' : 'footer_inner_section'">
             <!-- Close button -->
-            <button class="close_btn" (click)="closeOnClickFunction()" pTooltip="Back to list"
+            <button class="close_btn" (click)="closeOnClickFunction()" pTooltip="Back to list" *ngIf="editingType  != 'VIEW'"
                 tooltipPosition="top">Close</button>
             <!-- End of Close button -->
 
             <!-- Save button -->
-            <button class="save_btn" (click)="saveOnClickFunction()"
+            <button class="save_btn" (click)="saveOnClickFunction()" *ngIf="editingType  != 'VIEW'"
                 pTooltip="{{(systemEnhancement.Id && systemEnhancement.Id !== '')?'Update button':'Save button'}}"
                 tooltipPosition="top">
                 <span *ngIf="!(systemEnhancement.Id && systemEnhancement.Id !== '')">Save Detail</span>
                 <span *ngIf="systemEnhancement.Id && systemEnhancement.Id !== ''">Update Detail</span>
             </button>
             <!-- End of Save button -->
+             <!-- Save button -->
+             <button class="close_btn" (click)="closeOnClickFunction()" *ngIf="editingType  == 'VIEW'"
+             pTooltip="Back to list"
+             tooltipPosition="top">
+             Back to List
+         </button>
+         <!-- End of Save button -->
         </div>
         <!-- End of Footer inner section -->
     </div>
