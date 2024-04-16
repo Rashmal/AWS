@@ -302,8 +302,19 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   }
 
   // Get requesters names
-  getRequestByNames(enhancement: ViewSystemEnhancement) {
 
+  getRequestByNames(enhancement: ViewSystemEnhancement){
+    let requestNames = '';
+    
+    enhancement.RequestedStaffList.forEach((item, index) => {
+      if(requestNames == ''){
+        requestNames = item.FirstName+ ' '+ item.LastName 
+      }
+      else{
+        requestNames = requestNames + ', ' + item.FirstName+ ' '+ item.LastName
+      }
+    });
+    return requestNames;
   }
 
   //on change module list paginator
