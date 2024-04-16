@@ -199,8 +199,27 @@
 
                     </td>
                     <td class="text_center">
-                        <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
-                            class="module_display_section paddingRight5 ">
+                        <div [ngClass]="[eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g', (userRoleCode=='AD')?'admin_display_status':'']"
+                            class="module_display_section paddingRight5">
+
+                            <!-- Display the status list -->
+                            <div class="status_display_section">
+                                <!-- Loop through the statuses -->
+                                <div class="status_list" [style.borderColor]="status.ColorCode"
+                                    [style.background]="(status.Name == enhancement.StatusName)?status.ColorCode:'white'"
+                                    [style.color]="(status.Name == enhancement.StatusName)?'white':'black'"
+                                    *ngFor="let status of originalStatusListLocal"
+                                    (click)="onSelectStatusOnClick(status,enhancement)">
+                                    <!-- Status box -->
+                                    <div>
+                                        <span>{{status.Name}}</span>
+                                    </div>
+                                    <!-- End of Status box -->
+                                </div>
+                                <!-- End of Loop through the statuses -->
+                            </div>
+                            <!-- End of Display the status list -->
+
                             <span>{{enhancement.StatusName}}</span>
 
                         </div>
@@ -267,7 +286,8 @@
                             <button class="button_red"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             <!--End of Delete button-->
                             <!--Send feature list button-->
-                            <button *ngIf="false" class="button_grey"><i class="fa fa-archive" aria-hidden="true"></i></button>
+                            <button *ngIf="false" class="button_grey"><i class="fa fa-archive"
+                                    aria-hidden="true"></i></button>
                             <!--End of Send feature list button-->
 
                         </div>

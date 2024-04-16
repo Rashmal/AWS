@@ -14,6 +14,8 @@ import { DisplayModule } from 'src/app/modules/common/core/displayModule';
 import { Router } from '@angular/router';
 import { ViewSystemEnhancement } from '../../core/systemEnhancementModels/viewSystemEnhancement';
 import { DisplayTable } from '../../core/systemEnhancementModels/displayContent';
+import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
+import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
 
 
 
@@ -63,6 +65,12 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   systemEnhancementList: ViewSystemEnhancement[] = [];
   // Store display table data
   displayTable: DisplayTable[] = [];
+  // Store the status list
+  originalStatusListLocal: Status[] = [];
+  // Store the user role code
+  userRoleCode: string = "";
+  // Store the cookie interface
+  overallCookieInterface: OverallCookieInterface;
 
   // Constructor
   constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService,
@@ -71,6 +79,9 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     // Initialize the model
     this.commonModel = new CommonModel(this.commonService);
     this.systemEnhancementModel = new SystemEnhancementModel(this.systemEnhancementsService);
+    this.overallCookieInterface = new OverallCookieModel();
+    // Setting the user role
+    this.userRoleCode = this.overallCookieInterface.GetUserRole().toUpperCase();
   }
 
   ngOnDestroy() {
@@ -158,6 +169,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
       (data) => {
         // Getting the staff list
         let statusListLocal: Status[] = <Status[]>data;
+        this.originalStatusListLocal = statusListLocal;
         // Setting the all option
         this.viewStatusDropdownList.push({
           label: 'All',
@@ -303,15 +315,15 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
   // Get requesters names
 
-  getRequestByNames(enhancement: ViewSystemEnhancement){
+  getRequestByNames(enhancement: ViewSystemEnhancement) {
     let requestNames = '';
-    
+
     enhancement.RequestedStaffList.forEach((item, index) => {
-      if(requestNames == ''){
-        requestNames = item.FirstName+ ' '+ item.LastName 
+      if (requestNames == '') {
+        requestNames = item.FirstName + ' ' + item.LastName
       }
-      else{
-        requestNames = requestNames + ', ' + item.FirstName+ ' '+ item.LastName
+      else {
+        requestNames = requestNames + ', ' + item.FirstName + ' ' + item.LastName
       }
     });
     return requestNames;
@@ -323,10 +335,20 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
   //on change enhancement list paginator
   onEnhancementPageChange(event: any) { }
 
-
-
   // Making a deep copy
   deep<T extends object>(source: T): T {
     return JSON.parse(JSON.stringify(source))
+  }
+
+  // On Select status on click function
+  onSelectStatusOnClick(status: Status, enhancement: ViewSystemEnhancement) {
+    // Calling the model to update the status
+    this.systemEnhancementModel.UpdateSystemEnhancementStatus(enhancement.Id, status.Id).then(
+      (data) => {
+        // Refresh the list
+        this.getSystemEnhancementDisplayList();
+      }
+    )
+    // End of Calling the model to update the status
   }
 }

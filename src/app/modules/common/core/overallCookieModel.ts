@@ -16,7 +16,8 @@ export class OverallCookieModel implements OverallCookieInterface {
             UserToken: '',
             LoggedUserEmail: '',
             LoggedUserFullName: '',
-            LoggedUserId: ''
+            LoggedUserId: '',
+            LoggedUserRole: ''
         };
         // End of Initialize the object
     }
@@ -35,6 +36,8 @@ export class OverallCookieModel implements OverallCookieInterface {
         this.cookieObject.LoggedUserEmail = decodedToken['email'];
         // Setting the user id
         this.cookieObject.LoggedUserId = decodedToken['nameid'];
+        // Setting the user role
+        this.cookieObject.LoggedUserRole = decodedToken['amr'];
         // Store the cookie details
         this.StoreCookie();
     }
@@ -113,6 +116,14 @@ export class OverallCookieModel implements OverallCookieInterface {
         this.ValidateCookie();
         // Return the value
         return this.cookieObject.LoggedUserEmail;
+    }
+
+    // Getting the user role
+    GetUserRole() {
+        // Validate the cookie object
+        this.ValidateCookie();
+        // Return the value
+        return this.cookieObject.LoggedUserRole;
     }
 
     // Clearing the data from the local storage

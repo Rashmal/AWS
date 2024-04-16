@@ -89,7 +89,7 @@ export class SystemEnhancementModel {
     }
 
     // Updating the status of the system enhancement
-    UpdateSystemEnhancementStatus(systemEnhancementId: string, statusId: string) {
+    UpdateSystemEnhancementStatus(systemEnhancementId: string, statusId: number) {
         var promise = new Promise((resolve, reject) => {
             this.allSubscriptions.push(this.systemEnhancementsService.UpdateSystemEnhancementStatus(systemEnhancementId, statusId).subscribe(
                 data => {
