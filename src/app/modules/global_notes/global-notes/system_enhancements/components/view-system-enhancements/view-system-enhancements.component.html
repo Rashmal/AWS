@@ -82,10 +82,33 @@
         <!-- Status dropdown list -->
         <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
             *ngIf="viewStatusDropdownList && viewStatusDropdownList.length > 0">
+            <!-- Label section -->
             <div class="label_section">
                 <span class="marginRight5">Status</span>
             </div>
-            <p-dropdown [options]="viewStatusDropdownList" [(ngModel)]="filter.StatusId"></p-dropdown>
+            <!-- End of Label section -->
+
+            <!-- Custom colored dropdown -->
+            <p-dropdown class="colored_dropdown" [options]="viewStatusDropdownList" [(ngModel)]="filter.StatusId"
+                [style.background]="getStatusColorCode(filter.StatusId)" [style.borderRadius]="'6px'">
+                <!-- Selected item styles -->
+                <ng-template pTemplate="selectedItem" let-statusObject>
+                    <!-- When All is selected -->
+                    <div *ngIf="filter.StatusId == -1" [style.color]="(filter.StatusId == -1)?'black':'white'">
+                        {{statusObject.label}}
+                    </div>
+                    <!-- End of When All is selected -->
+
+                    <!-- When All is not selected -->
+                    <div *ngIf="filter.StatusId !== -1" [style.background]="getStatusColorCode(statusObject.value)"
+                        [style.color]="(filter.StatusId == -1)?'black':'white'">
+                        {{statusObject.label}}
+                    </div>
+                    <!-- End of When All is not selected -->
+                </ng-template>
+                <!-- End of Selected item styles -->
+            </p-dropdown>
+            <!-- End of Custom colored dropdown -->
         </div>
         <!-- End of Status dropdown list -->
 

@@ -394,4 +394,13 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     )
     // End of Calling the model to update the status
   }
+
+  // Getting the status color code
+  getStatusColorCode(statusCode: number) {
+    if (statusCode == -1) {
+      return 'white';
+    } else {
+      return this.originalStatusListLocal.find(obj => obj.Id == statusCode).ColorCode;
+    }
+  }
 }
