@@ -147,6 +147,12 @@
         height: 30px;
     }
 
+    .stator_strip{
+        height: 30px;
+        width: 7px;
+        margin-right: 5px;
+    }
+
     .module_display_section {
         justify-content: space-between;
         display: flex;
@@ -274,6 +280,9 @@
         display: none;
     }
 
+    .number_col{
+        // width: 100px;
+    }
     .status_display_section_mobile {
         display: none;
     }

@@ -673,4 +673,16 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
             ).ColorCode;
         }
     }
+
+     // Getting the status color code by status name
+    getStatusColorCodeByName(statusName: string){
+      debugger
+      if (statusName == '') {
+        return 'white';
+    } else {
+        return this.originalStatusListLocal.find(
+            (obj) => obj.Name.trim().toLocaleUpperCase() == statusName.trim().toLocaleUpperCase()
+        ).ColorCode;
+    }
+    }
 }
