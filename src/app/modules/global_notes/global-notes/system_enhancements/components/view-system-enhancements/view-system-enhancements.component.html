@@ -21,7 +21,8 @@
             <div class="label_section">
                 <span class="marginRight5">Staff</span>
             </div>
-            <p-dropdown [options]="viewStaffDropdownList" [(ngModel)]="filter.StaffId" (onChange)="onChangeFilterItem('STAFF')"></p-dropdown>
+            <p-dropdown [options]="viewStaffDropdownList" [(ngModel)]="filter.StaffId"
+                (onChange)="onChangeFilterItem('STAFF')"></p-dropdown>
         </div>
         <!-- End of Staff dropdown list -->
 
@@ -31,7 +32,8 @@
             <div class="label_section">
                 <span class="marginRight5">Priority</span>
             </div>
-            <p-dropdown [options]="viewPriorityDropdownList" [(ngModel)]="filter.PriorityId" (onChange)="onChangeFilterItem('PRIORITY')"></p-dropdown>
+            <p-dropdown [options]="viewPriorityDropdownList" [(ngModel)]="filter.PriorityId"
+                (onChange)="onChangeFilterItem('PRIORITY')"></p-dropdown>
         </div>
         <!-- End of Priority dropdown list -->
 
@@ -40,7 +42,8 @@
             <div class="label_section">
                 <span class="marginRight5">Start</span>
             </div>
-            <p-calendar [(ngModel)]="filter.StartDate" [iconDisplay]="'input'" [showIcon]="true" (onSelect)="onChangeFilterItem('START')"></p-calendar>
+            <p-calendar [(ngModel)]="filter.StartDate" [iconDisplay]="'input'" [showIcon]="true"
+                (onSelect)="onChangeFilterItem('START')"></p-calendar>
         </div>
         <!-- End of Start date section -->
     </div>
@@ -75,7 +78,8 @@
         <!-- No of records per page dropdown -->
         <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
             *ngIf="recordsPerPage && recordsPerPage.length > 0">
-            <p-dropdown [options]="recordsPerPage" [(ngModel)]="filter.RecordsPerPage" (onChange)="onChangeFilterItem('RECORDS')"></p-dropdown>
+            <p-dropdown [options]="recordsPerPage" [(ngModel)]="filter.RecordsPerPage"
+                (onChange)="onChangeFilterItem('RECORDS')"></p-dropdown>
         </div>
         <!-- End of No of records per page dropdown -->
 
@@ -90,17 +94,20 @@
 
             <!-- Custom colored dropdown -->
             <p-dropdown class="colored_dropdown" [options]="viewStatusDropdownList" [(ngModel)]="filter.StatusId"
-                [style.background]="getStatusColorCode(filter.StatusId)" [style.borderRadius]="'6px'" (onChange)="onChangeFilterItem('STATUS')">
+                [style.background]="getStatusColorCode(filter.StatusId)" [style.borderRadius]="'6px'"
+                (onChange)="onChangeFilterItem('STATUS')">
                 <!-- Selected item styles -->
                 <ng-template pTemplate="selectedItem" let-statusObject>
                     <!-- When All is selected -->
-                    <div *ngIf="statusObject && statusObject.label && filter.StatusId == -1" [style.color]="(filter.StatusId == -1 || filter.StatusId == 1 )?'black':'white'">
+                    <div *ngIf="statusObject && statusObject.label && filter.StatusId == -1"
+                        [style.color]="(filter.StatusId == -1 || filter.StatusId == 1 )?'black':'white'">
                         {{statusObject.label}}
                     </div>
                     <!-- End of When All is selected -->
 
                     <!-- When All is not selected -->
-                    <div *ngIf="statusObject && statusObject.label && filter.StatusId !== -1" [style.background]="getStatusColorCode(statusObject.value)"
+                    <div *ngIf="statusObject && statusObject.label && filter.StatusId !== -1"
+                        [style.background]="getStatusColorCode(statusObject.value)"
                         [style.color]="(filter.StatusId == -1 || filter.StatusId == 1 )?'black':'white'">
                         {{statusObject.label}}
                     </div>
@@ -118,7 +125,8 @@
             <div class="label_section">
                 <span class="marginRight5">Module</span>
             </div>
-            <p-dropdown [options]="viewModulesDropdownList" [(ngModel)]="localModuleDropdownSelection" (onChange)="onChangeFilterItem('MODULE')"></p-dropdown>
+            <p-dropdown [options]="viewModulesDropdownList" [(ngModel)]="localModuleDropdownSelection"
+                (onChange)="onChangeFilterItem('MODULE')"></p-dropdown>
         </div>
         <!-- End of Modules dropdown list -->
 
@@ -127,7 +135,8 @@
             <div class="label_section">
                 <span class="marginRight5">End</span>
             </div>
-            <p-calendar [(ngModel)]="filter.EndDate" [iconDisplay]="'input'" [showIcon]="true" (onSelect)="onChangeFilterItem('END')"></p-calendar>
+            <p-calendar [(ngModel)]="filter.EndDate" [iconDisplay]="'input'" [showIcon]="true"
+                (onSelect)="onChangeFilterItem('END')"></p-calendar>
         </div>
         <!-- End of End date section -->
     </div>
@@ -182,7 +191,8 @@
                 <tr class="table_row" (click)="filter.ModuleId = moduleData.Module.Id;clickOnModule()">
                     <td>
                         <div class="module_row paddingLeft5 cursor_pointer">
-                            {{(rowIndex+1)}}
+                            {{(rowIndex+1)+(this.modulesFilter.CurrentPage == 1 ? 0 :
+                            this.modulesFilter.RecordsPerPage*(this.modulesFilter.CurrentPage-1))}}
                         </div>
                     </td>
                     <td colspan="9">
@@ -203,14 +213,18 @@
                     <td>
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="paddingLeft5 ">
-                            {{(rowIndex+1)}}. {{(eRowIndex+1)}}
+                            {{(rowIndex+1)+(this.modulesFilter.CurrentPage == 1 ? 0 :
+                            this.modulesFilter.RecordsPerPage*(this.modulesFilter.CurrentPage-1))}}.
+                            {{(eRowIndex+1)+(this.filter.CurrentPage == 1 ? 0 :
+                            this.filter.RecordsPerPage*(this.filter.CurrentPage-1))}}
+
                         </div>
                     </td>
                     <td class="title_content">
-                        <div  [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
-                            class="expanded_content_title paddingRight5 cursor_pointer " >
-                            <div class="ellipsis" (click)="titleOnClickFunction(enhancement)" pTooltip="View enhancement"
-                            tooltipPosition="top">
+                        <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
+                            class="expanded_content_title paddingRight5 cursor_pointer ">
+                            <div class="ellipsis" (click)="titleOnClickFunction(enhancement)"
+                                pTooltip="View enhancement" tooltipPosition="top">
                                 {{enhancement.Title}}
                             </div>
                         </div>
@@ -249,7 +263,7 @@
                                     (onChange)="onChangeSystemEnhancementStatus(enhancement)"></p-dropdown>
                             </div>
                             <div class="status_display_section_mobile" *ngIf="userRoleCode !== 'AD'">
-                            <span>{{enhancement.StatusName}}</span>
+                                <span>{{enhancement.StatusName}}</span>
                             </div>
                             <!-- End of Display the status list in mobile view -->
 
@@ -314,7 +328,8 @@
                                     class="fa fa-pencil" aria-hidden="true"></i></button>
                             <!--End of Edit button-->
                             <!--Delete button-->
-                            <button class="button_red" (click)="deleteConfirmation(enhancement)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            <button class="button_red" (click)="deleteConfirmation(enhancement)"><i class="fa fa-trash"
+                                    aria-hidden="true"></i></button>
                             <!--End of Delete button-->
                             <!--Send feature list button-->
                             <button *ngIf="false" class="button_grey"><i class="fa fa-archive"
@@ -324,7 +339,7 @@
                         </div>
 
                     </td>
-                   
+
                 </tr>
                 <!-- End of Enhancement list for module-->
                 <tr *ngIf="moduleData.ExpandedContent.length == 0 && filter.ModuleId == moduleData.Module.Id">
@@ -332,13 +347,17 @@
                         There are no items matching this filter criteria.
                     </td>
                 </tr>
+                
                 <!-- Pagination section -->
-                <tr *ngIf="systemEnhancementList && systemEnhancementList.length > 0 && filter.ModuleId == moduleData.Module.Id && systemEnhancementList[0].Total > this.filter.RecordsPerPage">
+                <tr
+                    [ngClass]="(systemEnhancementList && systemEnhancementList.length > 0 && filter.ModuleId == moduleData.Module.Id && systemEnhancementList[0].Total > this.filter.RecordsPerPage)?'':'display_hide'">
                     <td colspan="9">
-                        <p-paginator (onPageChange)="onEnhancementPageChange($event)" [first]="filter.CurrentPage" [rows]="filter.RecordsPerPage" [totalRecords]="systemEnhancementList[0].Total" ></p-paginator>
+                        <p-paginator #enhancementPaginator
+                            (onPageChange)="onEnhancementPageChange($event, moduleData.Module.Id)"
+                            [rows]="filter.RecordsPerPage"
+                            [totalRecords]="systemEnhancementList[0].Total"></p-paginator>
                     </td>
                 </tr>
-
                 <!-- End of Pagination section -->
 
             </ng-template>
@@ -347,7 +366,9 @@
         <!-- End of Prime ng table -->
 
         <!-- Pagination section -->
-        <p-paginator *ngIf="localModuleDropdownSelection == -1" (onPageChange)="onPageChange($event)" [first]="1" [rows]="10" [totalRecords]="120"></p-paginator>
+        <p-paginator #modulePaginator
+            *ngIf="displayModuleList && displayModuleList.length > 0 && localModuleDropdownSelection == -1 && displayModuleList[0].Total > 10"
+            (onPageChange)="onPageChange($event)" [totalRecords]="displayModuleList[0].Total"></p-paginator>
         <!-- End of Pagination section -->
     </div>
     <!-- End of Table section -->
