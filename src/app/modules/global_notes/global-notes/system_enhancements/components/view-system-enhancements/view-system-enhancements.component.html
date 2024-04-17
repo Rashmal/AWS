@@ -124,7 +124,7 @@
             *ngIf="viewModulesDropdownList && viewModulesDropdownList.length > 0">
             <div class="label_section">
                 <span class="marginRight5">Module</span>
-            </div>{{localModuleDropdownSelection}}
+            </div>
             <p-dropdown [options]="viewModulesDropdownList" [(ngModel)]="localModuleDropdownSelection"
                 (onChange)="onChangeFilterItem('MODULE')"></p-dropdown>
         </div>

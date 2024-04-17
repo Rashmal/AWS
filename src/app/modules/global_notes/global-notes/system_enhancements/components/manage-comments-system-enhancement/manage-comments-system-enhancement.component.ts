@@ -31,7 +31,9 @@ export class ManageCommentsSystemEnhancementComponent implements OnInit, OnDestr
     SearchQuery: '',
     StaffId: '-1',
     StartDate: new Date(),
-    StatusId: -1
+    StatusId: -1,
+    SortColumn:'TITLE',
+    SortDirection:'ASC'
   };
   // Store the comments list
   viewSystemEnhancementComment: ViewSystemEnhancementComment[] = [];
