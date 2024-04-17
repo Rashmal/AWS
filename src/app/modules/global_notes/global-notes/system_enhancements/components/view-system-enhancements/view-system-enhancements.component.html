@@ -94,13 +94,13 @@
                 <!-- Selected item styles -->
                 <ng-template pTemplate="selectedItem" let-statusObject>
                     <!-- When All is selected -->
-                    <div *ngIf="filter.StatusId == -1" [style.color]="(filter.StatusId == -1 || filter.StatusId == 1 )?'black':'white'">
+                    <div *ngIf="statusObject && statusObject.label && filter.StatusId == -1" [style.color]="(filter.StatusId == -1 || filter.StatusId == 1 )?'black':'white'">
                         {{statusObject.label}}
                     </div>
                     <!-- End of When All is selected -->
 
                     <!-- When All is not selected -->
-                    <div *ngIf="filter.StatusId !== -1" [style.background]="getStatusColorCode(statusObject.value)"
+                    <div *ngIf="statusObject && statusObject.label && filter.StatusId !== -1" [style.background]="getStatusColorCode(statusObject.value)"
                         [style.color]="(filter.StatusId == -1 || filter.StatusId == 1 )?'black':'white'">
                         {{statusObject.label}}
                     </div>
@@ -164,7 +164,7 @@
                 <tr>
                     <th>No:</th>
                     <th class="title_content">Title</th>
-                    <th class="text_center">Status</th>
+                    <th class="text_align_left">Status</th>
                     <th class="text_center">Start Date</th>
                     <th class="text_center">End Date</th>
                     <th class="text_center">Est.Hrs.</th>
@@ -276,7 +276,7 @@
                     </td>
                     <td class="text_center">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
-                            class="module_display_section paddingRight5 ">
+                            class="module_display_section paddingRight5 justify_center">
                             <span>{{enhancement.EstimatedHours}}</span>
 
                         </div>
@@ -284,7 +284,7 @@
                     </td>
                     <td class="text_center">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
-                            class="module_display_section paddingRight5 ">
+                            class="module_display_section paddingRight5 justify_center">
                             <span>{{enhancement.PriorityName}}</span>
 
                         </div>
@@ -292,7 +292,7 @@
                     </td>
                     <td class="text_center">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
-                            class="module_display_section paddingRight5 ">
+                            class="module_display_section paddingRight5 justify_center">
                             <span>{{getRequestByNames(enhancement)}}</span>
 
                         </div>

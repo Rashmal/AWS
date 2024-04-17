@@ -467,11 +467,12 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.systemEnhancementModel
             .GetSystemEnhancementDisplayListService(this.filter)
             .then((data) => {
-                debugger
                 // Getting the staff list
                 this.systemEnhancementList = <ViewSystemEnhancement[]>data;
                 // Generate display table with module list and enhancement list
                 this.generateDisplayTable();
+                // Getting all the stat boxes list
+                this.getAllStatBoxesList();
             });
 
         // Stop loading

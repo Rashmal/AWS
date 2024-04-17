@@ -1,6 +1,10 @@
 .view_system_enhancement_list {
     padding: 5px;
 
+    .justify_center {
+        justify-content: center;
+    }
+
     .marginRight5 {
         margin-right: 5px;
     }
@@ -28,6 +32,10 @@
 
     .cursor_pointer {
         cursor: pointer;
+    }
+
+    .text_align_left {
+        text-align: left;
     }
 
     .title_filter_section {
@@ -139,14 +147,14 @@
         justify-content: space-between;
         display: flex;
         align-items: center;
-        
+        padding: 5px;
     }
 
     .expanded_content_title {
         justify-content: space-between;
         display: flex;
         align-items: center;
-
+        padding: 5px;
         color: #126095;
     }
 
@@ -213,7 +221,7 @@
         justify-content: center;
     }
     .action_column {
-        width: 200px;
+        width: 150px;
     }
 
     .title_content {
@@ -296,7 +304,7 @@
     text-align: center;
 }
 
-.full_width{
+.full_width {
     width: 100%;
 }
 ::ng-deep thead th {
