@@ -347,7 +347,7 @@
                         There are no items matching this filter criteria.
                     </td>
                 </tr>
-                
+
                 <!-- Pagination section -->
                 <tr
                     [ngClass]="(systemEnhancementList && systemEnhancementList.length > 0 && filter.ModuleId == moduleData.Module.Id && systemEnhancementList[0].Total > this.filter.RecordsPerPage)?'':'display_hide'">
@@ -355,7 +355,7 @@
                         <p-paginator #enhancementPaginator
                             (onPageChange)="onEnhancementPageChange($event, moduleData.Module.Id)"
                             [rows]="filter.RecordsPerPage"
-                            [totalRecords]="systemEnhancementList[0].Total"></p-paginator>
+                            [totalRecords]="(systemEnhancementList.length>0)?systemEnhancementList[0].Total:0"></p-paginator>
                     </td>
                 </tr>
                 <!-- End of Pagination section -->
