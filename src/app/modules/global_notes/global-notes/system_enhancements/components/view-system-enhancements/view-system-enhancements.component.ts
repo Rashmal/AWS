@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MessageService, SelectItem } from 'primeng/api';
 import { NO$OF$RECORDS$PER$PAGE } from 'src/app/core/apiConfigurations';
 import { BasicUserDetails } from 'src/app/modules/authentication/core/authenticationModals/basicUserDetails';
@@ -19,6 +19,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
 import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
 import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
+import { Paginator } from 'primeng/paginator';
 @Component({
     selector: 'app-view-system-enhancements',
     standalone: false,
@@ -94,6 +95,12 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     ref: DynamicDialogRef | undefined;
     // Store the local module dropdown
     localModuleDropdownSelection: number = -1;
+    // Store Paginator reference
+    @ViewChild('enhancementPaginator') enhancementPaginator: Paginator;
+    @ViewChild('modulePaginator') modulePaginator: Paginator;
+
+
+    
 
     // Constructor
     constructor(
@@ -121,6 +128,12 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        // Initiate start date for filter
+        let today = new Date();
+        let oneYearBefore = new Date(today);
+        this.filter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
+        this.modulesFilter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
+       
         // Getting all the staff list
         this.getAllStaffList();
         // Getting all the priority list
@@ -261,13 +274,13 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     }
 
     // Getting all the display module list
-    getAllSystemEnhancementModuleList() {
+    getAllSystemEnhancementModuleList(status: boolean = false) {
         // Start loading
         this.showLoading = true;
         // Clear the list
         this.displayModuleList = [];
         // Setting the filter
-        this.modulesFilter.ModuleId = this.filter.ModuleId;
+        this.modulesFilter.ModuleId = status ? -1 : this.filter.ModuleId ;
         // Calling the model to retrieve the data
         this.systemEnhancementModel
             .GetSystemEnhancementDisplayModulesService(this.modulesFilter)
@@ -295,7 +308,9 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
             this.displayTable.push({
                 Module: item,
                 ExpandedContent:
-                    (item.Id == this.filter.ModuleId || this.filter.ModuleId == -1 && item.Id == this.displayModuleList[0].Id)
+                    item.Id == this.filter.ModuleId ||
+                    (this.filter.ModuleId == -1 &&
+                        item.Id == this.displayModuleList[0].Id)
                         ? this.systemEnhancementList
                         : [],
             });
@@ -445,7 +460,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
                     this.displayTable.push({
                         Module: item,
                         ExpandedContent:
-                            (item.Id == moduleId)
+                            item.Id == moduleId
                                 ? this.systemEnhancementList
                                 : [],
                     });
@@ -467,7 +482,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.systemEnhancementModel
             .GetSystemEnhancementDisplayListService(this.filter)
             .then((data) => {
-                debugger
+                debugger;
                 // Getting the staff list
                 this.systemEnhancementList = <ViewSystemEnhancement[]>data;
                 // Generate display table with module list and enhancement list
@@ -495,14 +510,36 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     }
 
     //on change module list paginator
-    onPageChange(event: any) { }
+    onPageChange(event: any) {
+     
+      // Set current page to filter
+      this.modulesFilter.CurrentPage =  event.page + 1;
+       // Reset selected module id
+        this.modulesFilter.ModuleId = -1;
+        this.localModuleDropdownSelection = -1;
+      //Get modules
+      this.getAllSystemEnhancementModuleList(true);
+       // Set page to paginator
+      //  if(this.enhancementPaginator){
+      //   this.modulePaginator.changePage( this.modulesFilter.CurrentPage);
+      // }
+      
+    }
 
     //on change enhancement list paginator
     onEnhancementPageChange(event: any) {
+      
         // Set current page to filter
         this.filter.CurrentPage = event.page + 1;
+       
         //Get enhancement list for the selected page
         this.getSystemEnhancementDisplayList();
+        
+          // Set page to paginator
+          // if(this.enhancementPaginator){
+          //   this.enhancementPaginator.changePage(this.filter.CurrentPage);
+          // }
+          
     }
 
     // On change drop down or input to filter data

@@ -182,7 +182,7 @@
                 <tr class="table_row" (click)="filter.ModuleId = moduleData.Module.Id;clickOnModule()">
                     <td>
                         <div class="module_row paddingLeft5 cursor_pointer">
-                            {{(rowIndex+1)}}
+                            {{(rowIndex+1)+(this.modulesFilter.CurrentPage == 1 ? 0 : this.modulesFilter.RecordsPerPage*(this.modulesFilter.CurrentPage-1))}}
                         </div>
                     </td>
                     <td colspan="9">
@@ -203,7 +203,9 @@
                     <td>
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="paddingLeft5 ">
-                            {{(rowIndex+1)}}. {{(eRowIndex+1)}}
+                            {{(rowIndex+1)+(this.modulesFilter.CurrentPage == 1 ? 0 : this.modulesFilter.RecordsPerPage*(this.modulesFilter.CurrentPage-1))}}.
+                            {{(eRowIndex+1)+(this.filter.CurrentPage == 1 ? 0 : this.filter.RecordsPerPage*(this.filter.CurrentPage-1))}}
+                           
                         </div>
                     </td>
                     <td class="title_content">
@@ -335,7 +337,14 @@
                 <!-- Pagination section -->
                 <tr *ngIf="systemEnhancementList && systemEnhancementList.length > 0 && filter.ModuleId == moduleData.Module.Id && systemEnhancementList[0].Total > this.filter.RecordsPerPage">
                     <td colspan="9">
-                        <p-paginator (onPageChange)="onEnhancementPageChange($event)" [first]="filter.CurrentPage" [rows]="filter.RecordsPerPage" [totalRecords]="systemEnhancementList[0].Total" ></p-paginator>
+                        <p-paginator 
+                        #enhancementPaginator
+                        (onPageChange)="onEnhancementPageChange($event)" 
+                        [first]="1" 
+                        [rows]="filter.RecordsPerPage" 
+                        [totalRecords]="systemEnhancementList[0].Total" 
+                        
+                        ></p-paginator>
                     </td>
                 </tr>
 
@@ -345,9 +354,20 @@
             <!-- End of Modules table body section -->
         </p-table>
         <!-- End of Prime ng table -->
-
+       
+       
         <!-- Pagination section -->
-        <p-paginator *ngIf="displayModuleList && displayModuleList.length > 0 && localModuleDropdownSelection == -1 && displayModuleList[0].Total > 10" (onPageChange)="onPageChange($event)" [first]="1" [rows]="10" [totalRecords]="displayModuleList[0].Total"></p-paginator>
+        <p-paginator
+        #modulePaginator
+        *ngIf="displayModuleList && displayModuleList.length > 0 && localModuleDropdownSelection == -1 && displayModuleList[0].Total > 10" 
+        (onPageChange)="onPageChange($event)" 
+        [first]="1" [rows]="10" 
+        [totalRecords]="displayModuleList[0].Total"
+        
+        ></p-paginator>
+       
+      
+        
         <!-- End of Pagination section -->
     </div>
     <!-- End of Table section -->
