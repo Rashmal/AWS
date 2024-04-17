@@ -182,6 +182,7 @@
                 <tr class="table_row" (click)="filter.ModuleId = moduleData.Module.Id;clickOnModule()">
                     <td>
                         <div class="module_row paddingLeft5 cursor_pointer">
+                            <span class="stator_strip"></span>
                             {{(rowIndex+1)+(this.modulesFilter.CurrentPage == 1 ? 0 : this.modulesFilter.RecordsPerPage*(this.modulesFilter.CurrentPage-1))}}
                         </div>
                     </td>
@@ -201,17 +202,17 @@
                 <!-- Enhancement list for module-->
                 <tr *ngFor="let enhancement of moduleData.ExpandedContent; let eRowIndex = index">
                     <td>
-                        <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
-                            class="paddingLeft5 ">
-                            {{(rowIndex+1)+(this.modulesFilter.CurrentPage == 1 ? 0 : this.modulesFilter.RecordsPerPage*(this.modulesFilter.CurrentPage-1))}}.
-                            {{(eRowIndex+1)+(this.filter.CurrentPage == 1 ? 0 : this.filter.RecordsPerPage*(this.filter.CurrentPage-1))}}
+                        <div class="" [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
+                            >
+                            <span class="stator_strip" [style.background-color]="getStatusColorCodeByName(enhancement.StatusName)"></span>
+                            {{(rowIndex+1)+(this.modulesFilter.CurrentPage == 1 ? 0 : this.modulesFilter.RecordsPerPage*(this.modulesFilter.CurrentPage-1))}}.{{(eRowIndex+1)+(this.filter.CurrentPage == 1 ? 0 : this.filter.RecordsPerPage*(this.filter.CurrentPage-1))}}
                            
                         </div>
                     </td>
                     <td class="title_content">
                         <div  [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="expanded_content_title paddingRight5 cursor_pointer " >
-                            <div class="ellipsis" (click)="titleOnClickFunction(enhancement)" pTooltip="View enhancement"
+                            <div class="ellipsis" (click)="titleOnClickFunction(enhancement)" [pTooltip]="enhancement.Title"
                             tooltipPosition="top">
                                 {{enhancement.Title}}
                             </div>
