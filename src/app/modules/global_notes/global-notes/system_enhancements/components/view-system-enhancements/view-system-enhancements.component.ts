@@ -98,9 +98,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     // Store Paginator reference
     @ViewChild('enhancementPaginator') enhancementPaginator: Paginator;
     @ViewChild('modulePaginator') modulePaginator: Paginator;
-
-
-
+    // Store display full table
+    displayFullTable: boolean = true;
 
     // Constructor
     constructor(
@@ -281,7 +280,15 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.displayModuleList = [];
         // Setting the filter
         this.modulesFilter.ModuleId = status ? -1 : this.filter.ModuleId;
+
+        // if (this.modulePaginator && status == false) {
+        //     this.modulePaginator.changePage(0);
+        // } else {
+        if (this.localModuleDropdownSelection != -1) {
+            this.modulesFilter.ModuleId = this.localModuleDropdownSelection;
+        }
         // Calling the model to retrieve the data
+
         this.systemEnhancementModel
             .GetSystemEnhancementDisplayModulesService(this.modulesFilter)
             .then((data) => {
@@ -293,10 +300,18 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
                 } else {
                     this.filter.ModuleId = this.localModuleDropdownSelection;
                 }
+
                 // Set first module selected
+                //this.clickOnModule();
+
                 this.clickOnModule();
+
+                // Start loading
+                this.showLoading = false;
+                this.displayFullTable = true;
             });
         // End of Calling the model to retrieve the data
+        // }
     }
 
     // Generate display table
@@ -482,7 +497,6 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.systemEnhancementModel
             .GetSystemEnhancementDisplayListService(this.filter)
             .then((data) => {
-                debugger;
                 // Getting the staff list
                 this.systemEnhancementList = <ViewSystemEnhancement[]>data;
                 // Generate display table with module list and enhancement list
@@ -530,7 +544,6 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
     //on change enhancement list paginator
     onEnhancementPageChange(event: any, moduleId: number) {
-        debugger
         // Set current page to filter
         this.filter.CurrentPage = event.page + 1;
 
@@ -545,7 +558,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
                 // Getting the staff list
                 this.systemEnhancementList = <ViewSystemEnhancement[]>data;
                 // Generate display table with module list and enhancement list
-                let indexObj =  this.displayModuleList.findIndex(obj=>obj.Id == moduleId);
+                let indexObj = this.displayModuleList.findIndex(obj => obj.Id == moduleId);
                 // Setting the new list
                 this.displayTable[indexObj].ExpandedContent = this.systemEnhancementList;
             });
@@ -558,6 +571,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
     // On change drop down or input to filter data
     onChangeFilterItem(type: string) {
+        this.filter.CurrentPage = 1;
         // Set filter properties according to type
         switch (type) {
             case 'START':
@@ -595,9 +609,11 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
         //If module changed refresh module list
         if (type == 'MODULE') {
-            this.filter.ModuleId = this.localModuleDropdownSelection;
+            this.displayFullTable = false;
+            this.filter.ModuleId = this.deep(this.localModuleDropdownSelection);
+            this.modulesFilter.CurrentPage = 1;
             // Get module list
-            this.getAllSystemEnhancementModuleList();
+            this.getAllSystemEnhancementModuleList(false);
         } else {
             // Get enhancement list
             this.getSystemEnhancementDisplayList();
@@ -605,7 +621,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     }
 
     // Making a deep copy
-    deep<T extends object>(source: T): T {
+    deep<T extends any>(source: T): T {
         return JSON.parse(JSON.stringify(source));
     }
 

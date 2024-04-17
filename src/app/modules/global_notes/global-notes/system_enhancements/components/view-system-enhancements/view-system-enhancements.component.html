@@ -124,7 +124,7 @@
             *ngIf="viewModulesDropdownList && viewModulesDropdownList.length > 0">
             <div class="label_section">
                 <span class="marginRight5">Module</span>
-            </div>
+            </div>{{localModuleDropdownSelection}}
             <p-dropdown [options]="viewModulesDropdownList" [(ngModel)]="localModuleDropdownSelection"
                 (onChange)="onChangeFilterItem('MODULE')"></p-dropdown>
         </div>
@@ -164,7 +164,7 @@
     <!-- End of Stat boxes section -->
 
     <!-- Table section -->
-    <div class="col-xl-12">
+    <div class="col-xl-12" *ngIf="displayFullTable">
         <!-- Prime ng table -->
         <p-table [value]="displayTable" dataKey="name" [tableStyle]="{ 'min-width': '60rem' }" [responsive]="true">
             <!-- Header section -->
@@ -367,8 +367,9 @@
 
         <!-- Pagination section -->
         <p-paginator #modulePaginator
-            *ngIf="displayModuleList && displayModuleList.length > 0 && localModuleDropdownSelection == -1 && displayModuleList[0].Total > 10"
-            (onPageChange)="onPageChange($event)" [totalRecords]="displayModuleList[0].Total"></p-paginator>
+            [ngClass]="(displayModuleList && displayModuleList.length > 0 && localModuleDropdownSelection == -1 && displayModuleList[0].Total > 10)?'':'display_hide'"
+            [rows]="modulesFilter.RecordsPerPage" (onPageChange)="onPageChange($event)"
+            [totalRecords]="(displayModuleList.length>0)? displayModuleList[0].Total:0"></p-paginator>
         <!-- End of Pagination section -->
     </div>
     <!-- End of Table section -->
