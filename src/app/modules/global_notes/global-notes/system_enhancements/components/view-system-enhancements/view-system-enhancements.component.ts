@@ -676,7 +676,6 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
      // Getting the status color code by status name
     getStatusColorCodeByName(statusName: string){
-      debugger
       if (statusName == '') {
         return 'white';
     } else {
