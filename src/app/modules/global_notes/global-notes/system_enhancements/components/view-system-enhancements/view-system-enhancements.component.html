@@ -135,7 +135,7 @@
                 <span class="marginRight5">End</span>
             </div>
             <p-calendar [(ngModel)]="filter.EndDate" [iconDisplay]="'input'" [showIcon]="true"
-                (onSelect)="onChangeFilterItem('END')"></p-calendar>
+                [minDate]="filter.StartDate" (onSelect)="onChangeFilterItem('END')"></p-calendar>
         </div>
         <!-- End of End date section -->
     </div>

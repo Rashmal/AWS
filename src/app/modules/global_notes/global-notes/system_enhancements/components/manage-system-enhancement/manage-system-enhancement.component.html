@@ -221,7 +221,7 @@
                 </div>
                 <!-- End of Label section -->
 
-                <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true" [disabled]="editingType  == 'VIEW'"></p-calendar>
+                <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true" [disabled]="editingType  == 'VIEW'" [minDate]="startDate"></p-calendar>
             </div>
             <!-- End of End date section -->
         </div>
