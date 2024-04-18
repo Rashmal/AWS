@@ -163,14 +163,29 @@
                 <!-- Header row section -->
                 <tr>
                     <th>No:</th>
-                    <th class="title_content">Title</th>
-                    <th class="text_center">Status</th>
-                    <th class="text_center">Start Date</th>
-                    <th class="text_center">End Date</th>
-                    <th class="text_center">Est.Hrs.</th>
-                    <th class="text_center">Priority</th>
-                    <th class="text_center">Requested By</th>
-                    <th class="justify_center action_column">Action</th>
+                    <th class="title_content ">
+                        <i class="fa fa-sort-asc margin_right10 "  margin_right10aria-hidden="true" (click)="sortItems('TITLE', 'ASC')"></i>
+                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true" (click)="sortItems('TITLE', 'DESC')"></i>
+                        Title</th>
+                    <th class="text_center ">Status</th>
+                    <th class="text_center ">
+                        <i class="fa fa-sort-asc margin_right10 " margin_right10aria-hidden="true" (click)="sortItems('START', 'ASC')"></i>
+                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true" (click)="sortItems('START', 'DESC')"></i>
+                        Start Date
+                    </th>
+                    <th class="text_center "> 
+                        <i class="fa fa-sort-asc margin_right10 " margin_right10aria-hidden="true" (click)="sortItems('END', 'ASC')"></i>
+                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true" (click)="sortItems('END', 'DESC')"></i>
+                        End Date
+                    </th>
+                    <th class="text_center "> 
+                        <i class="fa fa-sort-asc margin_right10 " margin_right10aria-hidden="true" (click)="sortItems('HOURS', 'ASC')"></i>
+                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true" (click)="sortItems('HOURS', 'DESC')"></i>
+                        Est.Hrs.
+                    </th>
+                    <th class="text_center ">Priority</th>
+                    <th class="text_center ">Requested By</th>
+                    <th class="justify_center action_column ">Action</th>
                 </tr>
                 <!-- End of Header row section -->
             </ng-template>
@@ -187,12 +202,11 @@
                         </div>
                     </td>
                     <td colspan="9">
-                        <div class="module_row module_display_section paddingRight5 cursor_pointer">
+                        <div class="module_row module_display_section_module paddingRight5 cursor_pointer">
                             <span>{{moduleData.Module.Name}}</span>
                             <i *ngIf="filter.ModuleId != moduleData.Module.Id" class="fa fa-angle-double-down"
                                 aria-hidden="true"></i>
-                            <!-- <i *ngIf="filter.ModuleId == moduleData.Module.Id" class="fa fa-angle-double-up"
-                                aria-hidden="true"></i> -->
+                           
                         </div>
 
                     </td>
@@ -306,7 +320,7 @@
                     </td>
                     <td class="action_column">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
-                            class="module_display_section paddingRight5 action_button">
+                            class="module_display_section_btn paddingRight5 action_button">
                             <!--Comments button-->
                             <button class="button_green" (click)="commentOnClickFunction(enhancement)"><i
                                     class="fa fa-comments" aria-hidden="true"></i></button>
