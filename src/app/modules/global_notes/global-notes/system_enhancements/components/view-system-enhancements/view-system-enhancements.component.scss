@@ -294,8 +294,8 @@
         display: none;
     }
 
-    .number_col{
-        // width: 100px;
+    .requested_by{
+       
     }
     .status_display_section_mobile {
         display: none;
@@ -353,6 +353,18 @@
 .display_felx_center{
     display: flex;
     align-items: center;
+}
+
+.selected_sort{
+    
+        color: #40acf5;
+    
+}
+.unSelected_sort{
+    
+        color: #000000;
+        cursor: pointer;
+
 }
 
 ::ng-deep thead th {
