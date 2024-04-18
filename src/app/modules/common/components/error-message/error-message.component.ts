@@ -20,7 +20,8 @@ export class ErrorMessageComponent {
   overallCookieInterface: OverallCookieInterface;
   // Store the authentication model
   authenticationModel: AuthenticationModel;
-
+  // Storing the loading
+  showLoading: boolean = false;
 
   // Constructor
   constructor(private router: Router, public layoutService: LayoutService,
@@ -37,6 +38,8 @@ export class ErrorMessageComponent {
 
   // On click function of the login button
   loginClick() {
+    // Starting the loading
+    this.showLoading = true;
     // Calling the model to logout function
     this.authenticationModel.LogoutUserService(this.overallCookieInterface.GetUserEmail()).then(
       (data) => {
@@ -44,6 +47,8 @@ export class ErrorMessageComponent {
         this.overallCookieInterface.ClearCookies();
         // Redirect to the login page
         this.router.navigate(['/auth']);
+        // Stop the loading
+        this.showLoading = false;
       }
     );
     // End of Calling the model to logout function

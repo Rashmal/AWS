@@ -531,7 +531,6 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
     //on change module list paginator
     onPageChange(event: any) {
-
         // Set current page to filter
         this.modulesFilter.CurrentPage = event.page + 1;
         // Reset selected module id
@@ -539,11 +538,6 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.localModuleDropdownSelection = -1;
         //Get modules
         this.getAllSystemEnhancementModuleList(true);
-        // Set page to paginator
-        //  if(this.enhancementPaginator){
-        //   this.modulePaginator.changePage( this.modulesFilter.CurrentPage);
-        // }
-
     }
 
     //on change enhancement list paginator
@@ -616,7 +610,9 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         //If module changed refresh module list
         if (type == 'MODULE') {
             this.displayFullTable = false;
+            // Setting the module Id
             this.filter.ModuleId = this.deep(this.localModuleDropdownSelection);
+            // Setting the module filter current page to be 1
             this.modulesFilter.CurrentPage = 1;
             // Get module list
             this.getAllSystemEnhancementModuleList(false);
@@ -680,7 +676,6 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
      // Getting the status color code by status name
     getStatusColorCodeByName(statusName: string){
-      debugger
       if (statusName == '') {
         return 'white';
     } else {

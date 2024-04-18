@@ -5,7 +5,7 @@
         <!-- Title section -->
         <div *ngIf="editingType  != 'VIEW'" class="marginRight5 marginBottom5 marginTop5">
             <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
-            <span class="module_title" *ngIf="systemEnhancement.Id && systemEnhancement.Id == ''">Add System
+            <span class="module_title" *ngIf="systemEnhancement.Id == ''">Add System
                 Enhancement</span>
             <span class="module_title" *ngIf="systemEnhancement.Id && systemEnhancement.Id !== ''">
                 Edit - {{systemEnhancement.Title}}
