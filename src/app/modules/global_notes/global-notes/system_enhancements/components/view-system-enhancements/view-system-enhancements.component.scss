@@ -153,7 +153,21 @@
         margin-right: 5px;
     }
 
+    .module_display_section_module{
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+    }
+
     .module_display_section {
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+    }
+
+    .module_display_section_btn{
         justify-content: space-between;
         display: flex;
         align-items: center;
@@ -280,8 +294,8 @@
         display: none;
     }
 
-    .number_col{
-        // width: 100px;
+    .requested_by{
+       
     }
     .status_display_section_mobile {
         display: none;
@@ -313,6 +327,11 @@
     }
 }
 
+.icon-container {
+    display: flex;
+    align-items: center; /* Vertically centers the child elements */
+}
+
 .text_center {
     text-align: center;
 }
@@ -320,6 +339,34 @@
 .full_width {
     width: 100%;
 }
+
+.margin_right10{
+    margin-right: 10px;
+}
+.margin_bottom7{
+    margin-bottom: 7px;
+}
+.pos_abs{
+    position: absolute;
+}
+
+.display_felx_center{
+    display: flex;
+    align-items: center;
+}
+
+.selected_sort{
+    
+        color: #40acf5;
+    
+}
+.unSelected_sort{
+    
+        color: #000000;
+        cursor: pointer;
+
+}
+
 ::ng-deep thead th {
     padding: 5px;
 }

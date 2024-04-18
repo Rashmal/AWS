@@ -51,8 +51,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         StaffId: '-1',
         StartDate: new Date(),
         StatusId: -1,
-        SortColumn:'TITLE',
-        SortDirection:'ASC'
+        SortColumn: 'TITLE',
+        SortDirection: 'ASC'
     };
     // Store the modules filter object
     modulesFilter: Filter = {
@@ -67,8 +67,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         StaffId: '-1',
         StartDate: new Date(),
         StatusId: -1,
-        SortColumn:'TITLE',
-        SortDirection:'ASC'
+        SortColumn: 'TITLE',
+        SortDirection: 'ASC'
     };
     // Store the Common model
     commonModel: CommonModel;
@@ -593,8 +593,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
                     StaffId: '-1',
                     StartDate: new Date(),
                     StatusId: -1,
-                    SortColumn:'TITLE',
-                    SortDirection:'ASC'
+                    SortColumn: 'TITLE',
+                    SortDirection: 'ASC'
                 };
                 break;
 
@@ -683,5 +683,11 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
             (obj) => obj.Name.trim().toLocaleUpperCase() == statusName.trim().toLocaleUpperCase()
         ).ColorCode;
     }
+    }
+    // Sort enhancement items
+    sortItems(column: string, order: string){
+      this.filter.SortColumn = column;
+      this.filter.SortDirection = order;
+      this.onChangeFilterItem('SORT');
     }
 }

@@ -10,6 +10,6 @@ export interface Filter {
     EndDate: Date;
     ParentId: number;
     Id: string;
-    SortColumn: string;
     SortDirection: string;
+    SortColumn: string;
 }

@@ -39,8 +39,8 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
     StaffId: '-1',
     StartDate: new Date(),
     StatusId: -1,
-    SortColumn:'TITLE',
-    SortDirection:'ASC'
+    SortColumn: 'TITLE',
+    SortDirection: 'ASC'
   };
   // Store the change date history list
   viewSystemEnhancementChangeDate: ViewSystemEnhancementChangeDate[] = [];

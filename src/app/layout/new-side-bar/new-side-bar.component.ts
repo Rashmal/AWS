@@ -88,7 +88,7 @@ export class NewSideBarComponent implements OnInit {
   //Get site menu items
   getMenuItems() {
     //call services to get menu items
-    this.commonModel.GetModuleListServiceLocal().then(
+    this.commonModel.GetModuleListService().then(
       (data: Module[]) => {
         this.sideMenuItems = data;
 
