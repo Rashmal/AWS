@@ -100,14 +100,14 @@
                 <ng-template pTemplate="selectedItem" let-statusObject>
                     <!-- When All is selected -->
                     <div *ngIf="statusObject && filter.StatusId == -1"
-                        [style.color]="(filter.StatusId == -1 || filter.StatusId == 1 )?'black':'white'">
+                        [style.color]="(filter.StatusId == -1)?'black':'white'">
                         {{statusObject.label}}
                     </div>
                     <!-- End of When All is selected -->
 
                     <!-- When All is not selected -->
                     <div *ngIf="statusObject && filter.StatusId !== -1" [style.background]="getStatusColorCode(statusObject.value)"
-                        [style.color]="(filter.StatusId == -1 || filter.StatusId == 1 )?'black':'white'">
+                        [style.color]="(filter.StatusId == -1 )?'black':'white'">
                         {{statusObject.label}}
                     </div>
                     <!-- End of When All is not selected -->

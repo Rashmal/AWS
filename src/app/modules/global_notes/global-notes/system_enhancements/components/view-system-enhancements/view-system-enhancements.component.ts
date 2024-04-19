@@ -132,11 +132,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         // Initiate start date for filter
-        let today = new Date();
-        let oneYearBefore = new Date(today);
-        this.filter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
-        this.modulesFilter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
-
+       this.setOneYerBefore();
         // Getting all the staff list
         this.getAllStaffList();
         // Getting all the priority list
@@ -596,6 +592,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
                     SortColumn: 'TITLE',
                     SortDirection: 'ASC'
                 };
+                this.setOneYerBefore();
                 break;
 
             case 'END':
@@ -620,6 +617,15 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
             // Get enhancement list
             this.getSystemEnhancementDisplayList();
         }
+    }
+
+    // Set one year before date to filter start date
+    setOneYerBefore(){
+         // Initiate start date for filter
+         let today = new Date();
+         let oneYearBefore = new Date(today);
+         this.filter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
+         this.modulesFilter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
     }
 
     // Making a deep copy
