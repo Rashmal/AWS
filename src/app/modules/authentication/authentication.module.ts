@@ -17,6 +17,9 @@ import { InputrestrictionDirective } from '../common/directives/inputrestriction
         FormsModule,
         AuthenticationRoutingModule,
         TooltipModule 
+    ],
+    exports:[
+        InputrestrictionDirective
     ]
 })
 export class AuthenticationModule { }

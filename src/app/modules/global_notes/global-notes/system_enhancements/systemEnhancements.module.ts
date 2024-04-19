@@ -14,14 +14,15 @@ import { DateChangeHistoryComponent } from './components/date-change-history/dat
 import { ManageCommentsSystemEnhancementComponent } from './components/manage-comments-system-enhancement/manage-comments-system-enhancement.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputrestrictionDirective } from 'src/app/modules/common/directives/inputrestriction.directive';
+import { AuthenticationModule } from 'src/app/modules/authentication/authentication.module';
 
 @NgModule({
     declarations: [
         ViewSystemEnhancementsComponent,
         ManageSystemEnhancementComponent,
         DateChangeHistoryComponent,
-        ManageCommentsSystemEnhancementComponent,
-        InputrestrictionDirective
+        ManageCommentsSystemEnhancementComponent
+        
     ],
     imports: [
         CommonModule,
@@ -33,7 +34,8 @@ import { InputrestrictionDirective } from 'src/app/modules/common/directives/inp
         PaginatorModule,
         MultiSelectModule,
         EditorModule,
-        TooltipModule
+        TooltipModule,
+        AuthenticationModule
     ]
 })
 export class SystemEnhancementsModule { }

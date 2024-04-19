@@ -21,6 +21,6 @@ import { InputrestrictionDirective } from './modules/common/directives/inputrest
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
