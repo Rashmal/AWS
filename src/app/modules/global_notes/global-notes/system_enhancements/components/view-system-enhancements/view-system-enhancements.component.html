@@ -171,7 +171,7 @@
                 <!-- Header row section -->
                 <tr>
                     <th>No:</th>
-                    <th class="title_content ">
+                    <th class="title_content title_by_width">
                         <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('TITLE', 'ASC')"
                         [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'TITLE' )? 'selected_sort' : 'unSelected_sort'" 
                         ></i>
@@ -179,7 +179,7 @@
                         [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'TITLE' )? 'selected_sort' : 'unSelected_sort'" 
                         ></i>
                         Title</th>
-                    <th class="text_center ">Status</th>
+                    <th class="text_center status_by_width">Status</th>
                     <th class="text_center ">
                         <i class="fa fa-sort-asc margin_right10 "aria-hidden="true" (click)="sortItems('START', 'ASC')"
                         [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'START' )? 'selected_sort' : 'unSelected_sort'" 
@@ -200,7 +200,7 @@
                         
                         End Date
                     </th>
-                    <th class="text_center "> 
+                    <th class="text_center estimated_by_width"> 
                         <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('HOURS', 'ASC')"
                         [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'HOURS' )? 'selected_sort' : 'unSelected_sort'" 
                         ></i>
@@ -209,8 +209,8 @@
                         ></i>
                         Est.Hrs.
                     </th>
-                    <th class="text_center ">Priority</th>
-                    <th class="text_center requested_by"> <div class="requested_by">Requested By</div></th>
+                    <th class="text_center priority_by_width">Priority</th>
+                    <th class="text_center requested_by requested_by_width"> <div class="requested_by">Requested By</div></th>
                     <th class="justify_center action_column ">Action</th>
                 </tr>
                 <!-- End of Header row section -->
@@ -255,7 +255,7 @@
 
                         </div>
                     </td>
-                    <td class="title_content">
+                    <td class="title_content title_by_width">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="expanded_content_title paddingRight5 cursor_pointer ">
                             <div class="ellipsis" (click)="titleOnClickFunction(enhancement)"
@@ -265,7 +265,7 @@
                         </div>
 
                     </td>
-                    <td class="text_center">
+                    <td class="text_center status_by_width">
                         <div [ngClass]="[eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g', (userRoleCode=='AD')?'admin_display_status':'']"
                             class="module_display_section paddingRight5 ">
 
@@ -323,7 +323,7 @@
                         </div>
 
                     </td>
-                    <td class="text_center">
+                    <td class="text_center estimated_by_width">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 ">
                             <span>{{enhancement.EstimatedHours}}</span>
@@ -331,7 +331,7 @@
                         </div>
 
                     </td>
-                    <td class="text_center">
+                    <td class="text_center priority_by_width">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 ">
                             <span>{{enhancement.PriorityName}}</span>
@@ -339,7 +339,7 @@
                         </div>
 
                     </td>
-                    <td class="text_center ">
+                    <td class="text_center requested_by_width">
                         <div  [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 requested_by ellipsis">
                             <span>{{getRequestByNames(enhancement)}}</span>

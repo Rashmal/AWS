@@ -1,7 +1,27 @@
 .view_system_enhancement_list {
     padding: 5px;
 
-    .display_hide{
+    .requested_by_width {
+        width: 12%;
+    }
+
+    .title_by_width {
+        width: 30%;
+    }
+
+    .status_by_width {
+        width: 12%;
+    }
+
+    .priority_by_width {
+        width: 10%;
+    }
+
+    .estimated_by_width {
+        width: 8%;
+    }
+
+    .display_hide {
         display: none;
     }
 
@@ -147,13 +167,13 @@
         height: 30px;
     }
 
-    .stator_strip{
+    .stator_strip {
         height: 30px;
         width: 7px;
         margin-right: 5px;
     }
 
-    .module_display_section_module{
+    .module_display_section_module {
         justify-content: space-between;
         display: flex;
         align-items: center;
@@ -167,7 +187,7 @@
         padding: 5px;
     }
 
-    .module_display_section_btn{
+    .module_display_section_btn {
         justify-content: space-between;
         display: flex;
         align-items: center;
@@ -249,7 +269,7 @@
     }
 
     .title_content {
-        max-width: 300px;
+        //max-width: 300px;
         // width: 100%;
         // display: flex;
         .expanded_content_title {
@@ -289,13 +309,12 @@
         align-items: center;
         background: white;
         width: fit-content !important;
-        margin-left: -14vw;
+        margin-left: 0;
         box-shadow: 2px 2px #515454;
         display: none;
     }
 
-    .requested_by{
-       
+    .requested_by {
     }
     .status_display_section_mobile {
         display: none;
@@ -340,31 +359,27 @@
     width: 100%;
 }
 
-.margin_right10{
+.margin_right10 {
     margin-right: 10px;
 }
-.margin_bottom7{
+.margin_bottom7 {
     margin-bottom: 7px;
 }
-.pos_abs{
+.pos_abs {
     position: absolute;
 }
 
-.display_felx_center{
+.display_felx_center {
     display: flex;
     align-items: center;
 }
 
-.selected_sort{
-    
-        color: #40acf5;
-    
+.selected_sort {
+    color: #40acf5;
 }
-.unSelected_sort{
-    
-        color: #000000;
-        cursor: pointer;
-
+.unSelected_sort {
+    color: #000000;
+    cursor: pointer;
 }
 
 ::ng-deep thead th {

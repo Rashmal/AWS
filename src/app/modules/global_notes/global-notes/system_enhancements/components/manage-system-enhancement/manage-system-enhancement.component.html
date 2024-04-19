@@ -140,7 +140,7 @@
                 <div class="staff_multi_selection">
                     <p-multiSelect [options]="viewManagedStaffDropdownList" [disabled]="editingType  == 'VIEW'"
                         [(ngModel)]="systemEnhancement.AssignedStaffList" optionLabel="FullName" display="chip"
-                        (onClick)="assignedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
+                        (onChange)="assignedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
                 </div>
                 <!-- End of Staff dropdown section -->
 
@@ -164,7 +164,7 @@
                 <div class="staff_multi_selection">
                     <p-multiSelect [options]="viewRequestedStaffDropdownList" [disabled]="editingType  == 'VIEW'"
                         [(ngModel)]="systemEnhancement.RequestedStaffList" optionLabel="FullName" display="chip"
-                        (onClick)="requestedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
+                        (onChange)="requestedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
                 </div>
                 <!-- End of Staff dropdown section -->
 

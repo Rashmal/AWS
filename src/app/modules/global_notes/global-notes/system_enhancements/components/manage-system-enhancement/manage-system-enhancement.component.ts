@@ -264,7 +264,8 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
 
   // On click event of requested staff
   requestedStaffOnClick(elm) {
-    this.systemEnhancement.RequestedStaffList = elm.value;
+    debugger
+    //this.systemEnhancement.RequestedStaffList = elm.value;
   }
 
   // On click function of close button
@@ -275,6 +276,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
 
   // On click function of save button
   saveOnClickFunction() {
+    debugger
     // Validate the fields in the login page
     this.fieldValidation();
     // End of Validate the fields in the login page
