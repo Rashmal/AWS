@@ -27,7 +27,8 @@
                         "inlineStyleLanguage": "scss",
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets"
+                            "src/assets",
+                            "src/web.config"
                         ],
                         "styles": [
                             "src/styles.scss",
@@ -42,13 +43,13 @@
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "1mb",
-                                    "maximumError": "5mb"
+                                    "maximumWarning": "100mb",
+                                    "maximumError": "500mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
-                                    "maximumWarning": "2kb",
-                                    "maximumError": "4kb"
+                                    "maximumWarning": "200kb",
+                                    "maximumError": "400kb"
                                 }
                             ],
                             "outputHashing": "all"

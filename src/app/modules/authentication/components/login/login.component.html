@@ -28,7 +28,7 @@
                         <label for="username">Username</label>
                         <input type="text" class="form-control" id="username" aria-describedby="usernameHelp"
                             maxlength="{{emailLimit}}" [(ngModel)]="user_email" [ngModelOptions]="{standalone: true}"
-                            (input)="onPasteEmailFunction($event)">
+                            (input)="onPasteEmailFunction($event)" inputrestriction="^[a-z A-Z 0-9 @ _ .]*$">
                     </div>
 
                     <!-- Error Message -->

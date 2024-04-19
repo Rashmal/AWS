@@ -13,13 +13,15 @@ import { EditorModule } from 'primeng/editor';
 import { DateChangeHistoryComponent } from './components/date-change-history/date-change-history.component';
 import { ManageCommentsSystemEnhancementComponent } from './components/manage-comments-system-enhancement/manage-comments-system-enhancement.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { InputrestrictionDirective } from 'src/app/modules/common/directives/inputrestriction.directive';
 
 @NgModule({
     declarations: [
         ViewSystemEnhancementsComponent,
         ManageSystemEnhancementComponent,
         DateChangeHistoryComponent,
-        ManageCommentsSystemEnhancementComponent
+        ManageCommentsSystemEnhancementComponent,
+        InputrestrictionDirective
     ],
     imports: [
         CommonModule,

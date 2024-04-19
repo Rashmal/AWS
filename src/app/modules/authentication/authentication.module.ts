@@ -5,10 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TooltipModule } from 'primeng/tooltip';
+import { InputrestrictionDirective } from '../common/directives/inputrestriction.directive';
 
 @NgModule({
     declarations: [
-        LoginComponent
+        LoginComponent,
+        InputrestrictionDirective
     ],
     imports: [
         CommonModule,

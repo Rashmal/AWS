@@ -71,7 +71,6 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    debugger
     // Getting the passed params
     let paramObject = this.location.getState();
     if (paramObject['SystemEnhancementID']) {
@@ -264,7 +263,6 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
 
   // On click event of requested staff
   requestedStaffOnClick(elm) {
-    debugger
     //this.systemEnhancement.RequestedStaffList = elm.value;
   }
 
@@ -276,7 +274,6 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
 
   // On click function of save button
   saveOnClickFunction() {
-    debugger
     // Validate the fields in the login page
     this.fieldValidation();
     // End of Validate the fields in the login page
