@@ -161,6 +161,10 @@ input {
 }
 /* -------------------------------- End of Snapzing style -------------------------------- */
 
-.p-multiselect-label{
+.p-multiselect-label {
     white-space: pre-wrap;
+}
+
+.staff_multi_selection .p-multiselect.p-multiselect-chip .p-multiselect-token {
+    margin-bottom: 5px;
 }
