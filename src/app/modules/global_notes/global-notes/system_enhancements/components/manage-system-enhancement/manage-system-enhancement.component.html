@@ -12,10 +12,10 @@
             </span>
         </div>
         <!-- End of Title section -->
-         <!-- Title section -->
-         <div *ngIf="editingType  == 'VIEW'" class="marginRight5 marginBottom5 marginTop5">
+        <!-- Title section -->
+        <div *ngIf="editingType  == 'VIEW'" class="marginRight5 marginBottom5 marginTop5">
             <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
-            
+
             <span class="module_title" *ngIf="systemEnhancement.Id && systemEnhancement.Id !== ''">
                 View System Enhancement - {{systemEnhancement.Title}}
             </span>
@@ -89,7 +89,8 @@
 
                 <!-- Estimated hours input -->
                 <div>
-                    <input type="number" [(ngModel)]="systemEnhancement.EstimatedHours" [disabled]="editingType  == 'VIEW'">
+                    <input type="number" [(ngModel)]="systemEnhancement.EstimatedHours" inputrestriction="^[0-9]*$"
+                        [disabled]="editingType  == 'VIEW'" [min]="0" (input)="inputEstimateValue()">
                 </div>
                 <!-- End of Estimated hours input -->
 
@@ -115,8 +116,9 @@
 
                 <!-- Title input -->
                 <div>
-                    <input type="text" class="full_width" [(ngModel)]="systemEnhancement.Title" [disabled]="editingType  == 'VIEW'"
-                        maxlength="{{titleLimit}}" (input)="onPasteTitleFunction($event)" inputrestriction="^[a-z A-Z 0-9 @ _/ -]*$">
+                    <input type="text" class="full_width" [(ngModel)]="systemEnhancement.Title"
+                        [disabled]="editingType  == 'VIEW'" maxlength="{{titleLimit}}"
+                        (input)="onPasteTitleFunction($event)" inputrestriction="^[a-z A-Z 0-9 @ _/ -]*$">
                 </div>
                 <!-- End of Title input -->
 
@@ -190,7 +192,8 @@
 
                 <!-- Description input -->
                 <div>
-                    <p-editor [(ngModel)]="systemEnhancement.Description" [style]="{ height: '320px' }" [readonly]="editingType  == 'VIEW'"></p-editor>
+                    <p-editor [(ngModel)]="systemEnhancement.Description" [style]="{ height: '320px' }"
+                        [readonly]="editingType  == 'VIEW'"></p-editor>
                 </div>
                 <!-- End of Description input -->
 
@@ -209,7 +212,8 @@
                     <span>Start/Started</span>
                 </div>
                 <!-- End of Label section -->
-                <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true" [disabled]="editingType  == 'VIEW'"></p-calendar>
+                <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true"
+                    [disabled]="editingType  == 'VIEW'" [maxDate]="endDate"></p-calendar>
             </div>
             <!-- End of Start date section -->
 
@@ -221,7 +225,8 @@
                 </div>
                 <!-- End of Label section -->
 
-                <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true" [disabled]="editingType  == 'VIEW'" [minDate]="startDate"></p-calendar>
+                <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true"
+                    [disabled]="editingType  == 'VIEW'" [minDate]="startDate"></p-calendar>
             </div>
             <!-- End of End date section -->
         </div>
@@ -232,10 +237,10 @@
     <!-- Footer button section -->
     <div class="col-xl-12 footer_section">
         <!-- Footer inner section -->
-        <div  [ngClass]="editingType  == 'VIEW' ? 'footer_inner_section_view' : 'footer_inner_section'">
+        <div [ngClass]="editingType  == 'VIEW' ? 'footer_inner_section_view' : 'footer_inner_section'">
             <!-- Close button -->
-            <button class="close_btn" (click)="closeOnClickFunction()" pTooltip="Back to list" *ngIf="editingType  != 'VIEW'"
-                tooltipPosition="top">Close</button>
+            <button class="close_btn" (click)="closeOnClickFunction()" pTooltip="Back to list"
+                *ngIf="editingType  != 'VIEW'" tooltipPosition="top">Close</button>
             <!-- End of Close button -->
 
             <!-- Save button -->
@@ -246,13 +251,12 @@
                 <span *ngIf="systemEnhancement.Id && systemEnhancement.Id !== ''">Update Detail</span>
             </button>
             <!-- End of Save button -->
-             <!-- Save button -->
-             <button class="close_btn" (click)="closeOnClickFunction()" *ngIf="editingType  == 'VIEW'"
-             pTooltip="Back to list"
-             tooltipPosition="top">
-             Back to List
-         </button>
-         <!-- End of Save button -->
+            <!-- Save button -->
+            <button class="close_btn" (click)="closeOnClickFunction()" *ngIf="editingType  == 'VIEW'"
+                pTooltip="Back to list" tooltipPosition="top">
+                Back to List
+            </button>
+            <!-- End of Save button -->
         </div>
         <!-- End of Footer inner section -->
     </div>

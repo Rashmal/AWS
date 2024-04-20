@@ -22,7 +22,7 @@
                     <span>From Date</span>
                 </div>
                 <!-- End of Label section -->
-                <p-calendar [(ngModel)]="fromDate" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
+                <p-calendar [(ngModel)]="fromDate" [iconDisplay]="'input'" [showIcon]="true" [maxDate]="toDate"></p-calendar>
             </div>
             <!-- End of From date section -->
 
@@ -47,7 +47,7 @@
 
                 <!-- Estimated hours input -->
                 <div>
-                    <input type="number" [(ngModel)]="systemEnhancementChangeDate.NewDuration">
+                    <input type="number" [(ngModel)]="systemEnhancementChangeDate.NewDuration" inputrestriction="^[0-9]*$" min="0">
                 </div>
                 <!-- End of Estimated hours input -->
 

@@ -48,11 +48,11 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
   startDate: Date = new Date();
   // Store the end date
   endDate: Date = new Date();
-// Store show loading
+  // Store show loading
   showLoading: boolean = false;
   // Store the system enhancement Id
   systemEnhancementId: string = "";
-// Store managing type
+  // Store managing type
   editingType: string = 'EDIT';
   // Constructor
   constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService,
@@ -99,9 +99,9 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     // End of Getting the passed params
 
     // Set editing type
-    if(paramObject['Type']){
+    if (paramObject['Type']) {
       this.editingType = paramObject['Type'];
-    } 
+    }
   }
 
   // Getting the system enhancement details by Id
@@ -192,11 +192,11 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
 
         // Setting the default selection
         if (this.systemEnhancementId && this.systemEnhancementId != '') {
-        // Getting the system enhancement details by Id
-        this.getEnhancementDetailsById();
+          // Getting the system enhancement details by Id
+          this.getEnhancementDetailsById();
         } else {
           this.systemEnhancement.PriorityId = this.viewPriorityDropdownList[0].value;
-      }
+        }
       }
     );
     // End of Calling the model to retrieve the data
@@ -222,8 +222,11 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
         // End of Loop through the list
 
         // Setting the default selection
-        if (this.systemEnhancement && this.systemEnhancement.Id != '')
+        if (this.systemEnhancement && this.systemEnhancement.Id != '') {
           this.systemEnhancement.StatusId = this.viewStatusDropdownList[0].value;
+        } else {
+          this.systemEnhancement.StatusId = this.viewStatusDropdownList[0].value;
+        }
       }
     );
     // End of Calling the model to retrieve the data
@@ -249,8 +252,11 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
         // End of Loop through the list
 
         // Setting the default selection
-        if (this.systemEnhancement && this.systemEnhancement.Id != '')
+        if (this.systemEnhancement && this.systemEnhancement.Id != '') {
           this.systemEnhancement.ModuleId = this.viewModulesDropdownList[0].value;
+        } else {
+          this.systemEnhancement.ModuleId = this.viewModulesDropdownList[0].value;
+        }
       }
     );
     // End of Calling the model to retrieve the data
@@ -406,5 +412,20 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
   // Convert the date
   convertDate(currentDate) {
     return { date: new Date(currentDate) };
+  }
+
+  // On change event of the estimate value
+  inputEstimateValue() {
+    // Check if the value is numeric
+    if ((!this.systemEnhancement.EstimatedHours) || isNaN(+this.systemEnhancement.EstimatedHours)) {
+      this.systemEnhancement.EstimatedHours = 0;
+    }
+    // End of Check if the value is numeric
+
+    // Check if the value is less than 0
+    if (this.systemEnhancement.EstimatedHours < 0) {
+      this.systemEnhancement.EstimatedHours = 0;
+    }
+    // End of Check if the value is less than 0
   }
 }

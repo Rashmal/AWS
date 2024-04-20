@@ -439,6 +439,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.systemEnhancementModel
             .SetSystemEnhancementDetailsService(enhance, 'DELETE')
             .then(() => {
+                this.filter.CurrentPage = 1;
                 // Refresh the enhancement list
                 this.getSystemEnhancementDisplayList();
             });
@@ -641,6 +642,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.systemEnhancementModel
             .UpdateSystemEnhancementStatus(enhancement.Id, status.Id)
             .then((data) => {
+                this.filter.CurrentPage = 1;
                 // Refresh the list
                 this.getSystemEnhancementDisplayList();
             });
