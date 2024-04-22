@@ -1,4 +1,420 @@
-<div class="col-12">
-    <div>Third sprint will start from 22nd April 2024 to 26th April 2024</div>
-    <div>This includes the features related to Bug Fixes Details</div>
+<!-- Main content section -->
+<div class="col-xl-12 view_bug_fixes_list">
+    <!-- Title and Filter section -->
+    <div class="col-xl-12 title_filter_section">
+        <!-- Title section -->
+        <div class="marginRight5 marginBottom5 marginTop5 main_title_width">
+            <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
+            <span class="module_title">Bug Fixes</span>
+        </div>
+        <!-- End of Title section -->
+
+        <!-- Add button section -->
+        <div class="marginRight5 marginBottom5 marginTop5">
+            <button class="add_button" (click)="addNewBugFixClick()">+Add new</button>
+        </div>
+        <!-- End of Add button section -->
+
+        <!-- Staff dropdown list -->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+            *ngIf="viewStaffDropdownList && viewStaffDropdownList.length > 0">
+            <div class="label_section">
+                <span class="marginRight5">Staff</span>
+            </div>
+            <p-dropdown [options]="viewStaffDropdownList" [(ngModel)]="filter.StaffId"
+                (onChange)="onChangeFilterItem('STAFF')"></p-dropdown>
+        </div>
+        <!-- End of Staff dropdown list -->
+
+        <!-- Priority dropdown list -->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+            *ngIf="viewPriorityDropdownList && viewPriorityDropdownList.length > 0">
+            <div class="label_section">
+                <span class="marginRight5">Priority</span>
+            </div>
+            <p-dropdown [options]="viewPriorityDropdownList" [(ngModel)]="filter.PriorityId"
+                (onChange)="onChangeFilterItem('PRIORITY')"></p-dropdown>
+        </div>
+        <!-- End of Priority dropdown list -->
+
+        <!-- Start date section-->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5">
+            <div class="label_section">
+                <span class="marginRight5">Start</span>
+            </div>
+            <p-calendar [(ngModel)]="filter.StartDate" [iconDisplay]="'input'" [showIcon]="true"
+                (onSelect)="onChangeFilterItem('START')"></p-calendar>
+        </div>
+        <!-- End of Start date section -->
+    </div>
+    <!-- End of Title and Filter section -->
+
+    <!-- Search and Filter section -->
+    <div class="col-xl-12 title_filter_section">
+        <!-- Search box section -->
+        <div class="display_flex_center marginRight5 marginBottom5 marginTop5 main_title_width">
+            <!-- Search input box -->
+            <input type="search" placeholder="Search..." [(ngModel)]="filter.SearchQuery">
+            <!-- End of Search input box -->
+
+            <!-- Search icon -->
+            <div class="ash_color_button" (click)="onChangeFilterItem('SEARCH')">
+                <!-- Icon-->
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <!-- End of Icon-->
+            </div>
+            <!-- End of Search icon -->
+
+            <!-- Erase icon -->
+            <div class="ash_color_button" (click)="onChangeFilterItem('CLEAR')">
+                <!-- Icon-->
+                <i class="fa fa-eraser" aria-hidden="true"></i>
+                <!-- End of Icon-->
+            </div>
+            <!-- End of Erase icon -->
+        </div>
+        <!-- End of Search box section -->
+
+        <!-- No of records per page dropdown -->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+            *ngIf="recordsPerPage && recordsPerPage.length > 0">
+            <p-dropdown [options]="recordsPerPage" [(ngModel)]="filter.RecordsPerPage"
+                (onChange)="onChangeFilterItem('RECORDS')"></p-dropdown>
+        </div>
+        <!-- End of No of records per page dropdown -->
+
+        <!-- Status dropdown list -->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+            *ngIf="viewStatusDropdownList && viewStatusDropdownList.length > 0">
+            <!-- Label section -->
+            <div class="label_section">
+                <span class="marginRight5">Status</span>
+            </div>
+            <!-- End of Label section -->
+
+            <!-- Custom colored dropdown -->
+            <p-dropdown class="colored_dropdown" [options]="viewStatusDropdownList" [(ngModel)]="filter.StatusId"
+                [style.background]="getStatusColorCode(filter.StatusId)" [style.borderRadius]="'6px'"
+                (onChange)="onChangeFilterItem('STATUS')">
+                <!-- Selected item styles -->
+                <ng-template pTemplate="selectedItem" let-statusObject>
+                    <!-- When All is selected -->
+                    <div *ngIf="statusObject && filter.StatusId == -1"
+                        [style.color]="(filter.StatusId == -1)?'black':'white'">
+                        {{statusObject.label}}
+                    </div>
+                    <!-- End of When All is selected -->
+
+                    <!-- When All is not selected -->
+                    <div *ngIf="statusObject && filter.StatusId !== -1" [style.background]="getStatusColorCode(statusObject.value)"
+                        [style.color]="(filter.StatusId == -1 )?'black':'white'">
+                        {{statusObject.label}}
+                    </div>
+                    <!-- End of When All is not selected -->
+                </ng-template>
+                <!-- End of Selected item styles -->
+            </p-dropdown>
+            <!-- End of Custom colored dropdown -->
+        </div>
+        <!-- End of Status dropdown list -->
+
+        <!-- Modules dropdown list -->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+            *ngIf="viewModulesDropdownList && viewModulesDropdownList.length > 0">
+            <div class="label_section">
+                <span class="marginRight5">Module</span>
+            </div>
+            <p-dropdown [options]="viewModulesDropdownList" [(ngModel)]="localModuleDropdownSelection"
+                (onChange)="onChangeFilterItem('MODULE')"></p-dropdown>
+        </div>
+        <!-- End of Modules dropdown list -->
+
+        <!-- End date section-->
+        <div class="marginRight5 display_flex_center marginBottom5 marginTop5">
+            <div class="label_section">
+                <span class="marginRight5">End</span>
+            </div>
+            <p-calendar [(ngModel)]="filter.EndDate" [iconDisplay]="'input'" [showIcon]="true"
+                [minDate]="filter.StartDate" (onSelect)="onChangeFilterItem('END')"></p-calendar>
+        </div>
+        <!-- End of End date section -->
+    </div>
+    <!-- End of Search and Filter section -->
+
+    <!-- Stat boxes section -->
+    <div class="col-xl-12 stats_boxes_section">
+        <!-- Loop through the stat boxes list -->
+        <div class="stat_box_section" *ngFor="let statBox of statBoxesList"
+            [style.borderColor]="statBox.LabelColorCode">
+            <!-- Count section -->
+            <div>
+                {{statBox.LabelValue}}
+            </div>
+            <!-- End of Count section -->
+
+            <!-- Stat box label section -->
+            <div>
+                <span>{{statBox.LabelName}}</span>
+            </div>
+            <!-- End of Stat box label section -->
+        </div>
+        <!-- End of Loop through the stat boxes list -->
+    </div>
+    <!-- End of Stat boxes section -->
+
+    <!-- Table section -->
+    <div class="col-xl-12" *ngIf="displayFullTable">
+        <!-- Prime ng table -->
+        <p-table [value]="displayTable" dataKey="name" [tableStyle]="{ 'min-width': '60rem' }" [responsive]="true">
+            <!-- Header section -->
+            <ng-template pTemplate="header">
+                <!-- Header row section -->
+                <tr>
+                    <th>No:</th>
+                    <th class="title_content title_by_width">
+                        <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('TITLE', 'ASC')"
+                        [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'TITLE' )? 'selected_sort' : 'unSelected_sort'" 
+                        ></i>
+                        <i class="fa fa-sort-desc margin_right10" aria-hidden="true" (click)="sortItems('TITLE', 'DESC')"
+                        [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'TITLE' )? 'selected_sort' : 'unSelected_sort'" 
+                        ></i>
+                        Title</th>
+                    <th class="text_center status_by_width">Status</th>
+                    <th class="text_center ">
+                        <i class="fa fa-sort-asc margin_right10 "aria-hidden="true" (click)="sortItems('START', 'ASC')"
+                        [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'START' )? 'selected_sort' : 'unSelected_sort'" 
+                        ></i>
+                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true" (click)="sortItems('START', 'DESC')"
+                        [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'START' )? 'selected_sort' : 'unSelected_sort'" 
+                        ></i>
+                        Start Date
+                    </th>
+                    <th class="text_center "> 
+                        <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('END', 'ASC')"
+                        [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'END' )? 'selected_sort' : 'unSelected_sort'" 
+                        ></i>
+                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true" (click)="sortItems('END', 'DESC')"
+                        [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'END' )? 'selected_sort' : 'unSelected_sort'" 
+                        ></i>
+                        
+                        
+                        End Date
+                    </th>
+                    <th class="text_center estimated_by_width"> 
+                        <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('HOURS', 'ASC')"
+                        [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'HOURS' )? 'selected_sort' : 'unSelected_sort'" 
+                        ></i>
+                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true" (click)="sortItems('HOURS', 'DESC')"
+                        [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'HOURS' )? 'selected_sort' : 'unSelected_sort'" 
+                        ></i>
+                        Est.Hrs.
+                    </th>
+                    <th class="text_center priority_by_width">Priority</th>
+                    <th class="text_center requested_by requested_by_width"> <div class="requested_by">Requested By</div></th>
+                    <th class="justify_center action_column ">Action</th>
+                </tr>
+                <!-- End of Header row section -->
+            </ng-template>
+            <!-- End of Header section -->
+
+            <!-- Modules table body section -->
+            <ng-template pTemplate="body" let-moduleData let-rowIndex="rowIndex">
+                <!-- Body row section -->
+                <tr class="table_row" (click)="filter.ModuleId = moduleData.Module.Id;clickOnModule()">
+                    <td>
+                        <div class="module_row paddingLeft5 cursor_pointer">
+                            <span class="stator_strip"></span>
+                        <span>{{(rowIndex+1)+(this.modulesFilter.CurrentPage == 1 ? 0 :
+                            this.modulesFilter.RecordsPerPage*(this.modulesFilter.CurrentPage-1))}}</span>
+                        </div>
+                    </td>
+                    <td colspan="9">
+                        <div class="module_row module_display_section_module paddingRight5 cursor_pointer">
+                            <span>{{moduleData.Module.Name}} <span *ngIf="moduleData.TotalList > 0">({{moduleData.TotalList}})</span></span>
+                            <i *ngIf="filter.ModuleId != moduleData.Module.Id" class="fa fa-angle-double-down"
+                                aria-hidden="true"></i>
+                        </div>
+
+                    </td>
+                </tr>
+                <!-- End of Body row section -->
+
+                <!-- Enhancement list for module-->
+                <tr *ngFor="let enhancement of moduleData.ExpandedContent; let eRowIndex = index">
+                    <td>
+                        <div class="number_col" [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'">
+                            <span class="stator_strip"
+                                [style.background-color]="getStatusColorCodeByName(enhancement.StatusName)"></span>
+                            <div>
+                                {{(rowIndex+1)+(this.modulesFilter.CurrentPage == 1 ? 0 :
+                                this.modulesFilter.RecordsPerPage*(this.modulesFilter.CurrentPage-1))}}.{{(eRowIndex+1)+(this.filter.CurrentPage
+                                == 1 ? 0 : this.filter.RecordsPerPage*(this.filter.CurrentPage-1))}}
+
+                            </div>
+
+                        </div>
+                    </td>
+                    <td class="title_content title_by_width">
+                        <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
+                            class="expanded_content_title paddingRight5 cursor_pointer ">
+                            <div class="ellipsis" (click)="titleOnClickFunction(enhancement)"
+                                [pTooltip]="enhancement.Title" tooltipPosition="top">
+                                {{enhancement.Title}}
+                            </div>
+                        </div>
+
+                    </td>
+                    <td class="text_center status_by_width">
+                        <div [ngClass]="[eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g', (userRoleCode=='AD')?'admin_display_status':'']"
+                            class="module_display_section paddingRight5 ">
+
+                            <!-- Display the status list in desktop view -->
+                            <div class="status_display_section">
+                                <!-- Loop through the statuses -->
+                                <div class="status_list" [style.borderColor]="status.ColorCode"
+                                    [style.background]="(status.Name == enhancement.StatusName)?status.ColorCode:'white'"
+                                    [style.color]="(status.Name == enhancement.StatusName)?'white':'black'"
+                                    *ngFor="let status of originalStatusListLocal"
+                                    (click)="onSelectStatusOnClick(status,enhancement)">
+                                    <!-- Status box -->
+                                    <div>
+                                        <span>{{status.Name}}</span>
+                                    </div>
+                                    <!-- End of Status box -->
+                                </div>
+                                <!-- End of Loop through the statuses -->
+                            </div>
+                            <!-- End of Display the status list in desktop view -->
+
+                            <!-- Display the status list in desktop view -->
+                            <span class="status_display_section_desktop">{{enhancement.StatusName}}</span>
+                            <!-- End of Display the status list in desktop view -->
+
+                            <!-- Display the status list in mobile view -->
+                            <div class="status_display_section_mobile" *ngIf="userRoleCode == 'AD'">
+                                <p-dropdown [options]="viewStatusMobileDropdownList" optionLabel="label"
+                                    [(ngModel)]="enhancement.StatusName" optionValue="label"
+                                    (onChange)="onChangeBugFixesStatus(enhancement)"></p-dropdown>
+                            </div>
+                            <div class="status_display_section_mobile" *ngIf="userRoleCode !== 'AD'">
+                                <span>{{enhancement.StatusName}}</span>
+                            </div>
+                            <!-- End of Display the status list in mobile view -->
+
+                        </div>
+
+                    </td>
+                    <td class="text_center">
+                        <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
+                            class="module_display_section paddingRight5 ">
+                            <div class="ellipsis full_width">
+                                <span class="full_width">{{enhancement.StartDate| date: 'dd-MMM-yyyy'}}</span>
+                            </div>
+                        </div>
+
+                    </td>
+                    <td class="text_center">
+                        <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
+                            class="module_display_section paddingRight5 ">
+                            <div class="ellipsis full_width">
+                                <span class="full_width">{{enhancement.EndDate| date: 'dd-MMM-yyyy'}}</span>
+                            </div>
+                        </div>
+
+                    </td>
+                    <td class="text_center estimated_by_width">
+                        <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
+                            class="module_display_section paddingRight5 ">
+                            <span>{{enhancement.EstimatedHours}}</span>
+
+                        </div>
+
+                    </td>
+                    <td class="text_center priority_by_width">
+                        <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
+                            class="module_display_section paddingRight5 ">
+                            <span>{{enhancement.PriorityName}}</span>
+
+                        </div>
+
+                    </td>
+                    <td class="text_center requested_by_width">
+                        <div  [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
+                            class="module_display_section paddingRight5 requested_by ellipsis">
+                            <span>{{getRequestByNames(enhancement)}}</span>
+
+                        </div>
+
+                    </td>
+                    <td class="action_column">
+                        <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
+                            class="module_display_section_btn paddingRight5 action_button">
+                            <!--Comments button-->
+                            <button class="button_green" (click)="commentOnClickFunction(enhancement)" pTooltip="Comments" tooltipPosition="top"><i
+                                    class="fa fa-comments" aria-hidden="true"></i></button>
+                            <!--End of Comments button-->
+                            <!--Change history button-->
+                            <button class="button_orange" (click)="changeDateHistoryOnClick(enhancement)" pTooltip="Change History" tooltipPosition="top"><i
+                                    class="fa fa-history" aria-hidden="true"></i></button>
+                            <!--End of Change history button-->
+                            <!--Edit button-->
+                            <button class="button_blue" (click)="editOnClickFunction(enhancement)" pTooltip="Edit" tooltipPosition="top"><i
+                                    class="fa fa-pencil" aria-hidden="true"></i></button>
+                            <!--End of Edit button-->
+                            <!--Delete button-->
+                            <button class="button_red" (click)="deleteConfirmation(enhancement)" pTooltip="Delete" tooltipPosition="top"><i class="fa fa-trash"
+                                    aria-hidden="true"></i></button>
+                            <!--End of Delete button-->
+                            <!--Send feature list button-->
+                            <button *ngIf="false" class="button_grey"><i class="fa fa-archive"
+                                    aria-hidden="true"></i></button>
+                            <!--End of Send feature list button-->
+
+                        </div>
+
+                    </td>
+
+                </tr>
+                <!-- End of Enhancement list for module-->
+                <tr *ngIf="moduleData.ExpandedContent.length == 0 && filter.ModuleId == moduleData.Module.Id">
+                    <td colspan="9" class="text_center">
+                        There are no items matching this filter criteria.
+                    </td>
+                </tr>
+                <!-- Pagination section -->
+                <tr
+                    [ngClass]="(bugFixesList && bugFixesList.length > 0 && filter.ModuleId == moduleData.Module.Id && bugFixesList[0].Total > this.filter.RecordsPerPage)?'':'display_hide'">
+                    <td colspan="9">
+                        <p-paginator #bugFixesPaginator
+                            (onPageChange)="onEnhancementPageChange($event, moduleData.Module.Id)"
+                            [rows]="filter.RecordsPerPage"
+                            [totalRecords]="(bugFixesList.length>0)?bugFixesList[0].Total:0"></p-paginator>
+                    </td>
+                </tr>
+                <!-- End of Pagination section -->
+
+            </ng-template>
+            <!-- End of Modules table body section -->
+        </p-table>
+        <!-- End of Prime ng table -->
+
+
+        <!-- Pagination section -->
+        <p-paginator #modulePaginator
+            [ngClass]="(displayModuleList && displayModuleList.length > 0 && localModuleDropdownSelection == -1 && displayModuleList[0].Total > 10)?'':'display_hide'"
+            [rows]="modulesFilter.RecordsPerPage" (onPageChange)="onPageChange($event)"
+            [totalRecords]="(displayModuleList.length>0)? displayModuleList[0].Total:0"></p-paginator>
+        <!-- End of Pagination section -->
+    </div>
+    <!-- End of Table section -->
 </div>
+<!-- End of Main content section -->
+
+<!-- Snapzing section -->
+<div class="divLoadingWrapper" *ngIf="showLoading">
+    <div class="divLoadingBg"></div>
+    <div class="divLoadingContent">
+        <img src="../../../../../assets/images/aws_loading.gif">
+    </div>
+</div>
+<!-- End of the Snapzing section -->
