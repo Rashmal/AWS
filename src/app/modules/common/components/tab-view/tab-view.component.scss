@@ -42,6 +42,21 @@
             color: #126095 ;
         }
     }
+
+    .noti_count {
+        text-decoration: none;
+        height: 20px;
+        width: max-content;
+        background-color: #c30505;
+        display: flex;
+        align-items: center;
+        padding: 0px 5px;
+        border-radius: 8px;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 11px;
+        color: #fff;
+    }
 }
 
 @media (max-width: 991px) {
