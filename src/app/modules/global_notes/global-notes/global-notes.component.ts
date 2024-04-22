@@ -47,7 +47,8 @@ export class GlobalNotesComponent {
 
   // Ng on init
   ngOnInit() {
-
+    // Setting the default selection
+    this.onChangeTab(this.TabViewList[0].value);
   }
 
   // Change function of dropdown section
@@ -63,6 +64,9 @@ export class GlobalNotesComponent {
         break;
       case 'BugFixes'.toUpperCase():
         this.route.navigate(['/layout/global/globalNotes/bugFixes']);
+        break;
+      default:
+        this.route.navigate(['/layout/global/globalNotes/defaultPage']);
         break;
     }
     // End of Check the selected tab
