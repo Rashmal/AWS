@@ -1,0 +1,274 @@
+<!-- Main content section -->
+<div class="col-xl-12 manage_bug_fixes" *ngIf="bugFix">
+    <!-- Title section -->
+    <div class="col-xl-12 title_filter_section">
+        <!-- Title section -->
+        <div *ngIf="editingType  != 'VIEW'" class="marginRight5 marginBottom5 marginTop5">
+            <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
+            <span class="module_title" *ngIf="bugFix.Id == ''">Add Bug
+                Fix</span>
+            <span class="module_title" *ngIf="bugFix.Id && bugFix.Id !== ''">
+                Edit - {{bugFix.Title}}
+            </span>
+        </div>
+        <!-- End of Title section -->
+        <!-- Title section -->
+        <div *ngIf="editingType  == 'VIEW'" class="marginRight5 marginBottom5 marginTop5">
+            <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
+
+            <span class="module_title" *ngIf="bugFix.Id && bugFix.Id !== ''">
+                View Bug Fix - {{bugFix.Title}}
+            </span>
+        </div>
+        <!-- End of Title section -->
+    </div>
+    <!-- End of Title section -->
+
+    <!-- Body content section -->
+    <div class="body_content_section">
+        <!-- First row section -->
+        <div class="col-xl-12 first_row_section marginBottom5">
+            <!-- Priority dropdown section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Priority</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Priority dropdown section -->
+                <div>
+                    <p-dropdown [options]="viewPriorityDropdownList" [disabled]="editingType  == 'VIEW'"
+                        [(ngModel)]="bugFix.PriorityId"></p-dropdown>
+                </div>
+                <!-- End of Priority dropdown section -->
+            </div>
+            <!-- End of Priority dropdown section -->
+
+            <!-- Status dropdown section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Status</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Status dropdown section -->
+                <div>
+                    <p-dropdown [options]="viewStatusDropdownList" [disabled]="editingType  == 'VIEW'"
+                        [(ngModel)]="bugFix.StatusId"></p-dropdown>
+                </div>
+                <!-- End of Status dropdown section -->
+            </div>
+            <!-- End of Status dropdown section -->
+
+            <!-- Module dropdown section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Module</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Module dropdown section -->
+                <div>
+                    <p-dropdown [options]="viewModulesDropdownList" [disabled]="editingType  == 'VIEW'"
+                        [(ngModel)]="bugFix.ModuleId"></p-dropdown>
+                </div>
+                <!-- End of Module dropdown section -->
+            </div>
+            <!-- End of Module dropdown section -->
+
+            <!-- Estimated hours section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Estimated Hours</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Estimated hours input -->
+                <div>
+                    <input type="number" [(ngModel)]="bugFix.EstimatedHours" inputrestriction="^[0-9]*$"
+                        [disabled]="editingType  == 'VIEW'" [min]="0" (input)="inputEstimateValue()">
+                </div>
+                <!-- End of Estimated hours input -->
+
+                <!-- Error Message -->
+                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$EST$HOURS')">
+                    <span>{{CheckErrorCode('EMPTY$EST$HOURS').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
+            </div>
+            <!-- End of Estimated hours section -->
+        </div>
+        <!-- End of First row section -->
+
+        <!-- Second row section -->
+        <div class="col-xl-12 first_row_section marginBottom5">
+            <!-- Title section -->
+            <div class="each_section_merged">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Title</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Title input -->
+                <div>
+                    <input type="text" class="full_width" [(ngModel)]="bugFix.Title"
+                        [disabled]="editingType  == 'VIEW'" maxlength="{{titleLimit}}"
+                        (input)="onPasteTitleFunction($event)" inputrestriction="^[a-z A-Z 0-9 @ _/ -]*$">
+                </div>
+                <!-- End of Title input -->
+
+                <!-- Error Message -->
+                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$TITLE')">
+                    <span>{{CheckErrorCode('EMPTY$TITLE').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
+            </div>
+            <!-- End of Title section -->
+
+            <!-- Assigned staff section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Assigned Staff</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Staff dropdown section -->
+                <div class="staff_multi_selection">
+                    <p-multiSelect [options]="viewManagedStaffDropdownList" [disabled]="editingType  == 'VIEW'"
+                        [(ngModel)]="bugFix.AssignedStaffList" optionLabel="FullName" display="chip"
+                        (onChange)="assignedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
+                </div>
+                <!-- End of Staff dropdown section -->
+
+                <!-- Error Message -->
+                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$ASS$STAFF')">
+                    <span>{{CheckErrorCode('EMPTY$ASS$STAFF').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
+            </div>
+            <!-- End of Assigned staff section -->
+
+            <!-- Requested staff section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Requested Staff</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Staff dropdown section -->
+                <div class="staff_multi_selection">
+                    <p-multiSelect [options]="viewRequestedStaffDropdownList" [disabled]="editingType  == 'VIEW'"
+                        [(ngModel)]="bugFix.RequestedStaffList" optionLabel="FullName" display="chip"
+                        (onChange)="requestedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
+                </div>
+                <!-- End of Staff dropdown section -->
+
+                <!-- Error Message -->
+                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$REQ$STAFF')">
+                    <span>{{CheckErrorCode('EMPTY$REQ$STAFF').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
+            </div>
+            <!-- End of Requested staff section -->
+        </div>
+        <!-- End of Second row section -->
+
+        <!-- Third row section -->
+        <div class="col-xl-12 first_row_section">
+            <!-- Description section -->
+            <div class="each_section_merged">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Enhancement</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Description input -->
+                <div>
+                    <p-editor [(ngModel)]="bugFix.Description" [style]="{ height: '320px' }"
+                        [readonly]="editingType  == 'VIEW'"></p-editor>
+                </div>
+                <!-- End of Description input -->
+
+                <!-- Error Message -->
+                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$DESCRIPTION')">
+                    <span>{{CheckErrorCode('EMPTY$DESCRIPTION').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
+            </div>
+            <!-- End of Description section -->
+
+            <!-- Start date section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Start/Started</span>
+                </div>
+                <!-- End of Label section -->
+                <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true"
+                    [disabled]="editingType  == 'VIEW'" [maxDate]="endDate"></p-calendar>
+            </div>
+            <!-- End of Start date section -->
+
+            <!-- End date section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>End/Completed</span>
+                </div>
+                <!-- End of Label section -->
+
+                <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true"
+                    [disabled]="editingType  == 'VIEW'" [minDate]="startDate"></p-calendar>
+            </div>
+            <!-- End of End date section -->
+        </div>
+        <!-- End of Third row section -->
+    </div>
+    <!-- End of Body content section -->
+
+    <!-- Footer button section -->
+    <div class="col-xl-12 footer_section">
+        <!-- Footer inner section -->
+        <div [ngClass]="editingType  == 'VIEW' ? 'footer_inner_section_view' : 'footer_inner_section'">
+            <!-- Close button -->
+            <button class="close_btn" (click)="closeOnClickFunction()" pTooltip="Back to list"
+                *ngIf="editingType  != 'VIEW'" tooltipPosition="top">Close</button>
+            <!-- End of Close button -->
+
+            <!-- Save button -->
+            <button class="save_btn" (click)="saveOnClickFunction()" *ngIf="editingType  != 'VIEW'"
+                pTooltip="{{(bugFix.Id && bugFix.Id !== '')?'Update button':'Save button'}}"
+                tooltipPosition="top">
+                <span *ngIf="!(bugFix.Id && bugFix.Id !== '')">Save Detail</span>
+                <span *ngIf="bugFix.Id && bugFix.Id !== ''">Update Detail</span>
+            </button>
+            <!-- End of Save button -->
+            <!-- Save button -->
+            <button class="close_btn" (click)="closeOnClickFunction()" *ngIf="editingType  == 'VIEW'"
+                pTooltip="Back to list" tooltipPosition="top">
+                Back to List
+            </button>
+            <!-- End of Save button -->
+        </div>
+        <!-- End of Footer inner section -->
+    </div>
+    <!-- End of Footer button section -->
+</div>
+<!-- End of Main content section -->
+
+<!-- Snapzing section -->
+<div class="divLoadingWrapper" *ngIf="showLoading">
+    <div class="divLoadingBg"></div>
+    <div class="divLoadingContent">
+        <img src="../../../../../assets/images/aws_loading.gif">
+    </div>
+</div>
+<!-- End of the Snapzing section -->
