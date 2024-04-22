@@ -69,5 +69,17 @@ export class TabViewComponent {
     this.hubConnectionBuilder.on('NotificationCountGN', (result: any) => {
         console.log(result)
     });
+
+    this.hubConnectionBuilder = new HubConnectionBuilder().withUrl('https://localhost:7198/notificationHub').configureLogging(LogLevel.Information).build();
+    this.hubConnectionBuilder.start().then(() => console.log('Connection started.......!')).catch(err => console.log('Error while connect with server'));
+    this.hubConnectionBuilder.on('NotificationCountBF', (result: any) => {
+        console.log(result)
+    });
+
+    this.hubConnectionBuilder = new HubConnectionBuilder().withUrl('https://localhost:7198/notificationHub').configureLogging(LogLevel.Information).build();
+    this.hubConnectionBuilder.start().then(() => console.log('Connection started.......!')).catch(err => console.log('Error while connect with server'));
+    this.hubConnectionBuilder.on('NotificationCountSE', (result: any) => {
+        console.log(result)
+    });
   }
 }
