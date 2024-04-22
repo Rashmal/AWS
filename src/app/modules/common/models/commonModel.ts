@@ -112,4 +112,19 @@ export class CommonModel {
         // return the promise
         return promise;
     }
+
+    // Get notification count for tabs
+    GetNotificationCount(tabSelection: string){
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetNotificationCount(tabSelection).subscribe(
+                data => {
+                    let returnData = <number>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
 }
