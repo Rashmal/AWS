@@ -11,8 +11,10 @@ import { MenuService } from '../app.menu.service';
   styleUrl: './new-side-bar.component.scss',
 })
 export class NewSideBarComponent implements OnInit {
-  //On mouse enter on side bar
+  // On mouse enter on side bar
   @Input() mouseEnter: boolean = false;
+  // Store notification count
+  @Input() ttlNotCount: number = 0;
   // Store the model list objects
   model: any[] = [];
   //Store side menu content

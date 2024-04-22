@@ -6,6 +6,8 @@ import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppTopBarComponent } from './app.topbar.component';
 import { NewSideBarComponent } from './new-side-bar/new-side-bar.component';
 import { NewTopBarComponent } from './new-top-bar/new-top-bar.component';
+import { CommonService } from '../modules/common/services/common.service';
+import { CommonModel } from '../modules/common/models/commonModel';
 
 @Component({
     selector: 'app-layout',
@@ -14,6 +16,9 @@ import { NewTopBarComponent } from './new-top-bar/new-top-bar.component';
 export class AppLayoutComponent implements OnDestroy {
 
     mouseEnter: boolean = false;
+
+    // Store total notification count
+    ttlNotCount: number = 0;
 
     overlayMenuOpenSubscription: Subscription;
 
@@ -25,7 +30,11 @@ export class AppLayoutComponent implements OnDestroy {
 
     @ViewChild(NewTopBarComponent) appTopbar!: NewTopBarComponent;
 
-    constructor(public layoutService: LayoutService, public renderer: Renderer2, public router: Router) {
+    // Store common modal
+    commonModal: CommonModel;
+
+    constructor(public layoutService: LayoutService, public renderer: Renderer2, public router: Router, private commonService: CommonService) {
+        this.commonModal = new CommonModel(this.commonService);
         this.overlayMenuOpenSubscription = this.layoutService.overlayOpen$.subscribe(() => {
             if (!this.menuOutsideClickListener) {
                 this.menuOutsideClickListener = this.renderer.listen('document', 'click', event => {
@@ -125,9 +134,20 @@ export class AppLayoutComponent implements OnDestroy {
 
     mouseEnterOnSidebar(){
         this.mouseEnter = true;
+        this.getGlobalNotesNotCount();
     }
 
     mouseLeaveOnSidebar(){
         this.mouseEnter = false;
+    }
+
+    // Get global notes notification count
+    getGlobalNotesNotCount(){
+        this.commonModal.GetNotificationCount('TOTAL').then(
+            (data: number) => {
+                // Set notification count
+                this.ttlNotCount = data;
+            }
+        );
     }
 }

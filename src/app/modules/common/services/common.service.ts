@@ -19,6 +19,8 @@ export class CommonService {
   private GetStatusListUrl = API$DOMAIN + 'api/Common/GetStatusList';
   private GetModuleListUrl = API$DOMAIN + 'api/Common/GetModuleList';
   private GetAllStaffListUrl = API$DOMAIN + 'api/Common/GetAllStaffList';
+  private GetNotificationCountUrl = API$DOMAIN + 'api/Common/TotalGlobalNotes';
+
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
@@ -91,6 +93,19 @@ export class CommonService {
     return this.http.get<BasicUserDetails[]>(this.GetAllStaffListUrl, { params: my_params }).pipe(
       catchError(error => {
         return this.handleError('GetAllStaffList', error)
+      })
+    );
+  }
+
+  // Getting all the staff list
+  GetNotificationCount(tabSelection: string) {
+    // Setting the params
+    let my_params = new HttpParams()
+    .set("tabSection", tabSelection.toString());;
+
+    return this.http.get<number>(this.GetNotificationCountUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetNotificationCount', error)
       })
     );
   }
