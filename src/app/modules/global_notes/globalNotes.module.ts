@@ -5,10 +5,12 @@ import { GlobalNotesComponent } from './global-notes/global-notes.component';
 import { GlobalNotesRoutingModule } from './globalNotesRouting.module';
 import { TabViewComponent } from '../common/components/tab-view/tab-view.component';
 import { CalendarModule } from 'primeng/calendar';
+import { DefaultPageComponent } from './default-page/default-page.component';
 
 @NgModule({
     declarations: [
-        GlobalNotesComponent
+        GlobalNotesComponent,
+        DefaultPageComponent
     ],
     imports: [
         CommonModule,
