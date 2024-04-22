@@ -3,4 +3,5 @@ export interface ViewSystemEnhancementComment {
     AddedDate: Date;
     Total: number;
     HasReply: boolean;
+    AddedUser: string;
 }

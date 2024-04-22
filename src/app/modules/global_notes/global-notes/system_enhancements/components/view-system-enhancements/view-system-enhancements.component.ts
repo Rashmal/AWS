@@ -132,7 +132,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         // Initiate start date for filter
-       this.setOneYerBefore();
+        this.setOneYerBefore();
         // Getting all the staff list
         this.getAllStaffList();
         // Getting all the priority list
@@ -322,6 +322,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.displayModuleList.forEach((item) => {
             this.displayTable.push({
                 Module: item,
+                TotalList: item.TotalList,
                 ExpandedContent:
                     item.Id == this.filter.ModuleId ||
                         (this.filter.ModuleId == -1 &&
@@ -448,6 +449,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
     //Click on module row
     clickOnModule() {
+        this.filter.CurrentPage = 1;
         // Retrieve system enhancement list for selected module
         this.getSystemEnhancementDisplayList();
     }
@@ -475,6 +477,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
                 this.displayModuleList.forEach((item) => {
                     this.displayTable.push({
                         Module: item,
+                        TotalList: item.TotalList,
                         ExpandedContent:
                             item.Id == moduleId
                                 ? this.systemEnhancementList
@@ -615,18 +618,20 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
             // Get module list
             this.getAllSystemEnhancementModuleList(false);
         } else {
+            // Setting the module filter current page to be 1
+            this.modulesFilter.CurrentPage = 1;
             // Get enhancement list
             this.getSystemEnhancementDisplayList();
         }
     }
 
     // Set one year before date to filter start date
-    setOneYerBefore(){
-         // Initiate start date for filter
-         let today = new Date();
-         let oneYearBefore = new Date(today);
-         this.filter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
-         this.modulesFilter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
+    setOneYerBefore() {
+        // Initiate start date for filter
+        let today = new Date();
+        let oneYearBefore = new Date(today);
+        this.filter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
+        this.modulesFilter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
     }
 
     // Making a deep copy
@@ -642,9 +647,19 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.systemEnhancementModel
             .UpdateSystemEnhancementStatus(enhancement.Id, status.Id)
             .then((data) => {
-                this.filter.CurrentPage = 1;
+                //this.filter.CurrentPage = 1;
                 // Refresh the list
-                this.getSystemEnhancementDisplayList();
+                //this.getSystemEnhancementDisplayList();
+                // Check if the filter is there
+                if (this.systemEnhancementList && this.systemEnhancementList.length > 0 && this.systemEnhancementList[0].Total > this.filter.RecordsPerPage) {
+                    this.enhancementPaginator.changePage(this.filter.CurrentPage - 1);
+                    // Getting all the stat boxes list
+                    this.getAllStatBoxesList();
+                } else {
+                    this.filter.CurrentPage = 1;
+                    this.getSystemEnhancementDisplayList();
+                }
+                // End of Check if the filter is there
             });
         // End of Calling the model to update the status
     }
@@ -665,6 +680,8 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.systemEnhancementModel
             .UpdateSystemEnhancementStatus(enhancement.Id, statusID)
             .then((data) => {
+                // Setting the module filter current page to be 1
+                this.modulesFilter.CurrentPage = 1;
                 // Refresh the list
                 this.getSystemEnhancementDisplayList();
             });
@@ -682,20 +699,20 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         }
     }
 
-     // Getting the status color code by status name
-    getStatusColorCodeByName(statusName: string){
-      if (statusName == '') {
-        return 'white';
-    } else {
-        return this.originalStatusListLocal.find(
-            (obj) => obj.Name.trim().toLocaleUpperCase() == statusName.trim().toLocaleUpperCase()
-        ).ColorCode;
-    }
+    // Getting the status color code by status name
+    getStatusColorCodeByName(statusName: string) {
+        if (statusName == '') {
+            return 'white';
+        } else {
+            return this.originalStatusListLocal.find(
+                (obj) => obj.Name.trim().toLocaleUpperCase() == statusName.trim().toLocaleUpperCase()
+            ).ColorCode;
+        }
     }
     // Sort enhancement items
-    sortItems(column: string, order: string){
-      this.filter.SortColumn = column;
-      this.filter.SortDirection = order;
-      this.onChangeFilterItem('SORT');
+    sortItems(column: string, order: string) {
+        this.filter.SortColumn = column;
+        this.filter.SortDirection = order;
+        this.onChangeFilterItem('SORT');
     }
 }

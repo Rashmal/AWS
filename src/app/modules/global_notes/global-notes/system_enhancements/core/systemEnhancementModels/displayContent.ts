@@ -4,4 +4,5 @@ import { ViewSystemEnhancement } from "./viewSystemEnhancement";
 export interface DisplayTable {
     Module: DisplayModule;
     ExpandedContent: ViewSystemEnhancement[];
+    TotalList: number;
 }

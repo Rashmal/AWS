@@ -22,7 +22,8 @@
             <!-- End of Comment view section -->
 
             <!-- Comment added date -->
-            <div>
+            <div class="display_flex_center">
+                <div class="marginRight5 date_section">By {{comment.AddedUser}} on </div>
                 <div class="date_section">{{comment.AddedDate | date:'dd MMM yyyy hh:mm a' }}</div>
             </div>
             <!-- End of Comment added date -->

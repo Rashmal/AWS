@@ -230,7 +230,7 @@
                     </td>
                     <td colspan="9">
                         <div class="module_row module_display_section_module paddingRight5 cursor_pointer">
-                            <span>{{moduleData.Module.Name}}</span>
+                            <span>{{moduleData.Module.Name}} <span *ngIf="moduleData.TotalList > 0">({{moduleData.TotalList}})</span></span>
                             <i *ngIf="filter.ModuleId != moduleData.Module.Id" class="fa fa-angle-double-down"
                                 aria-hidden="true"></i>
                            
