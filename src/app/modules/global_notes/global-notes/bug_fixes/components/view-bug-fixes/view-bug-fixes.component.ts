@@ -281,6 +281,12 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     this.displayModuleList = [];
     // Setting the filter
     this.modulesFilter.ModuleId = status ? -1 : this.filter.ModuleId;
+    this.modulesFilter.SearchQuery = status ? '' : this.filter.SearchQuery;
+    this.modulesFilter.StaffId = status ? '-1' : this.filter.StaffId;
+    this.modulesFilter.StatusId = status ? -1 : this.filter.StatusId;
+    this.modulesFilter.PriorityId = status ? -1 : this.filter.PriorityId;
+    this.modulesFilter.StartDate = this.filter.StartDate;
+    this.modulesFilter.EndDate = this.filter.EndDate;
 
     // if (this.modulePaginator && status == false) {
     //     this.modulePaginator.changePage(0);
@@ -306,6 +312,52 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
         //this.clickOnModule();
 
         this.clickOnModule();
+
+        // Start loading
+        this.showLoading = false;
+        this.displayFullTable = true;
+      });
+    // End of Calling the model to retrieve the data
+    // }
+  }
+
+  // Getting all the display module list only
+  getAllBugFixesModuleListTemp(status: boolean = false) {
+    // Start loading
+    this.showLoading = true;
+    let modulesFilter = this.deep(this.modulesFilter);
+    // Setting the filter
+    modulesFilter.SearchQuery = status ? '' : this.filter.SearchQuery;
+    modulesFilter.StaffId = status ? '-1' : this.filter.StaffId;
+    modulesFilter.StatusId = status ? -1 : this.filter.StatusId;
+    modulesFilter.PriorityId = status ? -1 : this.filter.PriorityId;
+    modulesFilter.StartDate = this.filter.StartDate;
+    modulesFilter.EndDate = this.filter.EndDate;
+
+    // if (this.modulePaginator && status == false) {
+    //     this.modulePaginator.changePage(0);
+    // } else {
+    if (this.localModuleDropdownSelection != -1) {
+      modulesFilter.ModuleId = this.localModuleDropdownSelection;
+    }
+    // Calling the model to retrieve the data
+
+    this.bugFixModel
+      .GetBugFixesDisplayModulesService(modulesFilter)
+      .then((data) => {
+        // Getting the staff list
+        let displayModuleList = <DisplayModule[]>data;
+
+        // Loop through the existing list
+        for (let i = 0; i < this.displayTable.length; i++) {
+          // Getting the module ID
+          let moduleId = this.displayTable[i].Module.Id;
+          // Getting the count
+          let totalCount = (moduleId == -1) ? 0 : displayModuleList.find(obj => obj.Id == moduleId).TotalList;
+          // Update the count
+          this.displayTable[i].TotalList = totalCount;
+        }
+        // End of Loop through the existing list
 
         // Start loading
         this.showLoading = false;
@@ -623,6 +675,8 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
       this.modulesFilter.CurrentPage = 1;
       // Get bugFix list
       this.getBugFixesDisplayList();
+      // Getting all the modules based on the filter
+      this.getAllBugFixesModuleListTemp();
     }
   }
 
