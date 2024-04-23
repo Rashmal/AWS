@@ -142,3 +142,7 @@
         padding: 0;
     }
 }
+
+::ng-deep .p-calendar .p-inputtext{
+    width: 200px !important;
+}

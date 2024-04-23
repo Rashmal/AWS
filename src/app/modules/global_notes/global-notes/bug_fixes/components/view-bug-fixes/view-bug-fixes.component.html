@@ -1,7 +1,7 @@
 <!-- Main content section -->
 <div class="col-xl-12 view_bug_fixes_list">
     <!-- Title and Filter section -->
-    <div class="col-xl-12 title_filter_section">
+    <div *ngIf="false" class="col-xl-12 title_filter_section">
         <!-- Title section -->
         <div class="marginRight5 marginBottom5 marginTop5 main_title_width">
             <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
@@ -50,7 +50,7 @@
     <!-- End of Title and Filter section -->
 
     <!-- Search and Filter section -->
-    <div class="col-xl-12 title_filter_section">
+    <div *ngIf="false" class="col-xl-12 title_filter_section">
         <!-- Search box section -->
         <div class="display_flex_center marginRight5 marginBottom5 marginTop5 main_title_width">
             <!-- Search input box -->
@@ -141,6 +141,483 @@
         <!-- End of End date section -->
     </div>
     <!-- End of Search and Filter section -->
+
+    <!-- Stat boxes section -->
+    <div *ngIf="false" class="col-xl-12 stats_boxes_section">
+        <!-- Loop through the stat boxes list -->
+        <div class="stat_box_section" *ngFor="let statBox of statBoxesList"
+            [style.borderColor]="statBox.LabelColorCode">
+            <!-- Count section -->
+            <div>
+                {{statBox.LabelValue}}
+            </div>
+            <!-- End of Count section -->
+
+            <!-- Stat box label section -->
+            <div>
+                <span>{{statBox.LabelName}}</span>
+            </div>
+            <!-- End of Stat box label section -->
+        </div>
+        <!-- End of Loop through the stat boxes list -->
+    </div>
+    <!-- End of Stat boxes section -->
+
+     <!-- Display only on xl screens -->
+     <div class="d-none d-xl-block">
+        <!-- Title and Filter section -->
+        <div class="col-xl-12 title_filter_section">
+            <!-- Title section -->
+            <div class="marginRight5 marginBottom5 marginTop5 main_title_width">
+                <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
+                <span class="module_title">Bug Fixes</span>
+            </div>
+            <!-- End of Title section -->
+
+            <!-- Add button section -->
+            <div class=" marginRight5 marginBottom5 marginTop5">
+                <button class="add_button" (click)="addNewBugFixClick()">+Add new</button>
+            </div>
+            <!-- End of Add button section -->
+
+            <!-- Staff dropdown list -->
+            <div class=" marginRight5 display_flex_center marginBottom5 marginTop5"
+                *ngIf="viewStaffDropdownList && viewStaffDropdownList.length > 0">
+                <div class="label_section">
+                    <span class="marginRight5">Staff</span>
+                </div>
+                <p-dropdown [options]="viewStaffDropdownList" [(ngModel)]="filter.StaffId"
+                    (onChange)="onChangeFilterItem('STAFF')"></p-dropdown>
+            </div>
+            <!-- End of Staff dropdown list -->
+
+            <!-- Priority dropdown list -->
+            <div class=" marginRight5 display_flex_center marginBottom5 marginTop5"
+                *ngIf="viewPriorityDropdownList && viewPriorityDropdownList.length > 0">
+                <div class="label_section">
+                    <span class="marginRight5">Priority</span>
+                </div>
+                <p-dropdown [options]="viewPriorityDropdownList" [(ngModel)]="filter.PriorityId"
+                    (onChange)="onChangeFilterItem('PRIORITY')"></p-dropdown>
+            </div>
+            <!-- End of Priority dropdown list -->
+
+            <!-- Start date section-->
+            <div class=" marginRight5 display_flex_center marginBottom5 marginTop5">
+                <div class="label_section">
+                    <span class="marginRight5">Start</span>
+                </div>
+                <p-calendar [(ngModel)]="filterStartDate" [iconDisplay]="'input'" [showIcon]="true"
+                    (onSelect)="onChangeFilterItem('START')" [maxDate]="filterEndDate"></p-calendar>
+            </div>
+            <!-- End of Start date section -->
+        </div>
+        <!-- End of Title and Filter section -->
+
+        <!-- Search and Filter section -->
+        <div class=" col-xl-12 title_filter_section">
+            <!-- Search box section -->
+            <div class="display_flex_center marginRight5 marginBottom5 marginTop5 main_title_width">
+                <!-- Search input box -->
+                <input type="search" placeholder="Search..." [(ngModel)]="filter.SearchQuery">
+                <!-- End of Search input box -->
+
+                <!-- Search icon -->
+                <div class="ash_color_button" (click)="onChangeFilterItem('SEARCH')">
+                    <!-- Icon-->
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <!-- End of Icon-->
+                </div>
+                <!-- End of Search icon -->
+
+                <!-- Erase icon -->
+                <div class="ash_color_button" (click)="onChangeFilterItem('CLEAR')">
+                    <!-- Icon-->
+                    <i class="fa fa-eraser" aria-hidden="true"></i>
+                    <!-- End of Icon-->
+                </div>
+                <!-- End of Erase icon -->
+            </div>
+            <!-- End of Search box section -->
+
+            <!-- No of records per page dropdown -->
+            <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+                *ngIf="recordsPerPage && recordsPerPage.length > 0">
+                <p-dropdown [options]="recordsPerPage" [(ngModel)]="filter.RecordsPerPage"
+                    (onChange)="onChangeFilterItem('RECORDS')"></p-dropdown>
+            </div>
+            <!-- End of No of records per page dropdown -->
+
+            <!-- Status dropdown list -->
+            <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+                *ngIf="viewStatusDropdownList && viewStatusDropdownList.length > 0">
+                <!-- Label section -->
+                <div class="label_section">
+                    <span class="marginRight5">Status</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Custom colored dropdown -->
+                <p-dropdown class="colored_dropdown" [options]="viewStatusDropdownList" [(ngModel)]="filter.StatusId"
+                    [style.background]="getStatusColorCode(filter.StatusId)" [style.borderRadius]="'6px'"
+                    (onChange)="onChangeFilterItem('STATUS')">
+                    <!-- Selected item styles -->
+                    <ng-template pTemplate="selectedItem" let-statusObject>
+                        <!-- When All is selected -->
+                        <div *ngIf="statusObject && filter.StatusId == -1"
+                            [style.color]="(filter.StatusId == -1)?'black':'white'">
+                            {{statusObject.label}}
+                        </div>
+                        <!-- End of When All is selected -->
+
+                        <!-- When All is not selected -->
+                        <div *ngIf="statusObject && filter.StatusId !== -1"
+                            [style.background]="getStatusColorCode(statusObject.value)"
+                            [style.color]="(filter.StatusId == -1 )?'black':'white'">
+                            {{statusObject.label}}
+                        </div>
+                        <!-- End of When All is not selected -->
+                    </ng-template>
+                    <!-- End of Selected item styles -->
+                </p-dropdown>
+                <!-- End of Custom colored dropdown -->
+            </div>
+            <!-- End of Status dropdown list -->
+
+            <!-- Modules dropdown list -->
+            <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+                *ngIf="viewModulesDropdownList && viewModulesDropdownList.length > 0">
+                <div class="label_section">
+                    <span class="marginRight5">Module</span>
+                </div>
+                <p-dropdown [options]="viewModulesDropdownList" [(ngModel)]="localModuleDropdownSelection"
+                    (onChange)="onChangeFilterItem('MODULE')"></p-dropdown>
+            </div>
+            <!-- End of Modules dropdown list -->
+
+            <!-- End date section-->
+            <div class="marginRight5 display_flex_center marginBottom5 marginTop5">
+                <div class="label_section">
+                    <span class="marginRight5">End</span>
+                </div>
+                <p-calendar [(ngModel)]="filterEndDate" [iconDisplay]="'input'" [showIcon]="true"
+                    [minDate]="filterStartDate" (onSelect)="onChangeFilterItem('END')"></p-calendar>
+            </div>
+            <!-- End of End date section -->
+        </div>
+        <!-- End of Search and Filter section -->
+    </div>
+
+
+
+    <!-- Display only on xs and sm screens -->
+    <div class="d-block d-sm-block d-md-none d-lg-none d-xl-none">
+        <!--Filters in smaller screen-->
+        <div class="smaller_screen_content">
+            <!-- Title section -->
+            <div class="marginRight5 marginBottom5 marginTop5 main_title_width">
+                <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
+                <span class="module_title">Bug Fixes</span>
+            </div>
+            <!-- End of Title section -->
+            <!-- Add button section -->
+            <div class="marginRight5 marginBottom5 marginTop5">
+                <button class="add_button_mobile" (click)="addNewBugFixClick()">+Add new</button>
+            </div>
+            <!-- End of Add button section -->
+
+            <!-- Staff dropdown list -->
+            <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+                *ngIf="viewStaffDropdownList && viewStaffDropdownList.length > 0">
+                <div class="label_section">
+                    <span class="marginRight5">Staff</span>
+                </div>
+                <p-dropdown [options]="viewStaffDropdownList" [(ngModel)]="filter.StaffId"
+                    (onChange)="onChangeFilterItem('STAFF')"></p-dropdown>
+            </div>
+            <!-- End of Staff dropdown list -->
+
+            <!-- Priority dropdown list -->
+            <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+                *ngIf="viewPriorityDropdownList && viewPriorityDropdownList.length > 0">
+                <div class="label_section">
+                    <span class="marginRight5">Priority</span>
+                </div>
+                <p-dropdown [options]="viewPriorityDropdownList" [(ngModel)]="filter.PriorityId"
+                    (onChange)="onChangeFilterItem('PRIORITY')"></p-dropdown>
+            </div>
+            <!-- End of Priority dropdown list -->
+
+
+
+
+
+
+
+            <!-- Status dropdown list -->
+            <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+                *ngIf="viewStatusDropdownList && viewStatusDropdownList.length > 0">
+                <!-- Label section -->
+                <div class="label_section">
+                    <span class="marginRight5">Status</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Custom colored dropdown -->
+                <p-dropdown class="colored_dropdown" [options]="viewStatusDropdownList" [(ngModel)]="filter.StatusId"
+                    [style.background]="getStatusColorCode(filter.StatusId)" [style.borderRadius]="'6px'"
+                    (onChange)="onChangeFilterItem('STATUS')">
+                    <!-- Selected item styles -->
+                    <ng-template pTemplate="selectedItem" let-statusObject>
+                        <!-- When All is selected -->
+                        <div *ngIf="statusObject && filter.StatusId == -1"
+                            [style.color]="(filter.StatusId == -1)?'black':'white'">
+                            {{statusObject.label}}
+                        </div>
+                        <!-- End of When All is selected -->
+
+                        <!-- When All is not selected -->
+                        <div *ngIf="statusObject && filter.StatusId !== -1"
+                            [style.background]="getStatusColorCode(statusObject.value)"
+                            [style.color]="(filter.StatusId == -1 )?'black':'white'">
+                            {{statusObject.label}}
+                        </div>
+                        <!-- End of When All is not selected -->
+                    </ng-template>
+                    <!-- End of Selected item styles -->
+                </p-dropdown>
+                <!-- End of Custom colored dropdown -->
+            </div>
+            <!-- End of Status dropdown list -->
+
+            <!-- Modules dropdown list -->
+            <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+                *ngIf="viewModulesDropdownList && viewModulesDropdownList.length > 0">
+                <div class="label_section">
+                    <span class="marginRight5">Module</span>
+                </div>
+                <p-dropdown [options]="viewModulesDropdownList" [(ngModel)]="localModuleDropdownSelection"
+                    (onChange)="onChangeFilterItem('MODULE')"></p-dropdown>
+            </div>
+            <!-- End of Modules dropdown list -->
+
+            <!-- Start date section-->
+            <div class="marginRight5 display_flex_center marginBottom5 marginTop5">
+                <div class="label_section">
+                    <span class="marginRight5">Start</span>
+                </div>
+                <p-calendar [(ngModel)]="filterStartDate" [iconDisplay]="'input'" [showIcon]="true"
+                    (onSelect)="onChangeFilterItem('START')" [maxDate]="filterEndDate"></p-calendar>
+            </div>
+            <!-- End of Start date section -->
+
+            <!-- End date section-->
+            <div class="marginRight5 display_flex_center marginBottom5 marginTop5">
+                <div class="label_section">
+                    <span class="marginRight5">End</span>
+                </div>
+                <p-calendar [(ngModel)]="filterEndDate" [iconDisplay]="'input'" [showIcon]="true"
+                    [minDate]="filterStartDate" (onSelect)="onChangeFilterItem('END')"></p-calendar>
+            </div>
+            <!-- End of End date section -->
+
+            <!-- Search box section -->
+            <div class="display_flex_center marginRight5 marginBottom5 marginTop5 search_input_mobile">
+                <!-- Search input box -->
+                <input type="search" placeholder="Search..." [(ngModel)]="filter.SearchQuery">
+                <!-- End of Search input box -->
+
+                <!-- Search icon -->
+                <div class="ash_color_button" (click)="onChangeFilterItem('SEARCH')">
+                    <!-- Icon-->
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <!-- End of Icon-->
+                </div>
+                <!-- End of Search icon -->
+
+                <!-- Erase icon -->
+                <div class="ash_color_button" (click)="onChangeFilterItem('CLEAR')">
+                    <!-- Icon-->
+                    <i class="fa fa-eraser" aria-hidden="true"></i>
+                    <!-- End of Icon-->
+                </div>
+                <!-- End of Erase icon -->
+            </div>
+            <!-- End of Search box section -->
+
+            <!-- No of records per page dropdown -->
+            <div class="marginRight5 display_flex_center marginBottom5 marginTop5 per_page_ddw_mobile"
+                *ngIf="recordsPerPage && recordsPerPage.length > 0">
+                <p-dropdown [options]="recordsPerPage" [(ngModel)]="filter.RecordsPerPage"
+                    (onChange)="onChangeFilterItem('RECORDS')"></p-dropdown>
+            </div>
+            <!-- End of No of records per page dropdown -->
+
+        </div>
+        <!--End Filters in smaller screen-->
+    </div>
+
+    <!-- Display only on md and lg screens -->
+    <div class="d-none d-md-block d-lg-block d-xl-none">
+        <!--Filters in medium screen-->
+        <div class="smaller_screen_content">
+            <!-- Title section -->
+            <div class="marginRight5 marginBottom5 marginTop5 main_title_width">
+                <i class="fa fa-comments title_icon_color" aria-hidden="true"></i>
+                <span class="module_title">Bug Fixes</span>
+            </div>
+            <!-- End of Title section -->
+            <!-- Add button section -->
+            <div class="marginRight5 marginBottom5 marginTop5">
+                <button class="add_button_mobile" (click)="addNewBugFixClick()">+Add new</button>
+            </div>
+            <!-- End of Add button section -->
+            <div class="display_flex_center">
+                <!-- Staff dropdown list -->
+                <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+                    *ngIf="viewStaffDropdownList && viewStaffDropdownList.length > 0">
+                    <div class="label_section">
+                        <span class="marginRight5">Staff</span>
+                    </div>
+                    <p-dropdown [options]="viewStaffDropdownList" [(ngModel)]="filter.StaffId"
+                        (onChange)="onChangeFilterItem('STAFF')"></p-dropdown>
+                </div>
+                <!-- End of Staff dropdown list -->
+
+                <!-- Priority dropdown list -->
+                <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+                    *ngIf="viewPriorityDropdownList && viewPriorityDropdownList.length > 0">
+                    <div class="label_section">
+                        <span class="marginRight5">Priority</span>
+                    </div>
+                    <p-dropdown [options]="viewPriorityDropdownList" [(ngModel)]="filter.PriorityId"
+                        (onChange)="onChangeFilterItem('PRIORITY')"></p-dropdown>
+                </div>
+                <!-- End of Priority dropdown list -->
+            </div>
+
+
+
+
+
+
+            <div class="display_flex_center">
+                <!-- Status dropdown list -->
+                <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+                    *ngIf="viewStatusDropdownList && viewStatusDropdownList.length > 0">
+                    <!-- Label section -->
+                    <div class="label_section">
+                        <span class="marginRight5">Status</span>
+                    </div>
+                    <!-- End of Label section -->
+
+                    <!-- Custom colored dropdown -->
+                    <p-dropdown class="colored_dropdown" [options]="viewStatusDropdownList"
+                        [(ngModel)]="filter.StatusId" [style.background]="getStatusColorCode(filter.StatusId)"
+                        [style.borderRadius]="'6px'" (onChange)="onChangeFilterItem('STATUS')">
+                        <!-- Selected item styles -->
+                        <ng-template pTemplate="selectedItem" let-statusObject>
+                            <!-- When All is selected -->
+                            <div *ngIf="statusObject && filter.StatusId == -1"
+                                [style.color]="(filter.StatusId == -1)?'black':'white'">
+                                {{statusObject.label}}
+                            </div>
+                            <!-- End of When All is selected -->
+
+                            <!-- When All is not selected -->
+                            <div *ngIf="statusObject && filter.StatusId !== -1"
+                                [style.background]="getStatusColorCode(statusObject.value)"
+                                [style.color]="(filter.StatusId == -1 )?'black':'white'">
+                                {{statusObject.label}}
+                            </div>
+                            <!-- End of When All is not selected -->
+                        </ng-template>
+                        <!-- End of Selected item styles -->
+                    </p-dropdown>
+                    <!-- End of Custom colored dropdown -->
+                </div>
+                <!-- End of Status dropdown list -->
+
+                <!-- Modules dropdown list -->
+                <div class="marginRight5 display_flex_center marginBottom5 marginTop5"
+                    *ngIf="viewModulesDropdownList && viewModulesDropdownList.length > 0">
+                    <div class="label_section">
+                        <span class="marginRight5">Module</span>
+                    </div>
+                    <p-dropdown [options]="viewModulesDropdownList" [(ngModel)]="localModuleDropdownSelection"
+                        (onChange)="onChangeFilterItem('MODULE')"></p-dropdown>
+                </div>
+                <!-- End of Modules dropdown list -->
+            </div>
+
+
+
+
+            <div class="display_flex_center">
+                <!-- Start date section-->
+                <div class="marginRight5 display_flex_center marginBottom5 marginTop5">
+                    <div class="label_section">
+                        <span class="marginRight5">Start</span>
+                    </div>
+                    <p-calendar [(ngModel)]="filterStartDate" [iconDisplay]="'input'" [showIcon]="true"
+                        (onSelect)="onChangeFilterItem('START')" [maxDate]="filterEndDate"></p-calendar>
+                </div>
+                <!-- End of Start date section -->
+
+                <!-- End date section-->
+                <div class="marginRight5 display_flex_center marginBottom5 marginTop5">
+                    <div class="label_section">
+                        <span class="marginRight5">End</span>
+                    </div>
+                    <p-calendar [(ngModel)]="filterEndDate" [iconDisplay]="'input'" [showIcon]="true"
+                        [minDate]="filterStartDate" (onSelect)="onChangeFilterItem('END')"></p-calendar>
+                </div>
+                <!-- End of End date section -->
+
+            </div>
+
+
+            <div class="display_flex_center">
+                <!-- Search box section -->
+                <div class="display_flex_center marginRight5 marginBottom5 marginTop5 search_input_mobile">
+                    <!-- Search input box -->
+                    <input type="search" placeholder="Search..." [(ngModel)]="filter.SearchQuery">
+                    <!-- End of Search input box -->
+
+                    <!-- Search icon -->
+                    <div class="ash_color_button" (click)="onChangeFilterItem('SEARCH')">
+                        <!-- Icon-->
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                        <!-- End of Icon-->
+                    </div>
+                    <!-- End of Search icon -->
+
+                    <!-- Erase icon -->
+                    <div class="ash_color_button" (click)="onChangeFilterItem('CLEAR')">
+                        <!-- Icon-->
+                        <i class="fa fa-eraser" aria-hidden="true"></i>
+                        <!-- End of Icon-->
+                    </div>
+                    <!-- End of Erase icon -->
+                </div>
+                <!-- End of Search box section -->
+
+                <!-- No of records per page dropdown -->
+                <div class="marginRight5 display_flex_center marginBottom5 marginTop5 per_page_ddw_mobile"
+                    *ngIf="recordsPerPage && recordsPerPage.length > 0">
+                    <p-dropdown [options]="recordsPerPage" [(ngModel)]="filter.RecordsPerPage"
+                        (onChange)="onChangeFilterItem('RECORDS')"></p-dropdown>
+                </div>
+                <!-- End of No of records per page dropdown -->
+            </div>
+
+
+
+        </div>
+        <!--End Filters in medium screen-->
+    </div>
+
+
 
     <!-- Stat boxes section -->
     <div class="col-xl-12 stats_boxes_section">

@@ -105,6 +105,19 @@
         width: 200px;
     }
 
+    .add_button_mobile{
+        background: #126095;
+        border: solid 1px #126095;
+        border-radius: 6px;
+        width: 100%;
+        height: 30px;
+        color: white;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 4px;
+        width: 250px; 
+    }
+
     .label_section {
         width: 50px;
     }
@@ -115,6 +128,7 @@
         outline: none;
         border-width: 1px;
         border-radius: 6px;
+        width: 158px;
     }
 
     .ash_color_button {
@@ -132,7 +146,14 @@
     }
 
     .main_title_width {
-        width: 240px;
+        min-width: 228px;
+    }
+
+    .search_input_mobile{
+        max-width: 250px;
+        input{
+            width: 200px;
+        }
     }
 
     .stat_box_section {
@@ -396,4 +417,12 @@
 ::ng-deep tbody td {
     padding: 0;
     padding-bottom: 5px;
+}
+
+::ng-deep .p-calendar .p-inputtext{
+    width: 200px !important;
+}
+
+::ng-deep .per_page_ddw_mobile .p-dropdown{
+    width: 250px;
 }
