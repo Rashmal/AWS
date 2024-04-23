@@ -1,4 +1,8 @@
 .manage_system_enhancement {
+    .full_width {
+        width: 100%;
+    }
+
     .marginRight5 {
         margin-right: 5px;
     }
@@ -61,6 +65,11 @@
             width: 600px;
             padding-right: 10px;
         }
+
+        .each_section_merged_full_width {
+            width: 100%;
+            padding-right: 10px;
+        }
     }
 
     input {
@@ -87,7 +96,7 @@
             padding: 10px;
             border: 1px solid #ccc;
         }
-        .footer_inner_section_view{
+        .footer_inner_section_view {
             margin-top: 10px;
             display: flex;
             align-items: center;
@@ -126,7 +135,7 @@
         border-color: #21ba45;
         cursor: pointer;
     }
-    
+
     .error_message {
         margin-top: 5px;
         color: red;

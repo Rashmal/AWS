@@ -101,6 +101,18 @@
                 <!-- End of Error Message -->
             </div>
             <!-- End of Estimated hours section -->
+
+            <!-- Start date section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Start/Started</span>
+                </div>
+                <!-- End of Label section -->
+                <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true"
+                    [disabled]="editingType  == 'VIEW'" [maxDate]="endDate"></p-calendar>
+            </div>
+            <!-- End of Start date section -->
         </div>
         <!-- End of First row section -->
 
@@ -177,45 +189,6 @@
                 <!-- End of Error Message -->
             </div>
             <!-- End of Requested staff section -->
-        </div>
-        <!-- End of Second row section -->
-
-        <!-- Third row section -->
-        <div class="col-xl-12 first_row_section">
-            <!-- Description section -->
-            <div class="each_section_merged">
-                <!-- Label section -->
-                <div class="each_label">
-                    <span>Enhancement</span>
-                </div>
-                <!-- End of Label section -->
-
-                <!-- Description input -->
-                <div>
-                    <p-editor [(ngModel)]="systemEnhancement.Description" [style]="{ height: '320px' }"
-                        [readonly]="editingType  == 'VIEW'"></p-editor>
-                </div>
-                <!-- End of Description input -->
-
-                <!-- Error Message -->
-                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$DESCRIPTION')">
-                    <span>{{CheckErrorCode('EMPTY$DESCRIPTION').ErrorMessage}}</span>
-                </div>
-                <!-- End of Error Message -->
-            </div>
-            <!-- End of Description section -->
-
-            <!-- Start date section -->
-            <div class="each_section">
-                <!-- Label section -->
-                <div class="each_label">
-                    <span>Start/Started</span>
-                </div>
-                <!-- End of Label section -->
-                <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true"
-                    [disabled]="editingType  == 'VIEW'" [maxDate]="endDate"></p-calendar>
-            </div>
-            <!-- End of Start date section -->
 
             <!-- End date section -->
             <div class="each_section">
@@ -229,6 +202,33 @@
                     [disabled]="editingType  == 'VIEW'" [minDate]="startDate"></p-calendar>
             </div>
             <!-- End of End date section -->
+        </div>
+        <!-- End of Second row section -->
+
+        <!-- Third row section -->
+        <div class="col-xl-12 first_row_section">
+            <!-- Description section -->
+            <div class="each_section_merged_full_width">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Enhancement</span>
+                </div>
+                <!-- End of Label section -->
+
+                <!-- Description input -->
+                <div class="full_width">
+                    <p-editor [(ngModel)]="systemEnhancement.Description" [style]="{ height: '320px' }"
+                        [readonly]="editingType  == 'VIEW'"></p-editor>
+                </div>
+                <!-- End of Description input -->
+
+                <!-- Error Message -->
+                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$DESCRIPTION')">
+                    <span>{{CheckErrorCode('EMPTY$DESCRIPTION').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
+            </div>
+            <!-- End of Description section -->
         </div>
         <!-- End of Third row section -->
     </div>

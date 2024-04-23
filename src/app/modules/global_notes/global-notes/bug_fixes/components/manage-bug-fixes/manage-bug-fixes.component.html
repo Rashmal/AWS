@@ -101,6 +101,18 @@
                 <!-- End of Error Message -->
             </div>
             <!-- End of Estimated hours section -->
+
+            <!-- Start date section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>Start/Started</span>
+                </div>
+                <!-- End of Label section -->
+                <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true"
+                    [disabled]="editingType  == 'VIEW'" [maxDate]="endDate"></p-calendar>
+            </div>
+            <!-- End of Start date section -->
         </div>
         <!-- End of First row section -->
 
@@ -116,9 +128,9 @@
 
                 <!-- Title input -->
                 <div>
-                    <input type="text" class="full_width" [(ngModel)]="bugFix.Title"
-                        [disabled]="editingType  == 'VIEW'" maxlength="{{titleLimit}}"
-                        (input)="onPasteTitleFunction($event)" inputrestriction="^[a-z A-Z 0-9 @ _/ -]*$">
+                    <input type="text" class="full_width" [(ngModel)]="bugFix.Title" [disabled]="editingType  == 'VIEW'"
+                        maxlength="{{titleLimit}}" (input)="onPasteTitleFunction($event)"
+                        inputrestriction="^[a-z A-Z 0-9 @ _/ -]*$">
                 </div>
                 <!-- End of Title input -->
 
@@ -177,13 +189,26 @@
                 <!-- End of Error Message -->
             </div>
             <!-- End of Requested staff section -->
+
+            <!-- End date section -->
+            <div class="each_section">
+                <!-- Label section -->
+                <div class="each_label">
+                    <span>End/Completed</span>
+                </div>
+                <!-- End of Label section -->
+
+                <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true"
+                    [disabled]="editingType  == 'VIEW'" [minDate]="startDate"></p-calendar>
+            </div>
+            <!-- End of End date section -->
         </div>
         <!-- End of Second row section -->
 
         <!-- Third row section -->
         <div class="col-xl-12 first_row_section">
             <!-- Description section -->
-            <div class="each_section_merged">
+            <div class="each_section_merged_full_width">
                 <!-- Label section -->
                 <div class="each_label">
                     <span>Bug Fix</span>
@@ -205,30 +230,9 @@
             </div>
             <!-- End of Description section -->
 
-            <!-- Start date section -->
-            <div class="each_section">
-                <!-- Label section -->
-                <div class="each_label">
-                    <span>Start/Started</span>
-                </div>
-                <!-- End of Label section -->
-                <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true"
-                    [disabled]="editingType  == 'VIEW'" [maxDate]="endDate"></p-calendar>
-            </div>
-            <!-- End of Start date section -->
 
-            <!-- End date section -->
-            <div class="each_section">
-                <!-- Label section -->
-                <div class="each_label">
-                    <span>End/Completed</span>
-                </div>
-                <!-- End of Label section -->
 
-                <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true"
-                    [disabled]="editingType  == 'VIEW'" [minDate]="startDate"></p-calendar>
-            </div>
-            <!-- End of End date section -->
+
         </div>
         <!-- End of Third row section -->
     </div>
@@ -245,8 +249,7 @@
 
             <!-- Save button -->
             <button class="save_btn" (click)="saveOnClickFunction()" *ngIf="editingType  != 'VIEW'"
-                pTooltip="{{(bugFix.Id && bugFix.Id !== '')?'Update button':'Save button'}}"
-                tooltipPosition="top">
+                pTooltip="{{(bugFix.Id && bugFix.Id !== '')?'Update button':'Save button'}}" tooltipPosition="top">
                 <span *ngIf="!(bugFix.Id && bugFix.Id !== '')">Save Detail</span>
                 <span *ngIf="bugFix.Id && bugFix.Id !== ''">Update Detail</span>
             </button>
