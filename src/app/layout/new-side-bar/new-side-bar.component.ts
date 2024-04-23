@@ -82,9 +82,6 @@ export class NewSideBarComponent implements OnInit {
     // Initialize the model list
     this.getMenuItems();
     // End of Initialize the model list
-
-
-
   }
 
   //Get site menu items

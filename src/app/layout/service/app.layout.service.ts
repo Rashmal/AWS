@@ -88,9 +88,21 @@ export class LayoutService {
                 this.overlayOpen.next(null);
             }
         }
+
+        var elem = document.getElementsByClassName("display_top_menu");
+        if (elem) {
+            document.querySelectorAll('.user_top_menu').forEach(function (el: any) {
+                if (el.style.visibility == 'hidden') {
+                    el.style.visibility = 'visible';
+                } else {
+                    el.style.visibility = 'hidden';
+                }
+
+            });
+        }
     }
 
-    hideMenuToggle(){
+    hideMenuToggle() {
         this.state.overlayMenuActive = false;
     }
 
@@ -132,8 +144,8 @@ export class LayoutService {
                 el == this._config.theme
                     ? (el = config.theme)
                     : el == `theme-${this._config.colorScheme}`
-                    ? (el = `theme-${config.colorScheme}`)
-                    : el
+                        ? (el = `theme-${config.colorScheme}`)
+                        : el
             )
             .join('/');
 

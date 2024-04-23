@@ -33,14 +33,17 @@ export class AppLayoutComponent implements OnDestroy {
     // Store common modal
     commonModal: CommonModel;
 
+    // Store display menu top
+    displayMenuTop: boolean = false;
+
     constructor(public layoutService: LayoutService, public renderer: Renderer2, public router: Router, private commonService: CommonService) {
         this.commonModal = new CommonModel(this.commonService);
         this.overlayMenuOpenSubscription = this.layoutService.overlayOpen$.subscribe(() => {
             if (!this.menuOutsideClickListener) {
                 this.menuOutsideClickListener = this.renderer.listen('document', 'click', event => {
-                    const isOutsideClicked = !(this.appSidebar.el.nativeElement.isSameNode(event.target) || this.appSidebar.el.nativeElement.contains(event.target) 
+                    const isOutsideClicked = !(this.appSidebar.el.nativeElement.isSameNode(event.target) || this.appSidebar.el.nativeElement.contains(event.target)
                         || this.appTopbar.menuButton.nativeElement.isSameNode(event.target) || this.appTopbar.menuButton.nativeElement.contains(event.target));
-                    
+
                     if (isOutsideClicked) {
                         this.hideMenu();
                     }
@@ -132,17 +135,17 @@ export class AppLayoutComponent implements OnDestroy {
         }
     }
 
-    mouseEnterOnSidebar(){
+    mouseEnterOnSidebar() {
         this.mouseEnter = true;
         this.getGlobalNotesNotCount();
     }
 
-    mouseLeaveOnSidebar(){
+    mouseLeaveOnSidebar() {
         this.mouseEnter = false;
     }
 
     // Get global notes notification count
-    getGlobalNotesNotCount(){
+    getGlobalNotesNotCount() {
         this.commonModal.GetNotificationCount('TOTAL').then(
             (data: number) => {
                 // Set notification count

@@ -71,7 +71,6 @@ export class ManageBugFixesComponent {
   }
 
   ngOnInit(): void {
-    debugger
     // Getting the passed params
     let paramObject = this.location.getState();
     if (paramObject['BugFixesID']) {

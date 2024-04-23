@@ -1,39 +1,41 @@
 <!-- Main content section -->
 <div class="layout-topbar">
-    <!-- Logo section -->
-    <a class="layout-topbar-logo" routerLink="/layout">
-        <!-- <img src="assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg"
+    <!-- First row section -->
+    <div class="display_flex_center">
+        <!-- Logo section -->
+        <a class="layout-topbar-logo" routerLink="/layout">
+            <!-- <img src="assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg"
             alt="logo"> -->
-        <img src="../../../assets/images/logo_aws.png">
+            <img src="../../../assets/images/logo_aws.png">
 
-    </a>
-    <!-- End of Logo section -->
+        </a>
+        <!-- End of Logo section -->
 
-    <!-- Logo section -->
-    <!-- <div class="logo_section">
+        <!-- Logo section -->
+        <!-- <div class="logo_section">
         <img src="../../../assets/images/logo_aws.png">
     </div> -->
-    <!-- End of Logo section -->
+        <!-- End of Logo section -->
 
 
-    <!-- Menu bar section -->
-    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()"
-        pTooltip="Toggle side menu" tooltipPosition="top">
-        <i class="pi pi-bars"></i>
-    </button>
-    <!-- End of Menu bar section -->
+        <!-- Menu bar section -->
+        <button #menubutton class="p-link layout-menu-button layout-topbar-button"
+            (click)="layoutService.onMenuToggle()" pTooltip="Toggle side menu" tooltipPosition="top">
+            <i class="pi pi-bars"></i>
+        </button>
+        <!-- End of Menu bar section -->
 
-    <!-- Menu bar section for mobile -->
-    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button"
-        (click)="layoutService.showProfileSidebar()">
-        <i class="pi pi-ellipsis-v"></i>
-    </button>
-    <!-- End of Menu bar section for mobile -->
+        <!-- Menu bar section for mobile -->
+        <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button flex_align_right"
+            (click)="layoutService.showProfileSidebar()">
+            <i class="pi pi-ellipsis-v"></i>
+        </button>
+        <!-- End of Menu bar section for mobile -->
 
-    <!-- Top bar menu section -->
-    <div #topbarmenu class="layout-topbar-menu"
-        [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <!-- <button class="p-link layout-topbar-button">
+        <!-- Top bar menu section -->
+        <div #topbarmenu class="layout-topbar-menu flex_align_right"
+            [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+            <!-- <button class="p-link layout-topbar-button">
             <i class="pi pi-calendar"></i>
             <span>Calendar</span>
         </button>
@@ -41,13 +43,50 @@
             <i class="pi pi-user"></i>
             <span>Profile</span>
         </button> -->
-        <button class="p-link layout-topbar-button" (click)="opSettingsList.toggle($event)" pTooltip="Settings"
-            tooltipPosition="top">
-            <i class="pi pi-cog"></i>
-            <span>Settings</span>
-        </button>
+            <button class="p-link layout-topbar-button" (click)="opSettingsList.toggle($event)" pTooltip="Settings"
+                tooltipPosition="top">
+                <i class="pi pi-cog"></i>
+                <span>Settings</span>
+            </button>
+        </div>
+        <!-- End of Top bar menu section -->
     </div>
-    <!-- End of Top bar menu section -->
+    <!-- End of First row section -->
+
+    <!-- Top menu section -->
+    <div class="top_menu_section user_top_menu" *ngIf="staticMenuItemsDisplay.length > 0">
+        <div class="card">
+            <p-tabMenu [scrollable]="true" [model]="staticMenuItemsDisplay">
+                <ng-template pTemplate="item" let-item>
+                    <!--Single Item section-->
+                    <div class="single_item" (click)="itemClick($event,item)" [routerLink]="item.RedirectUrl"
+                        routerLinkActive="active-route">
+                        <!--Item icon-->
+                        <div class="icon_label">
+                            <i [ngClass]="item.ModuleIcon" class="layout-menuitem-icon"></i>
+                        </div>
+                        <!--End of Item icon-->
+
+                        <!--Label section-->
+                        <div class="tab_label">
+                            {{item.Name}}
+                        </div>
+                        <!--End of Label section-->
+
+                        <!--Notification count-->
+                        <!--Notification count-->
+                        <div *ngIf="(item.ModuleCode == 'STAT1')" class="noti_count">
+                            {{ttlNotCount}}
+                        </div>
+                        <!--End of Notification count-->
+                        <!--End of Notification count-->
+                    </div>
+                    <!--End of Single Item section-->
+                </ng-template>
+            </p-tabMenu>
+        </div>
+    </div>
+    <!-- End of Top menu section -->
 </div>
 <!-- End of Main content section -->
 

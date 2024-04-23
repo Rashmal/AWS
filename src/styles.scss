@@ -168,3 +168,43 @@ input {
 .staff_multi_selection .p-multiselect.p-multiselect-chip .p-multiselect-token {
     margin-bottom: 5px;
 }
+
+.display_top_menu {
+    .layout-main-container {
+        padding-top: 8rem !important;
+    }
+
+    .layout-main-container {
+        padding-left: 2rem !important;
+    }
+
+    .user_top_menu{
+        display: flex !important;
+    }
+
+    .layout-main-container{
+        margin-left: 0 !important;
+    }
+}
+
+.top_menu_section {
+    .card {
+        padding: 5px;
+        border: none;
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    .p-tabmenu .p-tabmenu-nav {
+        border: none;
+    }
+
+    li:nth-child(6) {
+        border-right: solid 1px #c7c8c9;
+    }
+    li:nth-child(7) {
+        margin-left: 5px;
+    }
+}

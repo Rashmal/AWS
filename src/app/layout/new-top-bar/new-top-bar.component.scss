@@ -1,0 +1,62 @@
+.layout-topbar {
+    .display_flex_center {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .flex_align_right {
+        margin-left: auto;
+    }
+
+    .top_menu_section {
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .single_item {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        .tab_label {
+            width: max-content;
+            padding-bottom: 1px;
+            color: #126095;
+        }
+        .icon_label {
+            margin-right: 5px;
+            color: #126095;
+        }
+        cursor: pointer;
+    }
+
+    .divider_vr {
+        height: 30px;
+        width: 1px;
+        background: #c7c8c9;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .noti_count {
+        margin-left: 5px;
+        text-decoration: none;
+        height: 17px;
+        width: max-content;
+        background-color: #c30505;
+        display: flex;
+        align-items: center;
+        padding: 0px 5px;
+        border-radius: 8px;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 8px;
+        color: white;
+    }
+
+    .user_top_menu {
+        display: none;
+    }
+}

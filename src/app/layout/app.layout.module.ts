@@ -23,6 +23,7 @@ import { NewSideBarComponent } from './new-side-bar/new-side-bar.component';
 import { NewTopBarComponent } from './new-top-bar/new-top-bar.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { RouterTestingModule } from "@angular/router/testing";
+import { TabMenuModule } from 'primeng/tabmenu';
 
 @NgModule({
     declarations: [
@@ -50,7 +51,8 @@ import { RouterTestingModule } from "@angular/router/testing";
         RouterModule,
         AppConfigModule,
         OverlayPanelModule ,
-        TooltipModule
+        TooltipModule,
+        TabMenuModule 
        
     ],
     exports: [AppLayoutComponent]

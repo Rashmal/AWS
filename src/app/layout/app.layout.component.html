@@ -1,13 +1,14 @@
 <!-- Main content section -->
-<div class="layout-wrapper" [ngClass]="containerClass">
+<div class="layout-wrapper" [ngClass]="containerClass" [class.display_top_menu]="displayMenuTop==true">
     <!-- Top bar section -->
     <!-- <app-topbar></app-topbar> -->
     <app-new-top-bar></app-new-top-bar>
     <!-- End of Top bar section -->
 
     <!-- Side bar section -->
-    <div class="layout-sidebar" (mouseenter)="mouseEnterOnSidebar()" (mouseleave)="mouseLeaveOnSidebar()">
-        <app-new-side-bar [mouseEnter]="mouseEnter" [ttlNotCount]="ttlNotCount" ></app-new-side-bar>
+    <div *ngIf="!displayMenuTop" class="layout-sidebar" (mouseenter)="mouseEnterOnSidebar()"
+        (mouseleave)="mouseLeaveOnSidebar()">
+        <app-new-side-bar [mouseEnter]="mouseEnter" [ttlNotCount]="ttlNotCount"></app-new-side-bar>
         <!-- <app-sidebar></app-sidebar> -->
     </div>
     <!-- End of Side bar section -->
