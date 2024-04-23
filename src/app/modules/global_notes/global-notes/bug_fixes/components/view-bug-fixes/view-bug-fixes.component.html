@@ -42,8 +42,8 @@
             <div class="label_section">
                 <span class="marginRight5">Start</span>
             </div>
-            <p-calendar [(ngModel)]="filter.StartDate" [iconDisplay]="'input'" [showIcon]="true"
-                (onSelect)="onChangeFilterItem('START')"></p-calendar>
+            <p-calendar [(ngModel)]="filterStartDate" [iconDisplay]="'input'" [showIcon]="true"
+                (onSelect)="onChangeFilterItem('START')" [maxDate]="filterEndDate"></p-calendar>
         </div>
         <!-- End of Start date section -->
     </div>
@@ -106,7 +106,8 @@
                     <!-- End of When All is selected -->
 
                     <!-- When All is not selected -->
-                    <div *ngIf="statusObject && filter.StatusId !== -1" [style.background]="getStatusColorCode(statusObject.value)"
+                    <div *ngIf="statusObject && filter.StatusId !== -1"
+                        [style.background]="getStatusColorCode(statusObject.value)"
                         [style.color]="(filter.StatusId == -1 )?'black':'white'">
                         {{statusObject.label}}
                     </div>
@@ -134,8 +135,8 @@
             <div class="label_section">
                 <span class="marginRight5">End</span>
             </div>
-            <p-calendar [(ngModel)]="filter.EndDate" [iconDisplay]="'input'" [showIcon]="true"
-                [minDate]="filter.StartDate" (onSelect)="onChangeFilterItem('END')"></p-calendar>
+            <p-calendar [(ngModel)]="filterEndDate" [iconDisplay]="'input'" [showIcon]="true"
+                [minDate]="filterStartDate" (onSelect)="onChangeFilterItem('END')"></p-calendar>
         </div>
         <!-- End of End date section -->
     </div>
@@ -173,44 +174,42 @@
                     <th>No:</th>
                     <th class="title_content title_by_width">
                         <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('TITLE', 'ASC')"
-                        [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'TITLE' )? 'selected_sort' : 'unSelected_sort'" 
-                        ></i>
-                        <i class="fa fa-sort-desc margin_right10" aria-hidden="true" (click)="sortItems('TITLE', 'DESC')"
-                        [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'TITLE' )? 'selected_sort' : 'unSelected_sort'" 
-                        ></i>
-                        Title</th>
+                            [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'TITLE' )? 'selected_sort' : 'unSelected_sort'"></i>
+                        <i class="fa fa-sort-desc margin_right10" aria-hidden="true"
+                            (click)="sortItems('TITLE', 'DESC')"
+                            [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'TITLE' )? 'selected_sort' : 'unSelected_sort'"></i>
+                        Title
+                    </th>
                     <th class="text_center status_by_width">Status</th>
-                    <th class="text_center ">
-                        <i class="fa fa-sort-asc margin_right10 "aria-hidden="true" (click)="sortItems('START', 'ASC')"
-                        [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'START' )? 'selected_sort' : 'unSelected_sort'" 
-                        ></i>
-                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true" (click)="sortItems('START', 'DESC')"
-                        [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'START' )? 'selected_sort' : 'unSelected_sort'" 
-                        ></i>
+                    <th class="text_center dates_by_width">
+                        <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('START', 'ASC')"
+                            [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'START' )? 'selected_sort' : 'unSelected_sort'"></i>
+                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true"
+                            (click)="sortItems('START', 'DESC')"
+                            [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'START' )? 'selected_sort' : 'unSelected_sort'"></i>
                         Start Date
                     </th>
-                    <th class="text_center "> 
+                    <th class="text_center dates_by_width">
                         <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('END', 'ASC')"
-                        [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'END' )? 'selected_sort' : 'unSelected_sort'" 
-                        ></i>
+                            [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'END' )? 'selected_sort' : 'unSelected_sort'"></i>
                         <i class="fa fa-sort-desc margin_right10 " aria-hidden="true" (click)="sortItems('END', 'DESC')"
-                        [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'END' )? 'selected_sort' : 'unSelected_sort'" 
-                        ></i>
-                        
-                        
+                            [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'END' )? 'selected_sort' : 'unSelected_sort'"></i>
+
+
                         End Date
                     </th>
-                    <th class="text_center estimated_by_width"> 
+                    <th class="text_center estimated_by_width">
                         <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('HOURS', 'ASC')"
-                        [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'HOURS' )? 'selected_sort' : 'unSelected_sort'" 
-                        ></i>
-                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true" (click)="sortItems('HOURS', 'DESC')"
-                        [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'HOURS' )? 'selected_sort' : 'unSelected_sort'" 
-                        ></i>
+                            [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'HOURS' )? 'selected_sort' : 'unSelected_sort'"></i>
+                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true"
+                            (click)="sortItems('HOURS', 'DESC')"
+                            [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'HOURS' )? 'selected_sort' : 'unSelected_sort'"></i>
                         Est.Hrs.
                     </th>
                     <th class="text_center priority_by_width">Priority</th>
-                    <th class="text_center requested_by requested_by_width"> <div class="requested_by">Requested By</div></th>
+                    <th class="text_center requested_by requested_by_width">
+                        <div class="requested_by">Requested By</div>
+                    </th>
                     <th class="justify_center action_column ">Action</th>
                 </tr>
                 <!-- End of Header row section -->
@@ -224,13 +223,14 @@
                     <td>
                         <div class="module_row paddingLeft5 cursor_pointer">
                             <span class="stator_strip"></span>
-                        <span>{{(rowIndex+1)+(this.modulesFilter.CurrentPage == 1 ? 0 :
-                            this.modulesFilter.RecordsPerPage*(this.modulesFilter.CurrentPage-1))}}</span>
+                            <span>{{(rowIndex+1)+(this.modulesFilter.CurrentPage == 1 ? 0 :
+                                this.modulesFilter.RecordsPerPage*(this.modulesFilter.CurrentPage-1))}}</span>
                         </div>
                     </td>
                     <td colspan="9">
                         <div class="module_row module_display_section_module paddingRight5 cursor_pointer">
-                            <span>{{moduleData.Module.Name}} <span *ngIf="moduleData.TotalList > 0">({{moduleData.TotalList}})</span></span>
+                            <span>{{moduleData.Module.Name}} <span
+                                    *ngIf="moduleData.TotalList > 0">({{moduleData.TotalList}})</span></span>
                             <i *ngIf="filter.ModuleId != moduleData.Module.Id" class="fa fa-angle-double-down"
                                 aria-hidden="true"></i>
                         </div>
@@ -304,7 +304,7 @@
                         </div>
 
                     </td>
-                    <td class="text_center">
+                    <td class="text_center dates_by_width">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 ">
                             <div class="ellipsis full_width">
@@ -313,7 +313,7 @@
                         </div>
 
                     </td>
-                    <td class="text_center">
+                    <td class="text_center dates_by_width">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 ">
                             <div class="ellipsis full_width">
@@ -339,7 +339,7 @@
 
                     </td>
                     <td class="text_center requested_by_width">
-                        <div  [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
+                        <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 requested_by ellipsis">
                             <span>{{getRequestByNames(enhancement)}}</span>
 
@@ -350,20 +350,22 @@
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section_btn paddingRight5 action_button">
                             <!--Comments button-->
-                            <button class="button_green" (click)="commentOnClickFunction(enhancement)" pTooltip="Comments" tooltipPosition="top"><i
-                                    class="fa fa-comments" aria-hidden="true"></i></button>
+                            <button class="button_green" (click)="commentOnClickFunction(enhancement)"
+                                pTooltip="Comments" tooltipPosition="top"><i class="fa fa-comments"
+                                    aria-hidden="true"></i></button>
                             <!--End of Comments button-->
                             <!--Change history button-->
-                            <button class="button_orange" (click)="changeDateHistoryOnClick(enhancement)" pTooltip="Change History" tooltipPosition="top"><i
-                                    class="fa fa-history" aria-hidden="true"></i></button>
+                            <button class="button_orange" (click)="changeDateHistoryOnClick(enhancement)"
+                                pTooltip="Change History" tooltipPosition="top"><i class="fa fa-history"
+                                    aria-hidden="true"></i></button>
                             <!--End of Change history button-->
                             <!--Edit button-->
-                            <button class="button_blue" (click)="editOnClickFunction(enhancement)" pTooltip="Edit" tooltipPosition="top"><i
-                                    class="fa fa-pencil" aria-hidden="true"></i></button>
+                            <button class="button_blue" (click)="editOnClickFunction(enhancement)" pTooltip="Edit"
+                                tooltipPosition="top"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                             <!--End of Edit button-->
                             <!--Delete button-->
-                            <button class="button_red" (click)="deleteConfirmation(enhancement)" pTooltip="Delete" tooltipPosition="top"><i class="fa fa-trash"
-                                    aria-hidden="true"></i></button>
+                            <button class="button_red" (click)="deleteConfirmation(enhancement)" pTooltip="Delete"
+                                tooltipPosition="top"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             <!--End of Delete button-->
                             <!--Send feature list button-->
                             <button *ngIf="false" class="button_grey"><i class="fa fa-archive"

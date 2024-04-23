@@ -9,6 +9,7 @@ export const LOGIN$USER_EMAIL$LIMIT: number = 50;
 export const LOGIN$USER_PASSWORD$LIMIT: number = 25;
 
 export const SYSTEM_ENHANCEMENT$TITLE$LIMIT: number = 500;
+export const BUG_FIXES$TITLE$LIMIT: number = 500;
 
 // Storing the no of records per page config
 export const NO$OF$RECORDS$PER$PAGE: SelectItem[] = [

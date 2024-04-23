@@ -105,6 +105,10 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
   @ViewChild('modulePaginator') modulePaginator: Paginator;
   // Store display full table
   displayFullTable: boolean = true;
+  // Store the start filter date
+  filterStartDate: Date = new Date();
+  // Store the end filter date
+  filterEndDate: Date = new Date();
 
   // Constructor
   constructor(
@@ -384,6 +388,9 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
             : [],
       });
     });
+
+    // Binding the no of lists
+    this.getAllBugFixesModuleListTemp();
   }
 
   // On click event of the add new bugFix
@@ -626,9 +633,12 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     // Set filter properties according to type
     switch (type) {
       case 'START':
+        // Getting the selected date
+        let localStartDate = new Date(this.deep(this.filterStartDate));
+        // Adding extra day to the date
         this.filter.StartDate = new Date(
-          this.filter.StartDate.setDate(
-            this.filter.StartDate.getDate() + 1
+          localStartDate.setDate(
+            localStartDate.getDate() + 1
           )
         );
         break;
@@ -649,13 +659,18 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
           SortColumn: 'TITLE',
           SortDirection: 'ASC'
         };
+        this.filterStartDate = new Date();
+        this.filterEndDate = new Date();
         this.setOneYerBefore();
         break;
 
       case 'END':
+        // Getting the selected date
+        let localEndDate: Date = new Date(this.deep(this.filterEndDate));
+
         this.filter.EndDate = new Date(
-          this.filter.EndDate.setDate(
-            this.filter.EndDate.getDate() + 1
+          localEndDate.setDate(
+            localEndDate.getDate() + 1
           )
         );
         break;
@@ -687,6 +702,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     let oneYearBefore = new Date(today);
     this.filter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
     this.modulesFilter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
+    this.filterStartDate = this.filter.StartDate;
   }
 
   // Making a deep copy

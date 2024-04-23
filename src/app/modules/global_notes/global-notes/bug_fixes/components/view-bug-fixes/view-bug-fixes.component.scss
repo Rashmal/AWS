@@ -3,6 +3,7 @@
 
     .requested_by_width {
         width: 12%;
+        min-width: 112px;
     }
 
     .title_by_width {
@@ -17,8 +18,14 @@
         width: 10%;
     }
 
+    .dates_by_width {
+        width: 10%;
+        min-width: 130px;
+    }
+
     .estimated_by_width {
         width: 8%;
+        min-width: 112px;
     }
 
     .display_hide {

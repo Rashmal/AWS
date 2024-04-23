@@ -42,8 +42,8 @@
             <div class="label_section">
                 <span class="marginRight5">Start</span>
             </div>
-            <p-calendar [(ngModel)]="filter.StartDate" [iconDisplay]="'input'" [showIcon]="true"
-                (onSelect)="onChangeFilterItem('START')"></p-calendar>
+            <p-calendar [(ngModel)]="filterStartDate" [iconDisplay]="'input'" [showIcon]="true"
+                (onSelect)="onChangeFilterItem('START')" [maxDate]="filterEndDate"></p-calendar>
         </div>
         <!-- End of Start date section -->
     </div>
@@ -134,8 +134,8 @@
             <div class="label_section">
                 <span class="marginRight5">End</span>
             </div>
-            <p-calendar [(ngModel)]="filter.EndDate" [iconDisplay]="'input'" [showIcon]="true"
-                [minDate]="filter.StartDate" (onSelect)="onChangeFilterItem('END')"></p-calendar>
+            <p-calendar [(ngModel)]="filterEndDate" [iconDisplay]="'input'" [showIcon]="true"
+                [minDate]="filterStartDate" (onSelect)="onChangeFilterItem('END')"></p-calendar>
         </div>
         <!-- End of End date section -->
     </div>
@@ -180,7 +180,7 @@
                         ></i>
                         Title</th>
                     <th class="text_center status_by_width">Status</th>
-                    <th class="text_center ">
+                    <th class="text_center dates_by_width">
                         <i class="fa fa-sort-asc margin_right10 "aria-hidden="true" (click)="sortItems('START', 'ASC')"
                         [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'START' )? 'selected_sort' : 'unSelected_sort'" 
                         ></i>
@@ -189,7 +189,7 @@
                         ></i>
                         Start Date
                     </th>
-                    <th class="text_center "> 
+                    <th class="text_center dates_by_width"> 
                         <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('END', 'ASC')"
                         [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'END' )? 'selected_sort' : 'unSelected_sort'" 
                         ></i>
@@ -304,7 +304,7 @@
                         </div>
 
                     </td>
-                    <td class="text_center">
+                    <td class="text_center dates_by_width">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 ">
                             <div class="ellipsis full_width">
@@ -313,7 +313,7 @@
                         </div>
 
                     </td>
-                    <td class="text_center">
+                    <td class="text_center dates_by_width">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section paddingRight5 ">
                             <div class="ellipsis full_width">

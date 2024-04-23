@@ -5,7 +5,7 @@ import { CommonModel } from 'src/app/modules/common/models/commonModel';
 import { BugFixModel } from '../../models/bugFixModel';
 import { BugFix } from '../../core/bugFixesModels/bugFix';
 import { IErrorMessage } from 'src/app/modules/common/core/iErrorMessage';
-import { SYSTEM_ENHANCEMENT$TITLE$LIMIT } from 'src/app/core/apiConfigurations';
+import { BUG_FIXES$TITLE$LIMIT } from 'src/app/core/apiConfigurations';
 import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
 import { CommonService } from 'src/app/modules/common/services/common.service';
 import { BugFixesService } from '../../services/bug-fixes.service';
@@ -41,7 +41,7 @@ export class ManageBugFixesComponent {
   // Store the error messages
   errorMessagesList: IErrorMessage[] = [];
   // Store the title limit
-  titleLimit: number = SYSTEM_ENHANCEMENT$TITLE$LIMIT;
+  titleLimit: number = BUG_FIXES$TITLE$LIMIT;
   // Store the cookie interface
   overallCookieInterface: OverallCookieInterface;
   // Store the start date
