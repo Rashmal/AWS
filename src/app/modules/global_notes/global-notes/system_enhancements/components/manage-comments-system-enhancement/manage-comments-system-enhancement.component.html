@@ -11,18 +11,18 @@
     </div>
     <!-- End of Title section -->
 
-    <!-- Body content section -->
+    <!-- Body content section on xl screens -->
     <div class="body_content_section">
         <!-- Loop through the comments -->
-        <div class="col-xl-12 comment_view_section marginBottom10" *ngFor="let comment of viewSystemEnhancementComment">
+        <div class="row comment_view_section marginBottom10" *ngFor="let comment of viewSystemEnhancementComment">
             <!-- Comment view section -->
-            <div class="comments_max_div">
+            <div class="col-12 comments_max_div">
                 <div [innerHtml]="comment.Description"></div>
             </div>
             <!-- End of Comment view section -->
 
             <!-- Comment added date -->
-            <div class="display_flex_center">
+            <div class="col-12 display_flex_center justify_end">
                 <div class="marginRight5 date_section">By {{comment.AddedUser}} on </div>
                 <div class="date_section">{{comment.AddedDate | date:'dd MMM yyyy hh:mm a' }}</div>
             </div>
@@ -43,6 +43,8 @@
         </div>
     </div>
     <!-- End of Body content section -->
+
+  
 
     <!-- Top row section -->
     <div class="marginTop5">

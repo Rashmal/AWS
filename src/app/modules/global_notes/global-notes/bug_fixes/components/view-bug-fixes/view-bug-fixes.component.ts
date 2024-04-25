@@ -222,6 +222,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
         label: 'All',
         value: -1,
       });
+      debugger
       // Loop through the list
       for (let i = 0; i < statusListLocal.length; i++) {
         // Setting the option
@@ -780,11 +781,19 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
       ).ColorCode;
     }
   }
+
   // Sort bugFix items
-  sortItems(column: string, order: string) {
+  sortItems(column: string) {
     this.filter.SortColumn = column;
-    this.filter.SortDirection = order;
+    this.filter.SortDirection = this.filter.SortDirection == 'ASC' ? 'DESC' : 'ASC' ;
     this.onChangeFilterItem('SORT');
   }
+
+  // Get colors for dropdown
+  getColorForDD(item: SelectItem, type: string){
+    let status = this.originalStatusListLocal.find(k => ( k.Name.toLocaleUpperCase() == item.label.toLocaleUpperCase()));
+    return status ? status.ColorCode : (type == 'BG' ? '#ffffff' : '#000000')
+  }
+
 }
 

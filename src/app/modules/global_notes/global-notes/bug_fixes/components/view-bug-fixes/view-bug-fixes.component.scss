@@ -197,7 +197,7 @@
 
     .stator_strip {
         height: 30px;
-        width: 7px;
+        width: 5px;
         margin-right: 5px;
     }
 
@@ -404,9 +404,14 @@
 
 .selected_sort {
     color: #40acf5;
+    margin-left: -8px;
 }
 .unSelected_sort {
     color: #000000;
+    cursor: pointer;
+    margin-left: -8px;
+}
+.sort_click{
     cursor: pointer;
 }
 

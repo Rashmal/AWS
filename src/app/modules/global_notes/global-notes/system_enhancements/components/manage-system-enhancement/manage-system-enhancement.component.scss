@@ -143,6 +143,75 @@
     }
 }
 
+.small_screen{
+    input{
+        width: 100% !important;
+    }
+    .each_section{
+        padding-right: 0 !important;
+    }
+    .each_section_merged_full_width{
+        padding-right: 0 !important;
+    }
+    .first_row_section{
+        display: block;
+        .each_section_merged{
+            width: 100% !important;
+            padding-right: 0 !important;
+        }
+    }
+}
+
 ::ng-deep .p-calendar .p-inputtext{
     width: 200px !important;
+}
+
+::ng-deep .small_screen .p-dropdown{
+    width: 100% !important;
+}
+::ng-deep .small_screen .p-calendar .p-inputtext{
+    width: 100% !important;
+}
+::ng-deep .small_screen .p-calendar {
+    width: 100% !important;
+}
+::ng-deep .small_screen .p-multiselect {
+    width: 100% !important;
+}
+
+.medium_screen{
+    .input_title{
+        width: 100% !important;
+    }
+    .input_esth{
+        width: 97% !important;
+    }
+    .each_section{
+        padding-right: 0 !important;
+    }
+    .each_section_merged_full_width{
+        padding-right: 0 !important;
+    }
+    .first_row_section{
+        display: block;
+        .each_section_merged{
+            width: 100% !important;
+            padding-right: 0 !important;
+        }
+    }
+}
+
+
+
+::ng-deep .medium_screen .p-dropdown{
+    width: 97% !important;
+}
+::ng-deep .medium_screen .p-calendar .p-inputtext{
+    width: 97% !important;
+}
+::ng-deep .medium_screen .p-calendar {
+    width: 97% !important;
+}
+::ng-deep .medium_screen .p-multiselect {
+    width: 97% !important;
 }

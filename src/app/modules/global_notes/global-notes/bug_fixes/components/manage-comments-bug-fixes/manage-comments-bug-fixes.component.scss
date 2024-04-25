@@ -128,7 +128,7 @@
     }
 
     .comments_max_div {
-        width: 54vw;
+       
         /* overflow: hidden; */
         display: flex;
         flex-wrap: wrap;
@@ -139,4 +139,7 @@
         color: red;
         padding: 0;
     }
+}
+.justify_end{
+    justify-content: end;
 }

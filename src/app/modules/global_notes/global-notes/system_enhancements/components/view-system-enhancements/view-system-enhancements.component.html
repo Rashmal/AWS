@@ -490,37 +490,37 @@
                 <!-- Header row section -->
                 <tr>
                     <th>No:</th>
-                    <th class="title_content title_by_width">
-                        <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('TITLE', 'ASC')"
+                    <th class="title_content title_by_width sort_click" (click)="sortItems('TITLE')">
+                        <i class="fa fa-sort-asc " aria-hidden="true" 
                             [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'TITLE' )? 'selected_sort' : 'unSelected_sort'"></i>
-                        <i class="fa fa-sort-desc margin_right10" aria-hidden="true"
-                            (click)="sortItems('TITLE', 'DESC')"
+                        <i class="fa fa-sort-desc " aria-hidden="true"
+                            
                             [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'TITLE' )? 'selected_sort' : 'unSelected_sort'"></i>
                         Title
                     </th>
                     <th class="text_center status_by_width">Status</th>
-                    <th class="text_center dates_by_width">
-                        <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('START', 'ASC')"
+                    <th class="text_center dates_by_width sort_click" (click)="sortItems('START')">
+                        <i class="fa fa-sort-asc  " aria-hidden="true" 
                             [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'START' )? 'selected_sort' : 'unSelected_sort'"></i>
-                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true"
-                            (click)="sortItems('START', 'DESC')"
+                        <i class="fa fa-sort-desc  " aria-hidden="true"
+                            
                             [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'START' )? 'selected_sort' : 'unSelected_sort'"></i>
                         Start Date
                     </th>
-                    <th class="text_center dates_by_width">
-                        <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('END', 'ASC')"
+                    <th class="text_center dates_by_width sort_click" (click)="sortItems('END')">
+                        <i class="fa fa-sort-asc   " aria-hidden="true" 
                             [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'END' )? 'selected_sort' : 'unSelected_sort'"></i>
-                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true" (click)="sortItems('END', 'DESC')"
+                        <i class="fa fa-sort-desc  " aria-hidden="true"
                             [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'END' )? 'selected_sort' : 'unSelected_sort'"></i>
 
 
                         End Date
                     </th>
-                    <th class="text_center estimated_by_width">
-                        <i class="fa fa-sort-asc margin_right10 " aria-hidden="true" (click)="sortItems('HOURS', 'ASC')"
+                    <th class="text_center estimated_by_width sort_click" (click)="sortItems('HOURS')">
+                        <i class="fa fa-sort-asc " aria-hidden="true" 
                             [ngClass]="(filter.SortDirection == 'ASC' && filter.SortColumn == 'HOURS' )? 'selected_sort' : 'unSelected_sort'"></i>
-                        <i class="fa fa-sort-desc margin_right10 " aria-hidden="true"
-                            (click)="sortItems('HOURS', 'DESC')"
+                        <i class="fa fa-sort-desc " aria-hidden="true"
+                            
                             [ngClass]="(filter.SortDirection == 'DESC' && filter.SortColumn == 'HOURS' )? 'selected_sort' : 'unSelected_sort'"></i>
                         Est.Hrs.
                     </th>
@@ -591,7 +591,7 @@
                                 <!-- Loop through the statuses -->
                                 <div class="status_list" [style.borderColor]="status.ColorCode"
                                     [style.background]="(status.Name == enhancement.StatusName)?status.ColorCode:'white'"
-                                    [style.color]="(status.Name == enhancement.StatusName)?'white':'black'"
+                                    [style.color]="(status.Name == enhancement.StatusName) ? 'white': status.ColorCode"
                                     *ngFor="let status of originalStatusListLocal"
                                     (click)="onSelectStatusOnClick(status,enhancement)">
                                     <!-- Status box -->
@@ -612,7 +612,14 @@
                             <div class="status_display_section_mobile" *ngIf="userRoleCode == 'AD'">
                                 <p-dropdown [options]="viewStatusMobileDropdownList" optionLabel="label"
                                     [(ngModel)]="enhancement.StatusName" optionValue="label"
-                                    (onChange)="onChangeSystemEnhancementStatus(enhancement)"></p-dropdown>
+                                    (onChange)="onChangeSystemEnhancementStatus(enhancement)">
+                                    <ng-template let-status pTemplate="item">
+                                        <div class='userItem' 
+                                        [style.color]="enhancement.StatusName.toLocaleUpperCase() != status.label.toLocaleUpperCase() ? getColorForDD(status, 'FF')   : '#ffffff'"
+                                        [style.background-color]="enhancement.StatusName.toLocaleUpperCase() == status.label.toLocaleUpperCase() ? getColorForDD(status, 'BG') : '#ffffff'"
+                                        >{{status.label}}</div>
+                                    </ng-template>
+                                </p-dropdown>
                             </div>
                             <div class="status_display_section_mobile" *ngIf="userRoleCode !== 'AD'">
                                 <span>{{enhancement.StatusName}}</span>

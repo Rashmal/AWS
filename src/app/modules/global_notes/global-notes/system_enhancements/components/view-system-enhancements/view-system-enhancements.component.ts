@@ -647,7 +647,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
                     Id: '',
                     CurrentPage: 1,
                     EndDate: new Date(),
-                    ModuleId: -1,
+                    ModuleId: 1,
                     ParentId: 0,
                     PriorityId: -1,
                     RecordsPerPage: 10,
@@ -779,10 +779,17 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
             ).ColorCode;
         }
     }
+
     // Sort enhancement items
-    sortItems(column: string, order: string) {
+    sortItems(column: string) {
         this.filter.SortColumn = column;
-        this.filter.SortDirection = order;
+        this.filter.SortDirection = this.filter.SortDirection == 'ASC' ? 'DESC' : 'ASC' ;
         this.onChangeFilterItem('SORT');
     }
+
+     // Get colors for dropdown
+  getColorForDD(item: SelectItem, type: string){
+    let status = this.originalStatusListLocal.find(k => ( k.Name.toLocaleUpperCase() == item.label.toLocaleUpperCase()));
+    return status ? status.ColorCode : (type == 'BG' ? '#ffffff' : '#000000')
+  }
 }
