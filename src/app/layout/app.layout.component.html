@@ -6,12 +6,20 @@
     <!-- End of Top bar section -->
 
     <!-- Side bar section -->
-    <div *ngIf="!displayMenuTop" class="layout-sidebar" (mouseenter)="mouseEnterOnSidebar()"
+    <div *ngIf="!displayMenuTop" class="d-none d-md-none d-lg-block d-xl-block layout-sidebar" (mouseenter)="mouseEnterOnSidebar()"
         (mouseleave)="mouseLeaveOnSidebar()">
-        <app-new-side-bar [mouseEnter]="mouseEnter" [ttlNotCount]="ttlNotCount"></app-new-side-bar>
+        <app-new-side-bar [mouseEnter]="mouseEnter" [ttlNotCount]="ttlNotCount" [isMobile]="false"></app-new-side-bar>
         <!-- <app-sidebar></app-sidebar> -->
     </div>
     <!-- End of Side bar section -->
+
+     <!-- Side bar section -->
+     <div *ngIf="!displayMenuTop" class="d-block d-md-block d-lg-none d-xl-none layout-sidebar" [style.width]="'270px'"
+     (mouseleave)="mouseLeaveOnSidebar()">
+     <app-new-side-bar [mouseEnter]="true" [ttlNotCount]="ttlNotCount" [isMobile]="true"></app-new-side-bar>
+     <!-- <app-sidebar></app-sidebar> -->
+ </div>
+ <!-- End of Side bar section -->
 
     <!-- Main container section -->
     <div class="layout-main-container">
