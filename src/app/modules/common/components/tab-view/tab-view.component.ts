@@ -78,8 +78,44 @@ export class TabViewComponent {
     }
 
     getNotificationCount() {
+        // this.hubConnectionBuilder = new HubConnectionBuilder()
+        //     .withUrl('https://localhost:7198/notificationHub')
+        //     .configureLogging(LogLevel.Information)
+        //     .build();
+        // this.hubConnectionBuilder
+        //     .start()
+        //     .then(() => console.log('Connection started.......!'))
+        //     .catch((err) => console.log('Error while connect with server'));
+        // this.hubConnectionBuilder.on('NotificationCountGN', (result: any) => {
+        //    this.totalCount = result;
+        // });
+
+        // this.hubConnectionBuilder = new HubConnectionBuilder()
+        //     .withUrl('https://localhost:7198/notificationHub')
+        //     .configureLogging(LogLevel.Information)
+        //     .build();
+        // this.hubConnectionBuilder
+        //     .start()
+        //     .then(() => console.log('Connection started.......!'))
+        //     .catch((err) => console.log('Error while connect with server'));
+        // this.hubConnectionBuilder.on('NotificationCountBF', (result: any) => {
+        //     this.countBF = result;
+        // });
+
+        // this.hubConnectionBuilder = new HubConnectionBuilder()
+        //     .withUrl('https://localhost:7198/notificationHub')
+        //     .configureLogging(LogLevel.Information)
+        //     .build();
+        // this.hubConnectionBuilder
+        //     .start()
+        //     .then(() => console.log('Connection started.......!'))
+        //     .catch((err) => console.log('Error while connect with server'));
+        // this.hubConnectionBuilder.on('NotificationCountSE', (result: any) => {
+        //     this.countSE = result;
+        // });
+
         this.hubConnectionBuilder = new HubConnectionBuilder()
-            .withUrl('https://localhost:7198/notificationHub')
+            .withUrl('https://iitcdemoapi.com/AWSAPI/notificationHub')
             .configureLogging(LogLevel.Information)
             .build();
         this.hubConnectionBuilder
@@ -91,7 +127,7 @@ export class TabViewComponent {
         });
 
         this.hubConnectionBuilder = new HubConnectionBuilder()
-            .withUrl('https://localhost:7198/notificationHub')
+            .withUrl('https://iitcdemoapi.com/AWSAPI/notificationHub')
             .configureLogging(LogLevel.Information)
             .build();
         this.hubConnectionBuilder
@@ -103,7 +139,7 @@ export class TabViewComponent {
         });
 
         this.hubConnectionBuilder = new HubConnectionBuilder()
-            .withUrl('https://localhost:7198/notificationHub')
+            .withUrl('https://iitcdemoapi.com/AWSAPI/notificationHub')
             .configureLogging(LogLevel.Information)
             .build();
         this.hubConnectionBuilder

@@ -161,7 +161,7 @@ export class NewTopBarComponent {
 
     getNotificationCount() {
         this.hubConnectionBuilder = new HubConnectionBuilder()
-            .withUrl('https://localhost:7198/notificationHub')
+            .withUrl('https://iitcdemoapi.com/AWSAPI/notificationHub')
             .configureLogging(LogLevel.Information)
             .build();
         this.hubConnectionBuilder
@@ -171,6 +171,18 @@ export class NewTopBarComponent {
         this.hubConnectionBuilder.on('NotificationCountGN', (result: any) => {
             this.ttlNotCount = result;
         });
+
+        // this.hubConnectionBuilder = new HubConnectionBuilder()
+        //     .withUrl('https://localhost:7198/notificationHub')
+        //     .configureLogging(LogLevel.Information)
+        //     .build();
+        // this.hubConnectionBuilder
+        //     .start()
+        //     .then(() => console.log('Connection started.......!'))
+        //     .catch((err) => console.log('Error while connect with server'));
+        // this.hubConnectionBuilder.on('NotificationCountGN', (result: any) => {
+        //     this.ttlNotCount = result;
+        // });
     }
 
     // Get global notes notification count
