@@ -13,6 +13,8 @@ import { MenuService } from '../app.menu.service';
 export class NewSideBarComponent implements OnInit {
   // On mouse enter on side bar
   @Input() mouseEnter: boolean = false;
+  // Is mobile screen
+  @Input() isMobile: boolean = false;
   // Store notification count
   @Input() ttlNotCount: number = 0;
   // Store the model list objects
@@ -82,7 +84,21 @@ export class NewSideBarComponent implements OnInit {
     // Initialize the model list
     this.getMenuItems();
     // End of Initialize the model list
+    if(this.isMobile){
+      this.getGlobalNotesNotCount();
+    }
+    
   }
+
+  // Get global notes notification count
+  getGlobalNotesNotCount() {
+    this.commonModel.GetNotificationCount('TOTAL').then(
+        (data: number) => {
+            // Set notification count
+            this.ttlNotCount = data;
+        }
+    );
+}
 
   //Get site menu items
   getMenuItems() {
