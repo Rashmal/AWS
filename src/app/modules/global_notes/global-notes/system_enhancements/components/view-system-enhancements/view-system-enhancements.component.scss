@@ -103,6 +103,9 @@
         padding-right: 40px;
         padding-bottom: 4px;
         width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .add_button_mobile{
@@ -115,6 +118,9 @@
         padding-left: 40px;
         padding-right: 40px;
         padding-bottom: 4px;
+        display: flex;
+    align-items: center;
+    justify-content: center;
        
     }
 
@@ -252,6 +258,11 @@
     }
 
     .action_button {
+        button{
+            display: flex;
+    align-items: center;
+    justify-content: center;
+        }
         .button_green {
             height: 30px;
             width: 33px;
