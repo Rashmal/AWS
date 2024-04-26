@@ -469,7 +469,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
   deleteConfirmation(bugFix: ViewBugFix) {
     // Open popup to confirm action
     this.ref = this.dialogService.open(DeleteConfirmationComponent, {
-      header: 'Delete an bugFix',
+      header: 'Delete a bug fix',
       data: bugFix,
     });
     // Perform an action on close the popup

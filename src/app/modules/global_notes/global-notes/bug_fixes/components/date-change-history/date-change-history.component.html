@@ -11,83 +11,244 @@
     </div>
     <!-- End of Title section -->
 
-    <!-- Body content section -->
-    <div class="body_content_section">
-        <!-- First row section -->
-        <div class="col-xl-12 first_row_section marginBottom5">
-            <!-- From date section -->
-            <div class="each_section">
-                <!-- Label section -->
-                <div class="each_label">
-                    <span>From Date</span>
-                </div>
-                <!-- End of Label section -->
-                <p-calendar [(ngModel)]="fromDate" [iconDisplay]="'input'" [showIcon]="true" [maxDate]="toDate"></p-calendar>
+   <!-- Body content section -->
+   <div class="d-none d-xl-block body_content_section ">
+    <!-- First row section -->
+    <div class="col-xl-12 first_row_section marginBottom5">
+        <!-- From date section -->
+        <div class="each_section">
+            <!-- Label section -->
+            <div class="each_label">
+                <span>From Date</span>
             </div>
-            <!-- End of From date section -->
-
-            <!-- To date section -->
-            <div class="each_section">
-                <!-- Label section -->
-                <div class="each_label">
-                    <span>To Date</span>
-                </div>
-                <!-- End of Label section -->
-                <p-calendar [(ngModel)]="toDate" [iconDisplay]="'input'" [showIcon]="true" [minDate]="fromDate"></p-calendar>
-            </div>
-            <!-- End of to date section -->
-
-            <!-- Estimated hours section -->
-            <div class="each_section">
-                <!-- Label section -->
-                <div class="each_label">
-                    <span>Approx. Duration (hrs)</span>
-                </div>
-                <!-- End of Label section -->
-
-                <!-- Estimated hours input -->
-                <div>
-                    <input type="number" [(ngModel)]="bugFixChangeDate.NewDuration" inputrestriction="^[0-9]*$" min="0">
-                </div>
-                <!-- End of Estimated hours input -->
-
-                <!-- Error Message -->
-                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$DURATION')">
-                    <span>{{CheckErrorCode('EMPTY$DURATION').ErrorMessage}}</span>
-                </div>
-                <!-- End of Error Message -->
-            </div>
-            <!-- End of Estimated hours section -->
+            <!-- End of Label section -->
+            <p-calendar [(ngModel)]="fromDate" [iconDisplay]="'input'" [showIcon]="true"
+                [maxDate]="toDate"></p-calendar>
         </div>
-        <!-- End of First row section -->
+        <!-- End of From date section -->
 
-        <!-- Second row section -->
-        <div class="col-xl-12 first_row_section marginBottom5">
-            <!-- Description section -->
-            <div class="each_section_merged">
-                <!-- Label section -->
-                <div class="each_label">
-                    <span>Reason</span>
-                </div>
-                <!-- End of Label section -->
-
-                <!-- Description input -->
-                <div>
-                    <p-editor [(ngModel)]="bugFixChangeDate.Reason" [style]="{ height: '320px' }"></p-editor>
-                </div>
-                <!-- End of Description input -->
-
-                <!-- Error Message -->
-                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$REASON')">
-                    <span>{{CheckErrorCode('EMPTY$REASON').ErrorMessage}}</span>
-                </div>
-                <!-- End of Error Message -->
+        <!-- To date section -->
+        <div class="each_section">
+            <!-- Label section -->
+            <div class="each_label">
+                <span>To Date</span>
             </div>
-            <!-- End of Description section -->
+            <!-- End of Label section -->
+            <p-calendar [(ngModel)]="toDate" [iconDisplay]="'input'" [showIcon]="true"
+                [minDate]="fromDate"></p-calendar>
         </div>
-        <!-- End of Second row section -->
+        <!-- End of to date section -->
+
+        <!-- Estimated hours section -->
+        <div class="each_section">
+            <!-- Label section -->
+            <div class="each_label">
+                <span>Approx. Duration (hrs)</span>
+            </div>
+            <!-- End of Label section -->
+
+            <!-- Estimated hours input -->
+            <div>
+                <input type="number" [(ngModel)]="bugFixChangeDate.NewDuration"
+                    inputrestriction="^[0-9]*$" min="0">
+            </div>
+            <!-- End of Estimated hours input -->
+
+            <!-- Error Message -->
+            <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$DURATION')">
+                <span>{{CheckErrorCode('EMPTY$DURATION').ErrorMessage}}</span>
+            </div>
+            <!-- End of Error Message -->
+        </div>
+        <!-- End of Estimated hours section -->
     </div>
-    <!-- End of Body content section -->
+    <!-- End of First row section -->
+
+    <!-- Second row section -->
+    <div class="col-xl-12 first_row_section marginBottom5">
+        <!-- Description section -->
+        <div class="each_section_merged">
+            <!-- Label section -->
+            <div class="each_label">
+                <span>Reason</span>
+            </div>
+            <!-- End of Label section -->
+
+            <!-- Description input -->
+            <div>
+                <p-editor [(ngModel)]="bugFixChangeDate.Reason" [style]="{ height: '320px' }"></p-editor>
+            </div>
+            <!-- End of Description input -->
+
+            <!-- Error Message -->
+            <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$REASON')">
+                <span>{{CheckErrorCode('EMPTY$REASON').ErrorMessage}}</span>
+            </div>
+            <!-- End of Error Message -->
+        </div>
+        <!-- End of Description section -->
+    </div>
+    <!-- End of Second row section -->
+</div>
+<!-- End of Body content section -->
+
+
+<!-- Body content section -->
+<div class="d-none d-md-block d-lg-block d-xl-none body_content_section smaller_screen_content">
+    <div class="row">
+        <!-- From date section -->
+        <div class="col-6 each_section">
+            <!-- Label section -->
+            <div class="each_label">
+                <span>From Date</span>
+            </div>
+            <!-- End of Label section -->
+            <p-calendar [(ngModel)]="fromDate" [iconDisplay]="'input'" [showIcon]="true"
+                [maxDate]="toDate"></p-calendar>
+        </div>
+        <!-- End of From date section -->
+
+        <!-- To date section -->
+        <div class="col-6 each_section">
+            <!-- Label section -->
+            <div class="each_label">
+                <span>To Date</span>
+            </div>
+            <!-- End of Label section -->
+            <p-calendar [(ngModel)]="toDate" [iconDisplay]="'input'" [showIcon]="true"
+                [minDate]="fromDate"></p-calendar>
+        </div>
+        <!-- End of to date section -->
+
+         <!-- Estimated hours section -->
+         <div class="col-6 each_section">
+            <!-- Label section -->
+            <div class="each_label">
+                <span>Approx. Duration (hrs)</span>
+            </div>
+            <!-- End of Label section -->
+
+            <!-- Estimated hours input -->
+            <div>
+                <input class="input_est" type="number" [(ngModel)]="bugFixChangeDate.NewDuration"
+                    inputrestriction="^[0-9]*$" min="0">
+            </div>
+            <!-- End of Estimated hours input -->
+
+            <!-- Error Message -->
+            <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$DURATION')">
+                <span>{{CheckErrorCode('EMPTY$DURATION').ErrorMessage}}</span>
+            </div>
+            <!-- End of Error Message -->
+        </div>
+        <!-- End of Estimated hours section -->
+
+        <!-- Description section -->
+        <div class="col-12 each_section_merged">
+            <!-- Label section -->
+            <div class="each_label">
+                <span>Reason</span>
+            </div>
+            <!-- End of Label section -->
+
+            <!-- Description input -->
+            <div>
+                <p-editor [(ngModel)]="bugFixChangeDate.Reason" [style]="{ height: '320px' }"></p-editor>
+            </div>
+            <!-- End of Description input -->
+
+            <!-- Error Message -->
+            <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$REASON')">
+                <span>{{CheckErrorCode('EMPTY$REASON').ErrorMessage}}</span>
+            </div>
+            <!-- End of Error Message -->
+        </div>
+        <!-- End of Description section -->
+    </div>
+  
+
+   
+</div>
+<!-- End of Body content section -->
+
+
+<!-- Body content section -->
+<div class="d-block d-sm-block d-md-none d-lg-none d-xl-none body_content_section smaller_screen_content">
+    <div class="row">
+        <!-- From date section -->
+        <div class="col-12 each_section">
+            <!-- Label section -->
+            <div class="each_label">
+                <span>From Date</span>
+            </div>
+            <!-- End of Label section -->
+            <p-calendar [(ngModel)]="fromDate" [iconDisplay]="'input'" [showIcon]="true"
+                [maxDate]="toDate"></p-calendar>
+        </div>
+        <!-- End of From date section -->
+
+        <!-- To date section -->
+        <div class="col-12 each_section">
+            <!-- Label section -->
+            <div class="each_label">
+                <span>To Date</span>
+            </div>
+            <!-- End of Label section -->
+            <p-calendar [(ngModel)]="toDate" [iconDisplay]="'input'" [showIcon]="true"
+                [minDate]="fromDate"></p-calendar>
+        </div>
+        <!-- End of to date section -->
+
+         <!-- Estimated hours section -->
+         <div class="col-12 each_section">
+            <!-- Label section -->
+            <div class="each_label">
+                <span>Approx. Duration (hrs)</span>
+            </div>
+            <!-- End of Label section -->
+
+            <!-- Estimated hours input -->
+            <div>
+                <input class="input_est" type="number" [(ngModel)]="bugFixChangeDate.NewDuration"
+                    inputrestriction="^[0-9]*$" min="0">
+            </div>
+            <!-- End of Estimated hours input -->
+
+            <!-- Error Message -->
+            <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$DURATION')">
+                <span>{{CheckErrorCode('EMPTY$DURATION').ErrorMessage}}</span>
+            </div>
+            <!-- End of Error Message -->
+        </div>
+        <!-- End of Estimated hours section -->
+
+        <!-- Description section -->
+        <div class="col-12 each_section_merged">
+            <!-- Label section -->
+            <div class="each_label">
+                <span>Reason</span>
+            </div>
+            <!-- End of Label section -->
+
+            <!-- Description input -->
+            <div>
+                <p-editor [(ngModel)]="bugFixChangeDate.Reason" [style]="{ height: '320px' }"></p-editor>
+            </div>
+            <!-- End of Description input -->
+
+            <!-- Error Message -->
+            <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$REASON')">
+                <span>{{CheckErrorCode('EMPTY$REASON').ErrorMessage}}</span>
+            </div>
+            <!-- End of Error Message -->
+        </div>
+        <!-- End of Description section -->
+    </div>
+  
+
+   
+</div>
+<!-- End of Body content section -->
 
     <!-- Previous change date histories list -->
     <div class="previous_date_histories">

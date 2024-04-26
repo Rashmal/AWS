@@ -149,6 +149,21 @@
     }
 }
 
+.smaller_screen_content{
+    .input_est{
+        width: 100% !important;
+    }
+    .label_section{
+        width: auto !important;
+    }
+    .col-12{
+        padding-top: 0px !important;
+    }
+    .col-6{
+        padding-top: 0px !important;
+    }
+}
+
 ::ng-deep thead th {
     padding: 5px;
 }
@@ -160,4 +175,25 @@
 }
 ::ng-deep .p-calendar .p-inputtext{
     width: 200px !important;
+}
+
+
+::ng-deep .smaller_screen_content .p-calendar .p-inputtext{
+    width: 100% !important;
+}
+
+::ng-deep .smaller_screen_content .p-calendar{
+    width: 100% !important;
+}
+
+::ng-deep .smaller_screen_content .p-dropdown{
+    width: 100% !important;
+}
+
+::ng-deep .smaller_screen_content p-dropdown{
+    width: 100% !important;
+}
+
+::ng-deep .smaller_screen_content p-calendar {
+    width: 100% !important;
 }

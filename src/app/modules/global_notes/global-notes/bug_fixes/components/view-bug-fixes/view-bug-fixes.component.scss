@@ -115,7 +115,7 @@
         padding-left: 40px;
         padding-right: 40px;
         padding-bottom: 4px;
-        width: 250px; 
+         
     }
 
     .label_section {
@@ -149,17 +149,21 @@
         min-width: 228px;
     }
 
-    .search_input_mobile{
-        max-width: 250px;
-        input{
-            width: 200px;
-        }
-    }
+   
 
     .stat_box_section {
         border: solid 2px black;
         border-radius: 5px;
         width: 180px;
+        padding: 5px;
+        margin-right: 5px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .stat_box_section_sm {
+        border: solid 2px black;
+        border-radius: 5px;
+        width: 100%;
         padding: 5px;
         margin-right: 5px;
         font-weight: bold;
@@ -430,4 +434,87 @@
 
 ::ng-deep .per_page_ddw_mobile .p-dropdown{
     width: 250px;
+}
+
+::ng-deep .smaller_screen_content .p-calendar .p-inputtext{
+    width: 100% !important;
+}
+
+::ng-deep .smaller_screen_content .p-calendar{
+    width: 100% !important;
+}
+
+::ng-deep .smaller_screen_content .p-dropdown{
+    width: 100% !important;
+}
+
+::ng-deep .smaller_screen_content p-dropdown{
+    width: 100% !important;
+}
+
+::ng-deep .smaller_screen_content p-calendar {
+    width: 100% !important;
+}
+
+.smaller_screen_content{
+    .search_input_mobile{
+        width: 100%;
+        input{
+           width: 100%;
+        }
+    }
+    .label_section{
+        width: auto !important;
+    }
+    .col-12{
+        padding-top: 0px !important;
+    }
+}
+
+.medium_screen{
+    .input_title{
+        width: 100% !important;
+    }
+    .input_esth{
+        width: 97% !important;
+    }
+    .each_section{
+        padding-right: 0 !important;
+    }
+    .each_section_merged_full_width{
+        padding-right: 0 !important;
+    }
+    .first_row_section{
+        display: block;
+        .each_section_merged{
+            width: 100% !important;
+            padding-right: 0 !important;
+        }
+    }
+    .search{
+        width: 80% !important;
+    }
+
+    .col-6{
+        padding-top: 0px !important;
+    }
+    .add_button{
+        width: 97% !important;
+    }
+    
+}
+
+
+
+::ng-deep .medium_screen .p-dropdown{
+    width: 97% !important;
+}
+::ng-deep .medium_screen .p-calendar .p-inputtext{
+    width: 97% !important;
+}
+::ng-deep .medium_screen .p-calendar {
+    width: 97% !important;
+}
+::ng-deep .medium_screen .p-multiselect {
+    width: 97% !important;
 }
