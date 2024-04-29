@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthenticationModel } from 'src/app/modules/authentication/models/authenticationModel';
@@ -23,6 +23,8 @@ export class NewTopBarComponent {
     @ViewChild('topbarmenubutton') topbarMenuButton!: ElementRef;
 
     @ViewChild('topbarmenu') menu!: ElementRef;
+
+    @Output() toggleMenus: EventEmitter<any> = new EventEmitter();
 
     // Store the cookie interface
     overallCookieInterface: OverallCookieInterface;
@@ -193,5 +195,10 @@ export class NewTopBarComponent {
                 this.ttlNotCount = data;
             }
         );
+    }
+
+    // On click event of toggle navigation
+    toggleNavigation() {
+        this.toggleMenus.emit(true);
     }
 }

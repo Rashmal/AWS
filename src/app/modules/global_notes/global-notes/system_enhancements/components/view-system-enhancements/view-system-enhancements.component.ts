@@ -494,6 +494,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
             EstimatedHours: 0,
             AssignedStaffList: [],
             RequestedStaffList: [],
+            HasRequest: 0
         };
         // Calling the modal to save the data
         this.systemEnhancementModel
@@ -783,13 +784,13 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
     // Sort enhancement items
     sortItems(column: string) {
         this.filter.SortColumn = column;
-        this.filter.SortDirection = this.filter.SortDirection == 'ASC' ? 'DESC' : 'ASC' ;
+        this.filter.SortDirection = this.filter.SortDirection == 'ASC' ? 'DESC' : 'ASC';
         this.onChangeFilterItem('SORT');
     }
 
-     // Get colors for dropdown
-  getColorForDD(item: SelectItem, type: string){
-    let status = this.originalStatusListLocal.find(k => ( k.Name.toLocaleUpperCase() == item.label.toLocaleUpperCase()));
-    return status ? status.ColorCode : (type == 'BG' ? '#ffffff' : '#000000')
-  }
+    // Get colors for dropdown
+    getColorForDD(item: SelectItem, type: string) {
+        let status = this.originalStatusListLocal.find(k => (k.Name.toLocaleUpperCase() == item.label.toLocaleUpperCase()));
+        return status ? status.ColorCode : (type == 'BG' ? '#ffffff' : '#000000')
+    }
 }

@@ -153,4 +153,9 @@ export class AppLayoutComponent implements OnDestroy {
             }
         );
     }
+
+    // Toggle menu navigation
+    toggleMenus(event) {
+        this.displayMenuTop = !this.displayMenuTop;
+    }
 }

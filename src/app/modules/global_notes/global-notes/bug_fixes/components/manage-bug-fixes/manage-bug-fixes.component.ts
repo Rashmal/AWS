@@ -91,7 +91,8 @@ export class ManageBugFixesComponent {
         StatusId: 0,
         EstimatedHours: 0,
         AssignedStaffList: [],
-        RequestedStaffList: []
+        RequestedStaffList: [],
+        HasRequest: 0
       };
       // Initialize default data
       this.initDefaultData();
@@ -123,7 +124,8 @@ export class ManageBugFixesComponent {
       StatusId: 0,
       EstimatedHours: 0,
       AssignedStaffList: [],
-      RequestedStaffList: []
+      RequestedStaffList: [],
+      HasRequest: 0
     };
     // Getting the Bug Fix details by ID
     this.bugFixModel.GetBugFixesDetailsByIdService(paramObject['BugFixesID']).then(
@@ -264,7 +266,7 @@ export class ManageBugFixesComponent {
 
   // On click event of assigned staff
   assignedStaffOnClick(elm) {
-    this.bugFix.AssignedStaffList = elm.value;
+    //this.bugFix.AssignedStaffList = elm.value;
   }
 
   // On click event of requested staff

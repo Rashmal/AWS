@@ -29,10 +29,25 @@ export class BugFixesService {
   private SetBugFixesCommentUrl = API$DOMAIN + 'api/BugFixes/SetBugFixesComment';
   private GetBugFixesCommentUrl = API$DOMAIN + 'api/BugFixes/GetBugFixesComment';
   private GetStatBoxesUrl = API$DOMAIN + 'api/BugFixes/GetStatBoxes';
+  private ApprovalChangeDateUrl = API$DOMAIN + 'api/BugFixes/ApprovalChangeDate';
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
 
+  }
+
+  // Approval of change date history
+  ApprovalChangeDate(BugFixChangeHistoryId: number, approval: string) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("BugFixChangeHistoryId", BugFixChangeHistoryId.toString())
+      .set("approval", approval.toString());
+
+    return this.http.get<boolean>(this.ApprovalChangeDateUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('ApprovalChangeDate', error)
+      })
+    );
   }
 
   // Set System Enhancement Details

@@ -20,6 +20,7 @@ import { BasicUserDetails } from 'src/app/modules/authentication/core/authentica
 import { Priority } from 'src/app/modules/common/core/priority';
 import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
 import { BugFix } from '../../core/bugFixesModels/bugFix';
+import { SystemEnhancement } from '../../../system_enhancements/core/systemEnhancementModels/systemEnhancement';
 
 @Component({
   selector: 'app-view-bug-fixes',
@@ -496,6 +497,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
       EstimatedHours: 0,
       AssignedStaffList: [],
       RequestedStaffList: [],
+      HasRequest: 0
     };
     // Calling the modal to save the data
     this.bugFixModel
@@ -785,13 +787,13 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
   // Sort bugFix items
   sortItems(column: string) {
     this.filter.SortColumn = column;
-    this.filter.SortDirection = this.filter.SortDirection == 'ASC' ? 'DESC' : 'ASC' ;
+    this.filter.SortDirection = this.filter.SortDirection == 'ASC' ? 'DESC' : 'ASC';
     this.onChangeFilterItem('SORT');
   }
 
   // Get colors for dropdown
-  getColorForDD(item: SelectItem, type: string){
-    let status = this.originalStatusListLocal.find(k => ( k.Name.toLocaleUpperCase() == item.label.toLocaleUpperCase()));
+  getColorForDD(item: SelectItem, type: string) {
+    let status = this.originalStatusListLocal.find(k => (k.Name.toLocaleUpperCase() == item.label.toLocaleUpperCase()));
     return status ? status.ColorCode : (type == 'BG' ? '#ffffff' : '#000000')
   }
 

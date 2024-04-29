@@ -563,7 +563,8 @@
                     <th class="text_center requested_by requested_by_width">
                         <div class="requested_by">Requested By</div>
                     </th>
-                    <th class="justify_center action_column ">Action</th>
+                    <th class="justify_center action_column " [ngClass]="(userRoleCode=='AD')?'':'action_column_user'">
+                        Action</th>
                 </tr>
                 <!-- End of Header row section -->
             </ng-template>
@@ -706,7 +707,7 @@
                         </div>
 
                     </td>
-                    <td class="action_column">
+                    <td class="action_column" [ngClass]="(userRoleCode=='AD')?'':'action_column_user'">
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section_btn paddingRight5 action_button">
                             <!--Comments button-->
@@ -715,17 +716,25 @@
                                     aria-hidden="true"></i></button>
                             <!--End of Comments button-->
                             <!--Change history button-->
-                            <button class="button_orange" (click)="changeDateHistoryOnClick(enhancement)"
-                                pTooltip="Change History" tooltipPosition="top"><i class="fa fa-history"
-                                    aria-hidden="true"></i></button>
+                            <button *ngIf="userRoleCode=='AD'" class="button_orange"
+                                (click)="changeDateHistoryOnClick(enhancement)" pTooltip="Change History"
+                                tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button>
+                            <button *ngIf="userRoleCode!=='AD' && enhancement.HasRequest !== 0" class="button_orange"
+                                (click)="changeDateHistoryOnClick(enhancement)" pTooltip="Change History"
+                                tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button>
+                            <button disabled *ngIf="userRoleCode!=='AD' && enhancement.HasRequest == 0"
+                                class="button_orange disabled" pTooltip="Change History Has Previous Requests" tooltipPosition="top"><i
+                                    class="fa fa-history" aria-hidden="true"></i></button>
                             <!--End of Change history button-->
                             <!--Edit button-->
-                            <button class="button_blue" (click)="editOnClickFunction(enhancement)" pTooltip="Edit"
-                                tooltipPosition="top"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                            <button class="button_blue" *ngIf="userRoleCode=='AD'"
+                                (click)="editOnClickFunction(enhancement)" pTooltip="Edit" tooltipPosition="top"><i
+                                    class="fa fa-pencil" aria-hidden="true"></i></button>
                             <!--End of Edit button-->
                             <!--Delete button-->
-                            <button class="button_red" (click)="deleteConfirmation(enhancement)" pTooltip="Delete"
-                                tooltipPosition="top"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            <button class="button_red" *ngIf="userRoleCode=='AD'"
+                                (click)="deleteConfirmation(enhancement)" pTooltip="Delete" tooltipPosition="top"><i
+                                    class="fa fa-trash" aria-hidden="true"></i></button>
                             <!--End of Delete button-->
                             <!--Send feature list button-->
                             <button *ngIf="false" class="button_grey"><i class="fa fa-archive"

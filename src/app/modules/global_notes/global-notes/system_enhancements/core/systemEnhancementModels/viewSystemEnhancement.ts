@@ -10,4 +10,5 @@ export interface ViewSystemEnhancement {
     PriorityName: string;
     RequestedStaffList: BasicUserDetails[];
     Total: number;
+    HasRequest: number;
 }

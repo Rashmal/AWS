@@ -13,6 +13,14 @@
 
     <!-- Body content section -->
     <div class="d-none d-xl-block body_content_section ">
+        <div class="col-xl-12 first_row_section marginBottom5">
+            <div class="each_section" *ngIf="systemEnhancementDetails.HasRequest == 0">
+                <span class="error_message">Adding the date change history will be disabled since it has a pending
+                    request of date
+                    change</span>
+            </div>
+        </div>
+
         <!-- First row section -->
         <div class="col-xl-12 first_row_section marginBottom5">
             <!-- From date section -->
@@ -22,8 +30,8 @@
                     <span>From Date</span>
                 </div>
                 <!-- End of Label section -->
-                <p-calendar [(ngModel)]="fromDate" [iconDisplay]="'input'" [showIcon]="true"
-                    [maxDate]="toDate"></p-calendar>
+                <p-calendar [disabled]="systemEnhancementDetails.HasRequest == 0" [(ngModel)]="fromDate"
+                    [iconDisplay]="'input'" [showIcon]="true" [maxDate]="toDate"></p-calendar>
             </div>
             <!-- End of From date section -->
 
@@ -34,8 +42,8 @@
                     <span>To Date</span>
                 </div>
                 <!-- End of Label section -->
-                <p-calendar [(ngModel)]="toDate" [iconDisplay]="'input'" [showIcon]="true"
-                    [minDate]="fromDate"></p-calendar>
+                <p-calendar [disabled]="systemEnhancementDetails.HasRequest == 0" [(ngModel)]="toDate"
+                    [iconDisplay]="'input'" [showIcon]="true" [minDate]="fromDate"></p-calendar>
             </div>
             <!-- End of to date section -->
 
@@ -49,8 +57,8 @@
 
                 <!-- Estimated hours input -->
                 <div>
-                    <input type="number" [(ngModel)]="systemEnhancementChangeDate.NewDuration"
-                        inputrestriction="^[0-9]*$" min="0">
+                    <input [disabled]="systemEnhancementDetails.HasRequest == 0" type="number"
+                        [(ngModel)]="systemEnhancementChangeDate.NewDuration" inputrestriction="^[0-9]*$" min="0">
                 </div>
                 <!-- End of Estimated hours input -->
 
@@ -76,7 +84,8 @@
 
                 <!-- Description input -->
                 <div>
-                    <p-editor [(ngModel)]="systemEnhancementChangeDate.Reason" [style]="{ height: '320px' }"></p-editor>
+                    <p-editor [readonly]="systemEnhancementDetails.HasRequest == 0"
+                        [(ngModel)]="systemEnhancementChangeDate.Reason" [style]="{ height: '320px' }"></p-editor>
                 </div>
                 <!-- End of Description input -->
 
@@ -120,8 +129,8 @@
             </div>
             <!-- End of to date section -->
 
-             <!-- Estimated hours section -->
-             <div class="col-6 each_section">
+            <!-- Estimated hours section -->
+            <div class="col-6 each_section">
                 <!-- Label section -->
                 <div class="each_label">
                     <span>Approx. Duration (hrs)</span>
@@ -165,9 +174,9 @@
             </div>
             <!-- End of Description section -->
         </div>
-      
 
-       
+
+
     </div>
     <!-- End of Body content section -->
 
@@ -199,8 +208,8 @@
             </div>
             <!-- End of to date section -->
 
-             <!-- Estimated hours section -->
-             <div class="col-12 each_section">
+            <!-- Estimated hours section -->
+            <div class="col-12 each_section">
                 <!-- Label section -->
                 <div class="each_label">
                     <span>Approx. Duration (hrs)</span>
@@ -244,9 +253,9 @@
             </div>
             <!-- End of Description section -->
         </div>
-      
 
-       
+
+
     </div>
     <!-- End of Body content section -->
 
@@ -280,6 +289,7 @@
                         <th>From</th>
                         <th>To</th>
                         <th>Duration</th>
+                        <th class="approval_btn_col"></th>
                     </tr>
                     <!-- End of Header row section -->
                 </ng-template>
@@ -309,9 +319,21 @@
                                 {{productData.NewToDate | date:'dd MMM yyyy'}}
                             </div>
                         </td>
-                        <td>
+                        <td [colSpan]="(productData.ApproveState == 0)?1:2">
                             <div>
                                 {{productData.NewDuration}}
+                            </div>
+                        </td>
+                        <td class="approval_btn_col">
+                            <div class="approval_btns" *ngIf="productData.ApproveState == 0">
+                                <button class="approve_btn marginRight5"
+                                    (click)="approveOnClick(productData.Id)">Approve</button>
+                                <button class="decline_btn" (click)="declineOnClick(productData.Id)">Decline</button>
+                            </div>
+                            <div class="approval_btns" *ngIf="productData.ApproveState !== 0">
+                                <span *ngIf="productData.ApproveState == 0">PENDING APPROVAL</span>
+                                <span class="decline_color" *ngIf="productData.ApproveState == 1">APPROVED</span>
+                                <span class="approve_color" *ngIf="productData.ApproveState == 2">DECLINED</span>
                             </div>
                         </td>
                     </tr>
@@ -359,7 +381,8 @@
             <!-- End of Close button -->
 
             <!-- Save button -->
-            <button class="save_btn" (click)="saveOnClickFunction()" pTooltip="Save button" tooltipPosition="top">
+            <button *ngIf="systemEnhancementDetails.HasRequest !== 0" class="save_btn" (click)="saveOnClickFunction()"
+                pTooltip="Save button" tooltipPosition="top">
                 <span>Save</span>
             </button>
             <!-- End of Save button -->

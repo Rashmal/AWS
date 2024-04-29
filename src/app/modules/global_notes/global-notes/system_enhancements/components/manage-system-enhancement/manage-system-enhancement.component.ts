@@ -54,6 +54,9 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
   systemEnhancementId: string = "";
   // Store managing type
   editingType: string = 'EDIT';
+  // Store the user access level
+  userAccessLevel: string = "";
+
   // Constructor
   constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService,
     private route: Router, private location: Location
@@ -62,6 +65,8 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     this.commonModel = new CommonModel(this.commonService);
     this.systemEnhancementModel = new SystemEnhancementModel(this.systemEnhancementsService);
     this.overallCookieInterface = new OverallCookieModel();
+    // Getting the user access level
+    this.userAccessLevel = this.overallCookieInterface.GetUserRole();
   }
 
   ngOnDestroy() {
@@ -91,7 +96,8 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
         StatusId: 0,
         EstimatedHours: 0,
         AssignedStaffList: [],
-        RequestedStaffList: []
+        RequestedStaffList: [],
+        HasRequest: 0
       };
       // Initialize default data
       this.initDefaultData();
@@ -123,7 +129,8 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
       StatusId: 0,
       EstimatedHours: 0,
       AssignedStaffList: [],
-      RequestedStaffList: []
+      RequestedStaffList: [],
+      HasRequest: 0
     };
     // Getting the system enhancement details by ID
     this.systemEnhancementModel.GetSystemEnhancementDetailsByIdService(paramObject['SystemEnhancementID']).then(
@@ -264,7 +271,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
 
   // On click event of assigned staff
   assignedStaffOnClick(elm) {
-    this.systemEnhancement.AssignedStaffList = elm.value;
+    //this.systemEnhancement.AssignedStaffList = elm.value;
   }
 
   // On click event of requested staff

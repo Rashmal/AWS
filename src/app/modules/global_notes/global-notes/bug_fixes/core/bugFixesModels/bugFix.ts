@@ -13,4 +13,5 @@ export interface BugFix {
     EndDate: Date;
     AssignedStaffList: BasicUserDetails[];
     RequestedStaffList: BasicUserDetails[];
+    HasRequest: number;
 }

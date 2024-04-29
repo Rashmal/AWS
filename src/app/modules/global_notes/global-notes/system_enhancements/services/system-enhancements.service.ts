@@ -29,10 +29,25 @@ export class SystemEnhancementsService {
   private SetSystemEhancementCommentUrl = API$DOMAIN + 'api/SystemEnhancement/SetSystemEhancementComment';
   private GetSystemEhancementCommentUrl = API$DOMAIN + 'api/SystemEnhancement/GetSystemEhancementComment';
   private GetStatBoxesUrl = API$DOMAIN + 'api/SystemEnhancement/GetStatBoxes';
+  private ApprovalChangeDateUrl = API$DOMAIN + 'api/SystemEnhancement/ApprovalChangeDate';
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
 
+  }
+
+  // Approval of change date history
+  ApprovalChangeDate(SystemEnhancementsChangeHistoryId: number, approval: string) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("SystemEnhancementsChangeHistoryId", SystemEnhancementsChangeHistoryId.toString())
+      .set("approval", approval.toString());
+
+    return this.http.get<boolean>(this.ApprovalChangeDateUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('ApprovalChangeDate', error)
+      })
+    );
   }
 
   // Set System Enhancement Details

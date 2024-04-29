@@ -93,6 +93,13 @@
 <!-- Over panel section for the settings list -->
 <p-overlayPanel #opSettingsList>
     <!-- Each option -->
+    <div class="option_label" (click)="toggleNavigation();opSettingsList.toggle($event);">
+        <span>Toggle Menu Navigation</span>
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+    </div>
+    <!-- End of Each option -->
+
+    <!-- Each option -->
     <div class="option_label" (click)="logoutOnClick()">
         <span>Logout</span>
         <i class="fa fa-angle-right" aria-hidden="true"></i>

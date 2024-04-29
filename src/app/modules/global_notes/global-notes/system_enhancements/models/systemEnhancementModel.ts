@@ -177,4 +177,19 @@ export class SystemEnhancementModel {
         // return the promise
         return promise;
     }
+
+    // Approval of change date history
+    ApprovalChangeDate(SystemEnhancementsChangeHistoryId: number, approval: string) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.systemEnhancementsService.ApprovalChangeDate(SystemEnhancementsChangeHistoryId, approval).subscribe(
+                data => {
+                    let returnData = <boolean>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
 }

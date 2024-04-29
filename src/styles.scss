@@ -178,11 +178,11 @@ input {
         padding-left: 2rem !important;
     }
 
-    .user_top_menu{
+    .user_top_menu {
         display: flex !important;
     }
 
-    .layout-main-container{
+    .layout-main-container {
         margin-left: 0 !important;
     }
 }
@@ -207,4 +207,8 @@ input {
     li:nth-child(7) {
         margin-left: 5px;
     }
+}
+
+.disabled {
+    opacity: 0.4;
 }

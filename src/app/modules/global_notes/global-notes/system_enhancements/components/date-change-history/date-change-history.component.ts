@@ -54,6 +54,8 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
   overallCookieInterface: OverallCookieInterface;
   // Store loading
   showLoading: boolean = false;
+  // Store the SystemEnhancement details
+  systemEnhancementDetails: SystemEnhancement;
 
   // Constructor
   constructor(private route: Router, private location: Location,
@@ -99,6 +101,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
       (data) => {
         // Getting the system enhancement details
         let systemEnhancement = <SystemEnhancement>data;
+        this.systemEnhancementDetails = systemEnhancement;
         // Setting the old data
         this.systemEnhancementChangeDate.OldDuration = systemEnhancement.EstimatedHours;
         this.systemEnhancementChangeDate.OldFromDate = systemEnhancement.StartDate;
@@ -229,5 +232,30 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
   closeOnClickFunction() {
     // Route to the list
     this.route.navigate(['/layout/global/globalNotes/systemEnhancements']);
+  }
+
+  // Approve on click function
+  approveOnClick(changeHistoryId: number) {
+    debugger
+    // Calling the model to update
+    this.systemEnhancementModel.ApprovalChangeDate(changeHistoryId, "APPROVE").then(
+      () => {
+        // Getting the change date history list
+        this.getChangeDateHistoryList();
+      }
+    );
+    // End of Calling the model to update
+  }
+
+  // Approve on click function
+  declineOnClick(changeHistoryId: number) {
+    // Calling the model to update
+    this.systemEnhancementModel.ApprovalChangeDate(changeHistoryId, "DECLINE").then(
+      () => {
+        // Getting the change date history list
+        this.getChangeDateHistoryList();
+      }
+    );
+    // End of Calling the model to update
   }
 }

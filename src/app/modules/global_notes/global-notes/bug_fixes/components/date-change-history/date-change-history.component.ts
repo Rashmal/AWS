@@ -54,6 +54,8 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
   overallCookieInterface: OverallCookieInterface;
   // Store loading
   showLoading: boolean = false;
+  // Store the bugFixDetails details
+  bugFixDetails: BugFix;
 
   // Constructor
   constructor(private route: Router, private location: Location,
@@ -99,6 +101,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
       (data) => {
         // Getting the bug fixes details
         let bugFix = <BugFix>data;
+        this.bugFixDetails = bugFix;
         // Setting the old data
         this.bugFixChangeDate.OldDuration = bugFix.EstimatedHours;
         this.bugFixChangeDate.OldFromDate = bugFix.StartDate;
@@ -229,6 +232,30 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
   closeOnClickFunction() {
     // Route to the list
     this.route.navigate(['/layout/global/globalNotes/bugFixes']);
+  }
+
+  // Approve on click function
+  approveOnClick(changeHistoryId: number) {
+    // Calling the model to update
+    this.bugFixModel.ApprovalChangeDate(changeHistoryId, "APPROVE").then(
+      () => {
+        // Getting the change date history list
+        this.getChangeDateHistoryList();
+      }
+    );
+    // End of Calling the model to update
+  }
+
+  // Approve on click function
+  declineOnClick(changeHistoryId: number) {
+    // Calling the model to update
+    this.bugFixModel.ApprovalChangeDate(changeHistoryId, "DECLINE").then(
+      () => {
+        // Getting the change date history list
+        this.getChangeDateHistoryList();
+      }
+    );
+    // End of Calling the model to update
   }
 }
 

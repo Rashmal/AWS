@@ -13,4 +13,5 @@ export interface SystemEnhancement {
     EndDate: Date;
     AssignedStaffList: BasicUserDetails[];
     RequestedStaffList: BasicUserDetails[];
+    HasRequest: number;
 }

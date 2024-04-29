@@ -10,4 +10,5 @@ export interface ViewBugFix {
     PriorityName: string;
     RequestedStaffList: BasicUserDetails[];
     Total: number;
+    HasRequest: number;
 }
