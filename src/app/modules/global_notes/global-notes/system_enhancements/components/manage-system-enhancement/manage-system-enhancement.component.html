@@ -319,35 +319,35 @@
             </div>
 
             <div class="row">
-                   <!-- Start date section -->
-            <div class="each_section col-6">
-                <!-- Label section -->
-                <div class="each_label">
-                    <span>Start/Started</span>
+                <!-- Start date section -->
+                <div class="each_section col-6">
+                    <!-- Label section -->
+                    <div class="each_label">
+                        <span>Start/Started</span>
+                    </div>
+                    <!-- End of Label section -->
+                    <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true"
+                        [disabled]="editingType  == 'VIEW'" [maxDate]="endDate"></p-calendar>
                 </div>
-                <!-- End of Label section -->
-                <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true"
-                    [disabled]="editingType  == 'VIEW'" [maxDate]="endDate"></p-calendar>
-            </div>
-            <!-- End of Start date section -->
+                <!-- End of Start date section -->
 
-            <!-- End date section -->
-            <div class="each_section col-6">
-                <!-- Label section -->
-                <div class="each_label">
-                    <span>End/Completed</span>
+                <!-- End date section -->
+                <div class="each_section col-6">
+                    <!-- Label section -->
+                    <div class="each_label">
+                        <span>End/Completed</span>
+                    </div>
+                    <!-- End of Label section -->
+
+                    <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true"
+                        [disabled]="editingType  == 'VIEW'" [minDate]="startDate"></p-calendar>
                 </div>
-                <!-- End of Label section -->
-
-                <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true"
-                    [disabled]="editingType  == 'VIEW'" [minDate]="startDate"></p-calendar>
-            </div>
-            <!-- End of End date section -->
+                <!-- End of End date section -->
 
             </div>
 
 
-         
+
         </div>
         <!-- End of First row section -->
 
@@ -379,55 +379,55 @@
 
             <div class="row">
 
-            <!-- Assigned staff section -->
-            <div class="each_section col-6">
-                <!-- Label section -->
-                <div class="each_label">
-                    <span>Assigned Staff</span>
-                </div>
-                <!-- End of Label section -->
+                <!-- Assigned staff section -->
+                <div class="each_section col-6">
+                    <!-- Label section -->
+                    <div class="each_label">
+                        <span>Assigned Staff</span>
+                    </div>
+                    <!-- End of Label section -->
 
-                <!-- Staff dropdown section -->
-                <div class="staff_multi_selection">
-                    <p-multiSelect [options]="viewManagedStaffDropdownList" [disabled]="editingType  == 'VIEW'"
-                        [(ngModel)]="systemEnhancement.AssignedStaffList" optionLabel="FullName" display="chip"
-                        (onChange)="assignedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
-                </div>
-                <!-- End of Staff dropdown section -->
+                    <!-- Staff dropdown section -->
+                    <div class="staff_multi_selection">
+                        <p-multiSelect [options]="viewManagedStaffDropdownList" [disabled]="editingType  == 'VIEW'"
+                            [(ngModel)]="systemEnhancement.AssignedStaffList" optionLabel="FullName" display="chip"
+                            (onChange)="assignedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
+                    </div>
+                    <!-- End of Staff dropdown section -->
 
-                <!-- Error Message -->
-                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$ASS$STAFF')">
-                    <span>{{CheckErrorCode('EMPTY$ASS$STAFF').ErrorMessage}}</span>
+                    <!-- Error Message -->
+                    <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$ASS$STAFF')">
+                        <span>{{CheckErrorCode('EMPTY$ASS$STAFF').ErrorMessage}}</span>
+                    </div>
+                    <!-- End of Error Message -->
                 </div>
-                <!-- End of Error Message -->
+                <!-- End of Assigned staff section -->
+
+                <!-- Requested staff section -->
+                <div class="each_section col-6">
+                    <!-- Label section -->
+                    <div class="each_label">
+                        <span>Requested Staff</span>
+                    </div>
+                    <!-- End of Label section -->
+
+                    <!-- Staff dropdown section -->
+                    <div class="staff_multi_selection">
+                        <p-multiSelect [options]="viewRequestedStaffDropdownList" [disabled]="editingType  == 'VIEW'"
+                            [(ngModel)]="systemEnhancement.RequestedStaffList" optionLabel="FullName" display="chip"
+                            (onChange)="requestedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
+                    </div>
+                    <!-- End of Staff dropdown section -->
+
+                    <!-- Error Message -->
+                    <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$REQ$STAFF')">
+                        <span>{{CheckErrorCode('EMPTY$REQ$STAFF').ErrorMessage}}</span>
+                    </div>
+                    <!-- End of Error Message -->
+                </div>
+                <!-- End of Requested staff section -->
+
             </div>
-            <!-- End of Assigned staff section -->
-
-            <!-- Requested staff section -->
-            <div class="each_section col-6">
-                <!-- Label section -->
-                <div class="each_label">
-                    <span>Requested Staff</span>
-                </div>
-                <!-- End of Label section -->
-
-                <!-- Staff dropdown section -->
-                <div class="staff_multi_selection">
-                    <p-multiSelect [options]="viewRequestedStaffDropdownList" [disabled]="editingType  == 'VIEW'"
-                        [(ngModel)]="systemEnhancement.RequestedStaffList" optionLabel="FullName" display="chip"
-                        (onChange)="requestedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
-                </div>
-                <!-- End of Staff dropdown section -->
-
-                <!-- Error Message -->
-                <div class="col-xl-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$REQ$STAFF')">
-                    <span>{{CheckErrorCode('EMPTY$REQ$STAFF').ErrorMessage}}</span>
-                </div>
-                <!-- End of Error Message -->
-            </div>
-            <!-- End of Requested staff section -->
-
-        </div>
         </div>
         <!-- End of Second row section -->
 

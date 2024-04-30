@@ -29,9 +29,9 @@ export class BugFixModel {
     }
 
     // Set System Enhancement Details
-    SetBugFixesDetailsService(bugFix: BugFix, actionState: string) {
+    SetBugFixesDetailsService(bugFix: BugFix, actionState: string, userId: string) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.SetBugFixesDetails(bugFix, actionState).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.SetBugFixesDetails(bugFix, actionState, userId).subscribe(
                 data => {
                     let returnData = <string>data;
                     // Resolve the promise
@@ -59,9 +59,9 @@ export class BugFixModel {
     }
 
     // Getting the system enhancements display list
-    GetBugFixesDisplayListService(filter: Filter) {
+    GetBugFixesDisplayListService(filter: Filter, userId: string) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.GetBugFixesDisplayList(filter).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.GetBugFixesDisplayList(filter, userId).subscribe(
                 data => {
                     let returnData = <ViewBugFix[]>data;
                     // Resolve the promise
@@ -182,6 +182,21 @@ export class BugFixModel {
     ApprovalChangeDate(BugFixChangeHistoryId: number, approval: string) {
         var promise = new Promise((resolve, reject) => {
             this.allSubscriptions.push(this.bugFixesService.ApprovalChangeDate(BugFixChangeHistoryId, approval).subscribe(
+                data => {
+                    let returnData = <boolean>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Adding the view Id for the system enhancement
+    AddViewId(itemId: string, userId: string) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.bugFixesService.AddViewId(itemId, userId).subscribe(
                 data => {
                     let returnData = <boolean>data;
                     // Resolve the promise

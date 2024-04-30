@@ -34,7 +34,7 @@ export class AppLayoutComponent implements OnDestroy {
     commonModal: CommonModel;
 
     // Store display menu top
-    displayMenuTop: boolean = false;
+    displayMenuTop: boolean = true;
 
     constructor(public layoutService: LayoutService, public renderer: Renderer2, public router: Router, private commonService: CommonService) {
         this.commonModal = new CommonModel(this.commonService);

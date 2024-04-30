@@ -29,9 +29,9 @@ export class SystemEnhancementModel {
     }
 
     // Set System Enhancement Details
-    SetSystemEnhancementDetailsService(systemEnhancement: SystemEnhancement, actionState: string) {
+    SetSystemEnhancementDetailsService(systemEnhancement: SystemEnhancement, actionState: string, userId: string) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.SetSystemEnhancementDetails(systemEnhancement, actionState).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.SetSystemEnhancementDetails(systemEnhancement, actionState, userId).subscribe(
                 data => {
                     let returnData = <string>data;
                     // Resolve the promise
@@ -59,9 +59,9 @@ export class SystemEnhancementModel {
     }
 
     // Getting the system enhancements display list
-    GetSystemEnhancementDisplayListService(filter: Filter) {
+    GetSystemEnhancementDisplayListService(filter: Filter, userId: string) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEnhancementDisplayList(filter).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEnhancementDisplayList(filter, userId).subscribe(
                 data => {
                     let returnData = <ViewSystemEnhancement[]>data;
                     // Resolve the promise
@@ -182,6 +182,21 @@ export class SystemEnhancementModel {
     ApprovalChangeDate(SystemEnhancementsChangeHistoryId: number, approval: string) {
         var promise = new Promise((resolve, reject) => {
             this.allSubscriptions.push(this.systemEnhancementsService.ApprovalChangeDate(SystemEnhancementsChangeHistoryId, approval).subscribe(
+                data => {
+                    let returnData = <boolean>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Adding the view Id for the system enhancement
+    AddViewId(itemId: string, userId: string) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.systemEnhancementsService.AddViewId(itemId, userId).subscribe(
                 data => {
                     let returnData = <boolean>data;
                     // Resolve the promise

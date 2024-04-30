@@ -498,7 +498,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         };
         // Calling the modal to save the data
         this.systemEnhancementModel
-            .SetSystemEnhancementDetailsService(enhance, 'DELETE')
+            .SetSystemEnhancementDetailsService(enhance, 'DELETE', this.overallCookieInterface.GetUserId())
             .then(() => {
                 this.filter.CurrentPage = 1;
                 // Refresh the enhancement list
@@ -526,7 +526,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         localFilter.ModuleId = moduleId;
         // Calling the model to retrieve the data
         this.systemEnhancementModel
-            .GetSystemEnhancementDisplayListService(localFilter)
+            .GetSystemEnhancementDisplayListService(localFilter, this.overallCookieInterface.GetUserId())
             .then((data) => {
                 // Getting the staff list
                 this.systemEnhancementList = <ViewSystemEnhancement[]>data;
@@ -559,7 +559,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.systemEnhancementList = [];
         // Calling the model to retrieve the data
         this.systemEnhancementModel
-            .GetSystemEnhancementDisplayListService(this.filter)
+            .GetSystemEnhancementDisplayListService(this.filter, this.overallCookieInterface.GetUserId())
             .then((data) => {
                 // Getting the staff list
                 this.systemEnhancementList = <ViewSystemEnhancement[]>data;
@@ -611,7 +611,7 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.systemEnhancementList = [];
         // Calling the model to retrieve the data
         this.systemEnhancementModel
-            .GetSystemEnhancementDisplayListService(this.filter)
+            .GetSystemEnhancementDisplayListService(this.filter, this.overallCookieInterface.GetUserId())
             .then((data) => {
                 // Getting the staff list
                 this.systemEnhancementList = <ViewSystemEnhancement[]>data;

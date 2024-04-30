@@ -11,4 +11,5 @@ export interface ViewSystemEnhancement {
     RequestedStaffList: BasicUserDetails[];
     Total: number;
     HasRequest: number;
+    IsNew: boolean;
 }

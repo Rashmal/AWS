@@ -11,4 +11,5 @@ export interface ViewBugFix {
     RequestedStaffList: BasicUserDetails[];
     Total: number;
     HasRequest: number;
+    IsNew: boolean;
 }

@@ -501,7 +501,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     };
     // Calling the modal to save the data
     this.bugFixModel
-      .SetBugFixesDetailsService(bug, 'DELETE')
+      .SetBugFixesDetailsService(bug, 'DELETE', this.overallCookieInterface.GetUserId())
       .then(() => {
         this.filter.CurrentPage = 1;
         // Refresh the bugFix list
@@ -529,7 +529,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     localFilter.ModuleId = moduleId;
     // Calling the model to retrieve the data
     this.bugFixModel
-      .GetBugFixesDisplayListService(localFilter)
+      .GetBugFixesDisplayListService(localFilter, this.overallCookieInterface.GetUserId())
       .then((data) => {
         // Getting the staff list
         this.bugFixesList = <ViewBugFix[]>data;
@@ -562,7 +562,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     this.bugFixesList = [];
     // Calling the model to retrieve the data
     this.bugFixModel
-      .GetBugFixesDisplayListService(this.filter)
+      .GetBugFixesDisplayListService(this.filter, this.overallCookieInterface.GetUserId())
       .then((data) => {
         // Getting the staff list
         this.bugFixesList = <ViewBugFix[]>data;
@@ -614,7 +614,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     this.bugFixesList = [];
     // Calling the model to retrieve the data
     this.bugFixModel
-      .GetBugFixesDisplayListService(this.filter)
+      .GetBugFixesDisplayListService(this.filter, this.overallCookieInterface.GetUserId())
       .then((data) => {
         // Getting the staff list
         this.bugFixesList = <ViewBugFix[]>data;
