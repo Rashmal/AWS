@@ -75,6 +75,7 @@ export class ManageBugFixesComponent {
     let paramObject = this.location.getState();
     if (paramObject['BugFixesID']) {
       this.bugFixId = paramObject['BugFixesID'];
+
       // Initialize default data
       this.initDefaultData();
     } else {
@@ -102,6 +103,17 @@ export class ManageBugFixesComponent {
     // Set editing type
     if (paramObject['Type']) {
       this.editingType = paramObject['Type'];
+
+      // Check the editing type
+      if (this.editingType == 'VIEW' || this.editingType == 'EDIT') {
+        // Set as visited
+        this.bugFixModel.AddViewId(this.bugFixId, this.overallCookieInterface.GetUserId()).then(
+          () => {
+
+          }
+        );
+      }
+      // End of Check the editing type
     }
   }
 
@@ -299,7 +311,7 @@ export class ManageBugFixesComponent {
     // Check if the bug fix ID exists
     if (this.bugFix.Id && this.bugFix.Id != '') {
       // Calling the modal to save the data
-      this.bugFixModel.SetBugFixesDetailsService(this.bugFix, "UPDATE").then(
+      this.bugFixModel.SetBugFixesDetailsService(this.bugFix, "UPDATE", this.overallCookieInterface.GetUserId()).then(
         () => {
           // Route to the list
           this.route.navigate(['/layout/global/globalNotes/bugFixes']);
@@ -308,7 +320,7 @@ export class ManageBugFixesComponent {
       // End of Calling the modal to save the data
     } else {
       // Calling the modal to save the data
-      this.bugFixModel.SetBugFixesDetailsService(this.bugFix, "NEW").then(
+      this.bugFixModel.SetBugFixesDetailsService(this.bugFix, "NEW", this.overallCookieInterface.GetUserId()).then(
         () => {
           // Route to the list
           this.route.navigate(['/layout/global/globalNotes/bugFixes']);

@@ -30,10 +30,25 @@ export class SystemEnhancementsService {
   private GetSystemEhancementCommentUrl = API$DOMAIN + 'api/SystemEnhancement/GetSystemEhancementComment';
   private GetStatBoxesUrl = API$DOMAIN + 'api/SystemEnhancement/GetStatBoxes';
   private ApprovalChangeDateUrl = API$DOMAIN + 'api/SystemEnhancement/ApprovalChangeDate';
+  private AddViewIdUrl = API$DOMAIN + 'api/SystemEnhancement/AddViewId';
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
 
+  }
+
+  // Adding the view Id for the system enhancement
+  AddViewId(itemId: string, userId: string) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("itemId", itemId.toString())
+      .set("userId", userId.toString());
+
+    return this.http.get<boolean>(this.AddViewIdUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('AddViewId', error)
+      })
+    );
   }
 
   // Approval of change date history
@@ -51,10 +66,11 @@ export class SystemEnhancementsService {
   }
 
   // Set System Enhancement Details
-  SetSystemEnhancementDetails(systemEnhancement: SystemEnhancement, actionState: string) {
+  SetSystemEnhancementDetails(systemEnhancement: SystemEnhancement, actionState: string, userId: string) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("actionState", actionState.toString());
+      .set("actionState", actionState.toString())
+      .set("userId", userId.toString());
 
     return this.http.post<string>(this.SetSystemEnhancementDetailsUrl, systemEnhancement, { params: my_params }).pipe(
       catchError(error => {
@@ -76,9 +92,10 @@ export class SystemEnhancementsService {
   }
 
   // Getting the system enhancements display list
-  GetSystemEnhancementDisplayList(filter: Filter) {
+  GetSystemEnhancementDisplayList(filter: Filter, userId: string) {
     // Setting the params
-    let my_params = new HttpParams();
+    let my_params = new HttpParams()
+      .set("UserId", userId.toString());
 
     return this.http.post<ViewSystemEnhancement[]>(this.GetSystemEnhancementDisplayListUrl, filter, { params: my_params }).pipe(
       catchError(error => {

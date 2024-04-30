@@ -76,6 +76,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    debugger
     // Getting the passed params
     let paramObject = this.location.getState();
     if (paramObject['SystemEnhancementID']) {
@@ -107,6 +108,17 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     // Set editing type
     if (paramObject['Type']) {
       this.editingType = paramObject['Type'];
+
+      // Check the editing type
+      if (this.editingType == 'VIEW' || this.editingType == 'EDIT') {
+        // Set as visited
+        this.systemEnhancementModel.AddViewId(this.systemEnhancementId, this.overallCookieInterface.GetUserId()).then(
+          () => {
+
+          }
+        );
+      }
+      // End of Check the editing type
     }
   }
 
@@ -304,7 +316,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     // Check if the system ID exists
     if (this.systemEnhancement.Id && this.systemEnhancement.Id != '') {
       // Calling the modal to save the data
-      this.systemEnhancementModel.SetSystemEnhancementDetailsService(this.systemEnhancement, "UPDATE").then(
+      this.systemEnhancementModel.SetSystemEnhancementDetailsService(this.systemEnhancement, "UPDATE", this.overallCookieInterface.GetUserId()).then(
         () => {
           // Route to the list
           this.route.navigate(['/layout/global/globalNotes/systemEnhancements']);
@@ -313,7 +325,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
       // End of Calling the modal to save the data
     } else {
       // Calling the modal to save the data
-      this.systemEnhancementModel.SetSystemEnhancementDetailsService(this.systemEnhancement, "NEW").then(
+      this.systemEnhancementModel.SetSystemEnhancementDetailsService(this.systemEnhancement, "NEW", this.overallCookieInterface.GetUserId()).then(
         () => {
           // Route to the list
           this.route.navigate(['/layout/global/globalNotes/systemEnhancements']);

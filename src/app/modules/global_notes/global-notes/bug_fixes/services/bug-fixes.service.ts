@@ -30,10 +30,25 @@ export class BugFixesService {
   private GetBugFixesCommentUrl = API$DOMAIN + 'api/BugFixes/GetBugFixesComment';
   private GetStatBoxesUrl = API$DOMAIN + 'api/BugFixes/GetStatBoxes';
   private ApprovalChangeDateUrl = API$DOMAIN + 'api/BugFixes/ApprovalChangeDate';
+  private AddViewIdUrl = API$DOMAIN + 'api/BugFixes/AddViewId';
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
 
+  }
+
+  // Adding the view Id for the system enhancement
+  AddViewId(itemId: string, userId: string) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("itemId", itemId.toString())
+      .set("userId", userId.toString());
+
+    return this.http.get<boolean>(this.AddViewIdUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('AddViewId', error)
+      })
+    );
   }
 
   // Approval of change date history
@@ -51,10 +66,11 @@ export class BugFixesService {
   }
 
   // Set System Enhancement Details
-  SetBugFixesDetails(bugFixes: BugFix, actionState: string) {
+  SetBugFixesDetails(bugFixes: BugFix, actionState: string, userId: string) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("actionState", actionState.toString());
+      .set("actionState", actionState.toString())
+      .set("userId", userId.toString());
 
     return this.http.post<string>(this.SetBugFixesDetailsUrl, bugFixes, { params: my_params }).pipe(
       catchError(error => {
@@ -76,9 +92,10 @@ export class BugFixesService {
   }
 
   // Getting the system enhancements display list
-  GetBugFixesDisplayList(filter: Filter) {
+  GetBugFixesDisplayList(filter: Filter, userId: string) {
     // Setting the params
-    let my_params = new HttpParams();
+    let my_params = new HttpParams()
+      .set("UserId", userId.toString());
 
     return this.http.post<ViewBugFix[]>(this.GetBugFixesDisplayListUrl, filter, { params: my_params }).pipe(
       catchError(error => {
