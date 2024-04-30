@@ -14,4 +14,5 @@ export interface SystemEnhancement {
     AssignedStaffList: BasicUserDetails[];
     RequestedStaffList: BasicUserDetails[];
     HasRequest: number;
+    IsNew: boolean;
 }

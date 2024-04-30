@@ -105,10 +105,11 @@ export class SystemEnhancementsService {
   }
 
   // Getting the system enhancements details based on the Id
-  GetSystemEnhancementDetailsById(systemEnhancementId: string) {
+  GetSystemEnhancementDetailsById(systemEnhancementId: string, userId: string) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("systemEnhancementId", systemEnhancementId.toString());
+      .set("systemEnhancementId", systemEnhancementId.toString())
+      .set("userId", userId.toString());
 
     return this.http.get<SystemEnhancement>(this.GetSystemEnhancementDetailsByIdUrl, { params: my_params }).pipe(
       catchError(error => {

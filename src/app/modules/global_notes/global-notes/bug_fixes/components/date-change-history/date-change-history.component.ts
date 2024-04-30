@@ -97,7 +97,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
     // Start loading
     this.showLoading = true;
     // Getting the bug fixes old details
-    this.bugFixModel.GetBugFixesDetailsByIdService(this.bugFixesId).then(
+    this.bugFixModel.GetBugFixesDetailsByIdService(this.bugFixesId, this.overallCookieInterface.GetUserId()).then(
       (data) => {
         // Getting the bug fixes details
         let bugFix = <BugFix>data;

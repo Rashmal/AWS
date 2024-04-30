@@ -98,7 +98,8 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
         EstimatedHours: 0,
         AssignedStaffList: [],
         RequestedStaffList: [],
-        HasRequest: 0
+        HasRequest: 0,
+        IsNew: false
       };
       // Initialize default data
       this.initDefaultData();
@@ -142,10 +143,11 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
       EstimatedHours: 0,
       AssignedStaffList: [],
       RequestedStaffList: [],
-      HasRequest: 0
+      HasRequest: 0,
+      IsNew: false
     };
     // Getting the system enhancement details by ID
-    this.systemEnhancementModel.GetSystemEnhancementDetailsByIdService(paramObject['SystemEnhancementID']).then(
+    this.systemEnhancementModel.GetSystemEnhancementDetailsByIdService(paramObject['SystemEnhancementID'], this.overallCookieInterface.GetUserId()).then(
       (data) => {
         // Getting the system enhancement details
         this.systemEnhancement = <SystemEnhancement>data;

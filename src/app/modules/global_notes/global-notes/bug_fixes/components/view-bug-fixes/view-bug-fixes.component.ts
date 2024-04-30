@@ -497,7 +497,8 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
       EstimatedHours: 0,
       AssignedStaffList: [],
       RequestedStaffList: [],
-      HasRequest: 0
+      HasRequest: 0,
+      IsNew: false
     };
     // Calling the modal to save the data
     this.bugFixModel

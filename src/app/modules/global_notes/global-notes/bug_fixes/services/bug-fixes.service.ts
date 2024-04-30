@@ -105,10 +105,11 @@ export class BugFixesService {
   }
 
   // Getting the system enhancements details based on the Id
-  GetBugFixesDetailsById(bugFixesId: string) {
+  GetBugFixesDetailsById(bugFixesId: string, userId: string) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("bugFixesId", bugFixesId.toString());
+      .set("bugFixesId", bugFixesId.toString())
+      .set("userId", userId.toString());
 
     return this.http.get<BugFix>(this.GetBugFixesDetailsByIdUrl, { params: my_params }).pipe(
       catchError(error => {

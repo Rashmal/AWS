@@ -93,7 +93,8 @@ export class ManageBugFixesComponent {
         EstimatedHours: 0,
         AssignedStaffList: [],
         RequestedStaffList: [],
-        HasRequest: 0
+        HasRequest: 0,
+        IsNew: false
       };
       // Initialize default data
       this.initDefaultData();
@@ -137,10 +138,11 @@ export class ManageBugFixesComponent {
       EstimatedHours: 0,
       AssignedStaffList: [],
       RequestedStaffList: [],
-      HasRequest: 0
+      HasRequest: 0,
+      IsNew: false
     };
     // Getting the Bug Fix details by ID
-    this.bugFixModel.GetBugFixesDetailsByIdService(paramObject['BugFixesID']).then(
+    this.bugFixModel.GetBugFixesDetailsByIdService(paramObject['BugFixesID'], this.overallCookieInterface.GetUserId()).then(
       (data) => {
         // Getting the Bug Fix details
         this.bugFix = <BugFix>data;

@@ -14,4 +14,5 @@ export interface BugFix {
     AssignedStaffList: BasicUserDetails[];
     RequestedStaffList: BasicUserDetails[];
     HasRequest: number;
+    IsNew: boolean;
 }
