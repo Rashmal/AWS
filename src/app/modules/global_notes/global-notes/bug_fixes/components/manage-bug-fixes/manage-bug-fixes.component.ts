@@ -140,7 +140,7 @@ export class ManageBugFixesComponent {
       HasRequest: 0
     };
     // Getting the Bug Fix details by ID
-    this.bugFixModel.GetBugFixesDetailsByIdService(paramObject['BugFixesID']).then(
+    this.bugFixModel.GetBugFixesDetailsByIdService(paramObject['BugFixesID'], this.overallCookieInterface.GetUserId()).then(
       (data) => {
         // Getting the Bug Fix details
         this.bugFix = <BugFix>data;
@@ -238,9 +238,10 @@ export class ManageBugFixesComponent {
         // Setting the default selection
         if (this.bugFix && this.bugFix.Id != '') {
           this.bugFix.StatusId = this.viewStatusDropdownList[0].value;
-        } else {
-          this.bugFix.StatusId = this.viewStatusDropdownList[0].value;
-        }
+        } 
+        // else {
+        //   this.bugFix.StatusId = this.viewStatusDropdownList[0].value;
+        // }
       }
     );
     // End of Calling the model to retrieve the data
@@ -268,9 +269,10 @@ export class ManageBugFixesComponent {
         // Setting the default selection
         if (this.bugFix && this.bugFix.Id != '') {
           this.bugFix.ModuleId = this.viewModulesDropdownList[0].value;
-        } else {
-          this.bugFix.ModuleId = this.viewModulesDropdownList[0].value;
-        }
+        } 
+        // else {
+        //   this.bugFix.ModuleId = this.viewModulesDropdownList[0].value;
+        // }
       }
     );
     // End of Calling the model to retrieve the data

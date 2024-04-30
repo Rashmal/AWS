@@ -74,9 +74,9 @@ export class BugFixModel {
     }
 
     // Getting the system enhancements details based on the Id
-    GetBugFixesDetailsByIdService(bugFixId: string) {
+    GetBugFixesDetailsByIdService(bugFixId: string, userId: string) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.GetBugFixesDetailsById(bugFixId).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.GetBugFixesDetailsById(bugFixId, userId).subscribe(
                 data => {
                     let returnData = <BugFix>data;
                     // Resolve the promise

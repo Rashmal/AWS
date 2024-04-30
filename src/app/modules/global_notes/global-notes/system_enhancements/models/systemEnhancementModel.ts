@@ -74,9 +74,9 @@ export class SystemEnhancementModel {
     }
 
     // Getting the system enhancements details based on the Id
-    GetSystemEnhancementDetailsByIdService(systemEnhancementId: string) {
+    GetSystemEnhancementDetailsByIdService(systemEnhancementId: string, userId: string) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEnhancementDetailsById(systemEnhancementId).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEnhancementDetailsById(systemEnhancementId, userId).subscribe(
                 data => {
                     let returnData = <SystemEnhancement>data;
                     // Resolve the promise

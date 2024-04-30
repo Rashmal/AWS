@@ -97,7 +97,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
     // Start loading
     this.showLoading = true;
     // Getting the system enhancement old details
-    this.systemEnhancementModel.GetSystemEnhancementDetailsByIdService(this.systemEnhancementId).then(
+    this.systemEnhancementModel.GetSystemEnhancementDetailsByIdService(this.systemEnhancementId, this.overallCookieInterface.GetUserId()).then(
       (data) => {
         // Getting the system enhancement details
         let systemEnhancement = <SystemEnhancement>data;
