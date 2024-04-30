@@ -108,6 +108,8 @@ export class SystemEnhancementsService {
   GetSystemEnhancementDetailsById(systemEnhancementId: string, userId: string) {
     // Setting the params
     let my_params = new HttpParams()
+      .set("systemEnhancementId", systemEnhancementId.toString());
+
       .set("systemEnhancementId", systemEnhancementId.toString())
       .set("userId", userId.toString());
 

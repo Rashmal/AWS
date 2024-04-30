@@ -121,6 +121,8 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
       }
       // End of Check the editing type
     }
+
+    
   }
 
   // Getting the system enhancement details by Id
@@ -245,9 +247,10 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
         // Setting the default selection
         if (this.systemEnhancement && this.systemEnhancement.Id != '') {
           this.systemEnhancement.StatusId = this.viewStatusDropdownList[0].value;
-        } else {
-          this.systemEnhancement.StatusId = this.viewStatusDropdownList[0].value;
-        }
+        } 
+        // else {
+        //   this.systemEnhancement.StatusId = this.viewStatusDropdownList[0].value;
+        // }
       }
     );
     // End of Calling the model to retrieve the data
@@ -275,9 +278,10 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
         // Setting the default selection
         if (this.systemEnhancement && this.systemEnhancement.Id != '') {
           this.systemEnhancement.ModuleId = this.viewModulesDropdownList[0].value;
-        } else {
-          this.systemEnhancement.ModuleId = this.viewModulesDropdownList[0].value;
-        }
+        } 
+        // else {
+        //   this.systemEnhancement.ModuleId = this.viewModulesDropdownList[0].value;
+        // }
       }
     );
     // End of Calling the model to retrieve the data

@@ -109,8 +109,7 @@ export class BugFixesService {
     // Setting the params
     let my_params = new HttpParams()
       .set("bugFixesId", bugFixesId.toString())
-      .set("userId", userId.toString());
-
+	  .set("userId", userId.toString());
     return this.http.get<BugFix>(this.GetBugFixesDetailsByIdUrl, { params: my_params }).pipe(
       catchError(error => {
         return this.handleError('GetBugFixesDetailsById', error)

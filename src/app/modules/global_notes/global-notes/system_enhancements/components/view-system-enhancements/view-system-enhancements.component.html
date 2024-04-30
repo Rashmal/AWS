@@ -613,7 +613,7 @@
                             class="expanded_content_title paddingRight5 cursor_pointer ">
                             <div class="ellipsis" (click)="titleOnClickFunction(enhancement)"
                                 [pTooltip]="enhancement.Title" tooltipPosition="top">
-                                {{enhancement.Title}}
+                                {{enhancement.Title}}<span class="new-label" *ngIf="enhancement.IsNew">New</span>
                             </div>
                         </div>
 

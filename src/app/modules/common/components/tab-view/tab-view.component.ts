@@ -9,6 +9,7 @@ import {
 } from '@microsoft/signalr';
 import { CommonModel } from '../../models/commonModel';
 import { CommonService } from '../../services/common.service';
+import { API$DOMAIN } from 'src/app/core/apiConfigurations';
 
 @Component({
     selector: 'app-tab-view',
@@ -55,6 +56,7 @@ export class TabViewComponent {
     commonModal: CommonModel;
 
     private hubConnectionBuilder!: HubConnection;
+    url = API$DOMAIN + 'notificationHub';
 
     constructor(private commonService: CommonService) {
         this.commonModal = new CommonModel(this.commonService);
@@ -78,44 +80,10 @@ export class TabViewComponent {
     }
 
     getNotificationCount() {
-        // this.hubConnectionBuilder = new HubConnectionBuilder()
-        //     .withUrl('https://localhost:7198/notificationHub')
-        //     .configureLogging(LogLevel.Information)
-        //     .build();
-        // this.hubConnectionBuilder
-        //     .start()
-        //     .then(() => console.log('Connection started.......!'))
-        //     .catch((err) => console.log('Error while connect with server'));
-        // this.hubConnectionBuilder.on('NotificationCountGN', (result: any) => {
-        //    this.totalCount = result;
-        // });
-
-        // this.hubConnectionBuilder = new HubConnectionBuilder()
-        //     .withUrl('https://localhost:7198/notificationHub')
-        //     .configureLogging(LogLevel.Information)
-        //     .build();
-        // this.hubConnectionBuilder
-        //     .start()
-        //     .then(() => console.log('Connection started.......!'))
-        //     .catch((err) => console.log('Error while connect with server'));
-        // this.hubConnectionBuilder.on('NotificationCountBF', (result: any) => {
-        //     this.countBF = result;
-        // });
-
-        // this.hubConnectionBuilder = new HubConnectionBuilder()
-        //     .withUrl('https://localhost:7198/notificationHub')
-        //     .configureLogging(LogLevel.Information)
-        //     .build();
-        // this.hubConnectionBuilder
-        //     .start()
-        //     .then(() => console.log('Connection started.......!'))
-        //     .catch((err) => console.log('Error while connect with server'));
-        // this.hubConnectionBuilder.on('NotificationCountSE', (result: any) => {
-        //     this.countSE = result;
-        // });
+       
 
         this.hubConnectionBuilder = new HubConnectionBuilder()
-            .withUrl('https://iitcdemoapi.com/AWSAPI/notificationHub')
+            .withUrl(this.url)
             .configureLogging(LogLevel.Information)
             .build();
         this.hubConnectionBuilder
@@ -127,7 +95,7 @@ export class TabViewComponent {
         });
 
         this.hubConnectionBuilder = new HubConnectionBuilder()
-            .withUrl('https://iitcdemoapi.com/AWSAPI/notificationHub')
+            .withUrl(this.url)
             .configureLogging(LogLevel.Information)
             .build();
         this.hubConnectionBuilder
@@ -139,7 +107,7 @@ export class TabViewComponent {
         });
 
         this.hubConnectionBuilder = new HubConnectionBuilder()
-            .withUrl('https://iitcdemoapi.com/AWSAPI/notificationHub')
+            .withUrl(this.url)
             .configureLogging(LogLevel.Information)
             .build();
         this.hubConnectionBuilder
@@ -147,6 +115,7 @@ export class TabViewComponent {
             .then(() => console.log('Connection started.......!'))
             .catch((err) => console.log('Error while connect with server'));
         this.hubConnectionBuilder.on('NotificationCountSE', (result: any) => {
+            debugger
             this.countSE = result;
         });
     }

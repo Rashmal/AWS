@@ -10,6 +10,7 @@ import { Module } from 'src/app/modules/common/core/module';
 import { CommonModel } from 'src/app/modules/common/models/commonModel';
 import { CommonService } from 'src/app/modules/common/services/common.service';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import { API$DOMAIN } from 'src/app/core/apiConfigurations';
 
 @Component({
     selector: 'app-new-top-bar',
@@ -91,6 +92,9 @@ export class NewTopBarComponent {
     // Store common modal
     commonModal: CommonModel;
 
+    
+    url = API$DOMAIN + 'notificationHub';
+
     // Constructor
     constructor(public layoutService: LayoutService, private authenticationService: AuthenticationService,
         private router: Router, private commonService: CommonService) {
@@ -163,7 +167,7 @@ export class NewTopBarComponent {
 
     getNotificationCount() {
         this.hubConnectionBuilder = new HubConnectionBuilder()
-            .withUrl('https://iitcdemoapi.com/AWSAPI/notificationHub')
+            .withUrl(this.url)
             .configureLogging(LogLevel.Information)
             .build();
         this.hubConnectionBuilder
@@ -174,17 +178,7 @@ export class NewTopBarComponent {
             this.ttlNotCount = result;
         });
 
-        // this.hubConnectionBuilder = new HubConnectionBuilder()
-        //     .withUrl('https://localhost:7198/notificationHub')
-        //     .configureLogging(LogLevel.Information)
-        //     .build();
-        // this.hubConnectionBuilder
-        //     .start()
-        //     .then(() => console.log('Connection started.......!'))
-        //     .catch((err) => console.log('Error while connect with server'));
-        // this.hubConnectionBuilder.on('NotificationCountGN', (result: any) => {
-        //     this.ttlNotCount = result;
-        // });
+       
     }
 
     // Get global notes notification count
