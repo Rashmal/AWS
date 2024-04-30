@@ -540,3 +540,20 @@
 ::ng-deep .medium_screen .p-multiselect {
     width: 97% !important;
 }
+.new-label {
+    background-color: #ff5733; /* Set background color */
+    color: #ffffff; /* Set text color */
+    border-radius: 50%; /* Set border radius for a circular shape */
+    padding: 6px 12px; /* Set padding for space around text */
+    font-size: 14px; /* Set font size */
+    animation: pulse 1.5s infinite alternate; /* Apply pulsating animation */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
