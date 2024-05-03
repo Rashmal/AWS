@@ -104,18 +104,18 @@ export class ManageBugFixesComponent {
     // Set editing type
     if (paramObject['Type']) {
       this.editingType = paramObject['Type'];
-
-      // Check the editing type
-      if (this.editingType == 'VIEW' || this.editingType == 'EDIT') {
-        // Set as visited
-        this.bugFixModel.AddViewId(this.bugFixId, this.overallCookieInterface.GetUserId()).then(
-          () => {
-
-          }
-        );
-      }
-      // End of Check the editing type
     }
+
+    // Check the editing type
+    if (this.editingType == 'VIEW' || this.editingType == 'EDIT') {
+      // Set as visited
+      this.bugFixModel.AddViewId(this.bugFixId, this.overallCookieInterface.GetUserId()).then(
+        () => {
+
+        }
+      );
+    }
+    // End of Check the editing type
   }
 
   // Getting the Bug Fix details by Id
@@ -239,11 +239,11 @@ export class ManageBugFixesComponent {
 
         // Setting the default selection
         if (this.bugFix && this.bugFix.Id != '') {
+          //this.bugFix.StatusId = this.viewStatusDropdownList[0].value;
+        }
+        else {
           this.bugFix.StatusId = this.viewStatusDropdownList[0].value;
-        } 
-        // else {
-        //   this.bugFix.StatusId = this.viewStatusDropdownList[0].value;
-        // }
+        }
       }
     );
     // End of Calling the model to retrieve the data
@@ -270,11 +270,11 @@ export class ManageBugFixesComponent {
 
         // Setting the default selection
         if (this.bugFix && this.bugFix.Id != '') {
+          //this.bugFix.ModuleId = this.viewModulesDropdownList[0].value;
+        }
+        else {
           this.bugFix.ModuleId = this.viewModulesDropdownList[0].value;
-        } 
-        // else {
-        //   this.bugFix.ModuleId = this.viewModulesDropdownList[0].value;
-        // }
+        }
       }
     );
     // End of Calling the model to retrieve the data
@@ -445,5 +445,17 @@ export class ManageBugFixesComponent {
       this.bugFix.EstimatedHours = 0;
     }
     // End of Check if the value is less than 0
+  }
+
+  // Check the length of the duration
+  checkLengthDuration(e) {
+    const keyValue = +e.key;
+    const numberOnlyPattern = '[0-9]+';
+    const newValue = this.bugFix.EstimatedHours + (isNaN(keyValue) ? '' : keyValue.toString());
+    const match = newValue.match(numberOnlyPattern);
+
+    if (+newValue > 999999 || !match || newValue === '') {
+      e.preventDefault();
+    }
   }
 }

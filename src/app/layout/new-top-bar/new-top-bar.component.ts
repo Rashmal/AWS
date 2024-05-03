@@ -183,7 +183,7 @@ export class NewTopBarComponent {
 
     // Get global notes notification count
     getGlobalNotesNotCount() {
-        this.commonModel.GetNotificationCount('TOTAL').then(
+        this.commonModel.GetNotificationCount('TOTAL', this.overallCookieInterface.GetUserId()).then(
             (data: number) => {
                 // Set notification count
                 this.ttlNotCount = data;

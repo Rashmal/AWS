@@ -8,6 +8,8 @@ import { NewSideBarComponent } from './new-side-bar/new-side-bar.component';
 import { NewTopBarComponent } from './new-top-bar/new-top-bar.component';
 import { CommonService } from '../modules/common/services/common.service';
 import { CommonModel } from '../modules/common/models/commonModel';
+import { OverallCookieInterface } from '../modules/common/core/overallCookieInterface';
+import { OverallCookieModel } from '../modules/common/core/overallCookieModel';
 
 @Component({
     selector: 'app-layout',
@@ -35,9 +37,13 @@ export class AppLayoutComponent implements OnDestroy {
 
     // Store display menu top
     displayMenuTop: boolean = true;
+    // Store the cookie interface
+    overallCookieInterface: OverallCookieInterface;
 
     constructor(public layoutService: LayoutService, public renderer: Renderer2, public router: Router, private commonService: CommonService) {
         this.commonModal = new CommonModel(this.commonService);
+        this.overallCookieInterface = new OverallCookieModel();
+
         this.overlayMenuOpenSubscription = this.layoutService.overlayOpen$.subscribe(() => {
             if (!this.menuOutsideClickListener) {
                 this.menuOutsideClickListener = this.renderer.listen('document', 'click', event => {
@@ -146,7 +152,7 @@ export class AppLayoutComponent implements OnDestroy {
 
     // Get global notes notification count
     getGlobalNotesNotCount() {
-        this.commonModal.GetNotificationCount('TOTAL').then(
+        this.commonModal.GetNotificationCount('TOTAL', this.overallCookieInterface.GetUserId()).then(
             (data: number) => {
                 // Set notification count
                 this.ttlNotCount = data;

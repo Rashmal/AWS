@@ -90,7 +90,8 @@
                 <!-- Estimated hours input -->
                 <div>
                     <input type="number" [(ngModel)]="systemEnhancement.EstimatedHours" inputrestriction="^[0-9]*$"
-                        [disabled]="editingType  == 'VIEW'" [min]="0" (input)="inputEstimateValue()">
+                        [disabled]="editingType  == 'VIEW'" [min]="0" [max]="999999" [maxlength]="6"
+                        (keydown)="checkLengthDuration($event)" (input)="inputEstimateValue()">
                 </div>
                 <!-- End of Estimated hours input -->
 
@@ -109,7 +110,7 @@
                     <span>Start/Started</span>
                 </div>
                 <!-- End of Label section -->
-                <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true"
+                <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="!(editingType  == 'VIEW')"
                     [disabled]="editingType  == 'VIEW'" [maxDate]="endDate"></p-calendar>
             </div>
             <!-- End of Start date section -->
@@ -198,7 +199,7 @@
                 </div>
                 <!-- End of Label section -->
 
-                <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true"
+                <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="!(editingType  == 'VIEW')"
                     [disabled]="editingType  == 'VIEW'" [minDate]="startDate"></p-calendar>
             </div>
             <!-- End of End date section -->

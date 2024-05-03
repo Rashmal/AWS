@@ -98,10 +98,11 @@ export class CommonService {
   }
 
   // Getting all the staff list
-  GetNotificationCount(tabSelection: string) {
+  GetNotificationCount(tabSelection: string, userId: string) {
     // Setting the params
     let my_params = new HttpParams()
-    .set("tabSection", tabSelection.toString());;
+      .set("tabSection", tabSelection.toString())
+      .set("userId", userId.toString());
 
     return this.http.get<number>(this.GetNotificationCountUrl, { params: my_params }).pipe(
       catchError(error => {

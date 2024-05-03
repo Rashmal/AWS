@@ -258,4 +258,16 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
     );
     // End of Calling the model to update
   }
+
+  // Check the length of the duration
+  checkLengthDuration(e) {
+    const keyValue = +e.key;
+    const numberOnlyPattern = '[0-9]+';
+    const newValue = this.systemEnhancementChangeDate.NewDuration + (isNaN(keyValue) ? '' : keyValue.toString());
+    const match = newValue.match(numberOnlyPattern);
+
+    if (+newValue > 999999 || !match || newValue === '') {
+      e.preventDefault();
+    }
+  }
 }

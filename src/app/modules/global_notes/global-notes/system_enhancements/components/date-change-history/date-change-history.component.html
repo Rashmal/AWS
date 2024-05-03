@@ -58,7 +58,8 @@
                 <!-- Estimated hours input -->
                 <div>
                     <input [disabled]="systemEnhancementDetails.HasRequest == 0" type="number"
-                        [(ngModel)]="systemEnhancementChangeDate.NewDuration" inputrestriction="^[0-9]*$" min="0">
+                        [(ngModel)]="systemEnhancementChangeDate.NewDuration" inputrestriction="^[0-9]*$" [min]="0"
+                        [max]="999999" [maxlength]="6" (keydown)="checkLengthDuration($event)">
                 </div>
                 <!-- End of Estimated hours input -->
 

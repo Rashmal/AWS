@@ -4,6 +4,8 @@ import { Module } from 'src/app/modules/common/core/module';
 import { CommonModel } from 'src/app/modules/common/models/commonModel';
 import { CommonService } from 'src/app/modules/common/services/common.service';
 import { MenuService } from '../app.menu.service';
+import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
+import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
 
 @Component({
   selector: 'app-new-side-bar',
@@ -74,9 +76,13 @@ export class NewSideBarComponent implements OnInit {
   commonModel: CommonModel;
   //store key
   key: string = '';
+  // Store the cookie interface
+  overallCookieInterface: OverallCookieInterface;
+
   // Constructor
   constructor(public layoutService: LayoutService, private commonService: CommonService, private menuService: MenuService, public el: ElementRef) {
     this.commonModel = new CommonModel(this.commonService);
+    this.overallCookieInterface = new OverallCookieModel();
   }
 
   // Ng on init function
@@ -84,21 +90,21 @@ export class NewSideBarComponent implements OnInit {
     // Initialize the model list
     this.getMenuItems();
     // End of Initialize the model list
-    if(this.isMobile){
+    if (this.isMobile) {
       this.getGlobalNotesNotCount();
     }
-    
+
   }
 
   // Get global notes notification count
   getGlobalNotesNotCount() {
-    this.commonModel.GetNotificationCount('TOTAL').then(
-        (data: number) => {
-            // Set notification count
-            this.ttlNotCount = data;
-        }
+    this.commonModel.GetNotificationCount('TOTAL', this.overallCookieInterface.GetUserId()).then(
+      (data: number) => {
+        // Set notification count
+        this.ttlNotCount = data;
+      }
     );
-}
+  }
 
   //Get site menu items
   getMenuItems() {

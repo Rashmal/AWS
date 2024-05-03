@@ -10,6 +10,8 @@ import {
 import { CommonModel } from '../../models/commonModel';
 import { CommonService } from '../../services/common.service';
 import { API$DOMAIN } from 'src/app/core/apiConfigurations';
+import { OverallCookieInterface } from '../../core/overallCookieInterface';
+import { OverallCookieModel } from '../../core/overallCookieModel';
 
 @Component({
     selector: 'app-tab-view',
@@ -54,12 +56,15 @@ export class TabViewComponent {
     totalCount: number = 0;
     // Store common modal
     commonModal: CommonModel;
+    // Store the cookie interface
+    overallCookieInterface: OverallCookieInterface;
 
     private hubConnectionBuilder!: HubConnection;
     url = API$DOMAIN + 'notificationHub';
 
     constructor(private commonService: CommonService) {
         this.commonModal = new CommonModel(this.commonService);
+        this.overallCookieInterface = new OverallCookieModel();
     }
 
     ngOnInit() {
@@ -80,7 +85,7 @@ export class TabViewComponent {
     }
 
     getNotificationCount() {
-       
+
 
         this.hubConnectionBuilder = new HubConnectionBuilder()
             .withUrl(this.url)
@@ -91,7 +96,7 @@ export class TabViewComponent {
             .then(() => console.log('Connection started.......!'))
             .catch((err) => console.log('Error while connect with server'));
         this.hubConnectionBuilder.on('NotificationCountGN', (result: any) => {
-           this.totalCount = result;
+            this.totalCount = result;
         });
 
         this.hubConnectionBuilder = new HubConnectionBuilder()
@@ -122,7 +127,7 @@ export class TabViewComponent {
 
     // Get SystemEnhancement notification count
     getSystemEnhancementCount() {
-        this.commonModal.GetNotificationCount('SE').then((data: number) => {
+        this.commonModal.GetNotificationCount('SE', this.overallCookieInterface.GetUserId()).then((data: number) => {
             // Set notification count
             this.countSE = data;
         });
@@ -130,9 +135,9 @@ export class TabViewComponent {
 
     // Get SystemEnhancement notification count
     getBugFixesCount() {
-      this.commonModal.GetNotificationCount('BGF').then((data: number) => {
-          // Set notification count
-          this.countBF = data;
-      });
-  }
+        this.commonModal.GetNotificationCount('BGF', this.overallCookieInterface.GetUserId()).then((data: number) => {
+            // Set notification count
+            this.countBF = data;
+        });
+    }
 }

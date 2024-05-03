@@ -114,9 +114,9 @@ export class CommonModel {
     }
 
     // Get notification count for tabs
-    GetNotificationCount(tabSelection: string){
+    GetNotificationCount(tabSelection: string, userId: string) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.commonService.GetNotificationCount(tabSelection).subscribe(
+            this.allSubscriptions.push(this.commonService.GetNotificationCount(tabSelection, userId).subscribe(
                 data => {
                     let returnData = <number>data;
                     // Resolve the promise

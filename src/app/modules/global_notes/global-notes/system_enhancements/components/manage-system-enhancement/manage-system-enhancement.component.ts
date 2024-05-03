@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
 import { CommonModel } from 'src/app/modules/common/models/commonModel';
@@ -59,7 +59,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
 
   // Constructor
   constructor(private commonService: CommonService, private systemEnhancementsService: SystemEnhancementsService,
-    private route: Router, private location: Location
+    private route: Router, private location: Location, private cdRef: ChangeDetectorRef
   ) {
     // Initialize the model
     this.commonModel = new CommonModel(this.commonService);
@@ -109,20 +109,19 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     // Set editing type
     if (paramObject['Type']) {
       this.editingType = paramObject['Type'];
-
-      // Check the editing type
-      if (this.editingType == 'VIEW' || this.editingType == 'EDIT') {
-        // Set as visited
-        this.systemEnhancementModel.AddViewId(this.systemEnhancementId, this.overallCookieInterface.GetUserId()).then(
-          () => {
-
-          }
-        );
-      }
-      // End of Check the editing type
     }
 
-    
+    // Check the editing type
+    if (this.editingType == 'VIEW' || this.editingType == 'EDIT') {
+      // Set as visited
+      this.systemEnhancementModel.AddViewId(this.systemEnhancementId, this.overallCookieInterface.GetUserId()).then(
+        () => {
+
+        }
+      );
+    }
+    // End of Check the editing type
+
   }
 
   // Getting the system enhancement details by Id
@@ -246,11 +245,11 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
 
         // Setting the default selection
         if (this.systemEnhancement && this.systemEnhancement.Id != '') {
+          //this.systemEnhancement.StatusId = this.viewStatusDropdownList[0].value;
+        }
+        else {
           this.systemEnhancement.StatusId = this.viewStatusDropdownList[0].value;
-        } 
-        // else {
-        //   this.systemEnhancement.StatusId = this.viewStatusDropdownList[0].value;
-        // }
+        }
       }
     );
     // End of Calling the model to retrieve the data
@@ -277,11 +276,11 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
 
         // Setting the default selection
         if (this.systemEnhancement && this.systemEnhancement.Id != '') {
+          //this.systemEnhancement.ModuleId = this.viewModulesDropdownList[0].value;
+        }
+        else {
           this.systemEnhancement.ModuleId = this.viewModulesDropdownList[0].value;
-        } 
-        // else {
-        //   this.systemEnhancement.ModuleId = this.viewModulesDropdownList[0].value;
-        // }
+        }
       }
     );
     // End of Calling the model to retrieve the data
@@ -452,5 +451,17 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
       this.systemEnhancement.EstimatedHours = 0;
     }
     // End of Check if the value is less than 0
+  }
+
+  // Check the length of the duration
+  checkLengthDuration(e) {
+    const keyValue = +e.key;
+    const numberOnlyPattern = '[0-9]+';
+    const newValue = this.systemEnhancement.EstimatedHours + (isNaN(keyValue) ? '' : keyValue.toString());
+    const match = newValue.match(numberOnlyPattern);
+
+    if (+newValue > 999999 || !match || newValue === '') {
+      e.preventDefault();
+    }
   }
 }
