@@ -109,12 +109,29 @@ export class NewSideBarComponent implements OnInit {
   //Get site menu items
   getMenuItems() {
     //call services to get menu items
-    this.commonModel.GetModuleListService().then(
-      (data: Module[]) => {
-        this.sideMenuItems = data;
+    // this.commonModel.GetModuleListService().then(
+    //   (data: Module[]) => {
+    //     this.sideMenuItems = data;
 
+    //   }
+    // );
+    this.staticMenuItems = [];
+
+    // Getting the menu list based on the user role for static
+    this.commonModel.GetModuleListBasedUserRoleService(this.overallCookieInterface.GetUserRole(), true).then(
+      (data) => {
+        this.staticMenuItems = <Module[]>data;
+
+        // Getting the menu list based on the user role for not static
+        this.commonModel.GetModuleListBasedUserRoleService(this.overallCookieInterface.GetUserRole(), false).then(
+          (data) => {
+            this.sideMenuItems = <Module[]>data;
+          }
+        );
+        // End of Getting the menu list based on the user role for not static
       }
     );
+    // End of Getting the menu list based on the user role for static
   }
 
   itemClick(event: Event, item?: any) {

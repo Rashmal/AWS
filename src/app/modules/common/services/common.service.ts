@@ -8,6 +8,7 @@ import { Module } from '../core/module';
 import { Router } from '@angular/router';
 import { ErrorMessage } from '../core/errorMessage';
 import { BasicUserDetails } from '../../authentication/core/authenticationModals/basicUserDetails';
+import { UserRoleAccessDetail } from '../core/userRoleAccessDetail';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,40 @@ export class CommonService {
   private GetModuleListUrl = API$DOMAIN + 'api/Common/GetModuleList';
   private GetAllStaffListUrl = API$DOMAIN + 'api/Common/GetAllStaffList';
   private GetNotificationCountUrl = API$DOMAIN + 'api/Common/TotalGlobalNotes';
+  private GetModuleListBasedUserRoleUrl = API$DOMAIN + 'api/Common/GetModuleListBasedUserRole';
+  private GetAccessListBasedUserRoleUrl = API$DOMAIN + 'api/Common/GetAccessListBasedUserRole';
 
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
 
+  }
+
+  // Getting all the access list based on the user role
+  GetAccessListBasedUserRole(userRole: string) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("userRole", userRole.toString());
+
+    return this.http.get<UserRoleAccessDetail[]>(this.GetAccessListBasedUserRoleUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAccessListBasedUserRole', error)
+      })
+    );
+  }
+
+  // Getting the module list based on user role
+  GetModuleListBasedUserRole(userRole: string, isStatic: boolean) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("userRole", userRole.toString())
+      .set("isStatic", isStatic.toString());
+
+    return this.http.get<Module[]>(this.GetModuleListBasedUserRoleUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetModuleListBasedUserRole', error)
+      })
+    );
   }
 
   // Check if the email exists

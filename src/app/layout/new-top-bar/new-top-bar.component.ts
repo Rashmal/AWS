@@ -92,7 +92,7 @@ export class NewTopBarComponent {
     // Store common modal
     commonModal: CommonModel;
 
-    
+
     url = API$DOMAIN + 'notificationHub';
 
     // Constructor
@@ -111,17 +111,40 @@ export class NewTopBarComponent {
 
     //Get site menu items
     getMenuItems() {
+        debugger
         //call services to get menu items
-        this.commonModel.GetModuleListService().then(
-            (data: Module[]) => {
-                this.sideMenuItems = data;
-                this.staticMenuItemsDisplay = this.staticMenuItems;
-                // Loop through the side menus
-                for (let i = 0; i < this.sideMenuItems.length; i++) {
-                    this.staticMenuItemsDisplay.push(this.sideMenuItems[i]);
-                }
+        // this.commonModel.GetModuleListService().then(
+        //     (data: Module[]) => {
+        //         this.sideMenuItems = data;
+        //         this.staticMenuItemsDisplay = this.staticMenuItems;
+        //         // Loop through the side menus
+        //         for (let i = 0; i < this.sideMenuItems.length; i++) {
+        //             this.staticMenuItemsDisplay.push(this.sideMenuItems[i]);
+        //         }
+        //     }
+        // );
+
+        this.staticMenuItemsDisplay = [];
+
+        // Getting the menu list based on the user role for static
+        this.commonModel.GetModuleListBasedUserRoleService(this.overallCookieInterface.GetUserRole(), true).then(
+            (data) => {
+                this.staticMenuItems = <Module[]>data;
+                // Getting the menu list based on the user role for not static
+                this.commonModel.GetModuleListBasedUserRoleService(this.overallCookieInterface.GetUserRole(), false).then(
+                    (data) => {
+                        this.sideMenuItems = <Module[]>data;
+                        this.staticMenuItemsDisplay = this.staticMenuItems;
+                        // Loop through the side menus
+                        for (let i = 0; i < this.sideMenuItems.length; i++) {
+                            this.staticMenuItemsDisplay.push(this.sideMenuItems[i]);
+                        }
+                    }
+                );
+                // End of Getting the menu list based on the user role for not static
             }
         );
+        // End of Getting the menu list based on the user role for static
     }
 
     // On click function of the logout
@@ -178,7 +201,7 @@ export class NewTopBarComponent {
             this.ttlNotCount = result;
         });
 
-       
+
     }
 
     // Get global notes notification count
