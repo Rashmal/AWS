@@ -4,6 +4,7 @@ import { Priority } from "../core/priority";
 import { Status } from "../core/status";
 import { Module } from "../core/module";
 import { BasicUserDetails } from "../../authentication/core/authenticationModals/basicUserDetails";
+import { UserRoleAccessDetail } from "../core/userRoleAccessDetail";
 
 export class CommonModel {
     //Store subscriptions
@@ -119,6 +120,36 @@ export class CommonModel {
             this.allSubscriptions.push(this.commonService.GetNotificationCount(tabSelection, userId).subscribe(
                 data => {
                     let returnData = <number>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting the module list based on user role
+    GetModuleListBasedUserRoleService(userRole: string, isStatic: boolean) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetModuleListBasedUserRole(userRole, isStatic).subscribe(
+                data => {
+                    let returnData = <Module[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all the access list based on the user role
+    GetAccessListBasedUserRoleService(userRole: string) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAccessListBasedUserRole(userRole).subscribe(
+                data => {
+                    let returnData = <UserRoleAccessDetail[]>data;
                     // Resolve the promise
                     resolve(returnData);
                 })
