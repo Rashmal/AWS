@@ -24,6 +24,7 @@ import { NewTopBarComponent } from './new-top-bar/new-top-bar.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { RouterTestingModule } from "@angular/router/testing";
 import { TabMenuModule } from 'primeng/tabmenu';
+import { ModuleSelectorComponent } from './module-selector/module-selector.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { TabMenuModule } from 'primeng/tabmenu';
         AppLayoutComponent,
         NewSideBarComponent,
         NewSideBarItemComponent,
-        NewTopBarComponent
+        NewTopBarComponent,
+        ModuleSelectorComponent
     ],
     imports: [
         BrowserModule,
