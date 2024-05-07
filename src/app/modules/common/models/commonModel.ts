@@ -158,4 +158,19 @@ export class CommonModel {
         // return the promise
         return promise;
     }
+
+    // Getting all the access list based on the user role for view
+    GetViewAccessListBasedUserRole(userRole: string) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetViewAccessListBasedUserRole(userRole).subscribe(
+                data => {
+                    let returnData = <Module[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
 }

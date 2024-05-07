@@ -23,11 +23,25 @@ export class CommonService {
   private GetNotificationCountUrl = API$DOMAIN + 'api/Common/TotalGlobalNotes';
   private GetModuleListBasedUserRoleUrl = API$DOMAIN + 'api/Common/GetModuleListBasedUserRole';
   private GetAccessListBasedUserRoleUrl = API$DOMAIN + 'api/Common/GetAccessListBasedUserRole';
+  private GetViewAccessListBasedUserRoleUrl = API$DOMAIN + 'api/Common/GetViewAccessListBasedUserRole';
 
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
 
+  }
+
+  // Getting all the access list based on the user role for view
+  GetViewAccessListBasedUserRole(userRole: string) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("userRole", userRole.toString());
+
+    return this.http.get<Module[]>(this.GetViewAccessListBasedUserRoleUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetViewAccessListBasedUserRole', error)
+      })
+    );
   }
 
   // Getting all the access list based on the user role
