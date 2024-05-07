@@ -1,5 +1,5 @@
 .error_message {
-    background-image: linear-gradient(to right, #ffde59, #ff914d);
+   background-image: linear-gradient(to right, #008acc, #00588f);
     height: 100vh;
 
     .title_section {
@@ -47,13 +47,13 @@
         display: flex;
         justify-content: center;
         button {
-            background-image: linear-gradient(to right, #ffde59, #ff914d);
+            background-image: linear-gradient(to right, #008acc, #00588f);
             border: none;
             width: auto;
             height: 40px;
             border-radius: 15px;
             color: white;
-            border: solid thin black;
+            border: solid 2px #fff;
             padding-left: 10px;
             padding-right: 10px;
         }

@@ -1,11 +1,11 @@
-$primary-color: #ff9e4f;
+$primary-color: #00588f;
 
 .login_main {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: linear-gradient(to right, #ffde59, #ff914d);
+    background-image: linear-gradient(to right, #008acc, #00588f);
 
     label {
         color: $primary-color;
@@ -13,7 +13,7 @@ $primary-color: #ff9e4f;
     }
 
     .form-control {
-        background: #ffefe3;
+        background: #e1f4ff;
     }
 
     .form-group {
@@ -35,6 +35,15 @@ $primary-color: #ff9e4f;
     .login_form {
         height: fit-content;
         margin: auto;
+        .img_container{
+            display: flex;
+            justify-content: center;
+            .logo_image{
+                width: auto;
+                height: 100px;
+
+            }
+        }
     }
 
     .title_label_color {
@@ -49,7 +58,7 @@ $primary-color: #ff9e4f;
         display: flex;
 
         .btn-primary {
-            background-image: linear-gradient(to right, #ffde59, #ff914d);
+            background-image: linear-gradient(to right, #008acc, #00588f);
             border: none;
             width: 40%;
             height: 40px;
@@ -80,7 +89,7 @@ $primary-color: #ff9e4f;
     background-image: url("../../../../../assets/demo/images/login/loginImg.jpg"); /* Replace 'your-image-url.jpg' with your image URL */
     background-size: cover;
     background-position: center;
-    opacity: 0.5;
+   
 }
 
 .overlay_text_home {
@@ -88,16 +97,16 @@ $primary-color: #ff9e4f;
     height: 100%;
     width: 68vw;
     justify-content: center;
-    align-content: center;
+    
     align-self: center;
     padding: 30px;
     h3 {
         font-size: 40pt;
-        color: #e76c1b;
+        color: #ffffff;
     }
     p {
         font-size: 16pt;
-        color: #e76c1b;
+        color: #ffffff;
     }
 }
 
@@ -109,11 +118,11 @@ $primary-color: #ff9e4f;
     padding-bottom: 50pt;
     h3 {
         font-size: 20pt;
-        color: #e76c1b;
+        color: #ffffff;
     }
     p {
         font-size: 8pt;
-        color: #e76c1b;
+        color: #ffffff;
         margin-bottom: 10px;
     }
 }

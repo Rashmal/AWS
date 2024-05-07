@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
 import { ErrorMessageComponent } from './modules/common/components/error-message/error-message.component';
+import { ModuleSelectorComponent } from './layout/module-selector/module-selector.component';
 
 @NgModule({
     imports: [
@@ -10,6 +11,7 @@ import { ErrorMessageComponent } from './modules/common/components/error-message
             { path: '', redirectTo: 'auth', pathMatch: 'full' },
             // { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
             { path: 'auth', loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule) },
+            {path: 'module-selector', component: ModuleSelectorComponent},
             {
                 path: 'layout', component: AppLayoutComponent,
                 children: [
