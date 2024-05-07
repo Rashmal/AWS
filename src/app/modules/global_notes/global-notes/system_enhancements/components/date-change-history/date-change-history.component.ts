@@ -236,7 +236,6 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
 
   // Approve on click function
   approveOnClick(changeHistoryId: number) {
-    debugger
     // Calling the model to update
     this.systemEnhancementModel.ApprovalChangeDate(changeHistoryId, "APPROVE").then(
       () => {

@@ -12,11 +12,12 @@ import { CommonService } from '../../services/common.service';
 import { API$DOMAIN } from 'src/app/core/apiConfigurations';
 import { OverallCookieInterface } from '../../core/overallCookieInterface';
 import { OverallCookieModel } from '../../core/overallCookieModel';
+import { AuthenticationModule } from 'src/app/modules/authentication/authentication.module';
 
 @Component({
     selector: 'app-tab-view',
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, AuthenticationModule],
     templateUrl: './tab-view.component.html',
     styleUrl: './tab-view.component.scss',
 })
@@ -120,7 +121,6 @@ export class TabViewComponent {
             .then(() => console.log('Connection started.......!'))
             .catch((err) => console.log('Error while connect with server'));
         this.hubConnectionBuilder.on('NotificationCountSE', (result: any) => {
-            debugger
             this.countSE = result;
         });
     }

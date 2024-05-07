@@ -111,7 +111,6 @@ export class NewTopBarComponent {
 
     //Get site menu items
     getMenuItems() {
-        debugger
         //call services to get menu items
         // this.commonModel.GetModuleListService().then(
         //     (data: Module[]) => {

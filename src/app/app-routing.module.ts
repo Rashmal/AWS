@@ -11,7 +11,7 @@ import { ModuleSelectorComponent } from './layout/module-selector/module-selecto
             { path: '', redirectTo: 'auth', pathMatch: 'full' },
             // { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
             { path: 'auth', loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule) },
-            {path: 'module-selector', component: ModuleSelectorComponent},
+            { path: 'module-selector', component: ModuleSelectorComponent },
             {
                 path: 'layout', component: AppLayoutComponent,
                 children: [
