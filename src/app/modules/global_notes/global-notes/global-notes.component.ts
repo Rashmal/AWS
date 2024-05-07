@@ -47,6 +47,8 @@ export class GlobalNotesComponent {
 
   // Ng on init
   ngOnInit() {
+    
+
     // Setting the default selection
     this.onChangeTab(this.TabViewList[0].value);
   }

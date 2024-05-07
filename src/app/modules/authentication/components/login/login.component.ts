@@ -107,6 +107,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.overallCookieInterface.SetUserToken(loginToken);
                 // Navigate to the module-selector
                 this.router.navigate(['/module-selector']);
+                //this.router.navigate(['/layout']);
               }
               // End of Check if the token is valid
             }

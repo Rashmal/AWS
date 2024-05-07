@@ -223,7 +223,6 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
         label: 'All',
         value: -1,
       });
-      debugger
       // Loop through the list
       for (let i = 0; i < statusListLocal.length; i++) {
         // Setting the option
