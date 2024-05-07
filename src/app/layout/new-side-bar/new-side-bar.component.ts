@@ -140,9 +140,6 @@ export class NewSideBarComponent implements OnInit {
       event.preventDefault();
       return;
     }
-
-
-
     this.menuService.onMenuStateChange({ key: this.key });
   }
 }

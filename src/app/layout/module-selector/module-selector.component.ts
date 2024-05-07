@@ -44,8 +44,9 @@ export class ModuleSelectorComponent implements OnInit {
     }
 
     clickOnModule(module: Module) {
-      //check it is accessible
+        //check it is accessible
         if (!module.IsDisable) {
+            localStorage.setItem("MODULE$REDIRECT", module.RedirectUrl);
             // Navigate to the layout
             this.router.navigate(['/layout']);
         }

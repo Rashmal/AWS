@@ -28,7 +28,7 @@ import { ModuleSelectorComponent } from './layout/module-selector/module-selecto
             { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
             { path: 'notfound', component: NotfoundComponent },
             { path: 'errorMessage', component: ErrorMessageComponent },
-            { path: '**', redirectTo: '/notfound' },
+            // { path: '**', redirectTo: '/notfound' },
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })
     ],
     exports: [RouterModule]

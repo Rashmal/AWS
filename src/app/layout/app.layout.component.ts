@@ -41,6 +41,17 @@ export class AppLayoutComponent implements OnDestroy {
     overallCookieInterface: OverallCookieInterface;
 
     constructor(public layoutService: LayoutService, public renderer: Renderer2, public router: Router, private commonService: CommonService) {
+        debugger
+        // Check if the module redirect is there
+        if (localStorage.getItem("MODULE$REDIRECT")) {
+            // Getting the redirect url
+            let redirectUrl = localStorage.getItem("MODULE$REDIRECT");
+            // Remove the local storage
+            localStorage.removeItem("MODULE$REDIRECT");
+            // Redirect the url
+            this.router.navigate([redirectUrl]);
+        }
+
         this.commonModal = new CommonModel(this.commonService);
         this.overallCookieInterface = new OverallCookieModel();
 
