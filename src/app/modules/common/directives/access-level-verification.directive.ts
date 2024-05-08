@@ -30,7 +30,6 @@ export class AccessLevelVerificationDirective {
     // Getting the access list
     this.commonModel.GetAccessListBasedUserRoleService(this.OverallCookieAccessible.GetUserRole()).then(
       (data) => {
-        debugger
         // Getting the access list
         let userAccessList: UserRoleAccessDetail[] = <UserRoleAccessDetail[]>data;
         // Filter by the list

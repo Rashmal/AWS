@@ -24,7 +24,14 @@ import { NewTopBarComponent } from './new-top-bar/new-top-bar.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { RouterTestingModule } from "@angular/router/testing";
 import { TabMenuModule } from 'primeng/tabmenu';
-import { ModuleSelectorComponent } from './module-selector/module-selector.component';
+import { ModuleSelectorComponent } from './common/module-selector/module-selector.component';
+import { ReportBugComponent } from './common/report-bug/report-bug.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
+import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { EditorModule } from 'primeng/editor';
 
 @NgModule({
     declarations: [
@@ -37,7 +44,8 @@ import { ModuleSelectorComponent } from './module-selector/module-selector.compo
         NewSideBarComponent,
         NewSideBarItemComponent,
         NewTopBarComponent,
-        ModuleSelectorComponent
+        ModuleSelectorComponent,
+        ReportBugComponent
     ],
     imports: [
         BrowserModule,
@@ -54,7 +62,13 @@ import { ModuleSelectorComponent } from './module-selector/module-selector.compo
         AppConfigModule,
         OverlayPanelModule ,
         TooltipModule,
-        TabMenuModule 
+        TabMenuModule,
+        DropdownModule,
+        CalendarModule,
+        TableModule,
+        PaginatorModule,
+        MultiSelectModule,
+        EditorModule,
        
     ],
     exports: [AppLayoutComponent]
