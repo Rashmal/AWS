@@ -1,11 +1,11 @@
-$primary-color: #00588f;
+$primary-color: #FF914D;
 
 .login_main {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: linear-gradient(to right, #008acc, #00588f);
+    background-image: linear-gradient(to right, #FFDE59, #FF914D);
 
     label {
         color: $primary-color;
@@ -13,7 +13,7 @@ $primary-color: #00588f;
     }
 
     .form-control {
-        background: #e1f4ff;
+        background: #ffefe5;
     }
 
     .form-group {
@@ -58,7 +58,7 @@ $primary-color: #00588f;
         display: flex;
 
         .btn-primary {
-            background-image: linear-gradient(to right, #008acc, #00588f);
+            background-image: linear-gradient(to right, #FFDE59, #FF914D);
             border: none;
             width: 40%;
             height: 40px;
@@ -86,7 +86,7 @@ $primary-color: #00588f;
     }
 }
 .banner_img {
-    background-image: url("../../../../../assets/demo/images/login/loginImg.jpg"); /* Replace 'your-image-url.jpg' with your image URL */
+    background-image: url("../../../../../assets/demo/images/login/loginImg_old.jpg"); /* Replace 'your-image-url.jpg' with your image URL */
     background-size: cover;
     background-position: center;
    

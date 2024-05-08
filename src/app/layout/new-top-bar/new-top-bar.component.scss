@@ -1,8 +1,14 @@
 .layout-topbar {
     .active-route {
-        background: #126095;
+       
         .tab_label {
-            color: white !important;
+            font-weight: bold !important;
+            text-decoration: underline !important;
+        }
+        .icon_label{
+            i{
+                font-weight: bold !important;
+            }
         }
     }
 
@@ -38,7 +44,7 @@
         }
         cursor: pointer;
         padding-right: 10px;
-        height: 30px;
+       
     }
     .divider_vr {
         height: 30px;

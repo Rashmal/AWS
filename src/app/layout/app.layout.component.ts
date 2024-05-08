@@ -36,7 +36,7 @@ export class AppLayoutComponent implements OnDestroy {
     commonModal: CommonModel;
 
     // Store display menu top
-    displayMenuTop: boolean = true;
+    displayMenuTop: boolean = false;
     // Store the cookie interface
     overallCookieInterface: OverallCookieInterface;
 
