@@ -140,6 +140,10 @@ export class NewSideBarComponent implements OnInit {
       event.preventDefault();
       return;
     }
+
+    // Store the current module
+    localStorage.setItem("MODULE", item.Id.toString());
+
     this.menuService.onMenuStateChange({ key: this.key });
   }
 }

@@ -217,4 +217,16 @@ export class NewTopBarComponent {
     toggleNavigation() {
         this.toggleMenus.emit(true);
     }
+
+    // On click function of the item
+    itemClick(event, module: Module) {
+        // Store the current module
+        localStorage.setItem("MODULE", module.Id.toString());
+    }
+
+    // On click function of report a bug
+    reportBug() {
+        // Redirect to add a bug
+        this.router.navigate(['/layout/report-bug']);
+    }
 }

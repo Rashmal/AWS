@@ -1,0 +1,10 @@
+<!-- Module selector main section -->
+<div class="container-fluid module_selector_main">
+  <ul class="honeycomb" lang="es">
+    <li *ngFor="let item of moduleList" class="honeycomb-cell"
+      [ngClass]="!item.IsDisable ? 'enable_module' : 'disable_module'">
+      <div class="honeycomb-cell__title" (click)="clickOnModule(item)">{{item.Name}}</div>
+    </li>
+  </ul>
+</div>
+<!-- End of Module selector main section -->

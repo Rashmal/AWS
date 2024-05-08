@@ -36,12 +36,11 @@ export class AppLayoutComponent implements OnDestroy {
     commonModal: CommonModel;
 
     // Store display menu top
-    displayMenuTop: boolean = true;
+    displayMenuTop: boolean = false;
     // Store the cookie interface
     overallCookieInterface: OverallCookieInterface;
 
     constructor(public layoutService: LayoutService, public renderer: Renderer2, public router: Router, private commonService: CommonService) {
-        debugger
         // Check if the module redirect is there
         if (localStorage.getItem("MODULE$REDIRECT")) {
             // Getting the redirect url

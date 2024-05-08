@@ -139,7 +139,8 @@ export class NewSideBarItemComponent implements OnInit {
             return;
         }
 
-
+        // Store the current module
+        localStorage.setItem("MODULE", this.item.Id.toString());
 
         this.menuService.onMenuStateChange({ key: this.key });
     }
