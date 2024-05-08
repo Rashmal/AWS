@@ -55,7 +55,7 @@
 
                 <!-- Staff dropdown section -->
                 <div class="staff_multi_selection">
-                    <p-multiSelect [options]="viewRequestedStaffDropdownList" [disabled]="editingType  == 'VIEW'"
+                    <p-multiSelect [options]="viewRequestedStaffDropdownList" [disabled]="true"
                         [(ngModel)]="bugFix.RequestedStaffList" optionLabel="FullName" display="chip"
                         (onChange)="requestedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
                 </div>
@@ -79,7 +79,7 @@
 
                 <!-- Module dropdown section -->
                 <div>
-                    <p-dropdown [options]="viewModulesDropdownList" [disabled]="editingType  == 'VIEW'"
+                    <p-dropdown [options]="viewModulesDropdownList" [disabled]="true"
                         [(ngModel)]="bugFix.ModuleId"></p-dropdown>
                 </div>
                 <!-- End of Module dropdown section -->
@@ -181,7 +181,7 @@
 
                     <!-- Staff dropdown section -->
                     <div class="staff_multi_selection">
-                        <p-multiSelect [options]="viewRequestedStaffDropdownList" [disabled]="editingType  == 'VIEW'"
+                        <p-multiSelect [options]="viewRequestedStaffDropdownList" [disabled]="true"
                             [(ngModel)]="bugFix.RequestedStaffList" optionLabel="FullName" display="chip"
                             (onChange)="requestedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
                     </div>
@@ -208,8 +208,8 @@
 
                     <!-- Module dropdown section -->
                     <div>
-                        <p-dropdown [options]="viewModulesDropdownList" [disabled]="editingType  == 'VIEW'"
-                            [(ngModel)]="bugFix.ModuleId"></p-dropdown>
+                        <p-dropdown [options]="viewModulesDropdownList" [disabled]="true"
+                            [(ngModel)]="bugFix.ModuleId" ></p-dropdown>
                     </div>
                     <!-- End of Module dropdown section -->
                 </div>
@@ -306,7 +306,7 @@
 
                 <!-- Staff dropdown section -->
                 <div class="staff_multi_selection">
-                    <p-multiSelect [options]="viewRequestedStaffDropdownList" [disabled]="editingType  == 'VIEW'"
+                    <p-multiSelect [options]="viewRequestedStaffDropdownList" [disabled]="true"
                         [(ngModel)]="bugFix.RequestedStaffList" optionLabel="FullName" display="chip"
                         (onChange)="requestedStaffOnClick(elm)" #elm [filter]="false"></p-multiSelect>
                 </div>
@@ -330,7 +330,7 @@
 
                 <!-- Module dropdown section -->
                 <div>
-                    <p-dropdown [options]="viewModulesDropdownList" [disabled]="editingType  == 'VIEW'"
+                    <p-dropdown [options]="viewModulesDropdownList" [disabled]="true"
                         [(ngModel)]="bugFix.ModuleId"></p-dropdown>
                 </div>
                 <!-- End of Module dropdown section -->
