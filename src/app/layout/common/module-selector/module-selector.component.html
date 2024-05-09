@@ -11,8 +11,9 @@
   <div class="row normal_btn_panel d-none d-xl-flex">
     <!--Button panel-->
     <div class="col-4">
-      <div *ngFor="let item of moduleList" class="module_item">
-        <button class="module_button" [ngClass]="!item.IsDisable ? 'enable_module' : 'disable_module'" (click)="clickOnModule(item)">{{item.Name}}</button>
+      <div *ngFor="let item of moduleList; let i = index" class="module_item" [ngClass]="(i==0)?'global_background':''">
+        <button class="module_button" [ngClass]="!item.IsDisable ? 'enable_module' : 'disable_module'"
+          (click)="clickOnModule(item)">{{item.Name}}</button>
       </div>
 
     </div>
@@ -32,12 +33,13 @@
 
   </div>
   <!--End of Normal button panel and welcome note-->
-   <!--Normal button panel and welcome note medium screens-->
-   <div class="row normal_btn_panel d-none d-md-flex d-lg-flex d-xl-none">
+  <!--Normal button panel and welcome note medium screens-->
+  <div class="row normal_btn_panel d-none d-md-flex d-lg-flex d-xl-none">
     <!--Button panel-->
     <div class="col-6">
       <div *ngFor="let item of moduleList" class="module_item">
-        <button class="module_button" [ngClass]="!item.IsDisable ? 'enable_module' : 'disable_module'" (click)="clickOnModule(item)">{{item.Name}}</button>
+        <button class="module_button" [ngClass]="!item.IsDisable ? 'enable_module' : 'disable_module'"
+          (click)="clickOnModule(item)">{{item.Name}}</button>
       </div>
 
     </div>
@@ -58,12 +60,13 @@
   </div>
   <!--End of Normal button panel and welcome note-->
 
-   <!--Normal button panel and welcome note small screens-->
-   <div class="row normal_btn_panel_sm d-block d-sm-block d-md-none d-lg-none d-xl-none">
+  <!--Normal button panel and welcome note small screens-->
+  <div class="row normal_btn_panel_sm d-block d-sm-block d-md-none d-lg-none d-xl-none">
     <!--Button panel-->
     <div class="col-12">
       <div *ngFor="let item of moduleList" class="module_item">
-        <button class="module_button" [ngClass]="!item.IsDisable ? 'enable_module' : 'disable_module'" (click)="clickOnModule(item)">{{item.Name}}</button>
+        <button class="module_button" [ngClass]="!item.IsDisable ? 'enable_module' : 'disable_module'"
+          (click)="clickOnModule(item)">{{item.Name}}</button>
       </div>
 
     </div>

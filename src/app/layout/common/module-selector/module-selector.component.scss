@@ -1,23 +1,27 @@
 $primary-color: #00588f;
-body{
-    height: 100% !important;
+body {
+  height: 100% !important;
 }
 
+.global_background {
+  .enable_module {
+    background-image: linear-gradient(to right, #d2dbe1, #126095) !important;
+  }
+}
 
-.module_selector_main{
+.module_selector_main {
   width: 100%;
-    height: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(to right, #FFDE59, #FF914D);
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to right, #ffde59, #ff914d);
 
-    //background-image: linear-gradient(to right, #ffffff, #7D7D7D);
-
+  //background-image: linear-gradient(to right, #ffffff, #7D7D7D);
 }
 $hexagon-width: 150px;
-$hexagon-height: $hexagon-width*.55;
+$hexagon-height: $hexagon-width * 0.55;
 $hexagon-margin: 25px;
 $hexagon-title-color: #fff;
 $hexagon-border-color: #fff;
@@ -26,14 +30,16 @@ $hexagon-image-color: #3ea0eb;
 $honeycomb-max-width: 1200px;
 $viewport-thereshold: $hexagon-width + $hexagon-margin;
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   background: #3ea0eb;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -60,7 +66,6 @@ body {
     z-index: 1;
     cursor: pointer;
 
-
     &__title {
       height: 100%;
       display: flex;
@@ -75,7 +80,7 @@ body {
       transition: opacity 350ms;
       width: 136px;
       height: 68.5px;
-      
+
       > small {
         font-weight: 300;
         margin-top: 0.25em;
@@ -86,12 +91,15 @@ body {
       object-fit: cover;
       object-position: center;
     }
-    
-    &::before, &::after {
-      content: '';
+
+    &::before,
+    &::after {
+      content: "";
     }
 
-    &::before, &::after, &__image {
+    &::before,
+    &::after,
+    &__image {
       top: -50%;
       left: 0;
       width: 100%;
@@ -108,54 +116,46 @@ body {
     }
 
     &::after {
-     
       transition: opacity 350ms;
     }
 
     &:hover {
-      
-      
-      
-      
     }
-
   }
 
-  &__placeholder{
-    display:none;
+  &__placeholder {
+    display: none;
     opacity: 0;
     width: $hexagon-width;
     margin: 0 $hexagon-margin/2;
   }
 }
 
-.disable_module{
+.disable_module {
   &::after {
-    background-image: linear-gradient(to right, #ffffff, #7D7D7D);
+    background-image: linear-gradient(to right, #ffffff, #7d7d7d);
   }
 }
-.enable_module{
+.enable_module {
   &::after {
-    background-image: linear-gradient(to right, #FFDE59, #FF914D);
-
-   
+    background-image: linear-gradient(to right, #ffde59, #ff914d);
   }
 }
 
-@media (max-width:#{2*$viewport-thereshold}){
+@media (max-width:#{2*$viewport-thereshold}) {
   .honeycomb-cell {
     margin: #{$hexagon-margin/2 + $hexagon-height/2} $hexagon-margin;
   }
 }
 
-@media (min-width: #{2*$viewport-thereshold}) and (max-width:#{3*$viewport-thereshold}){
+@media (min-width: #{2*$viewport-thereshold}) and (max-width:#{3*$viewport-thereshold}) {
   .honeycomb-cell:nth-child(3n) {
     margin-right: calc(50% - #{$hexagon-width/2});
     margin-left: calc(50% - #{$hexagon-width/2});
   }
 
   .honeycomb__placeholder:nth-child(3n + 5) {
-    display:block;
+    display: block;
   }
 }
 
@@ -168,144 +168,132 @@ body {
     margin-right: calc(50% - #{$hexagon-width + $hexagon-margin});
   }
 
-  .honeycomb__placeholder:nth-child(5n), .honeycomb__placeholder:nth-child(5n + 3) {
-    display:block;
+  .honeycomb__placeholder:nth-child(5n),
+  .honeycomb__placeholder:nth-child(5n + 3) {
+    display: block;
   }
 }
 
 @media (min-width: #{4*$viewport-thereshold}) {
-  .honeycomb-cell:nth-child(7n + 5)  {
-    margin-left: calc(50% - #{$hexagon-width*1.5 + $hexagon-margin});
+  .honeycomb-cell:nth-child(7n + 5) {
+    margin-left: calc(50% - #{$hexagon-width * 1.5 + $hexagon-margin});
   }
 
-  .honeycomb-cell:nth-child(7n + 7), .honeycomb-cell:nth-child(7n + 5):nth-last-child(2) {
-    margin-right: calc(50% - #{$hexagon-width*1.5 + $hexagon-margin});
+  .honeycomb-cell:nth-child(7n + 7),
+  .honeycomb-cell:nth-child(7n + 5):nth-last-child(2) {
+    margin-right: calc(50% - #{$hexagon-width * 1.5 + $hexagon-margin});
   }
 
-  .honeycomb__placeholder:nth-child(7n + 7), .honeycomb__placeholder:nth-child(7n + 9), .honeycomb__placeholder:nth-child(7n + 11){
-    display:block;
+  .honeycomb__placeholder:nth-child(7n + 7),
+  .honeycomb__placeholder:nth-child(7n + 9),
+  .honeycomb__placeholder:nth-child(7n + 11) {
+    display: block;
   }
 }
 
-.normal_btn_panel{
+.normal_btn_panel {
   width: 90%;
-  .module_item{
-   
-    .module_button{
+  .module_item {
+    .module_button {
       height: 50px;
-    border-radius: 6px;
-    min-width: 300px;
-    margin-bottom: 10px;
-    border: 2px solid #ffffff;
-    
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 20px;
+      border-radius: 6px;
+      min-width: 300px;
+      margin-bottom: 10px;
+      border: 2px solid #ffffff;
+
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 20px;
     }
   }
-  .welcome_text{
-    h2{
+  .welcome_text {
+    h2 {
       color: #ffffff;
       margin-bottom: 20px;
     }
   }
 
-  .disable_module{
-    
-    background-image: linear-gradient(to right, #ffffff, #7D7D7D);
+  .disable_module {
+    background-image: linear-gradient(to right, #ffffff, #7d7d7d);
     color: #767676 !important;
     cursor: not-allowed;
   }
-  .enable_module{
-   
-      background-image: linear-gradient(to right, #FFDE59, #FF914D);
+  .enable_module {
+    background-image: linear-gradient(to right, #ffde59, #ff914d);
   }
-  .enable_module:hover{
+  .enable_module:hover {
     background-image: linear-gradient(to right, #fae48a, #fcaa78);
   }
-
 }
 
-.normal_btn_panel_sm{
+.normal_btn_panel_sm {
   width: 90%;
-  .module_item{
-   display: flex;
-   justify-content: center;
-    .module_button{
+  .module_item {
+    display: flex;
+    justify-content: center;
+    .module_button {
       height: 50px;
-    border-radius: 6px;
-    min-width: 300px;
-    margin-bottom: 10px;
-    border: 2px solid #ffffff;
-    
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 20px;
+      border-radius: 6px;
+      min-width: 300px;
+      margin-bottom: 10px;
+      border: 2px solid #ffffff;
+
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 20px;
     }
   }
-  .welcome_text{
-    h2{
+  .welcome_text {
+    h2 {
       color: #ffffff;
       margin-bottom: 20px;
     }
   }
 
-  .disable_module{
-    
-      background-image: linear-gradient(to right, #ffffff, #7D7D7D);
-      color: #767676 !important;
-      cursor: not-allowed;
+  .disable_module {
+    background-image: linear-gradient(to right, #ffffff, #7d7d7d);
+    color: #767676 !important;
+    cursor: not-allowed;
   }
-  .enable_module{
-   
-      background-image: linear-gradient(to right, #FFDE59, #FF914D);
+  .enable_module {
+    background-image: linear-gradient(to right, #ffde59, #ff914d);
   }
-  .enable_module:hover{
+  .enable_module:hover {
     background-image: linear-gradient(to right, #fae48a, #fcaa78);
   }
-
 }
 
-.normal_btn_panel_md{
+.normal_btn_panel_md {
   width: 90%;
-  .module_item{
-   
-    .module_button{
+  .module_item {
+    .module_button {
       height: 50px;
-    border-radius: 6px;
-    min-width: 300px;
-    margin-bottom: 10px;
-    border: 2px solid #ffffff;
-    
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 20px;
+      border-radius: 6px;
+      min-width: 300px;
+      margin-bottom: 10px;
+      border: 2px solid #ffffff;
+
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 20px;
     }
   }
-  .welcome_text{
-    h2{
+  .welcome_text {
+    h2 {
       color: #ffffff;
       margin-bottom: 20px;
     }
   }
 
-  .disable_module{
-    
-      background-image: linear-gradient(to right, #ffffff, #7D7D7D);
-      color: #767676 !important;
-      cursor: not-allowed;
+  .disable_module {
+    background-image: linear-gradient(to right, #ffffff, #7d7d7d);
+    color: #767676 !important;
+    cursor: not-allowed;
   }
-  .enable_module{
-   
-      background-image: linear-gradient(to right, #FFDE59, #FF914D);
+  .enable_module {
+    background-image: linear-gradient(to right, #ffde59, #ff914d);
   }
-  .enable_module:hover{
+  .enable_module:hover {
     background-image: linear-gradient(to right, #fae48a, #fcaa78);
   }
-
 }
-
-
-
-
-
