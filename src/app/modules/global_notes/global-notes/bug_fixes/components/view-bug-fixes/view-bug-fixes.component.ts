@@ -48,7 +48,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     ModuleId: -1,
     ParentId: 0,
     PriorityId: -1,
-    RecordsPerPage: 10,
+    RecordsPerPage: 20,
     SearchQuery: '',
     StaffId: '-1',
     StartDate: new Date(),
@@ -64,7 +64,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     ModuleId: -1,
     ParentId: 0,
     PriorityId: -1,
-    RecordsPerPage: 10,
+    RecordsPerPage: 20,
     SearchQuery: '',
     StaffId: '-1',
     StartDate: new Date(),
@@ -308,7 +308,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
         this.displayModuleList = <DisplayModule[]>data;
         //this.filter.ModuleId = this.filter.ModuleId;
         if (this.localModuleDropdownSelection == -1) {
-          this.filter.ModuleId = this.displayModuleList[0].Id;
+          //this.filter.ModuleId = this.displayModuleList[0].Id;
         } else {
           this.filter.ModuleId = this.localModuleDropdownSelection;
         }
@@ -654,7 +654,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
           ModuleId: -1,
           ParentId: 0,
           PriorityId: -1,
-          RecordsPerPage: 10,
+          RecordsPerPage: 20,
           SearchQuery: '',
           StaffId: '-1',
           StartDate: new Date(),
