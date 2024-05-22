@@ -1,23 +1,23 @@
-import { Address } from "./address";
+import { BusinessNumberType } from "../../common/core/businessNumberType";
+import { BusinessAddress } from "./businessAddress";
 import { Contact } from "./contact";
 
-export interface Client{
-    ClientId: number;
+export interface ClientCustomer {
+    Id: number;
     FirstName: string;
     BusinessName: string;
     MiddleInitial: string;
-    BusinessNumberType: string;
-    BusinessNumber: number;
+    BusinessNumber: string;
+    BusinessNumberType: BusinessNumberType;
 }
 
-export interface DisplayClientDetails{
+export interface DisplayClientDetails {
     CreatedBy: string;
     CreatedDate: Date;
     FullName: string;
-    Contacts: Contact [];
+    Contacts: Contact[];
     PaymentTerm: string;
-    BillingAddress: Address;
+    BillingAddress: string;
     FinancialNotes: string;
-    ExpenseAccount: string; 
-
+    ExpenseAccount: string;
 }
