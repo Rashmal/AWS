@@ -1,0 +1,23 @@
+<div class="card">
+    <p-table 
+        [value]="clientList" 
+        styleClass="p-datatable-striped" 
+        [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-client>
+                <tr>
+                    <td>{{client.FirstName+ '' + client.BusinessName}}</td>
+                    <td>{{client.name}}</td>
+                    <td>{{client.category}}</td>
+                    <td>{{client.quantity}}</td>
+                </tr>
+            </ng-template>
+    </p-table>
+</div>
