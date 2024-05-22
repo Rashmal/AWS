@@ -11,12 +11,13 @@ export interface Client{
 }
 
 export interface DisplayClientDetails{
+    Id: number;
     CreatedBy: string;
     CreatedDate: Date;
     FullName: string;
     Contacts: Contact [];
     PaymentTerm: string;
-    BillingAddress: Address;
+    BillingAddress: string;
     FinancialNotes: string;
     ExpenseAccount: string; 
 
