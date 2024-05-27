@@ -327,7 +327,7 @@
                         <span>Start/Started</span>
                     </div>
                     <!-- End of Label section -->
-                    <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true"
+                    <p-calendar [(ngModel)]="startDate" [iconDisplay]="'input'" [showIcon]="true" dateFormat="dd.mm.yy"
                         [disabled]="editingType  == 'VIEW'" [maxDate]="endDate"></p-calendar>
                 </div>
                 <!-- End of Start date section -->
@@ -340,7 +340,7 @@
                     </div>
                     <!-- End of Label section -->
 
-                    <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true"
+                    <p-calendar [(ngModel)]="endDate" [iconDisplay]="'input'" [showIcon]="true" dateFormat="dd.mm.yy"
                         [disabled]="editingType  == 'VIEW'" [minDate]="startDate"></p-calendar>
                 </div>
                 <!-- End of End date section -->

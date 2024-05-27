@@ -21,7 +21,6 @@ export interface RelationshipDetails {
     NextReportDateTime: Date;
     PriceClassification: PriceClassification;
     ClientSize: ClientSize;
-    TermType: TermType;
     ClientTermType: TermType;
     SupplierTermType: TermType;
     DayDetails: DayDetails;

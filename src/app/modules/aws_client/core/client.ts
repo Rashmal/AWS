@@ -12,6 +12,7 @@ export interface ClientCustomer {
 }
 
 export interface DisplayClientDetails {
+    Id: number;
     CreatedBy: string;
     CreatedDate: Date;
     FullName: string;
@@ -20,4 +21,5 @@ export interface DisplayClientDetails {
     BillingAddress: string;
     FinancialNotes: string;
     ExpenseAccount: string;
+    TotalRecords: number;
 }

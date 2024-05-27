@@ -3,4 +3,5 @@ export interface HourlyOtherRates {
     RateName: string;
     Rate: number;
     RateType: string;
+    TotalRecords: number;
 }

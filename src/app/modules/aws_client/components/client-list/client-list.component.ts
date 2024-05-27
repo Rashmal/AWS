@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Client } from '../../core/client';
 
 @Component({
   selector: 'app-client-list',
@@ -7,9 +6,7 @@ import { Client } from '../../core/client';
   styleUrl: './client-list.component.scss'
 })
 export class ClientListComponent {
-  //Store clients
-  clientList: Client[] = [];
-  
+
 
   
 }
