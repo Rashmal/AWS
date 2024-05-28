@@ -5,7 +5,7 @@ export interface ClientRequirement {
     Id: number;
     Title: string;
     AdditionalData: string;
-    RoleDetails: RoleDetails;
+    RoleDetails: RoleDetails[];
     ClientRequirementFiles: ClientRequirementFile[];
     TotalRecords: number;
 }
