@@ -5,6 +5,17 @@ import { Status } from "../core/status";
 import { Module } from "../core/module";
 import { BasicUserDetails } from "../../authentication/core/authenticationModals/basicUserDetails";
 import { UserRoleAccessDetail } from "../core/userRoleAccessDetail";
+import { AccountDetails } from "../core/accountDetails";
+import { BusinessNumberType } from "../core/businessNumberType";
+import { ClientSize } from "../core/clientSize";
+import { ContactType } from "../core/contactType";
+import { Country } from "../core/country";
+import { DayDetails } from "../core/dayDetails";
+import { PriceClassification } from "../core/priceClassification";
+import { RatingDetails } from "../core/ratingDetails";
+import { SocialMediaType } from "../core/socialMediaType";
+import { TermType } from "../core/termType";
+import { RoleDetails } from "../core/roleDetails";
 
 export class CommonModel {
     //Store subscriptions
@@ -165,6 +176,171 @@ export class CommonModel {
             this.allSubscriptions.push(this.commonService.GetViewAccessListBasedUserRole(userRole).subscribe(
                 data => {
                     let returnData = <Module[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all the account details
+    GetAccountDetails() {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAccountDetails().subscribe(
+                data => {
+                    let returnData = <AccountDetails[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all the business number type details
+    GetAllBusinessNumberTypes() {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAllBusinessNumberTypes().subscribe(
+                data => {
+                    let returnData = <BusinessNumberType[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all the client size details
+    GetAllClientSizes() {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAllClientSizes().subscribe(
+                data => {
+                    let returnData = <ClientSize[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all the contact type details
+    GetAllContactTypes() {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAllContactTypes().subscribe(
+                data => {
+                    let returnData = <ContactType[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all the country details
+    GetAllCountries() {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAllCountries().subscribe(
+                data => {
+                    let returnData = <Country[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all the day details
+    GetAllDays() {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAllDays().subscribe(
+                data => {
+                    let returnData = <DayDetails[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all the price classfication details
+    GetAllPriceClassifications() {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAllPriceClassifications().subscribe(
+                data => {
+                    let returnData = <PriceClassification[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all the rating details
+    GetAllRatings() {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAllRatings().subscribe(
+                data => {
+                    let returnData = <RatingDetails[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all the social media type details
+    GetAllSocialMediaTypes() {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAllSocialMediaTypes().subscribe(
+                data => {
+                    let returnData = <SocialMediaType[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all the term type details
+    GetAllTermTypes() {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAllTermTypes().subscribe(
+                data => {
+                    let returnData = <TermType[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all the role details
+    GetAllRoleDetails() {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAllRoleDetails().subscribe(
+                data => {
+                    let returnData = <RoleDetails[]>data;
                     // Resolve the promise
                     resolve(returnData);
                 })

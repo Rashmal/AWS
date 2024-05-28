@@ -9,6 +9,17 @@ import { Router } from '@angular/router';
 import { ErrorMessage } from '../core/errorMessage';
 import { BasicUserDetails } from '../../authentication/core/authenticationModals/basicUserDetails';
 import { UserRoleAccessDetail } from '../core/userRoleAccessDetail';
+import { RoleDetails } from '../core/roleDetails';
+import { TermType } from '../core/termType';
+import { SocialMediaType } from '../core/socialMediaType';
+import { RatingDetails } from '../core/ratingDetails';
+import { PriceClassification } from '../core/priceClassification';
+import { DayDetails } from '../core/dayDetails';
+import { Country } from '../core/country';
+import { ContactType } from '../core/contactType';
+import { ClientSize } from '../core/clientSize';
+import { BusinessNumberType } from '../core/businessNumberType';
+import { AccountDetails } from '../core/accountDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +35,153 @@ export class CommonService {
   private GetModuleListBasedUserRoleUrl = API$DOMAIN + 'api/Common/GetModuleListBasedUserRole';
   private GetAccessListBasedUserRoleUrl = API$DOMAIN + 'api/Common/GetAccessListBasedUserRole';
   private GetViewAccessListBasedUserRoleUrl = API$DOMAIN + 'api/Common/GetViewAccessListBasedUserRole';
-
+  private GetAccountDetailsUrl = API$DOMAIN + 'api/Common/GetAccountDetails';
+  private GetAllBusinessNumberTypesUrl = API$DOMAIN + 'api/Common/GetAllBusinessNumberTypes';
+  private GetAllClientSizesUrl = API$DOMAIN + 'api/Common/GetAllClientSizes';
+  private GetAllContactTypesUrl = API$DOMAIN + 'api/Common/GetAllContactTypes';
+  private GetAllCountriesUrl = API$DOMAIN + 'api/Common/GetAllCountries';
+  private GetAllDaysUrl = API$DOMAIN + 'api/Common/GetAllDays';
+  private GetAllPriceClassificationsUrl = API$DOMAIN + 'api/Common/GetAllPriceClassifications';
+  private GetAllRatingsUrl = API$DOMAIN + 'api/Common/GetAllRatings';
+  private GetAllSocialMediaTypesUrl = API$DOMAIN + 'api/Common/GetAllSocialMediaTypes';
+  private GetAllTermTypesUrl = API$DOMAIN + 'api/Common/GetAllTermTypes';
+  private GetAllRoleDetailsUrl = API$DOMAIN + 'api/Common/GetAllRoleDetails';
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
 
+  }
+
+  // Getting all the account details
+  GetAccountDetails() {
+    // Setting the params
+    let my_params = new HttpParams();
+
+    return this.http.get<AccountDetails[]>(this.GetAccountDetailsUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAccountDetails', error)
+      })
+    );
+  }
+
+  // Getting all the business number type details
+  GetAllBusinessNumberTypes() {
+    // Setting the params
+    let my_params = new HttpParams();
+
+    return this.http.get<BusinessNumberType[]>(this.GetAllBusinessNumberTypesUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAllBusinessNumberTypes', error)
+      })
+    );
+  }
+
+  // Getting all the client size details
+  GetAllClientSizes() {
+    // Setting the params
+    let my_params = new HttpParams();
+
+    return this.http.get<ClientSize[]>(this.GetAllClientSizesUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAllClientSizes', error)
+      })
+    );
+  }
+
+  // Getting all the contact type details
+  GetAllContactTypes() {
+    // Setting the params
+    let my_params = new HttpParams();
+
+    return this.http.get<ContactType[]>(this.GetAllContactTypesUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAllContactTypes', error)
+      })
+    );
+  }
+
+  // Getting all the country details
+  GetAllCountries() {
+    // Setting the params
+    let my_params = new HttpParams();
+
+    return this.http.get<Country[]>(this.GetAllCountriesUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAllCountries', error)
+      })
+    );
+  }
+
+  // Getting all the day details
+  GetAllDays() {
+    // Setting the params
+    let my_params = new HttpParams();
+
+    return this.http.get<DayDetails[]>(this.GetAllDaysUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAllDays', error)
+      })
+    );
+  }
+
+  // Getting all the price classfication details
+  GetAllPriceClassifications() {
+    // Setting the params
+    let my_params = new HttpParams();
+
+    return this.http.get<PriceClassification[]>(this.GetAllPriceClassificationsUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAllPriceClassifications', error)
+      })
+    );
+  }
+
+  // Getting all the rating details
+  GetAllRatings() {
+    // Setting the params
+    let my_params = new HttpParams();
+
+    return this.http.get<RatingDetails[]>(this.GetAllRatingsUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAllRatings', error)
+      })
+    );
+  }
+
+  // Getting all the social media type details
+  GetAllSocialMediaTypes() {
+    // Setting the params
+    let my_params = new HttpParams();
+
+    return this.http.get<SocialMediaType[]>(this.GetAllSocialMediaTypesUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAllSocialMediaTypes', error)
+      })
+    );
+  }
+
+  // Getting all the term type details
+  GetAllTermTypes() {
+    // Setting the params
+    let my_params = new HttpParams();
+
+    return this.http.get<TermType[]>(this.GetAllTermTypesUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAllTermTypes', error)
+      })
+    );
+  }
+
+  // Getting all the role details
+  GetAllRoleDetails() {
+    // Setting the params
+    let my_params = new HttpParams();
+
+    return this.http.get<RoleDetails[]>(this.GetAllRoleDetailsUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAllRoleDetails', error)
+      })
+    );
   }
 
   // Getting all the access list based on the user role for view
