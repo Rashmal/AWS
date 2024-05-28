@@ -4,6 +4,6 @@ export interface Contact {
     Id: number;
     Name: string;
     ContactValue: string;
-    Contact: string;
     ContactType: ContactType;
+    TotalRecords ?: number;
 }

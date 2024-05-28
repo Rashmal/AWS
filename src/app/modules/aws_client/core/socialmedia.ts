@@ -4,4 +4,5 @@ export interface SocialMedia {
     Id: number;
     Setting: string;
     SocialMediaType: SocialMediaType;
+    TotalRecords: number;
 }

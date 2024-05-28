@@ -36,14 +36,14 @@ export class ClientListComponent implements OnInit {
                     Id: 101,
                     Name: "John's Email",
                     ContactValue: 'john.doe@example.com',
-                    Contact: 'Email',
+                    
                     ContactType: this.contactTypes[0],
                 },
                 {
                     Id: 102,
                     Name: "John's Phone",
                     ContactValue: '+1234567890',
-                    Contact: 'Phone',
+                   
                     ContactType: this.contactTypes[1],
                 },
             ],
@@ -63,14 +63,14 @@ export class ClientListComponent implements OnInit {
                     Id: 103,
                     Name: "Jane's Email",
                     ContactValue: 'jane.smith@example.com',
-                    Contact: 'Email',
+                   
                     ContactType: this.contactTypes[0],
                 },
                 {
                     Id: 104,
                     Name: "Jane's Office Phone",
                     ContactValue: '+1987654321',
-                    Contact: 'Phone',
+                   
                     ContactType: this.contactTypes[1],
                 },
             ],
@@ -89,14 +89,14 @@ export class ClientListComponent implements OnInit {
                     Id: 105,
                     Name: "Peter's Mobile",
                     ContactValue: '+1098765432',
-                    Contact: 'Phone',
+                   
                     ContactType: this.contactTypes[1],
                 },
                 {
                     Id: 106,
                     Name: "Peter's Work Email",
                     ContactValue: 'peter.parker@dailybugle.com',
-                    Contact: 'Email',
+                   
                     ContactType: this.contactTypes[0],
                 },
             ],
@@ -115,14 +115,14 @@ export class ClientListComponent implements OnInit {
                     Id: 107,
                     Name: "Bruce's Email",
                     ContactValue: 'bruce.wayne@wayneenterprises.com',
-                    Contact: 'Email',
+                    
                     ContactType: this.contactTypes[0],
                 },
                 {
                     Id: 108,
                     Name: "Bruce's Mobile",
                     ContactValue: '+1122334455',
-                    Contact: 'Phone',
+                    
                     ContactType: this.contactTypes[1],
                 },
             ],
@@ -141,14 +141,14 @@ export class ClientListComponent implements OnInit {
                     Id: 109,
                     Name: "Clark's Email",
                     ContactValue: 'clark.kent@dailyplanet.com',
-                    Contact: 'Email',
+                    
                     ContactType: this.contactTypes[0],
                 },
                 {
                     Id: 110,
                     Name: "Clark's Work Phone",
                     ContactValue: '+1223344556',
-                    Contact: 'Phone',
+                   
                     ContactType: this.contactTypes[1],
                 },
             ],
@@ -167,14 +167,14 @@ export class ClientListComponent implements OnInit {
                     Id: 111,
                     Name: "Diana's Email",
                     ContactValue: 'diana.prince@themiscira.gov',
-                    Contact: 'Email',
+                   
                     ContactType: this.contactTypes[0],
                 },
                 {
                     Id: 112,
                     Name: "Diana's Mobile",
                     ContactValue: '+1234567891',
-                    Contact: 'Phone',
+                    
                     ContactType: this.contactTypes[1],
                 },
             ],
@@ -193,14 +193,14 @@ export class ClientListComponent implements OnInit {
                     Id: 113,
                     Name: "Tony's Email",
                     ContactValue: 'tony.stark@starkindustries.com',
-                    Contact: 'Email',
+                    
                     ContactType: this.contactTypes[0],
                 },
                 {
                     Id: 114,
                     Name: "Tony's Phone",
                     ContactValue: '+1321654987',
-                    Contact: 'Phone',
+                    
                     ContactType: this.contactTypes[1],
                 },
             ],
@@ -219,14 +219,14 @@ export class ClientListComponent implements OnInit {
                     Id: 115,
                     Name: "Natasha's Email",
                     ContactValue: 'natasha.romanoff@shield.gov',
-                    Contact: 'Email',
+                   
                     ContactType: this.contactTypes[0],
                 },
                 {
                     Id: 116,
                     Name: "Natasha's Mobile",
                     ContactValue: '+1123456789',
-                    Contact: 'Phone',
+                   
                     ContactType: this.contactTypes[1],
                 },
             ],
@@ -246,14 +246,14 @@ export class ClientListComponent implements OnInit {
                     Id: 117,
                     Name: "Steve's Email",
                     ContactValue: 'steve.rogers@avengers.com',
-                    Contact: 'Email',
+                   
                     ContactType: this.contactTypes[0],
                 },
                 {
                     Id: 118,
                     Name: "Steve's Phone",
                     ContactValue: '+1987456123',
-                    Contact: 'Phone',
+                    
                     ContactType: this.contactTypes[1],
                 },
             ],
@@ -272,14 +272,14 @@ export class ClientListComponent implements OnInit {
                     Id: 119,
                     Name: "Bruce's Email",
                     ContactValue: 'bruce.banner@avengers.com',
-                    Contact: 'Email',
+                    
                     ContactType: this.contactTypes[0],
                 },
                 {
                     Id: 120,
                     Name: "Bruce's Mobile",
                     ContactValue: '+1876543210',
-                    Contact: 'Phone',
+                   
                     ContactType: this.contactTypes[1],
                 },
             ],

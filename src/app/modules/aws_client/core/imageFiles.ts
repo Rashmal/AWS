@@ -6,4 +6,5 @@ export interface ImageFiles {
     ResourceFile: string;
     InternalNotes: string;
     ResourceType: ResourceType;
+    TotalRecords: number;
 }
