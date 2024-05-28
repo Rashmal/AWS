@@ -1,0 +1,87 @@
+.clients_main{
+   .filter_section{
+    margin-bottom: 20px;
+    .add_new{
+        button{
+            height: 30px;
+            width: 100%;
+            border-radius: 3px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2867af;
+            color: #fff;
+        }
+    }
+    .filter_item{
+        display: flex;
+        align-items: center;
+        label{
+            min-width: 150px;
+        }
+        input{
+            width: 100%;
+            margin-left: 10px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+    }
+   }
+
+   .paginator_sec{
+    margin-top: 10px;
+   }
+   
+}
+
+::ng-deep p-table .table_header_row{
+    background-color: #dddddd  !important;
+    th{
+        background-color: transparent;
+    }
+    .header_col{
+        text-align: center;
+        min-width: 130px;
+    }
+ 
+}
+
+::ng-deep p-table .table_body{
+    .action_button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        button{
+            height: 30px;
+            width: 33px;
+            border-radius: 3px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            i{
+                color:#fff;
+            }
+        }
+        .red_btn{
+            background-color: #ff5757;
+        }
+        .blue_btn{
+           
+            background-color: #2867af;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        .green_btn{
+            background-color: #21ba45;
+        }
+    }
+}
+::ng-deep p-dropdown  {
+    width: 100% !important;
+}
+::ng-deep .p-dropdown {
+    width: 100% !important;
+}

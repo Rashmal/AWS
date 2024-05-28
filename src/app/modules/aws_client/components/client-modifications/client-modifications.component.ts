@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-client-modifications',
@@ -8,6 +9,9 @@ import { SelectItem } from 'primeng/api';
     styleUrl: './client-modifications.component.scss',
 })
 export class ClientModificationsComponent {
+    modificationMode = 'NEW';
+    selectedClientId = 0;
+
     // Store the tab list
     TabViewList: SelectItem[] = [
         {
@@ -27,10 +31,20 @@ export class ClientModificationsComponent {
     tabSelection: SelectItem;
 
     // Constructor
-    constructor(private route: Router) {}
+    constructor(private route: Router, private location: Location) {}
 
     // Ng on init
     ngOnInit() {
+        // Getting the passed params
+        let paramObject = this.location.getState();
+        //Set editing mode
+        if (paramObject['EditingMode']) {
+            this.modificationMode = paramObject['EditingMode'];
+        }
+        //Set editing client id
+        if (paramObject['ClientId']) {
+            this.selectedClientId = paramObject['ClientId'];
+        }
         // Setting the default selection
         this.onChangeTab(this.TabViewList[0].value);
     }
@@ -46,19 +60,37 @@ export class ClientModificationsComponent {
         // Check the selected tab
         switch (selectedTab.toUpperCase()) {
             case 'GeneralInfo'.toUpperCase():
-                this.route.navigate([
-                    '/layout/client/client_main/client_mod/gen_inf',
-                ]);
+                this.route.navigate(
+                    ['/layout/client/client_main/client_mod/gen_inf'],
+                    {
+                        state: {
+                            ClientId: this.selectedClientId,
+                            EditingMode: this.modificationMode,
+                        },
+                    }
+                );
                 break;
             case 'ImgDcFi'.toUpperCase():
-                this.route.navigate([
-                    '/layout/client/client_main/client_mod/media',
-                ]);
+                this.route.navigate(
+                    ['/layout/client/client_main/client_mod/media'],
+                    {
+                        state: {
+                            ClientId: this.selectedClientId,
+                            EditingMode: this.modificationMode,
+                        },
+                    }
+                );
                 break;
             case 'ClientReq'.toUpperCase():
-                this.route.navigate([
-                    '/layout/client/client_main/client_mod/cli_req',
-                ]);
+                this.route.navigate(
+                    ['/layout/client/client_main/client_mod/cli_req'],
+                    {
+                        state: {
+                            ClientId: this.selectedClientId,
+                            EditingMode: this.modificationMode,
+                        },
+                    }
+                );
                 break;
         }
         // End of Check the selected tab

@@ -13,7 +13,8 @@ $gutter: 1rem; //for primeflex grid system
 @import "assets/demo/styles/badges.scss";
 @import "assets/demo/styles/code.scss";
 
-
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
 
 input {
     height: 30px;
@@ -45,6 +46,7 @@ input {
 .p-dropdown {
     height: 30px;
     min-width: 200px;
+    border-radius: 3px;
 }
 
 .p-dropdown .p-dropdown-label {

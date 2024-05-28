@@ -8,6 +8,14 @@ import { ClientModificationsComponent } from './components/client-modifications/
 import { GeneralInfoComponent } from './components/client-modifications/general-info/general-info.component';
 import { ImagesFilesDocsComponent } from './components/client-modifications/images-files-docs/images-files-docs.component';
 import { ClientRequirementsComponent } from './components/client-modifications/client-requirements/client-requirements.component';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
+import { PaginatorModule } from 'primeng/paginator';
+import { AccordionModule } from 'primeng/accordion';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { EditorModule } from 'primeng/editor';
+import { ChipsModule } from 'primeng/chips';
 
 @NgModule({
     declarations: [
@@ -16,8 +24,20 @@ import { ClientRequirementsComponent } from './components/client-modifications/c
         ClientModificationsComponent,
         GeneralInfoComponent,
         ImagesFilesDocsComponent,
-        ClientRequirementsComponent
+        ClientRequirementsComponent,
     ],
-    imports: [AWSClientRoutingModule, TableModule, TabViewComponent],
+    imports: [
+        FormsModule,
+        CommonModule,
+        AWSClientRoutingModule,
+        TableModule,
+        TabViewComponent,
+        DropdownModule,
+        PaginatorModule,
+        AccordionModule,
+        InputSwitchModule,
+        EditorModule,
+        ChipsModule
+    ],
 })
 export class AWSClientModule {}

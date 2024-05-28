@@ -1,1 +1,526 @@
-<p>general-info works!</p>
+<!--Gen info main-->
+<div class="card flex justify-content-center gen_info_main">
+    <p-accordion [multiple]="true" [activeIndex]="[0, 1, 2, 3, 4]">
+        <p-accordionTab header="Client / Customer">
+            <!--Client Customer-->
+            <div class="row gen_info_item">
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Business Name / Surname</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">First Name</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Middle Initial</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Business Number Type</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Business Number</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+            </div>
+            <!--End of Client Customer-->
+
+        </p-accordionTab>
+        <p-accordionTab header="Billing Address">
+            <!--Billing Address-->
+
+            <div class="row gen_info_item">
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Billing Name (if any)</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Street Number and Name</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Suburb</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Pcode / Zip</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">State / Territory</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Country</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+            </div>
+
+            <!--End of Billing Address-->
+
+        </p-accordionTab>
+        <p-accordionTab header="Relationship">
+            <!--Relationship-->
+            <div class="row gen_info_item">
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Office Job</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Work Credit</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Pricing Classification</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Client Rating</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Pricing Classification</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Client Term Type</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Client Terms</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Default Deposit</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Month Day Alert</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-6 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Financial Notes</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <textarea class="input_field" type="text"></textarea>
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Supplier Term Type</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Supplier Terms</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Is Supplier</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Expense Account</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area input_area_switch">
+                    <!--Label-->
+                    <label class="input_lbl">Is Subcontractor</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-inputSwitch [(ngModel)]="checked" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area input_area_switch">
+                    <!--Label-->
+                    <label class="input_lbl">Is Client</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-inputSwitch [(ngModel)]="checked" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area input_area_switch">
+                    <!--Label-->
+                    <label class="input_lbl">Auto Progress Report</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-inputSwitch [(ngModel)]="checked" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Report Day</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-lg-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Next Report Date / Time</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" />
+                    <!--End of Input area-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+
+            </div>
+            <!--End of Relationship-->
+
+        </p-accordionTab>
+        <p-accordionTab header="Contacts">
+            <!--Contacts-->
+            <div class="">
+                <div class="row">
+                    <div class="col-12 col-lg-9">
+                        <p-table class="contacts_tbl" [value]="products" dataKey="id"
+                            [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
+                            <ng-template pTemplate="header">
+                                <tr class="table_header_row">
+
+                                    <th class="header_col" style="width:30%">
+                                        Contact Name(s)
+                                    </th>
+                                    <th class="header_col" style="width:30%">
+                                        Contact Type
+                                    </th>
+                                    <th class="header_col" style="width:30%">
+                                        Contact
+                                    </th>
+                                    <th class="header_col" style="width:10%">
+                                        Action
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-product let-editing="editing">
+                                <tr>
+                                    <td><input class="input_field" type="text" /></td>
+                                    <td><p-dropdown [options]="cities" optionLabel="name" class="full_width"
+                                            placeholder="Select a City" /></td>
+                                    <td><input class="input_field" type="text" /></td>
+                                    <td class="action_button"><button class="red_btn"><i class="fa fa-trash"
+                                                aria-hidden="true"></i></button></td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+                        <!-- Pagination section -->
+                        <p-paginator class="paginator_sec" #modulePaginator
+                            [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
+                            [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
+                            [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
+                        <!-- End of Pagination section -->
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--End of Contacts-->
+
+        </p-accordionTab>
+        <p-accordionTab header="Social Media">
+            <!--Social Media-->
+            <div class="">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <p-table class="contacts_tbl" [value]="products" dataKey="id"
+                            [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
+                            <ng-template pTemplate="header">
+                                <tr class="table_header_row">
+                                    <th class="header_col" style="width:25%">
+                                        Type
+                                    </th>
+                                    <th class="header_col" style="width:25%">
+                                        Setting
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-product let-editing="editing">
+                                <tr>
+                                    <td><p-dropdown [options]="cities" optionLabel="name" class="full_width"
+                                            placeholder="Select a City" /></td>
+                                    <td><input class="input_field " type="text" /></td>
+
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+                        <!-- Pagination section -->
+                        <p-paginator class="paginator_sec" #modulePaginator
+                            [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
+                            [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
+                            [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
+                        <!-- End of Pagination section -->
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!--End of Social Media-->
+
+        </p-accordionTab>
+
+    </p-accordion>
+</div>
+<!--End of Gen info main-->
