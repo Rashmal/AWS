@@ -16,6 +16,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { EditorModule } from 'primeng/editor';
 import { ChipsModule } from 'primeng/chips';
+import { GlobalRequirementsComponent } from './components/client-modifications/client-requirements/global-requirements/global-requirements.component';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { ChipsModule } from 'primeng/chips';
         GeneralInfoComponent,
         ImagesFilesDocsComponent,
         ClientRequirementsComponent,
+        GlobalRequirementsComponent
     ],
     imports: [
         FormsModule,

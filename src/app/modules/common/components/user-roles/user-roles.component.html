@@ -1,0 +1,51 @@
+<!--delete confirmation-->
+<div class="popup_content">
+    <!--Message-->
+    <div class="">
+
+        <div >
+            <p-table 
+                [value]="products" 
+                [(selection)]="selectedProducts" 
+                dataKey="code" 
+                >
+                    <ng-template pTemplate="header">
+                        <tr class="table_header_row">
+                            <th style="width: 4rem" class="header_col"><p-tableHeaderCheckbox /></th>
+                            
+                            <th class="header_col">User Role</th>
+                          
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="product" />
+                            </td>
+                           
+                            <td>{{product.name}}</td>
+                            
+                        </tr>
+                    </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <!--End of Message-->
+    <!--Button panel outer div-->
+    <div class="button_panel_outer">
+        <!--Button panel-->
+        <div class="button_panel">
+            
+            <button class="button_red" (click)="onClickCancel()">Cancel</button>
+            <button class="button_blue" (click)="onClickSave()">Save</button>
+        </div>
+        <!--End of Button panel-->
+    </div>
+    <!--End of Button panel outer div-->
+
+
+
+
+
+</div>
+<!--End of delete confirmation-->

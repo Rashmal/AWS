@@ -1,0 +1,31 @@
+<!-- Container for the file upload area, applying the drag-and-drop directive -->
+<div class="upload-container" appDragDrop (fileDropped)="onFileDropped($event)">
+    <!-- Hidden file input element that supports multiple file selection of any type -->
+    <input type="file" #fileInput multiple (change)="onFileSelected($event)" hidden>
+    <!-- Button to trigger the file input click event -->
+    <button (click)="fileInput.click()" class="button_blue">Upload Files</button>
+    <!-- Instructional text for drag-and-drop functionality -->
+    <p>or drag and drop files here</p>
+    <!-- Additional message to indicate supported file types -->
+    <p>Supported file types: images, documents, and more.</p>
+</div>
+
+<!-- List to display the names of the selected files -->
+<div class="file-list">
+    <ul>
+        <!-- Loop through the files array and display each file's name -->
+        <li *ngFor="let file of files">{{ file.name }}</li>
+    </ul>
+</div>
+
+ <!--Button panel outer div-->
+ <div class="button_panel_outer">
+    <!--Button panel-->
+    <div class="button_panel">
+       
+        <button class="button_red" (click)="closePopup(true)">Cancel</button>
+        <button class="button_blue" (click)="closePopup(true)">Upload</button>
+    </div>
+    <!--End of Button panel-->
+</div>
+<!--End of Button panel outer div-->

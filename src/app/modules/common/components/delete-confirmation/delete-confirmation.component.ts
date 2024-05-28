@@ -4,8 +4,6 @@ import { ViewSystemEnhancement } from 'src/app/modules/global_notes/global-notes
 
 @Component({
   selector: 'app-delete-confirmation',
-  standalone: true,
-  imports: [DynamicDialogModule],
   templateUrl: './delete-confirmation.component.html',
   styleUrl: './delete-confirmation.component.scss',
   
