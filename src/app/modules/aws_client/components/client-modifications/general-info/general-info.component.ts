@@ -22,6 +22,8 @@ import { Filter } from 'src/app/modules/common/core/filters';
 import { ContactType } from 'src/app/modules/common/core/contactType';
 import { SocialMedia } from '../../../core/socialMedia';
 import { SocialMediaType } from 'src/app/modules/common/core/socialMediaType';
+import { aC } from '@fullcalendar/core/internal-common';
+import { CommonClientService } from '../../../services/common-client.service';
 
 interface City {
     name: string;
@@ -118,7 +120,7 @@ export class GeneralInfoComponent implements OnInit {
     socialMediaList: SocialMedia[] = [];
 
     constructor(private location: Location, private clientService: ClientService,
-        private commonService: CommonService) {
+        private commonService: CommonService, private commonClientService: CommonClientService) {
         // Initialize the model
         this.clientModel = new ClientModel(this.clientService);
         this.commonModel = new CommonModel(this.commonService);
@@ -263,7 +265,65 @@ export class GeneralInfoComponent implements OnInit {
         //Set editing client id
         if (paramObject['ClientId']) {
             this.selectedClientId = paramObject['ClientId'];
+            // getting the Client Customer details based on the selected client Id
+            this.GetClientCustomerDetails();
+            // getting the Client Business details based on the selected client Id
+            this.GetBusinessCustomerDetails();
+            // getting the Client Relationship details based on the selected client Id
+            this.GetRelationshipDetails();
+            // getting the Client Contact details based on the selected client Id
+            this.GetContactListDetails();
+            // getting the Client Social Media details based on the selected client Id
+            this.GetSocialMediaListDetails();
         }
+    }
+
+    // getting the Client Customer details based on the selected client Id
+    GetClientCustomerDetails() {
+        // Calling the object model to access the service
+        this.clientModel.GetClientCustomer(this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Getting the list of social media list
+                this.clientCustomer = <ClientCustomer>data;
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // getting the Client Business details based on the selected client Id
+    GetBusinessCustomerDetails() {
+        // Calling the object model to access the service
+        this.clientModel.GetBillingAddress(this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Getting the list of social media list
+                this.businessAddress = <BusinessAddress>data;
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // getting the Client Relationship details based on the selected client Id
+    GetRelationshipDetails() {
+        // Calling the object model to access the service
+        this.clientModel.GetRelationshipDetails(this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Getting the list of social media list
+                this.relationshipDetails = <RelationshipDetails>data;
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // getting the Client Contact details based on the selected client Id
+    GetContactListDetails() {
+        // Getting all the contacts list
+        this.getAllContactList();
+    }
+
+    // getting the Client Social Media details based on the selected client Id
+    GetSocialMediaListDetails() {
+        // Getting all the social media list
+        this.getAllSocialMediaList();
     }
 
     //on change module list paginator
@@ -541,8 +601,15 @@ export class GeneralInfoComponent implements OnInit {
         // Calling the object model to access the service
         this.clientModel.SetClientCustomer(this.clientCustomer, this.overallCookieInterface.GetUserId(), actionState, this.companyId).then(
             (data) => {
+                debugger
                 // Assign new client Id
                 this.selectedClientId = <number>data;
+                // Check if the action state is new
+                if (actionState == "NEW" && this.selectedClientId != 0) {
+                    // Setting the new id
+                    this.commonClientService.selectedClientFunc(this.selectedClientId);
+                }
+                // End of Check if the action state is new
                 this.clientCustomer.Id = this.selectedClientId;
                 this.modificationMode = "EDIT";
             }
