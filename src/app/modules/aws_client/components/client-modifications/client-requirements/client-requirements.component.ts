@@ -7,6 +7,8 @@ import { UploadFilesComponent } from 'src/app/modules/common/components/upload-f
 import { GlobalRequirementsComponent } from './global-requirements/global-requirements.component';
 import { Location } from '@angular/common';
 import { ClientRequirement } from '../../../core/clientRequirement';
+import { ClientModel } from '../../../models/clientModel';
+import { ClientService } from '../../../services/client.service';
 
 @Component({
     selector: 'app-client-requirements',
@@ -50,9 +52,16 @@ export class ClientRequirementsComponent implements OnInit {
     selectedClientId = 0;
     // Store the client requirements
     clientRequirementList: ClientRequirement[] = [];
+    // Store the client model
+    clientModel: ClientModel;
+    // Store the company Id
+    companyId: number = 0;
 
-    constructor(public dialogService: DialogService, private location: Location) {
-
+    constructor(public dialogService: DialogService, private location: Location,
+        private clientService: ClientService
+    ) {
+        // Initialize the model
+        this.clientModel = new ClientModel(this.clientService);
     }
 
     ngOnInit(): void {
@@ -170,16 +179,31 @@ export class ClientRequirementsComponent implements OnInit {
     }
 
     // On blur event
-    onBlurEvent(currentSection: string) {
+    onBlurEvent(currentSection: string, currentIndex: number, clientRequirementObject: ClientRequirement) {
         // Check the current section
         switch (currentSection) {
             case 'CLIENT$REQUIREMENTS':
-
+                // Update the client requirement object
+                this.updateClientRequirementObject(currentIndex, clientRequirementObject);
                 break;
         }
         // End of Check the current section
     }
 
-    
+    // Update the client requirement object
+    updateClientRequirementObject(currentIndex: number, clientRequirementObject: ClientRequirement) {
+        // Check the action state
+        let actionState = (clientRequirementObject.Id == 0) ? "NEW" : "UPDATE";
+
+        // Calling the object model to access the service
+        this.clientModel.SetClientRequirement(clientRequirementObject, actionState, this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Setting the business address Id
+                this.clientRequirementList[currentIndex].Id = <number>data;
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
 
 }

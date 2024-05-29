@@ -39,7 +39,7 @@
                                         <!--requirement description-->
                                         <input class="input_field" type="text" placeholder="Enter Title"
                                             [disabled]="selectedClientId == 0" [(ngModel)]="clientRequirement.Title"
-                                            (blur)="onBlurEvent('CLIENT$REQUIREMENTS')" />
+                                            (blur)="onBlurEvent('CLIENT$REQUIREMENTS',rowIndex,clientRequirement)" />
                                         <!--End of requirement description-->
                                         <!-- Description input -->
                                         <div (click)="enterEditingItem(rowIndex)" (mouseleave)="enterLeaveItem()"
