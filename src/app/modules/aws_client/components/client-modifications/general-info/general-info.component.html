@@ -6,6 +6,7 @@
     </div>
     <!-- End of Error message -->
 
+    <!-- Accordion section -->
     <p-accordion [multiple]="true" [activeIndex]="[0, 1, 2, 3, 4]">
         <p-accordionTab header="Client / Customer">
             <!--Client Customer-->
@@ -388,7 +389,7 @@
             <div class="">
                 <div class="row">
                     <div class="col-12 col-lg-9">
-                        <p-table class="contacts_tbl" [value]="products" dataKey="id"
+                        <p-table class="contacts_tbl" [value]="contactList" dataKey="Id"
                             [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
                             <ng-template pTemplate="header">
                                 <tr class="table_header_row">
@@ -407,40 +408,53 @@
                                     </th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-product let-editing="editing">
+                            <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
                                 <tr>
-                                    <td><input class="input_field" type="text" /></td>
-                                    <td><p-dropdown [options]="cities" optionLabel="name" class="full_width"
-                                            placeholder="Select a City" /></td>
-                                    <td><input class="input_field" type="text" /></td>
-                                    <td class="action_button"><button class="red_btn"><i class="fa fa-trash"
-                                                aria-hidden="true"></i></button></td>
+                                    <td>
+                                        <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                                            [(ngModel)]="contact.Name"
+                                            (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
+                                    </td>
+                                    <td>
+                                        <p-dropdown [options]="displayContactTypeList" class="full_width"
+                                            appendTo="body" placeholder="Select an option"
+                                            [disabled]="!clientCustomer.BusinessName"
+                                            [(ngModel)]="contact.ContactType.Id"
+                                            (onChange)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
+                                    </td>
+                                    <td>
+                                        <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                                            [(ngModel)]="contact.ContactValue"
+                                            (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
+                                    </td>
+                                    <td class="action_button">
+                                        <button class="red_btn" [disabled]="!clientCustomer.BusinessName"
+                                            (click)="onDeleteContact(contact)">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             </ng-template>
                         </p-table>
 
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
-                            [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
-                            [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
-                            [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
+                            [ngClass]="(contactList && contactList.length > 0 && contactList[0].TotalRecords > 10)?'':'display_hide'"
+                            [rows]="contactFilter.RecordsPerPage" (onPageChange)="onPageChange($event, 'CONTACT')"
+                            [totalRecords]="(contactList.length>0)? contactList[0].TotalRecords:0"></p-paginator>
                         <!-- End of Pagination section -->
 
                     </div>
                 </div>
             </div>
-
-
-
             <!--End of Contacts-->
-
         </p-accordionTab>
         <p-accordionTab header="Social Media">
             <!--Social Media-->
             <div class="">
                 <div class="row">
                     <div class="col-12 col-lg-6">
-                        <p-table class="contacts_tbl" [value]="products" dataKey="id"
+                        <p-table class="contacts_tbl" [value]="socialMediaList" dataKey="Id"
                             [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
                             <ng-template pTemplate="header">
                                 <tr class="table_header_row">
@@ -450,35 +464,48 @@
                                     <th class="header_col" style="width:25%">
                                         Setting
                                     </th>
-
+                                    <th class="header_col" style="width:10%">
+                                        Action
+                                    </th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-product let-editing="editing">
+                            <ng-template pTemplate="body" let-socialMedia let-rowSMIndex="rowIndex">
                                 <tr>
-                                    <td><p-dropdown [options]="cities" optionLabel="name" class="full_width"
-                                            placeholder="Select a City" /></td>
-                                    <td><input class="input_field " type="text" /></td>
-
+                                    <td>
+                                        <p-dropdown [options]="displaySocialMediaTypeList" class="full_width"
+                                            appendTo="body" placeholder="Select an option"
+                                            [disabled]="!clientCustomer.BusinessName"
+                                            [(ngModel)]="socialMedia.SocialMediaType.Id"
+                                            (onChange)="onBlurEvent('SOCIAL$MEDIA$DETAILS',rowSMIndex,null,socialMedia)" />
+                                    </td>
+                                    <td>
+                                        <input class="input_field " type="text"
+                                            [disabled]="!clientCustomer.BusinessName" [(ngModel)]="socialMedia.Setting"
+                                            (blur)="onBlurEvent('SOCIAL$MEDIA$DETAILS',rowSMIndex,null,socialMedia)" />
+                                    </td>
+                                    <td class="action_button">
+                                        <button class="red_btn" [disabled]="!clientCustomer.BusinessName"
+                                            (click)="onDeleteSocialMedia(socialMedia)">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             </ng-template>
                         </p-table>
 
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
-                            [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
-                            [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
-                            [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
+                            [ngClass]="(socialMediaList && socialMediaList.length > 0 && socialMediaList[0].TotalRecords > 10)?'':'display_hide'"
+                            [rows]="socialMediaFilter.RecordsPerPage"
+                            (onPageChange)="onPageChange($event, 'SOCIAL$MEDIA')"
+                            [totalRecords]="(socialMediaList.length>0)? socialMediaList[0].TotalRecords:0"></p-paginator>
                         <!-- End of Pagination section -->
                     </div>
                 </div>
-
             </div>
-
-
             <!--End of Social Media-->
-
         </p-accordionTab>
-
     </p-accordion>
+    <!-- End of Accordion section -->
 </div>
 <!--End of Gen info main-->

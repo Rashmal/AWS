@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Filter } from '../../../core/filter';
 import { ClientModel } from '../../../models/clientModel';
 import { ClientService } from '../../../services/client.service';
 import { CommonModel } from 'src/app/modules/common/models/commonModel';
@@ -18,6 +17,11 @@ import { OverallCookieInterface } from 'src/app/modules/common/core/overallCooki
 import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
 import { BusinessAddress } from '../../../core/businessAddress';
 import { RelationshipDetails } from '../../../core/relationshipDetails';
+import { Contact } from '../../../core/contact';
+import { Filter } from 'src/app/modules/common/core/filters';
+import { ContactType } from 'src/app/modules/common/core/contactType';
+import { SocialMedia } from '../../../core/socialMedia';
+import { SocialMediaType } from 'src/app/modules/common/core/socialMediaType';
 
 interface City {
     name: string;
@@ -43,11 +47,38 @@ export class GeneralInfoComponent implements OnInit {
     // Store the is checked
     checked = true;
     //Store filter settings
-    filter: Filter = {
-        Type: { label: 'All', value: 'ALL' },
-        Search: '',
-        ItemsPerPage: 10,
+    socialMediaFilter: Filter = {
+        Param1: 'ALL',
+        SearchQuery: '',
+        RecordsPerPage: 10,
         CurrentPage: 1,
+        StaffId: '',
+        PriorityId: 0,
+        ModuleId: 0,
+        StartDate: new Date(),
+        EndDate: new Date(),
+        Id: '',
+        ParentId: 0,
+        SortColumn: '',
+        SortDirection: '',
+        StatusId: 0
+    };
+    //Store contact filter settings
+    contactFilter: Filter = {
+        Param1: 'ALL',
+        SearchQuery: '',
+        RecordsPerPage: 10,
+        CurrentPage: 1,
+        StaffId: '',
+        PriorityId: 0,
+        ModuleId: 0,
+        StartDate: new Date(),
+        EndDate: new Date(),
+        Id: '',
+        ParentId: 0,
+        SortColumn: '',
+        SortDirection: '',
+        StatusId: 0
     };
     // Store the client model
     clientModel: ClientModel;
@@ -67,6 +98,10 @@ export class GeneralInfoComponent implements OnInit {
     displayAccountDetailsList: SelectItem[] = [];
     // Store the display day details list
     displayDayDetailsList: SelectItem[] = [];
+    // Store the display contact type list
+    displayContactTypeList: SelectItem[] = [];
+    // Store the display social media type list
+    displaySocialMediaTypeList: SelectItem[] = [];
     // Store the client customer details
     clientCustomer: ClientCustomer;
     // Store the Business Address
@@ -77,6 +112,10 @@ export class GeneralInfoComponent implements OnInit {
     overallCookieInterface: OverallCookieInterface;
     // Store the company Id
     companyId: number = 0;
+    // Store the contact list details
+    contactList: Contact[] = [];
+    // Store the social media list details
+    socialMediaList: SocialMedia[] = [];
 
     constructor(private location: Location, private clientService: ClientService,
         private commonService: CommonService) {
@@ -163,6 +202,35 @@ export class GeneralInfoComponent implements OnInit {
             },
             WorkCredit: 0
         };
+        // Initializing the contact details
+        this.contactList = [];
+        this.contactList.push(
+            {
+                Id: 0,
+                ContactType: {
+                    Id: 0,
+                    Code: '',
+                    Name: ''
+                },
+                ContactValue: '',
+                Name: '',
+                TotalRecords: 0
+            }
+        );
+        // Initializing the social media list
+        this.socialMediaList = [];
+        this.socialMediaList.push(
+            {
+                Id: 0,
+                Setting: '',
+                SocialMediaType: {
+                    Id: 0,
+                    Code: '',
+                    Name: ''
+                },
+                TotalRecords: 0
+            }
+        );
     }
 
     ngOnInit(): void {
@@ -180,6 +248,10 @@ export class GeneralInfoComponent implements OnInit {
         this.InitAccountDetailsList();
         // Initializing the day details list
         this.InitDayDetailsList();
+        // Initializing the contact type list
+        this.InitContactTypeList();
+        // Initializing the social media type list
+        this.InitSocialMediaTypeList();
 
 
         // Getting the passed params
@@ -195,7 +267,24 @@ export class GeneralInfoComponent implements OnInit {
     }
 
     //on change module list paginator
-    onPageChange(event: any) { }
+    onPageChange(event: any, sectionType: string) {
+        // Check the section type
+        switch (sectionType) {
+            case 'CONTACT':
+                // Setting the filter
+                this.contactFilter.CurrentPage = event.page + 1;
+                // Getting all the list
+                this.getAllContactList();
+                break;
+            case 'SOCIAL$MEDIA':
+                // Setting the filter
+                this.socialMediaFilter.CurrentPage = event.page + 1;
+                // Getting all the list
+                this.getAllSocialMediaList();
+                break;
+        }
+        // End of Check the section type
+    }
 
     // Initializing the country list
     InitCountryList() {
@@ -358,8 +447,54 @@ export class GeneralInfoComponent implements OnInit {
         // End of Calling the model to retrieve the data
     }
 
+    // Initializing the contact type list
+    InitContactTypeList() {
+        // Clear the data
+        this.displayContactTypeList = [];
+        // Calling the model to retrieve the data
+        this.commonModel.GetAllContactTypes().then(
+            (data) => {
+                // Getting the country list
+                let dataList: ContactType[] = <ContactType[]>data;
+                // Loop through the country list
+                for (let i = 0; i < dataList.length; i++) {
+                    // Pushing the object
+                    this.displayContactTypeList.push({
+                        value: dataList[i].Id,
+                        label: dataList[i].Name
+                    });
+                }
+                // End of Loop through the country list
+            }
+        );
+        // End of Calling the model to retrieve the data
+    }
+
+    // Initializing the social media type list
+    InitSocialMediaTypeList() {
+        // Clear the data
+        this.displaySocialMediaTypeList = [];
+        // Calling the model to retrieve the data
+        this.commonModel.GetAllSocialMediaTypes().then(
+            (data) => {
+                // Getting the country list
+                let dataList: SocialMediaType[] = <SocialMediaType[]>data;
+                // Loop through the country list
+                for (let i = 0; i < dataList.length; i++) {
+                    // Pushing the object
+                    this.displaySocialMediaTypeList.push({
+                        value: dataList[i].Id,
+                        label: dataList[i].Name
+                    });
+                }
+                // End of Loop through the country list
+            }
+        );
+        // End of Calling the model to retrieve the data
+    }
+
     // On blur event of fields
-    onBlurEvent(currentEvent: string) {
+    onBlurEvent(currentEvent: string, currentIndex: number = 0, contactObject: Contact = null, socialMediaObject: SocialMedia = null) {
         // Check if the business name is not empty
         if (this.clientCustomer.BusinessName) {
             // Check the event
@@ -375,6 +510,22 @@ export class GeneralInfoComponent implements OnInit {
                 case 'RELATIONSHIP$DETAILS':
                     // Update the relationship details object
                     this.updateRelationshipDetailsObject();
+                    break;
+                case 'CONTACT$DETAILS':
+                    // Check if the values are not empty
+                    if (!(contactObject && contactObject.ContactValue == '' && contactObject.ContactType.Id == 0)) {
+                        // Update the contact list details object
+                        this.updateContactListDetailsObject(contactObject, currentIndex);
+                    }
+                    // End of Check if the values are not empty
+                    break;
+                case 'SOCIAL$MEDIA$DETAILS':
+                    // Check if the values are not empty
+                    if (!(socialMediaObject && socialMediaObject.Setting == '' && socialMediaObject.SocialMediaType.Id == 0)) {
+                        // Update the contact list details object
+                        this.updateSocialMediaListDetailsObject(socialMediaObject, currentIndex);
+                    }
+                    // End of Check if the values are not empty
                     break;
             }
             // End of Check the event
@@ -424,6 +575,148 @@ export class GeneralInfoComponent implements OnInit {
             (data) => {
                 // Setting the business address Id
                 this.relationshipDetails.Id = <number>data;
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // Update the contact list details object
+    updateContactListDetailsObject(contactObject: Contact, currentIndex: number) {
+        // Check the action state
+        let actionState = (contactObject.Id == 0) ? "NEW" : "UPDATE";
+
+        // Check if the action is new
+        if (actionState == "NEW") {
+            // Adding another contact object to the list
+            this.contactList.push(
+                {
+                    Id: 0,
+                    ContactType: {
+                        Id: 0,
+                        Code: '',
+                        Name: ''
+                    },
+                    ContactValue: '',
+                    Name: '',
+                    TotalRecords: 0
+                }
+            );
+        }
+        // End of Check if the action is new
+
+        // Calling the object model to access the service
+        this.clientModel.SetContactDetails(contactObject, actionState, this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Setting the business address Id
+                this.contactList[currentIndex].Id = <number>data;
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // Update the social media list details object
+    updateSocialMediaListDetailsObject(socialMediaObject: SocialMedia, currentIndex: number) {
+        // Check the action state
+        let actionState = (socialMediaObject.Id == 0) ? "NEW" : "UPDATE";
+
+        // Check if the action is new
+        if (actionState == "NEW") {
+            // Adding another contact object to the list
+            this.socialMediaList.push(
+                {
+                    Id: 0,
+                    Setting: '',
+                    SocialMediaType: {
+                        Id: 0,
+                        Code: '',
+                        Name: ''
+                    },
+                    TotalRecords: 0
+                }
+            );
+        }
+        // End of Check if the action is new
+
+        // Calling the object model to access the service
+        this.clientModel.SetSocialMediaDetails(socialMediaObject, actionState, this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Setting the business address Id
+                this.socialMediaList[currentIndex].Id = <number>data;
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // On delete function for contact
+    onDeleteContact(contactObject: Contact) {
+        // Calling the object model to access the service
+        this.clientModel.SetContactDetails(contactObject, "REMOVE", this.selectedClientId, this.companyId).then(
+            (data) => {
+                /// Getting all the contacts list
+                this.getAllContactList();
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // Getting all the contacts list
+    getAllContactList() {
+        // Calling the object model to access the service
+        this.clientModel.GetAllContactList(this.contactFilter, this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Getting the list of contacts
+                this.contactList = <Contact[]>data;
+                // Adding another contact object to the list
+                this.contactList.push(
+                    {
+                        Id: 0,
+                        ContactType: {
+                            Id: 0,
+                            Code: '',
+                            Name: ''
+                        },
+                        ContactValue: '',
+                        Name: '',
+                        TotalRecords: 0
+                    }
+                );
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // On delete function for social media
+    onDeleteSocialMedia(socialMediaObject: SocialMedia) {
+        // Calling the object model to access the service
+        this.clientModel.SetSocialMediaDetails(socialMediaObject, "REMOVE", this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Getting all the social media list
+                this.getAllSocialMediaList();
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // Getting all the social media list
+    getAllSocialMediaList() {
+        // Calling the object model to access the service
+        this.clientModel.GetAllSocialMediaList(this.socialMediaFilter, this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Getting the list of social media list
+                this.socialMediaList = <SocialMedia[]>data;
+                // Adding another contact object to the list
+                this.socialMediaList.push(
+                    {
+                        Id: 0,
+                        Setting: '',
+                        SocialMediaType: {
+                            Id: 0,
+                            Code: '',
+                            Name: ''
+                        },
+                        TotalRecords: 0
+                    }
+                );
             }
         );
         // End of Calling the object model to access the service

@@ -51,10 +51,25 @@ export class ClientService {
   private SetGlobalClientRequirementUrl = API$DOMAIN + 'api/Client/SetGlobalClientRequirement';
   private GetGlobalClientRequirementUrl = API$DOMAIN + 'api/Client/GetGlobalClientRequirement';
   private GetClientRequirementUrl = API$DOMAIN + 'api/Client/GetClientRequirement';
+  private GetAllSocialMediaListUrl = API$DOMAIN + 'api/Client/GetAllSocialMediaList';
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
 
+  }
+
+  // Getting the social media list
+  GetAllSocialMediaList(filter: Filter, customerId: number, companyId: number) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString())
+      .set("customerId", customerId.toString());
+
+    return this.http.post<SocialMedia[]>(this.GetAllSocialMediaListUrl, filter, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAllSocialMediaList', error)
+      })
+    );
   }
 
   // Get Display client details
@@ -86,13 +101,13 @@ export class ClientService {
   }
 
   // Setting the client customer
-  GetAllContactList(clientId: number, companyId: number) {
+  GetAllContactList(filter: Filter, clientId: number, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("companyId", companyId.toString())
       .set("clientId", clientId.toString());
 
-    return this.http.get<Contact[]>(this.GetAllContactListUrl, { params: my_params }).pipe(
+    return this.http.post<Contact[]>(this.GetAllContactListUrl, filter, { params: my_params }).pipe(
       catchError(error => {
         return this.handleError('GetAllContactList', error)
       })
