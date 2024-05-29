@@ -16,6 +16,7 @@ import { RatingDetails } from "../core/ratingDetails";
 import { SocialMediaType } from "../core/socialMediaType";
 import { TermType } from "../core/termType";
 import { RoleDetails } from "../core/roleDetails";
+import { Filter } from "../core/filters";
 
 export class CommonModel {
     //Store subscriptions
@@ -186,9 +187,9 @@ export class CommonModel {
     }
 
     // Getting all the account details
-    GetAccountDetails() {
+    GetAccountDetails(filter: Filter) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.commonService.GetAccountDetails().subscribe(
+            this.allSubscriptions.push(this.commonService.GetAccountDetails(filter).subscribe(
                 data => {
                     let returnData = <AccountDetails[]>data;
                     // Resolve the promise

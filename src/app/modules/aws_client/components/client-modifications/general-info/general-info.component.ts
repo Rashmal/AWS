@@ -181,7 +181,8 @@ export class GeneralInfoComponent implements OnInit {
             DefaultDeposit: 0,
             ExpenseAccount: {
                 Id: 0,
-                Name: ''
+                Name: '',
+                Total: 0
             },
             FinancialNotes: '',
             IsAutoProgressReport: false,

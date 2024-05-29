@@ -315,7 +315,7 @@
                     
                    
                     <button class="exp_acc_ddp_btn" [disabled]="!clientCustomer.BusinessName" (click)="onClickExpAccountDD()">
-                        <div>{{relationshipDetails.ExpenseAccount.Name == '' ? 'Select an option Select an option Select an option' : 'relationshipDetails.ExpenseAccount.Name' }}</div>
+                        <div>{{relationshipDetails.ExpenseAccount.Name == '' ? 'Select an option' : relationshipDetails.ExpenseAccount.Name }}</div>
                         
                         <i class="fa fa-angle-down" aria-hidden="true"></i>
                     </button>
@@ -378,7 +378,7 @@
                     <label class="input_lbl">Next Report Date / Time</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="datetime" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="datetime-local" [disabled]="!clientCustomer.BusinessName"
                         [(ngModel)]="relationshipDetails.NextReportDateTime"
                         (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->

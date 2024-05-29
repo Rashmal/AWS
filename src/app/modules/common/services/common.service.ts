@@ -20,6 +20,7 @@ import { ContactType } from '../core/contactType';
 import { ClientSize } from '../core/clientSize';
 import { BusinessNumberType } from '../core/businessNumberType';
 import { AccountDetails } from '../core/accountDetails';
+import { Filter } from '../core/filters';
 
 @Injectable({
   providedIn: 'root'
@@ -53,11 +54,11 @@ export class CommonService {
   }
 
   // Getting all the account details
-  GetAccountDetails() {
+  GetAccountDetails(filter: Filter) {
     // Setting the params
     let my_params = new HttpParams();
 
-    return this.http.get<AccountDetails[]>(this.GetAccountDetailsUrl, { params: my_params }).pipe(
+    return this.http.post<AccountDetails[]>(this.GetAccountDetailsUrl, filter, { params: my_params }).pipe(
       catchError(error => {
         return this.handleError('GetAccountDetails', error)
       })

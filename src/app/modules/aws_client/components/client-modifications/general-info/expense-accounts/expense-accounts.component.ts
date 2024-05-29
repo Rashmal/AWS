@@ -22,7 +22,7 @@ export class ExpenseAccountsComponent {
     selectedAccount!: SelectItem;
     initialValue!: SelectItem;
     //store total records
-    totalRecords = 1000;
+    totalRecords = 0;
     recordsPerPage = 10;
     filter: Filter = {
         CurrentPage: 1,
@@ -88,9 +88,12 @@ export class ExpenseAccountsComponent {
         // Clear the data
         this.displayAccountDetailsList = [];
         // Calling the model to retrieve the data
-        this.commonModel.GetAccountDetails().then((data) => {
+        this.commonModel.GetAccountDetails(this.filter).then((data) => {
             // Getting the country list
             let dataList: AccountDetails[] = <AccountDetails[]>data;
+            if(dataList && dataList.length > 0){
+                this.totalRecords = dataList[0].Total;
+            }
             // Loop through the country list
             for (let i = 0; i < dataList.length; i++) {
                 // Pushing the object

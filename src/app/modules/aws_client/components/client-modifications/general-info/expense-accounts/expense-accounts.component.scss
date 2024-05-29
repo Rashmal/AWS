@@ -3,7 +3,7 @@
 }
 
 .popup_content{
-    width: 400px;
+    width: auto;
     .button_panel_outer{
         display: flex;
         align-items: center;
@@ -58,4 +58,5 @@
 
   .paginator_sec{
     margin-top: 10px;
+    margin-bottom: 10px;
   }

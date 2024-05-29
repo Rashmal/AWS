@@ -6,6 +6,7 @@ import { ActionConfirmationComponent } from 'src/app/modules/common/components/a
 import { UploadFilesComponent } from 'src/app/modules/common/components/upload-files/upload-files.component';
 import { GlobalRequirementsComponent } from './global-requirements/global-requirements.component';
 import { Location } from '@angular/common';
+import { ClientRequirement } from '../../../core/clientRequirement';
 
 @Component({
     selector: 'app-client-requirements',
@@ -47,6 +48,8 @@ export class ClientRequirementsComponent implements OnInit {
     ref: DynamicDialogRef | undefined;
     // Store the selected client Id
     selectedClientId = 0;
+    // Store the client requirements
+    clientRequirementList: ClientRequirement[] = [];
 
     constructor(public dialogService: DialogService, private location: Location) {
 
@@ -55,6 +58,18 @@ export class ClientRequirementsComponent implements OnInit {
     ngOnInit(): void {
         // Getting the passed params
         let paramObject = this.location.getState();
+
+        // Initializing the object
+        this.clientRequirementList.push(
+            {
+                Id: 0,
+                AdditionalData: '',
+                ClientRequirementFiles: [],
+                RoleDetails: [],
+                Title: '',
+                TotalRecords: 0
+            }
+        );
 
         //Set editing client id
         if (paramObject['ClientId']) {
@@ -153,4 +168,18 @@ export class ClientRequirementsComponent implements OnInit {
             }
         });
     }
+
+    // On blur event
+    onBlurEvent(currentSection: string) {
+        // Check the current section
+        switch (currentSection) {
+            case 'CLIENT$REQUIREMENTS':
+
+                break;
+        }
+        // End of Check the current section
+    }
+
+    
+
 }
