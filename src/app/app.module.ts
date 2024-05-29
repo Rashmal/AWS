@@ -25,6 +25,7 @@ import { CommonModule } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ActionConfirmationComponent } from './modules/common/components/action-confirmation/action-confirmation.component';
 import { UploadFilesComponent } from './modules/common/components/upload-files/upload-files.component';
+import { DragDropDirective } from './modules/common/directives/drag-drop.directive';
 
 @NgModule({
     declarations: [

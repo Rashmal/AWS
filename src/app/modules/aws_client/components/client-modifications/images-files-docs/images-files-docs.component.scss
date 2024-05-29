@@ -1,0 +1,237 @@
+.upload-container {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    width: 100%;
+}
+
+.upload-container:hover {
+    border-color: #888;
+}
+
+.upload-container button {
+    margin-top: 10px;
+}
+
+.file-list {
+    margin-top: 20px;
+}
+
+.file-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.file-list li {
+    background: #f1f1f1;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.button_panel_outer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+
+    .button_panel {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: right;
+
+        .button_blue {
+            height: 30px;
+            width: 100px;
+            border-radius: 3px;
+            border: none;
+            color: #ffffff;
+            background-color: #126095;
+        }
+
+        .button_red {
+            height: 30px;
+            width: 100px;
+            border-radius: 3px;
+            border: none;
+            color: #ffffff;
+            background-color: #ff5757;
+            margin-right: 10px;
+        }
+    }
+
+}
+
+.input_area {
+    display: flex;
+    align-items: center;
+
+    label {
+        margin-right: 10px;
+        min-width: 200px;
+    }
+
+    p-dropdown {
+        margin-right: 10px;
+    }
+
+    button {
+        margin-right: 10px;
+    }
+
+}
+
+.button_blue {
+
+    height: 30px;
+    width: 100px;
+    border-radius: 3px;
+    border: none;
+    color: #ffffff;
+    background-color: #126095;
+
+}
+
+.button_blue_s {
+
+    height: 30px;
+    width: 33px;
+    border-radius: 3px;
+    border: none;
+    color: #ffffff;
+    background-color: #126095;
+
+    i {
+        color: #fff;
+    }
+
+}
+
+.upload_icon {
+    i {
+        font-size: 50px;
+        color: #126095;
+    }
+}
+
+.image-container {
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    position: relative;
+  }
+  
+  .preview-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+    cursor: grab; /* Change cursor to indicate draggable image */
+  }
+  .preview-image:active {
+    cursor: grabbing; /* Change cursor to indicate dragging */
+  }
+  .hide_btn{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 10px;
+  }
+
+::ng-deep p-table .table_header_row {
+    background-color: #dddddd !important;
+
+    th {
+        background-color: transparent;
+    }
+
+    .header_col {
+        text-align: center;
+        min-width: 130px;
+    }
+
+}
+
+::ng-deep p-table {
+    .table_col {
+        .created_by{
+            color: #888;
+        }
+        .label_input_div {
+            display: flex;
+            align-items: start;
+            justify-content: start;
+            margin-bottom: 5px;
+            .input_class{
+                width: 100%;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+            }
+            .lbl_class{
+                min-width: 200px;
+            }
+        }
+
+        .label_input_div_spe {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            margin-bottom: 5px;
+            .input_drp{
+                display: flex;
+                align-items: center;
+                .margin_r10{
+                    margin-right: 10px;
+                }
+            }
+            .input_class{
+                width: 100%;
+               
+            }
+            .lbl_class{
+                min-width: 200px;
+            }
+        }
+        
+    }
+    .action_button{
+        .action_button_div{
+            display: flex;
+            align-items: center;
+            button{
+                height: 30px;
+                width: 33px;
+                border-radius: 3px;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 5px;
+    
+                i {
+                    color: #fff;
+                }
+            }
+            .red_btn{
+                background-color: #ff5757;
+            }
+            .blue_btn{
+                background-color: #126095;
+            }
+            .yellow_btn{
+                background-color: #ebb32c;
+            }
+            .green_btn{
+                background-color: #21ba45;
+            }
+        }
+    }
+}

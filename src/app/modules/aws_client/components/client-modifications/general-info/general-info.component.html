@@ -51,7 +51,7 @@
                     <label class="input_lbl">Business Number Type</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayBusinessNumberTypeList" class="full_width"
+                    <p-dropdown [options]="displayBusinessNumberTypeList" class="width_50" autoWidth="false"
                         placeholder="Select an option" [(ngModel)]="clientCustomer.BusinessNumberType.Id"
                         [disabled]="!clientCustomer.BusinessName" (onChange)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
@@ -138,7 +138,7 @@
                     <label class="input_lbl">Country</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayCountryList" class="full_width" placeholder="Select an option"
+                    <p-dropdown [options]="displayCountryList" class="width_50" autoWidth="false" placeholder="Select an option"
                         [disabled]="!clientCustomer.BusinessName" [(ngModel)]="businessAddress.Country.Id"
                         (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
@@ -179,7 +179,7 @@
                     <label class="input_lbl">Pricing Classification</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayPriceClassificationList" class="full_width"
+                    <p-dropdown [options]="displayPriceClassificationList" class="width_50" autoWidth="false"
                         placeholder="Select an option" [disabled]="!clientCustomer.BusinessName"
                         [(ngModel)]="relationshipDetails.PriceClassification.Id"
                         (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
@@ -192,7 +192,7 @@
                     <label class="input_lbl">Client Rating</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayClientRatingList" class="full_width" placeholder="Select an option"
+                    <p-dropdown [options]="displayClientRatingList" class="width_50" autoWidth="false" placeholder="Select an option"
                         [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.RatingDetails.Id"
                         (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -204,7 +204,7 @@
                     <label class="input_lbl">Client Size</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayPriceClassificationList" class="full_width"
+                    <p-dropdown [options]="displayPriceClassificationList" class="width_50" autoWidth="false"
                         placeholder="Select an option" [disabled]="!clientCustomer.BusinessName"
                         [(ngModel)]="relationshipDetails.ClientSize.Id"
                         (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
@@ -218,7 +218,7 @@
                     <label class="input_lbl">Client Term Type</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayTermTypeList" class="full_width" placeholder="Select an option"
+                    <p-dropdown [options]="displayTermTypeList" class="width_50" autoWidth="false" placeholder="Select an option"
                         [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.ClientTermType.Id"
                         (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -277,7 +277,7 @@
                     <label class="input_lbl">Supplier Term Type</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayTermTypeList" class="full_width" placeholder="Select an option"
+                    <p-dropdown [options]="displayTermTypeList" class="width_50" autoWidth="false" placeholder="Select an option"
                         [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.SupplierTermType.Id"
                         (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -296,7 +296,7 @@
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
-                <div class="col-lg-3 flex input_area">
+                <div class="col-lg-3 flex input_area input_area_switch">
                     <!--Label-->
                     <label class="input_lbl">Is Supplier</label>
                     <!--End of Label-->
@@ -307,14 +307,19 @@
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
-                <div class="col-lg-3 flex input_area">
+                <div class="col-lg-3 flex input_area exp_acc_ddp">
                     <!--Label-->
                     <label class="input_lbl">Expense Account</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayAccountDetailsList" class="full_width" placeholder="Select an option"
-                        [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.ExpenseAccount.Id"
-                        (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
+                    
+                   
+                    <button class="exp_acc_ddp_btn" [disabled]="!clientCustomer.BusinessName" (click)="onClickExpAccountDD()">
+                        <div>{{relationshipDetails.ExpenseAccount.Name == '' ? 'Select an option' : relationshipDetails.ExpenseAccount.Name }}</div>
+                        
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </button>
+                    
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -361,7 +366,7 @@
                     <label class="input_lbl">Report Day</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayDayDetailsList" class="full_width" placeholder="Select an option"
+                    <p-dropdown [options]="displayDayDetailsList" class="width_50" autoWidth="false" placeholder="Select an option"
                         [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.DayDetails.Id"
                         (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -373,7 +378,7 @@
                     <label class="input_lbl">Next Report Date / Time</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="datetime" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="datetime-local" [disabled]="!clientCustomer.BusinessName"
                         [(ngModel)]="relationshipDetails.NextReportDateTime"
                         (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -416,7 +421,7 @@
                                             (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
                                     </td>
                                     <td>
-                                        <p-dropdown [options]="displayContactTypeList" class="full_width"
+                                        <p-dropdown [options]="displayContactTypeList" class="width_50" autoWidth="false"
                                             appendTo="body" placeholder="Select an option"
                                             [disabled]="!clientCustomer.BusinessName"
                                             [(ngModel)]="contact.ContactType.Id"
@@ -472,7 +477,7 @@
                             <ng-template pTemplate="body" let-socialMedia let-rowSMIndex="rowIndex">
                                 <tr>
                                     <td>
-                                        <p-dropdown [options]="displaySocialMediaTypeList" class="full_width"
+                                        <p-dropdown [options]="displaySocialMediaTypeList" class="width_50" autoWidth="false"
                                             appendTo="body" placeholder="Select an option"
                                             [disabled]="!clientCustomer.BusinessName"
                                             [(ngModel)]="socialMedia.SocialMediaType.Id"

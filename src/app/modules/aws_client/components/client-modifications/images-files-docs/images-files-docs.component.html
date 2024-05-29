@@ -1,1 +1,203 @@
-<p>images-files-docs works!</p>
+<!--Image and doc info main-->
+<div class="card flex justify-content-center gen_info_main">
+    <p-accordion [multiple]="true" [activeIndex]="[0]">
+        <p-accordionTab header="Resources - Images, Documents etc.">
+            <!--File types-->
+            <div class="row gen_info_item">
+
+
+                <!--Input and label-->
+                <div class="col-12 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Select A Type To Upload:</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <!--End of Input area-->
+                    <button class="button_blue_s" (click)="onClickConfigResource()"><i class="fa fa-cog"
+                            aria-hidden="true"></i></button>
+
+
+
+                </div>
+                <!--End of Input and label-->
+
+            </div>
+            <!--End of File types-->
+            <!--File uploader-->
+            <div class="row gen_info_item">
+
+
+                <!--Input and label-->
+                <div class="col-12">
+
+                    <!-- Container for the file upload area, applying the drag-and-drop directive -->
+                    <div class="upload-container" appDragDrop (fileDropped)="onFileDropped($event)">
+                        <!--Upload icon-->
+                        <div class="upload_icon">
+                            <i class="fa fa-upload" aria-hidden="true"></i>
+                        </div>
+                        <!--End of Upload icon-->
+
+                        <!-- Hidden file input element that supports multiple file selection of any type -->
+                        <input type="file" #fileInput multiple (change)="onFileSelected($event)" hidden>
+                        <!-- Button to trigger the file input click event -->
+                        <button (click)="fileInput.click()" class="button_blue">Upload Files</button>
+                        <!-- Instructional text for drag-and-drop functionality -->
+                        <p>or drag and drop files here</p>
+                        <!-- Additional message to indicate supported file types -->
+                        <p>Supported file types: images, documents, and more.</p>
+                    </div>
+
+                    <!-- List to display the names of the selected files -->
+                    <div *ngIf="files && files.length > 0"
+                        class="file-list col-xs-12 col-sm-12 col-md-5 col-lg-3 col-xl-2">
+                        <ul>
+                            <div>
+                                <label class="input_lbl">Selected File(s)</label>
+                            </div>
+                            <!-- Loop through the files array and display each file's name -->
+                            <li *ngFor="let file of files; let index = index">{{ file.name }}<i class="fa fa-times"
+                                    aria-hidden="true" (click)="removeUploadedFile(index)"></i>
+                            </li>
+                        </ul>
+                        <!--Button panel outer div-->
+                        <div class="button_panel_outer">
+                            <!--Button panel-->
+                            <div class="button_panel">
+
+                                <button class="button_red" (click)="cancelSelection(true)">Cancel</button>
+                                <button class="button_blue" (click)="uploadSelected(false)">Upload</button>
+                            </div>
+                            <!--End of Button panel-->
+                        </div>
+                        <!--End of Button panel outer div-->
+                    </div>
+
+
+                </div>
+                <!--End of Input and label-->
+
+            </div>
+            <!--End of File uploader-->
+
+            <!--Hr-->
+            <hr />
+            <!--Hr-->
+            <!--File List-->
+            <div class="row gen_info_item">
+
+                <!--Input and label-->
+                <div class="col-12 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Filter by file type:</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <!--End of Input area-->
+                    <button class="button_blue_s" (click)="onClickConfigResource()"><i class="fa fa-cog"
+                            aria-hidden="true"></i></button>
+
+
+
+                </div>
+                <!--End of Input and label-->
+
+                <!--File list-->
+                <div class="col-12 col-md-12 col-lg-8 col-xl-8">
+                    <p-table class="contacts_tbl" [value]="products" dataKey="id"
+                        [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
+                        <ng-template pTemplate="header">
+                            <tr class="table_header_row">
+
+                                <th class="header_col" style="width:80%">
+                                    Description
+                                </th>
+
+                                <th class="header_col" style="width:20%">
+                                    Action
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-product let-editing="editing">
+                            <tr>
+                                <td class="table_col">
+
+                                    <div class="created_by">Created by {{'Name'}} at {{'Date'}} </div>
+                                    <div class="label_input_div">
+                                        <label class="lbl_class">Caption:</label>
+                                        <textarea class="input_class"></textarea>
+                                    </div>
+                                    <div class="label_input_div">
+                                        <label class="lbl_class">Internal Notes:</label>
+                                        <textarea class="input_class"></textarea>
+                                    </div>
+                                    <div class="label_input_div_spe">
+                                        <label class="lbl_class">Resource Type:</label>
+                                        <div class="input_drp">
+                                            <!--Config Types-->
+                                            <p-dropdown [options]="cities" optionLabel="name"
+                                                class="full_width margin_r10" placeholder="Select a City" />
+                                            <!--End of Config Types-->
+                                            <!--Setting icon-->
+                                            <button class="button_blue_s" (click)="onClickConfigResource()"><i
+                                                    class="fa fa-cog" aria-hidden="true"></i></button>
+                                            <!--End of Setting icon-->
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="action_button">
+                                    <div class="action_button_div">
+                                        <button (click)="imagePreviewer(true)" class="green_btn"><i class="fa fa-eye"
+                                                aria-hidden="true"></i></button>
+                                        <button class="yellow_btn"><i class="fa fa-undo"
+                                                aria-hidden="true"></i></button>
+                                        <button class="yellow_btn"><i class="fa fa-repeat"
+                                                aria-hidden="true"></i></button>
+                                        <button class="blue_btn"><i class="fa fa-download"
+                                                aria-hidden="true"></i></button>
+                                        <button class="red_btn"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                    <!-- Pagination section -->
+                    <p-paginator class="paginator_sec" #modulePaginator
+                        [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
+                        [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
+                        [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
+                    <!-- End of Pagination section -->
+                </div>
+                <!--End of File list-->
+
+                <!--Image view-->
+                <div *ngIf="imagePreview" class="col-12 col-md-12 col-lg-4 col-xl-4">
+                    <div class="hide_btn">
+                        <button (click)="imagePreviewer(false)" class="button_blue">Hide</button>
+                    </div>
+                    <!-- Container for the image previewer -->
+                    <div class="image-container">
+                        <!-- Image element with data binding for the source and transform style -->
+                        <!-- (wheel) event binding for zooming functionality -->
+                        <div class="image-container">
+                            <img [src]="imageSrc" alt="Preview" class="preview-image" (wheel)="onMouseWheel($event)"
+                                (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)"
+                                (mousemove)="onMouseMove($event)" [style.transform]="transform"
+                                [style.left.px]="position.x" [style.top.px]="position.y" />
+                        </div>
+                    </div>
+                </div>
+                <!--End of Image view-->
+
+            </div>
+            <!--End of File List-->
+
+        </p-accordionTab>
+
+    </p-accordion>
+</div>
+<!--End of Image and doc info main-->

@@ -1,4 +1,5 @@
 .clients_main{
+    margin: 10px 0px;
    .filter_section{
     margin-bottom: 20px;
     .add_new{
@@ -44,10 +45,19 @@
         text-align: center;
         min-width: 130px;
     }
+    .created_details{
+        min-width: 200px;
+    }
  
 }
 
 ::ng-deep p-table .table_body{
+    .created_details{
+        .created_date_txt{
+            color: #9f9f9f;
+            font-size: 11px;
+        }
+    }
     .action_button{
         display: flex;
         align-items: center;

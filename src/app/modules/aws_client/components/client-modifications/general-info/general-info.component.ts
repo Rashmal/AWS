@@ -24,6 +24,8 @@ import { SocialMedia } from '../../../core/socialMedia';
 import { SocialMediaType } from 'src/app/modules/common/core/socialMediaType';
 import { aC } from '@fullcalendar/core/internal-common';
 import { CommonClientService } from '../../../services/common-client.service';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ExpenseAccountsComponent } from './expense-accounts/expense-accounts.component';
 
 interface City {
     name: string;
@@ -34,6 +36,7 @@ interface City {
     selector: 'app-general-info',
     templateUrl: './general-info.component.html',
     styleUrl: './general-info.component.scss',
+    providers: [DialogService],
 })
 export class GeneralInfoComponent implements OnInit {
     // Store the modification mode
@@ -118,8 +121,10 @@ export class GeneralInfoComponent implements OnInit {
     contactList: Contact[] = [];
     // Store the social media list details
     socialMediaList: SocialMedia[] = [];
+    // Store dynamic dialog ref
+    ref: DynamicDialogRef | undefined;
 
-    constructor(private location: Location, private clientService: ClientService,
+    constructor(public dialogService: DialogService, private location: Location, private clientService: ClientService,
         private commonService: CommonService, private commonClientService: CommonClientService) {
         // Initialize the model
         this.clientModel = new ClientModel(this.clientService);
@@ -247,8 +252,7 @@ export class GeneralInfoComponent implements OnInit {
         this.InitClientRatingList();
         // Initializing the term types list
         this.InitTermTypeList();
-        // Initializing the account details list
-        this.InitAccountDetailsList();
+        
         // Initializing the day details list
         this.InitDayDetailsList();
         // Initializing the contact type list
@@ -462,44 +466,27 @@ export class GeneralInfoComponent implements OnInit {
         // End of Calling the model to retrieve the data
     }
 
-    // Initializing the account details list
-    InitAccountDetailsList() {
-        let filter: Filter = {
-            Param1: 'ALL',
-            SearchQuery: '',
-            RecordsPerPage: 10,
-            CurrentPage: 1,
-            StaffId: '',
-            PriorityId: 0,
-            ModuleId: 0,
-            StartDate: new Date(),
-            EndDate: new Date(),
-            Id: '',
-            ParentId: 0,
-            SortColumn: '',
-            SortDirection: '',
-            StatusId: 0
-        };
-        // Clear the data
-        this.displayAccountDetailsList = [];
-        // Calling the model to retrieve the data
-        this.commonModel.GetAccountDetails(filter).then(
-            (data) => {
-                // Getting the country list
-                let dataList: AccountDetails[] = <AccountDetails[]>data;
-                // Loop through the country list
-                for (let i = 0; i < dataList.length; i++) {
-                    // Pushing the object
-                    this.displayAccountDetailsList.push({
-                        value: dataList[i].Id,
-                        label: dataList[i].Name
-                    });
-                }
-                // End of Loop through the country list
+    //On click expense account dropdown to get full account list
+    onClickExpAccountDD(){
+        // Open popup to select user roles
+        this.ref = this.dialogService.open(ExpenseAccountsComponent, {
+            header: 'Select An Expense Account',
+            //Send user roles to popup
+            data: this.relationshipDetails.ExpenseAccount,
+        });
+        // Perform an action on close the popup
+        this.ref.onClose.subscribe((expenseAccount: AccountDetails) => {
+            if (expenseAccount) {
+                //Set selected expense account
+                this.relationshipDetails.ExpenseAccount = expenseAccount;
+                // Save data On change value
+                this.onBlurEvent('RELATIONSHIP$DETAILS');
             }
-        );
-        // End of Calling the model to retrieve the data
+        });
+
     }
+
+   
 
     // Initializing the day details list
     InitDayDetailsList() {
