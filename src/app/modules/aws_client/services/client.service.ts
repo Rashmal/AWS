@@ -71,7 +71,7 @@ export class ClientService {
   }
 
   // Get all the contact list
-  SetClientCustomer(clientCustomer: ClientCustomer, staffId: number, actionType: string, companyId: number) {
+  SetClientCustomer(clientCustomer: ClientCustomer, staffId: string, actionType: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("companyId", companyId.toString())

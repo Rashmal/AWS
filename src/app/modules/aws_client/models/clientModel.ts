@@ -46,7 +46,7 @@ export class ClientModel {
     }
 
     // Get all the contact list
-    SetClientCustomer(clientCustomer: ClientCustomer, staffId: number, actionType: string, companyId: number) {
+    SetClientCustomer(clientCustomer: ClientCustomer, staffId: string, actionType: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
             this.allSubscriptions.push(this.clientService.SetClientCustomer(clientCustomer, staffId, actionType, companyId).subscribe(
                 data => {

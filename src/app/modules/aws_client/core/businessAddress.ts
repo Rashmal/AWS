@@ -2,7 +2,7 @@ import { Country } from "../../common/core/country";
 
 export interface BusinessAddress {
     Id: number;
-    BillingName: string;
+    BuildingName: string;
     StreetName: string;
     Suburb: string;
     PostalCode: string;
