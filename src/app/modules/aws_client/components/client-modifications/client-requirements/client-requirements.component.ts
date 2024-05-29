@@ -5,6 +5,7 @@ import { UserRolesComponent } from 'src/app/modules/common/components/user-roles
 import { ActionConfirmationComponent } from 'src/app/modules/common/components/action-confirmation/action-confirmation.component';
 import { UploadFilesComponent } from 'src/app/modules/common/components/upload-files/upload-files.component';
 import { GlobalRequirementsComponent } from './global-requirements/global-requirements.component';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-client-requirements',
@@ -44,10 +45,22 @@ export class ClientRequirementsComponent implements OnInit {
 
     // Store dynamic dialog ref
     ref: DynamicDialogRef | undefined;
+    // Store the selected client Id
+    selectedClientId = 0;
 
-    constructor(public dialogService: DialogService) {}
+    constructor(public dialogService: DialogService, private location: Location) {
 
-    ngOnInit(): void {}
+    }
+
+    ngOnInit(): void {
+        // Getting the passed params
+        let paramObject = this.location.getState();
+
+        //Set editing client id
+        if (paramObject['ClientId']) {
+            this.selectedClientId = paramObject['ClientId'];
+        }
+    }
     //On enter editing editor
     enterEditingItem(index: number) {
         this.editingItem_index = index;
@@ -59,7 +72,7 @@ export class ClientRequirementsComponent implements OnInit {
     }
 
     //on change module list paginator
-    onPageChange(event: any) {}
+    onPageChange(event: any) { }
 
     //On click select user role button
     onClickUserRole(client: any) {
@@ -126,9 +139,9 @@ export class ClientRequirementsComponent implements OnInit {
     }
 
     //On click add from global retirements
-    onClickAddFromGlobalReq(){
-         // Open popup to select user roles
-         this.ref = this.dialogService.open(GlobalRequirementsComponent, {
+    onClickAddFromGlobalReq() {
+        // Open popup to select user roles
+        this.ref = this.dialogService.open(GlobalRequirementsComponent, {
             header: 'Add New Requirement From Global',
             //Send user roles to popup
             data: [],

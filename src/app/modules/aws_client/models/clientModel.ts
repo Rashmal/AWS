@@ -46,7 +46,7 @@ export class ClientModel {
     }
 
     // Get all the contact list
-    SetClientCustomer(clientCustomer: ClientCustomer, staffId: number, actionType: string, companyId: number) {
+    SetClientCustomer(clientCustomer: ClientCustomer, staffId: string, actionType: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
             this.allSubscriptions.push(this.clientService.SetClientCustomer(clientCustomer, staffId, actionType, companyId).subscribe(
                 data => {
@@ -61,9 +61,9 @@ export class ClientModel {
     }
 
     // Setting the client customer
-    GetAllContactList(clientId: number, companyId: number) {
+    GetAllContactList(filter: Filter, clientId: number, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.clientService.GetAllContactList(clientId, companyId).subscribe(
+            this.allSubscriptions.push(this.clientService.GetAllContactList(filter, clientId, companyId).subscribe(
                 data => {
                     let returnData = <Contact[]>data;
                     // Resolve the promise
@@ -471,6 +471,21 @@ export class ClientModel {
             this.allSubscriptions.push(this.clientService.GetClientRequirement(filter, customerId, companyId).subscribe(
                 data => {
                     let returnData = <ClientRequirement[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting the social media list
+    GetAllSocialMediaList(filter: Filter, customerId: number, companyId: number) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.clientService.GetAllSocialMediaList(filter, customerId, companyId).subscribe(
+                data => {
+                    let returnData = <SocialMedia[]>data;
                     // Resolve the promise
                     resolve(returnData);
                 })

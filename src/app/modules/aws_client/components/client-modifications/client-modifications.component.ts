@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
 import { Location } from '@angular/common';
+import { CommonClientService } from '../../services/common-client.service';
 
 @Component({
     selector: 'app-client-modifications',
@@ -31,10 +32,14 @@ export class ClientModificationsComponent {
     tabSelection: SelectItem;
 
     // Constructor
-    constructor(private route: Router, private location: Location) {}
+    constructor(private route: Router, private location: Location,
+        private commonClientService: CommonClientService) {
+        this.commonClientService.executeSelectedClientFunc(this.updateSelectedClientId.bind(this));
+    }
 
     // Ng on init
     ngOnInit() {
+        debugger
         // Getting the passed params
         let paramObject = this.location.getState();
         //Set editing mode
@@ -49,8 +54,16 @@ export class ClientModificationsComponent {
         this.onChangeTab(this.TabViewList[0].value);
     }
 
+    // Updating the selected client Id
+    updateSelectedClientId(selectedClientId: number) {
+        debugger
+        // Setting the selected client id
+        this.selectedClientId = selectedClientId;
+    }
+
     // Change function of dropdown section
     onChangeTab(selectedTab: string) {
+        debugger
         // Getting the object of the selected tab
         let selectedObj = this.TabViewList.find(
             (obj) => obj.value == selectedTab

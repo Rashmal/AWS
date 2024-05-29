@@ -1,5 +1,12 @@
 <!--Gen info main-->
 <div class="card flex justify-content-center gen_info_main">
+    <!-- Error message -->
+    <div class="col-12" *ngIf="!clientCustomer.BusinessName">
+        <span class="error_label">Business name/surname is mandatory in order to fill the rest of the fields</span>
+    </div>
+    <!-- End of Error message -->
+
+    <!-- Accordion section -->
     <p-accordion [multiple]="true" [activeIndex]="[0, 1, 2, 3, 4]">
         <p-accordionTab header="Client / Customer">
             <!--Client Customer-->
@@ -10,11 +17,9 @@
                     <label class="input_lbl">Business Name / Surname</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [(ngModel)]="clientCustomer.BusinessName"
+                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
 
@@ -24,11 +29,9 @@
                     <label class="input_lbl">First Name</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [(ngModel)]="clientCustomer.FirstName"
+                        [disabled]="!clientCustomer.BusinessName" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -37,11 +40,9 @@
                     <label class="input_lbl">Middle Initial</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [(ngModel)]="clientCustomer.MiddleInitial"
+                        [disabled]="!clientCustomer.BusinessName" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -50,11 +51,10 @@
                     <label class="input_lbl">Business Number Type</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <p-dropdown [options]="displayBusinessNumberTypeList" class="full_width"
+                        placeholder="Select an option" [(ngModel)]="clientCustomer.BusinessNumberType.Id"
+                        [disabled]="!clientCustomer.BusinessName" (onChange)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -63,11 +63,9 @@
                     <label class="input_lbl">Business Number</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [(ngModel)]="clientCustomer.BusinessNumber"
+                        [disabled]="!clientCustomer.BusinessName" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
             </div>
@@ -76,7 +74,6 @@
         </p-accordionTab>
         <p-accordionTab header="Billing Address">
             <!--Billing Address-->
-
             <div class="row gen_info_item">
                 <!--Input and label-->
                 <div class="col-lg-3 flex input_area">
@@ -84,11 +81,9 @@
                     <label class="input_lbl">Billing Name (if any)</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="businessAddress.BuildingName" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
 
@@ -98,11 +93,9 @@
                     <label class="input_lbl">Street Number and Name</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="businessAddress.StreetName" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -111,11 +104,9 @@
                     <label class="input_lbl">Suburb</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="businessAddress.Suburb" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -124,11 +115,9 @@
                     <label class="input_lbl">Pcode / Zip</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="businessAddress.PostalCode" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -137,11 +126,9 @@
                     <label class="input_lbl">State / Territory</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="businessAddress.State" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
 
@@ -151,17 +138,14 @@
                     <label class="input_lbl">Country</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <p-dropdown [options]="displayCountryList" class="full_width" placeholder="Select an option"
+                        [disabled]="!clientCustomer.BusinessName" [(ngModel)]="businessAddress.Country.Id"
+                        (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
             </div>
-
             <!--End of Billing Address-->
-
         </p-accordionTab>
         <p-accordionTab header="Relationship">
             <!--Relationship-->
@@ -172,11 +156,9 @@
                     <label class="input_lbl">Office Job</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.OfficeJob" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
 
@@ -186,11 +168,9 @@
                     <label class="input_lbl">Work Credit</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.WorkCredit" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -199,11 +179,11 @@
                     <label class="input_lbl">Pricing Classification</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <p-dropdown [options]="displayPriceClassificationList" class="full_width"
+                        placeholder="Select an option" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.PriceClassification.Id"
+                        (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -212,24 +192,23 @@
                     <label class="input_lbl">Client Rating</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <p-dropdown [options]="displayClientRatingList" class="full_width" placeholder="Select an option"
+                        [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.RatingDetails.Id"
+                        (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
                 <div class="col-lg-3 flex input_area">
                     <!--Label-->
-                    <label class="input_lbl">Pricing Classification</label>
+                    <label class="input_lbl">Client Size</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <p-dropdown [options]="displayPriceClassificationList" class="full_width"
+                        placeholder="Select an option" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.ClientSize.Id"
+                        (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
 
@@ -239,11 +218,10 @@
                     <label class="input_lbl">Client Term Type</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <p-dropdown [options]="displayTermTypeList" class="full_width" placeholder="Select an option"
+                        [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.ClientTermType.Id"
+                        (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
 
@@ -253,11 +231,9 @@
                     <label class="input_lbl">Client Terms</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.ClientTerms" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -266,11 +242,9 @@
                     <label class="input_lbl">Default Deposit</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.DefaultDeposit" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -279,11 +253,9 @@
                     <label class="input_lbl">Month Day Alert</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.MonthDayAlert" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -292,11 +264,10 @@
                     <label class="input_lbl">Financial Notes</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <textarea class="input_field" type="text"></textarea>
+                    <textarea class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.FinancialNotes"
+                        (blur)="onBlurEvent('RELATIONSHIP$DETAILS')"></textarea>
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
 
@@ -306,11 +277,10 @@
                     <label class="input_lbl">Supplier Term Type</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <p-dropdown [options]="displayTermTypeList" class="full_width" placeholder="Select an option"
+                        [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.SupplierTermType.Id"
+                        (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
 
@@ -320,11 +290,9 @@
                     <label class="input_lbl">Supplier Terms</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.SupplierTerms" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -333,11 +301,9 @@
                     <label class="input_lbl">Is Supplier</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <p-inputSwitch [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.IsSupplier" (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -346,11 +312,10 @@
                     <label class="input_lbl">Expense Account</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <p-dropdown [options]="displayAccountDetailsList" class="full_width" placeholder="Select an option"
+                        [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.ExpenseAccount.Id"
+                        (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -359,11 +324,10 @@
                     <label class="input_lbl">Is Subcontractor</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-inputSwitch [(ngModel)]="checked" />
+                    <p-inputSwitch [(ngModel)]="checked" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.IsSubcontractor"
+                        (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
 
@@ -373,11 +337,9 @@
                     <label class="input_lbl">Is Client</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-inputSwitch [(ngModel)]="checked" />
+                    <p-inputSwitch [(ngModel)]="checked" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.IsClient" (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
 
@@ -387,11 +349,10 @@
                     <label class="input_lbl">Auto Progress Report</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-inputSwitch [(ngModel)]="checked" />
+                    <p-inputSwitch [(ngModel)]="checked" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.IsAutoProgressReport"
+                        (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -400,11 +361,10 @@
                     <label class="input_lbl">Report Day</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <p-dropdown [options]="displayDayDetailsList" class="full_width" placeholder="Select an option"
+                        [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.DayDetails.Id"
+                        (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -413,11 +373,10 @@
                     <label class="input_lbl">Next Report Date / Time</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" />
+                    <input class="input_field" type="datetime" [disabled]="!clientCustomer.BusinessName"
+                        [(ngModel)]="relationshipDetails.NextReportDateTime"
+                        (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
-
-
-
                 </div>
                 <!--End of Input and label-->
 
@@ -430,7 +389,7 @@
             <div class="">
                 <div class="row">
                     <div class="col-12 col-lg-9">
-                        <p-table class="contacts_tbl" [value]="products" dataKey="id"
+                        <p-table class="contacts_tbl" [value]="contactList" dataKey="Id"
                             [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
                             <ng-template pTemplate="header">
                                 <tr class="table_header_row">
@@ -449,40 +408,53 @@
                                     </th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-product let-editing="editing">
+                            <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
                                 <tr>
-                                    <td><input class="input_field" type="text" /></td>
-                                    <td><p-dropdown [options]="cities" optionLabel="name" class="full_width"
-                                            placeholder="Select a City" /></td>
-                                    <td><input class="input_field" type="text" /></td>
-                                    <td class="action_button"><button class="red_btn"><i class="fa fa-trash"
-                                                aria-hidden="true"></i></button></td>
+                                    <td>
+                                        <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                                            [(ngModel)]="contact.Name"
+                                            (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
+                                    </td>
+                                    <td>
+                                        <p-dropdown [options]="displayContactTypeList" class="full_width"
+                                            appendTo="body" placeholder="Select an option"
+                                            [disabled]="!clientCustomer.BusinessName"
+                                            [(ngModel)]="contact.ContactType.Id"
+                                            (onChange)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
+                                    </td>
+                                    <td>
+                                        <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                                            [(ngModel)]="contact.ContactValue"
+                                            (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
+                                    </td>
+                                    <td class="action_button">
+                                        <button class="red_btn" [disabled]="!clientCustomer.BusinessName"
+                                            (click)="onDeleteContact(contact)">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             </ng-template>
                         </p-table>
 
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
-                            [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
-                            [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
-                            [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
+                            [ngClass]="(contactList && contactList.length > 0 && contactList[0].TotalRecords > 10)?'':'display_hide'"
+                            [rows]="contactFilter.RecordsPerPage" (onPageChange)="onPageChange($event, 'CONTACT')"
+                            [totalRecords]="(contactList.length>0)? contactList[0].TotalRecords:0"></p-paginator>
                         <!-- End of Pagination section -->
 
                     </div>
                 </div>
             </div>
-
-
-
             <!--End of Contacts-->
-
         </p-accordionTab>
         <p-accordionTab header="Social Media">
             <!--Social Media-->
             <div class="">
                 <div class="row">
                     <div class="col-12 col-lg-6">
-                        <p-table class="contacts_tbl" [value]="products" dataKey="id"
+                        <p-table class="contacts_tbl" [value]="socialMediaList" dataKey="Id"
                             [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
                             <ng-template pTemplate="header">
                                 <tr class="table_header_row">
@@ -492,35 +464,48 @@
                                     <th class="header_col" style="width:25%">
                                         Setting
                                     </th>
-
+                                    <th class="header_col" style="width:10%">
+                                        Action
+                                    </th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-product let-editing="editing">
+                            <ng-template pTemplate="body" let-socialMedia let-rowSMIndex="rowIndex">
                                 <tr>
-                                    <td><p-dropdown [options]="cities" optionLabel="name" class="full_width"
-                                            placeholder="Select a City" /></td>
-                                    <td><input class="input_field " type="text" /></td>
-
+                                    <td>
+                                        <p-dropdown [options]="displaySocialMediaTypeList" class="full_width"
+                                            appendTo="body" placeholder="Select an option"
+                                            [disabled]="!clientCustomer.BusinessName"
+                                            [(ngModel)]="socialMedia.SocialMediaType.Id"
+                                            (onChange)="onBlurEvent('SOCIAL$MEDIA$DETAILS',rowSMIndex,null,socialMedia)" />
+                                    </td>
+                                    <td>
+                                        <input class="input_field " type="text"
+                                            [disabled]="!clientCustomer.BusinessName" [(ngModel)]="socialMedia.Setting"
+                                            (blur)="onBlurEvent('SOCIAL$MEDIA$DETAILS',rowSMIndex,null,socialMedia)" />
+                                    </td>
+                                    <td class="action_button">
+                                        <button class="red_btn" [disabled]="!clientCustomer.BusinessName"
+                                            (click)="onDeleteSocialMedia(socialMedia)">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             </ng-template>
                         </p-table>
 
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
-                            [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
-                            [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
-                            [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
+                            [ngClass]="(socialMediaList && socialMediaList.length > 0 && socialMediaList[0].TotalRecords > 10)?'':'display_hide'"
+                            [rows]="socialMediaFilter.RecordsPerPage"
+                            (onPageChange)="onPageChange($event, 'SOCIAL$MEDIA')"
+                            [totalRecords]="(socialMediaList.length>0)? socialMediaList[0].TotalRecords:0"></p-paginator>
                         <!-- End of Pagination section -->
                     </div>
                 </div>
-
             </div>
-
-
             <!--End of Social Media-->
-
         </p-accordionTab>
-
     </p-accordion>
+    <!-- End of Accordion section -->
 </div>
 <!--End of Gen info main-->

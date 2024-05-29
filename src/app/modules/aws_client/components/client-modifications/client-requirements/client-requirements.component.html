@@ -30,7 +30,8 @@
                                     <!--Requirement text-->
                                     <td class="requirement_description">
                                         <!--requirement description-->
-                                        <input class="input_field" type="text" placeholder="Enter Title" />
+                                        <input class="input_field" type="text" placeholder="Enter Title"
+                                            [disabled]="selectedClientId == 0" />
                                         <!--End of requirement description-->
                                         <!-- Description input -->
                                         <div (click)="enterEditingItem(rowIndex)" (mouseleave)="enterLeaveItem()"
@@ -49,7 +50,8 @@
                                     <td class="uploaded_files_section">
                                         <!--Upload button-->
                                         <div class="action_button_upl">
-                                            <button (click)="clickOnUploadRequirementFile(product)" class="yellow_btn">Upload Files</button>
+                                            <button (click)="clickOnUploadRequirementFile(product)"
+                                                class="yellow_btn">Upload Files</button>
                                         </div>
                                         <!--End of Upload button-->
 
@@ -85,7 +87,8 @@
 
                                             <!--Add to Global-->
                                             <div class="action_button">
-                                                <button (click)="clickOnAddToGlobal(product)" class="blue_btn_spe">Add To Global</button>
+                                                <button (click)="clickOnAddToGlobal(product)" class="blue_btn_spe">Add
+                                                    To Global</button>
                                             </div>
                                             <!--End of Add to Global-->
 
@@ -94,31 +97,32 @@
                                     <!--End of Action buttons sec-->
                                     <!--Roles-->
                                     <td class="uploaded_files_section">
-                                        
-                                            <div class="action_button_upl">
-                                                <button class="green_btn" (click)="onClickUserRole(product)">Select Roles</button>
-                                            </div>
-                                            <!--Role list-->
-                                            <!-- <div>
+
+                                        <div class="action_button_upl">
+                                            <button class="green_btn" (click)="onClickUserRole(product)">Select
+                                                Roles</button>
+                                        </div>
+                                        <!--Role list-->
+                                        <!-- <div>
                                                 <p-chips [(ngModel)]="products">
                                                     <ng-template let-item pTemplate="item">
                                                         {{ item.name }}
                                                     </ng-template>
                                                 </p-chips>
                                             </div> -->
-                                             <!--File List-->
+                                        <!--File List-->
                                         <div *ngFor="let item of products" class="uploaded_files_list">
                                             <div>{{item.name}}</div>
                                             <div class="action_button">
-                                                
+
                                                 <button class="red_btn"><i class="fa fa-times"
                                                         aria-hidden="true"></i></button>
                                             </div>
                                         </div>
                                         <!--End of File List-->
-                                            <!--End of Role list-->
+                                        <!--End of Role list-->
 
-                                        
+
                                     </td>
                                     <!--End of Roles-->
 
@@ -173,7 +177,8 @@
                             [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
                             [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
                         <!-- End of Pagination section -->
-                        <button class="long_txt_btn full_width" (click)="clickOnUploadGlobalFile()">Add New Global Files</button>
+                        <button class="long_txt_btn full_width" (click)="clickOnUploadGlobalFile()">Add New Global
+                            Files</button>
                     </div>
                 </div>
                 <div class="row">

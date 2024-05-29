@@ -216,3 +216,12 @@ input {
 .disabled {
     opacity: 0.4;
 }
+
+input:disabled {
+    background-color: #7a7e83;
+    opacity: 0.2;
+}
+
+.error_label {
+    color: #ff5757;
+}
