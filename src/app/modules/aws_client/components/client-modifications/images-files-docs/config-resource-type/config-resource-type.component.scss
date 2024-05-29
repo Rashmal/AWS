@@ -1,0 +1,133 @@
+.font_bold {
+    font-weight: bold;
+}
+
+.popup_content {
+    width: auto;
+
+    .button_panel_outer {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+
+        .button_panel {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: right;
+
+            .button_blue {
+                height: 30px;
+                width: 100px;
+                border-radius: 3px;
+                border: none;
+                color: #ffffff;
+                background-color: #126095;
+            }
+
+            .button_red {
+                height: 30px;
+                width: 100px;
+                border-radius: 3px;
+                border: none;
+                color: #ffffff;
+                background-color: #ff5757;
+            }
+        }
+
+    }
+
+}
+
+
+.button_panel_outer {
+    .button_panel {
+        display: flex;
+        justify-content: right;
+        width: 100%;
+
+
+        .button_blue {
+            height: 30px;
+            width: 100px;
+            border-radius: 3px;
+            border: none;
+            color: #ffffff;
+            background-color: #126095;
+        }
+
+        .button_red {
+            height: 30px;
+            width: 100px;
+            border-radius: 3px;
+            border: none;
+            color: #ffffff;
+            background-color: #ff5757;
+        }
+    }
+
+}
+
+::ng-deep p-table .table_header_row {
+    background-color: #dddddd !important;
+
+    th {
+        background-color: transparent;
+    }
+
+    .header_col {
+        text-align: center;
+        min-width: 130px;
+    }
+
+}
+
+::ng-deep p-table {
+    .req_specs {
+        background-color: transparent;
+
+        .req_details_all {
+           input{
+            border: 1px solid #ccc;
+            border-radius: 3px;
+           }
+
+           
+        }
+
+    }
+
+    .action_buttons {
+        .btn_panel {
+            display: flex;
+            
+
+            button {
+                width: 100px;
+                padding: 0px 10px;
+                margin-right: 5px;
+                height: 30px;
+                border-radius: 3px;
+            border: none;
+            color: #ffffff;
+            }
+            
+        .button_blue {
+           
+            background-color: #126095;
+        }
+        .button_blue_l {
+           
+            background-color: #126095;
+            width: 141px;
+        }
+
+        .button_red {
+           
+            background-color: #ff5757;
+        }
+        }
+    }
+
+}

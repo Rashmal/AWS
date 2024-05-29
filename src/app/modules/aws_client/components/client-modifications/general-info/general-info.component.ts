@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Filter } from '../../../core/filter';
 
-interface City {
-    name: string;
-    code: string;
-}
+
 
 @Component({
     selector: 'app-general-info',
@@ -21,7 +18,13 @@ export class GeneralInfoComponent implements OnInit {
         { code: 'P003', name: 'Product 3', category: 'Category 3', TotalRecords: 10 },
       ];
 
-      cities: City[] | undefined;
+      cities: any[] =  [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ];
       checked = true;
       //Store filter settings
     filter: Filter = {
@@ -34,13 +37,7 @@ export class GeneralInfoComponent implements OnInit {
     constructor(private location: Location) {}
 
     ngOnInit(): void {
-        this.cities = [
-            { name: 'New York', code: 'NY' },
-            { name: 'Rome', code: 'RM' },
-            { name: 'London', code: 'LDN' },
-            { name: 'Istanbul', code: 'IST' },
-            { name: 'Paris', code: 'PRS' }
-        ];
+        
         // Getting the passed params
         let paramObject = this.location.getState();
         //Set editing mode

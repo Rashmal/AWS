@@ -17,6 +17,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { EditorModule } from 'primeng/editor';
 import { ChipsModule } from 'primeng/chips';
 import { GlobalRequirementsComponent } from './components/client-modifications/client-requirements/global-requirements/global-requirements.component';
+import { ConfigResourceTypeComponent } from './components/client-modifications/images-files-docs/config-resource-type/config-resource-type.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { GlobalRequirementsComponent } from './components/client-modifications/c
         GeneralInfoComponent,
         ImagesFilesDocsComponent,
         ClientRequirementsComponent,
-        GlobalRequirementsComponent
+        GlobalRequirementsComponent,
+        ConfigResourceTypeComponent
     ],
     imports: [
         FormsModule,
