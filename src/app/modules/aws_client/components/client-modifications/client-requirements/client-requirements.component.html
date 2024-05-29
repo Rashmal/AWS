@@ -1,16 +1,20 @@
 <!--Client requirements main-->
 <div class="card flex justify-content-center gen_info_main">
+    <!-- According section -->
     <p-accordion [multiple]="true" [activeIndex]="[0, 1]">
+        <!-- Client requirements section -->
         <p-accordionTab header="Client Requirements">
             <!--Client Requirements-->
             <div class="">
+                <!-- Top content section -->
                 <div class="row">
+                    <!-- Client requirements table section -->
                     <div class="col-12 col-lg-9">
-                        <p-table class="contacts_tbl" [value]="products" dataKey="id"
+                        <p-table class="contacts_tbl" [value]="clientRequirementList" dataKey="id"
                             [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
+                            <!-- Header section -->
                             <ng-template pTemplate="header">
                                 <tr class="table_header_row">
-
                                     <th class="header_col" style="width:30%">
                                         Client Requirements
                                     </th>
@@ -25,45 +29,68 @@
                                     </th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-product let-editing="editing" let-rowIndex="rowIndex">
+                            <!-- End of Header section -->
+
+                            <!-- Body table section -->
+                            <ng-template pTemplate="body" let-clientRequirement let-rowIndex="rowIndex">
                                 <tr>
                                     <!--Requirement text-->
                                     <td class="requirement_description">
                                         <!--requirement description-->
                                         <input class="input_field" type="text" placeholder="Enter Title"
-                                            [disabled]="selectedClientId == 0" />
+                                            [disabled]="selectedClientId == 0" [(ngModel)]="clientRequirement.Title"
+                                            (blur)="onBlurEvent('CLIENT$REQUIREMENTS')" />
                                         <!--End of requirement description-->
                                         <!-- Description input -->
                                         <div (click)="enterEditingItem(rowIndex)" (mouseleave)="enterLeaveItem()"
                                             [class]="editingItem_index == rowIndex ? 'show_editor_header': 'hide_editor_header'">
-                                            <p-editor>
-
+                                            <p-editor [readonly]="selectedClientId == 0"
+                                                [(ngModel)]="clientRequirement.AdditionalData">
                                             </p-editor>
                                         </div>
-
                                         <!-- End of Description input -->
-
                                     </td>
                                     <!--End of Requirement text-->
 
                                     <!--Uploaded file section-->
                                     <td class="uploaded_files_section">
+                                        <!-- When the files is empty -->
+                                        <div class="no_roles_label"
+                                            *ngIf="clientRequirement.ClientRequirementFiles.length == 0">
+                                            <span>No Files Uploaded</span>
+                                        </div>
+                                        <!-- End of When the files is empty -->
+
                                         <!--Upload button-->
                                         <div class="action_button_upl">
                                             <button (click)="clickOnUploadRequirementFile(product)"
-                                                class="yellow_btn">Upload Files</button>
+                                                [disabled]="selectedClientId == 0" class="yellow_btn">Upload
+                                                Files</button>
                                         </div>
                                         <!--End of Upload button-->
 
                                         <!--File List-->
-                                        <div *ngFor="let item of products" class="uploaded_files_list">
+                                        <div *ngFor="let item of clientRequirement.ClientRequirementFiles"
+                                            class="uploaded_files_list">
+                                            <!-- Display label section -->
                                             <div>{{item.name}}</div>
+                                            <!-- End of Display label section -->
+
+                                            <!-- Buttons section -->
                                             <div class="action_button">
-                                                <button class="blue_btn"><i class="fa fa-download"
-                                                        aria-hidden="true"></i></button>
-                                                <button class="red_btn"><i class="fa fa-trash"
-                                                        aria-hidden="true"></i></button>
+                                                <!-- Download button -->
+                                                <button class="blue_btn">
+                                                    <i class="fa fa-download" aria-hidden="true"></i>
+                                                </button>
+                                                <!-- End of Download button -->
+
+                                                <!-- Delete button -->
+                                                <button class="red_btn">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                                <!-- End of Delete button -->
                                             </div>
+                                            <!-- End of Buttons section -->
                                         </div>
                                         <!--End of File List-->
 
@@ -75,19 +102,22 @@
                                         <div class="">
                                             <!--Action buttons-->
                                             <div class="action_button">
-
-                                                <button class="red_btn"><i class="fa fa-trash"
-                                                        aria-hidden="true"></i></button>
-                                                <button class="grey_btn margin_lr_5"><i class="fa fa-arrow-up"
-                                                        aria-hidden="true"></i></button>
-                                                <button class="grey_btn"><i class="fa fa-arrow-down"
-                                                        aria-hidden="true"></i></button>
+                                                <button class="red_btn" [disabled]="selectedClientId == 0">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                                <button class="grey_btn margin_lr_5" [disabled]="selectedClientId == 0">
+                                                    <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                                </button>
+                                                <button class="grey_btn" [disabled]="selectedClientId == 0">
+                                                    <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                                </button>
                                             </div>
                                             <!--Action buttons-->
 
                                             <!--Add to Global-->
                                             <div class="action_button">
-                                                <button (click)="clickOnAddToGlobal(product)" class="blue_btn_spe">Add
+                                                <button (click)="clickOnAddToGlobal(product)" class="blue_btn_spe"
+                                                    [disabled]="selectedClientId == 0">Add
                                                     To Global</button>
                                             </div>
                                             <!--End of Add to Global-->
@@ -95,39 +125,45 @@
                                         </div>
                                     </td>
                                     <!--End of Action buttons sec-->
+
                                     <!--Roles-->
                                     <td class="uploaded_files_section">
+                                        <!-- When the roles is empty -->
+                                        <div class="no_roles_label" *ngIf="clientRequirement.RoleDetails.length == 0">
+                                            <span>No Roles Selected</span>
+                                        </div>
+                                        <!-- End of When the roles is empty -->
 
+                                        <!-- Select Buttons section -->
                                         <div class="action_button_upl">
-                                            <button class="green_btn" (click)="onClickUserRole(product)">Select
-                                                Roles</button>
+                                            <button [disabled]="selectedClientId == 0" class="green_btn"
+                                                (click)="onClickUserRole(product)">
+                                                Select Roles
+                                            </button>
                                         </div>
-                                        <!--Role list-->
-                                        <!-- <div>
-                                                <p-chips [(ngModel)]="products">
-                                                    <ng-template let-item pTemplate="item">
-                                                        {{ item.name }}
-                                                    </ng-template>
-                                                </p-chips>
-                                            </div> -->
-                                        <!--File List-->
-                                        <div *ngFor="let item of products" class="uploaded_files_list">
-                                            <div>{{item.name}}</div>
+                                        <!-- End of Select Buttons section -->
+
+                                        <!-- Display Role list -->
+                                        <div *ngFor="let item of clientRequirement.RoleDetails"
+                                            class="uploaded_files_list">
+                                            <!-- Role name -->
+                                            <div>{{item.Name}}</div>
+                                            <!-- End of Role name -->
+
+                                            <!-- Delete button -->
                                             <div class="action_button">
-
-                                                <button class="red_btn"><i class="fa fa-times"
-                                                        aria-hidden="true"></i></button>
+                                                <button class="red_btn" [disabled]="selectedClientId == 0">
+                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                </button>
                                             </div>
+                                            <!-- End of Delete button -->
                                         </div>
-                                        <!--End of File List-->
-                                        <!--End of Role list-->
-
-
+                                        <!-- End of Display Role list -->
                                     </td>
                                     <!--End of Roles-->
-
                                 </tr>
                             </ng-template>
+                            <!-- End of Body table section -->
                         </p-table>
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
@@ -137,6 +173,9 @@
                         <!-- End of Pagination section -->
 
                     </div>
+                    <!-- End of Client requirements table section -->
+
+                    <!-- Global files section -->
                     <div class="col-12 col-lg-3">
                         <p-table class="contacts_tbl" [value]="products" dataKey="id">
                             <ng-template pTemplate="header">
@@ -157,10 +196,12 @@
                                                 <span>{{product.name}}</span>
                                             </div>
                                             <div class="action_button_glbl">
-                                                <button class="blue_btn"><i class="fa fa-download"
-                                                        aria-hidden="true"></i></button>
-                                                <button class="red_btn"><i class="fa fa-trash"
-                                                        aria-hidden="true"></i></button>
+                                                <button class="blue_btn" [disabled]="selectedClientId == 0">
+                                                    <i class="fa fa-download" aria-hidden="true"></i>
+                                                </button>
+                                                <button class="red_btn" [disabled]="selectedClientId == 0">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
                                             </div>
                                         </div>
                                         <!--End of Global file item div-->
@@ -177,24 +218,31 @@
                             [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
                             [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
                         <!-- End of Pagination section -->
-                        <button class="long_txt_btn full_width" (click)="clickOnUploadGlobalFile()">Add New Global
+                        <button class="long_txt_btn full_width" (click)="clickOnUploadGlobalFile()"
+                            [disabled]="selectedClientId == 0">Add New Global
                             Files</button>
                     </div>
+                    <!-- End of Global files section -->
                 </div>
+                <!-- End of Top content section -->
+
+                <!-- Bottom content section -->
                 <div class="row">
                     <div class="col-12">
-                        <button class="long_txt_btn" (click)="onClickAddFromGlobalReq()">Add New From Global</button>
-                        <button class="long_txt_btn">Add New From Empty</button>
-
+                        <!-- Buttons section -->
+                        <button [disabled]="selectedClientId == 0" class="long_txt_btn"
+                            (click)="onClickAddFromGlobalReq()">Add New From Global</button>
+                        <button [disabled]="selectedClientId == 0" class="long_txt_btn">Add New From Empty</button>
+                        <!-- End of Buttons section -->
                     </div>
                 </div>
+                <!-- End of Bottom content section -->
             </div>
-
-
-
             <!--End of Client Requirements-->
-
         </p-accordionTab>
+        <!-- End of Client requirements section -->
+
+        <!-- Hourly other rates section -->
         <p-accordionTab header="Hourly and Other Rates">
             <!--Hourly and Other Rates-->
             <div class="">
@@ -218,10 +266,17 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-product let-editing="editing">
                                 <tr>
-                                    <td><textarea class="input_field " placeholder="Enter Rate Name"></textarea></td>
-                                    <td><input class="input_field " type="number" /></td>
-                                    <td><input class="input_field " placeholder="Enter Rate Type (eg, per hour)"
-                                            type="text" /></td>
+                                    <td>
+                                        <textarea class="input_field " placeholder="Enter Rate Name"
+                                            [disabled]="selectedClientId == 0"></textarea>
+                                    </td>
+                                    <td>
+                                        <input class="input_field " type="number" [disabled]="selectedClientId == 0" />
+                                    </td>
+                                    <td>
+                                        <input class="input_field " placeholder="Enter Rate Type (eg, per hour)"
+                                            type="text" [disabled]="selectedClientId == 0" />
+                                    </td>
 
                                 </tr>
                             </ng-template>
@@ -241,6 +296,8 @@
             <!--End of Hourly and Other Rates-->
 
         </p-accordionTab>
+        <!-- End of Hourly other rates section -->
     </p-accordion>
+    <!-- End of According section -->
 </div>
 <!--End of Client requirements main-->

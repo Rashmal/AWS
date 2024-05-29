@@ -176,7 +176,8 @@ export class GeneralInfoComponent implements OnInit {
             DefaultDeposit: 0,
             ExpenseAccount: {
                 Id: 0,
-                Name: ''
+                Name: '',
+                Total: 0
             },
             FinancialNotes: '',
             IsAutoProgressReport: false,
@@ -463,10 +464,26 @@ export class GeneralInfoComponent implements OnInit {
 
     // Initializing the account details list
     InitAccountDetailsList() {
+        let filter: Filter = {
+            Param1: 'ALL',
+            SearchQuery: '',
+            RecordsPerPage: 10,
+            CurrentPage: 1,
+            StaffId: '',
+            PriorityId: 0,
+            ModuleId: 0,
+            StartDate: new Date(),
+            EndDate: new Date(),
+            Id: '',
+            ParentId: 0,
+            SortColumn: '',
+            SortDirection: '',
+            StatusId: 0
+        };
         // Clear the data
         this.displayAccountDetailsList = [];
         // Calling the model to retrieve the data
-        this.commonModel.GetAccountDetails().then(
+        this.commonModel.GetAccountDetails(filter).then(
             (data) => {
                 // Getting the country list
                 let dataList: AccountDetails[] = <AccountDetails[]>data;

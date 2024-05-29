@@ -17,18 +17,15 @@
             }
 
             .input_field {
-
                 border: 1px solid #ccc;
                 border-radius: 3px;
                 width: 100%;
-
             }
         }
 
         .input_area_switch {
             display: flex !important;
         }
-
     }
 }
 
@@ -54,7 +51,6 @@
 }
 
 ::ng-deep p-table {
-
     .input_field {
         border: 1px solid #ccc;
         border-radius: 3px;
@@ -67,11 +63,9 @@
         .input_field {
             margin-bottom: 5px;
         }
-
     }
 
     .uploaded_files_section {
-
         .uploaded_files_list {
             display: flex;
             align-items: center;
@@ -119,9 +113,6 @@
                 }
             }
         }
-
-
-
     }
 
     .action_button {
@@ -146,7 +137,7 @@
         .red_btn {
             background-color: #ff5757;
         }
-        .green_btn{
+        .green_btn {
             background-color: #21ba45;
             color: #fff;
             width: auto !important;
@@ -172,7 +163,6 @@
             padding: 0px 10px;
             color: #fff;
             margin-top: 10px;
-
         }
 
         .yellow_btn {
@@ -200,8 +190,6 @@
             }
         }
 
-
-
         .yellow_btn {
             background-color: #ebb32c;
             width: auto;
@@ -222,7 +210,7 @@
 
     .global_file_list {
         width: 100%;
-        td{
+        td {
             padding: 0px;
         }
         .global_file_div {
@@ -264,8 +252,11 @@
             background-color: #126095;
             margin-right: 5px;
         }
-
     }
+}
+
+.no_roles_label {
+    padding-bottom: 10px;
 }
 
 .margin_lr_5 {
@@ -289,7 +280,6 @@
         text-align: center;
         min-width: 130px;
     }
-
 }
 
 ::ng-deep .p-dropdown {
@@ -316,20 +306,19 @@
 }
 
 ::ng-deep p-chips {
-    .p-inputtext .p-chips-multiple-container{
+    .p-inputtext .p-chips-multiple-container {
         border: none;
         background-color: transparent;
     }
-    .p-chips-input-token{
+    .p-chips-input-token {
         display: none;
     }
 }
 ::ng-deep p-chips {
-    .p-inputtext{
+    .p-inputtext {
         border: none;
         background-color: transparent;
     }
-   
 }
 
 @media (max-width: 991px) {
@@ -341,7 +330,5 @@
         .input_area_switch {
             display: flex !important;
         }
-
-
     }
 }
