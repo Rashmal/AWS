@@ -18,6 +18,8 @@ import { EditorModule } from 'primeng/editor';
 import { ChipsModule } from 'primeng/chips';
 import { GlobalRequirementsComponent } from './components/client-modifications/client-requirements/global-requirements/global-requirements.component';
 import { ConfigResourceTypeComponent } from './components/client-modifications/images-files-docs/config-resource-type/config-resource-type.component';
+import { ExpenseAccountsComponent } from './components/client-modifications/general-info/expense-accounts/expense-accounts.component';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
     declarations: [
@@ -28,7 +30,8 @@ import { ConfigResourceTypeComponent } from './components/client-modifications/i
         ImagesFilesDocsComponent,
         ClientRequirementsComponent,
         GlobalRequirementsComponent,
-        ConfigResourceTypeComponent
+        ConfigResourceTypeComponent,
+        ExpenseAccountsComponent
     ],
     imports: [
         FormsModule,
@@ -41,7 +44,8 @@ import { ConfigResourceTypeComponent } from './components/client-modifications/i
         AccordionModule,
         InputSwitchModule,
         EditorModule,
-        ChipsModule
+        ChipsModule,
+        RadioButtonModule
     ],
 })
 export class AWSClientModule {}
