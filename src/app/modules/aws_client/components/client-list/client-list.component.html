@@ -13,22 +13,22 @@
             <label>Filter by : </label>
             <p-dropdown 
             [options]="personTypes" 
-            [(ngModel)]="filter.Type" 
-            optionLabel="label"
+            [(ngModel)]="filter.Param1" 
+            (onChange)="onChangeFilter('DRP')"
             />
         </div>
         <!--End of Person type-->
         <!--Search by name-->
         <div class="col-lg-3 filter_item">
             <label>Client name : </label>
-            <input type="text"  [(ngModel)]="filter.Search" />
+            <input type="text"  [(ngModel)]="filter.SearchQuery" (change)="onChangeFilter('SEARCH')"/>
         </div>
         <!--End of Search by name-->
 
         <!--Items per page-->
         <div class="col-lg-3 filter_item">
             <label>Records Per Page : </label>
-            <input type="number" min="1" [(ngModel)]="filter.ItemsPerPage" />
+            <input type="number" min="1" [(ngModel)]="filter.RecordsPerPage" (change)="onChangeFilter('RPP')"/>
         </div>
         <!--Items per page-->
 
@@ -39,8 +39,8 @@
     <p-table [value]="clientList" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
         <ng-template pTemplate="header" class="table_header">
             <tr class="table_header_row">
-                <th class="header_col">Created By</th>
-                <th class="header_col">Created On</th>
+                <th class="header_col created_details">Created By</th>
+                
                 <th class="header_col">Full Name</th>
                 <th class="header_col">Contacts</th>
                 <th class="header_col">Payment Term</th>
@@ -52,8 +52,10 @@
         </ng-template>
         <ng-template pTemplate="body" let-client>
             <tr  class="table_body">
-                <td>{{client.CreatedBy}}</td>
-                <td>{{client.CreatedDate | date}}</td>
+                <td class="created_details">
+                    <div>{{client.CreatedBy}}</div>
+                    <div class="created_date_txt">(on {{client.CreatedDate | date : 'MMM d, y, h:mm:ss a'}})</div>
+                </td>
                 <td>{{client.FullName}}</td>
                 <td>
                     <div *ngFor="let contact of client.Contacts">
@@ -75,9 +77,9 @@
     <!--End of Client list table-->
 
      <!-- Pagination section -->
-     <p-paginator class="paginator_sec" #modulePaginator
+     <p-paginator class="paginator_sec" #modulePaginator *ngIf="clientList && clientList.length > 0 && clientList[0].TotalRecords > filter.RecordsPerPage"
      [ngClass]="(clientList && clientList.length > 0 && clientList[0].TotalRecords > 10)?'':'display_hide'"
-     [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
+     [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event)"
      [totalRecords]="(clientList.length>0)? clientList[0].TotalRecords:0"></p-paginator>
  <!-- End of Pagination section -->
 

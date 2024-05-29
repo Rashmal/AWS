@@ -12,4 +12,5 @@ export interface Filter {
     Id: string;
     SortDirection: string;
     SortColumn: string;
+    Param1 ?: string;
 }
