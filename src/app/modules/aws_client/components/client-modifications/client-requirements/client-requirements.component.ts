@@ -10,6 +10,9 @@ import { ClientModel } from '../../../models/clientModel';
 import { ClientService } from '../../../services/client.service';
 import { RoleDetails } from 'src/app/modules/common/core/roleDetails';
 import { Filter } from 'src/app/modules/common/core/filters';
+import { ClientRequirementFile } from '../../../core/clientRequirementFile';
+import { GlobalFileDetails } from '../../../core/globalFileDetails';
+import { HourlyOtherRates } from '../../../core/hourlyOtherRates';
 
 @Component({
     selector: 'app-client-requirements',
@@ -56,8 +59,25 @@ export class ClientRequirementsComponent implements OnInit {
         SortDirection: '',
         StatusId: 0
     };
+    //Store filter settings for global files
+    filterGlobalFiles: Filter = {
+        Param1: 'ALL',
+        SearchQuery: '',
+        RecordsPerPage: 10,
+        CurrentPage: 1,
+        StaffId: '',
+        PriorityId: 0,
+        ModuleId: 0,
+        StartDate: new Date(),
+        EndDate: new Date(),
+        Id: '',
+        ParentId: 0,
+        SortColumn: '',
+        SortDirection: '',
+        StatusId: 0
+    };
     //Store filter settings
-    filter: Filter = {
+    filterHoursOtherRates: Filter = {
         Param1: 'ALL',
         SearchQuery: '',
         RecordsPerPage: 10,
@@ -84,6 +104,10 @@ export class ClientRequirementsComponent implements OnInit {
     clientModel: ClientModel;
     // Store the company Id
     companyId: number = 0;
+    // Store all the global files
+    globalFilesList: GlobalFileDetails[] = [];
+    // Store the hours and other rates list
+    hoursOthersRatesList: HourlyOtherRates[] = [];
 
     constructor(public dialogService: DialogService, private location: Location,
         private clientService: ClientService
@@ -114,8 +138,14 @@ export class ClientRequirementsComponent implements OnInit {
 
             // Getting the client requirements
             this.GetAllClientRequirements();
+
+            // Getting all the hours and other rates list
+            this.GetAllCHoursOthersRates();
         }
         // End of Set editing client id
+
+        // Getting all the Global files
+        this.GetAllGlobalFiles();
     }
 
     // Getting the client requirements
@@ -146,7 +176,6 @@ export class ClientRequirementsComponent implements OnInit {
         // End of Calling the object model to access the service
     }
 
-
     //On enter editing editor
     enterEditingItem(index: number) {
         this.editingItem_index = index;
@@ -166,6 +195,12 @@ export class ClientRequirementsComponent implements OnInit {
                 this.filterClientRequirements.CurrentPage = event.page + 1;
                 // Getting all the list
                 this.GetAllClientRequirements();
+                break;
+            case 'GLOBAL$FILES':
+                // Setting the filter
+                this.filterGlobalFiles.CurrentPage = event.page + 1;
+                // Getting all the list
+                this.GetAllGlobalFiles();
                 break;
         }
         // End of Check the section type
@@ -216,15 +251,44 @@ export class ClientRequirementsComponent implements OnInit {
             data: [],
         });
         // Perform an action on close the popup
-        this.ref.onClose.subscribe((userRoles: any[]) => {
-            if (userRoles) {
-                //Set selected user roles
+        this.ref.onClose.subscribe((reqFiles: File[]) => {
+            // Check if there are any files
+            if (reqFiles && reqFiles.length > 0) {
+                //Setting the form data
+                const frmDataObj = new FormData();
+                // Loop through the files
+                for (let i = 0; i < reqFiles.length; i++) {
+                    frmDataObj.append("fileUpload", reqFiles[i]);
+                }
+                // End of Loop through the files
+
+                // Calling the object model to access the service
+                this.clientModel.UploadGlobalFile(frmDataObj, this.selectedClientId, this.companyId).then(
+                    (data) => {
+                        // Getting all the Global files
+                        this.GetAllGlobalFiles();
+                    }
+                );
+                // End of Calling the object model to access the service
             }
+            // End of Check if there are any files
         });
     }
 
+    // Getting all the Global files
+    GetAllGlobalFiles() {
+        // Calling the object model to access the service
+        this.clientModel.GetAllFilesList(this.filterGlobalFiles, this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Setting the global files
+                this.globalFilesList = <GlobalFileDetails[]>data;
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
     //On click upload files for requirement
-    clickOnUploadRequirementFile(requirement: any) {
+    clickOnUploadRequirementFile(clientRequirement: ClientRequirement) {
         // Open popup to select user roles
         this.ref = this.dialogService.open(UploadFilesComponent, {
             header: 'Upload Your Files Here',
@@ -232,10 +296,27 @@ export class ClientRequirementsComponent implements OnInit {
             data: [],
         });
         // Perform an action on close the popup
-        this.ref.onClose.subscribe((userRoles: any[]) => {
-            if (userRoles) {
-                //Set selected user roles
+        this.ref.onClose.subscribe((reqFiles: File[]) => {
+            // Check if there are any files
+            if (reqFiles && reqFiles.length > 0) {
+                //Setting the form data
+                const frmDataObj = new FormData();
+                // Loop through the files
+                for (let i = 0; i < reqFiles.length; i++) {
+                    frmDataObj.append("fileUpload", reqFiles[i]);
+                }
+                // End of Loop through the files
+
+                // Calling the object model to access the service
+                this.clientModel.SetClientRequirementFile(clientRequirement.Id, "", this.selectedClientId, this.companyId, frmDataObj).then(
+                    (data) => {
+                        // Getting the client requirements
+                        this.GetAllClientRequirements();
+                    }
+                );
+                // End of Calling the object model to access the service
             }
+            // End of Check if there are any files
         });
     }
 
@@ -245,18 +326,24 @@ export class ClientRequirementsComponent implements OnInit {
         this.ref = this.dialogService.open(GlobalRequirementsComponent, {
             header: 'Add New Requirement From Global',
             //Send user roles to popup
-            data: [],
+            data: {
+                selectedClientId: this.selectedClientId
+            },
         });
         // Perform an action on close the popup
-        this.ref.onClose.subscribe((userRoles: any[]) => {
-            if (userRoles) {
-                //Set selected user roles
+        this.ref.onClose.subscribe((clientRequirement: ClientRequirement) => {
+            if (clientRequirement) {
+                // Adding the requirement
+                this.clientRequirementList.push(clientRequirement);
+                this.clientRequirementList[this.clientRequirementList.length - 1].Id = 0;
+                // Saving the requirement
+                this.onBlurEvent("CLIENT$REQUIREMENTS", this.clientRequirementList.length - 1, this.clientRequirementList[this.clientRequirementList.length - 1]);
             }
         });
     }
 
     // On blur event
-    onBlurEvent(currentSection: string, currentIndex: number, clientRequirementObject: ClientRequirement, event: any = null) {
+    onBlurEvent(currentSection: string, currentIndex: number, clientRequirementObject: ClientRequirement = null, event: any = null, hourlyOtherRates: HourlyOtherRates = null) {
         // Check the current section
         switch (currentSection) {
             case 'CLIENT$REQUIREMENTS':
@@ -267,6 +354,10 @@ export class ClientRequirementsComponent implements OnInit {
                 // End of Check if the event is not null
                 // Update the client requirement object
                 this.updateClientRequirementObject(currentIndex, clientRequirementObject);
+                break;
+            case 'HOURLY$OTHER$RATES':
+                // Update the hours others rates object
+                this.updateHoursOthersRatesObject(currentIndex, hourlyOtherRates);
                 break;
         }
         // End of Check the current section
@@ -370,6 +461,101 @@ export class ClientRequirementsComponent implements OnInit {
             (data) => {
                 // Getting the client requirements
                 this.GetAllClientRequirements();
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // On click event of removing the client requirement file
+    removeClientRequirementFile(clientRequirement: ClientRequirement, ClientRequirementFiles: ClientRequirementFile) {
+        // Calling the object model to access the service
+        this.clientModel.RemoveClientRequirementFile(ClientRequirementFiles.Id, this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Getting the client requirements
+                this.GetAllClientRequirements();
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // On click event of removing the global file
+    removeGlobalFile(globalFile: GlobalFileDetails) {
+        // Calling the object model to access the service
+        this.clientModel.RemoveGlobalFile(globalFile.Id, this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Getting the client requirements
+                this.GetAllGlobalFiles();
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // Getting all the hours and other rates list
+    GetAllCHoursOthersRates() {
+        // Calling the object model to access the service
+        this.clientModel.GetHourlyOtherRateListDetails(this.filterHoursOtherRates, this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Setting the business address Id
+                this.hoursOthersRatesList = <HourlyOtherRates[]>data;
+
+                // Check if the list is empty
+                if (this.hoursOthersRatesList.length == 0 || this.hoursOthersRatesList[this.hoursOthersRatesList.length - 1].Id !== 0) {
+                    // Initializing the object
+                    this.hoursOthersRatesList.push(
+                        {
+                            Id: 0,
+                            Rate: 0,
+                            RateName: '',
+                            RateType: '',
+                            TotalRecords: 0
+                        }
+                    );
+                }
+                // End of Check if the list is empty
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // Update the hours others rates object
+    updateHoursOthersRatesObject(currentIndex: number, hourlyOtherRates: HourlyOtherRates) {
+        debugger
+        // Check the action state
+        let actionState = (hourlyOtherRates.Id == 0) ? "NEW" : "UPDATE";
+
+        // Calling the object model to access the service
+        this.clientModel.SetOtherRateDetails(hourlyOtherRates, actionState, this.selectedClientId, this.companyId).then(
+            (data) => {
+                debugger
+                // Setting the business address Id
+                this.hoursOthersRatesList[currentIndex].Id = <number>data;
+
+                // Check if the action type is NEW
+                if (actionState == "NEW") {
+                    // Initializing the object
+                    this.hoursOthersRatesList.push(
+                        {
+                            Id: 0,
+                            Rate: 0,
+                            RateName: '',
+                            RateType: '',
+                            TotalRecords: 0
+                        }
+                    );
+                }
+                // End of Check if the action type is NEW
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // On click event of the removing hourly other rate
+    removeHourlyOtherRates(hoursOthersRates: HourlyOtherRates) {
+        // Calling the object model to access the service
+        this.clientModel.SetOtherRateDetails(hoursOthersRates, "REMOVE", this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Getting the client requirements
+                this.GetAllCHoursOthersRates();
             }
         );
         // End of Calling the object model to access the service

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Filter } from 'src/app/modules/aws_client/core/filter';
+import { ClientRequirement } from 'src/app/modules/aws_client/core/clientRequirement';
+import { ClientModel } from 'src/app/modules/aws_client/models/clientModel';
+import { ClientService } from 'src/app/modules/aws_client/services/client.service';
+import { Filter } from 'src/app/modules/common/core/filters';
 
 @Component({
     selector: 'app-global-requirements',
@@ -31,24 +34,86 @@ export class GlobalRequirementsComponent {
 
     //Store filter settings
     filter: Filter = {
-        Type: { label: 'All', value: 'ALL' },
-        Search: '',
-        ItemsPerPage: 10,
+        Param1: 'ALL',
+        SearchQuery: '',
+        RecordsPerPage: 10,
         CurrentPage: 1,
+        StaffId: '',
+        PriorityId: 0,
+        ModuleId: 0,
+        StartDate: new Date(),
+        EndDate: new Date(),
+        Id: '',
+        ParentId: 0,
+        SortColumn: '',
+        SortDirection: '',
+        StatusId: 0
     };
     selectedProducts!: any;
 
-    constructor(
-        public ref: DynamicDialogRef,
-        private config: DynamicDialogConfig
-    ) {}
+    // Store the Global Client Requirements
+    globalClientRequirements: ClientRequirement[] = [];
+    // Store the client model
+    clientModel: ClientModel;
+    // Store the selected client Id
+    selectedClientId = 0;
+    // Store the company Id
+    companyId: number = 0;
+
+    constructor(public ref: DynamicDialogRef, private config: DynamicDialogConfig,
+        private clientService: ClientService
+    ) {
+        // Initialize the model
+        this.clientModel = new ClientModel(this.clientService);
+    }
+
+    ngOnInit() {
+        // Getting the data from the parent
+        if (this.config.data['selectedClientId']) {
+            this.selectedClientId = this.config.data['selectedClientId'];
+
+            // Getting all the global client requirements
+            this.GetAllGlobalClientRequirements();
+        }
+        // End of Getting the data from the parent
+    }
 
     //On  click cancel
     onClickCancel() {
         //Send data to component
-        this.ref.close([]);
+        this.ref.close();
     }
 
     //on change module list paginator
-    onPageChange(event: any) {}
+    onPageChange(event: any) { }
+
+    // Getting all the global client requirements
+    GetAllGlobalClientRequirements() {
+        // Calling the object model to access the service
+        this.clientModel.GetGlobalClientRequirement(this.filter, this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Setting the business address Id
+                this.globalClientRequirements = <ClientRequirement[]>data;
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // On click event og removing the global client requirement
+    deleteGlobalClientRequirement(globalClientRequirement: ClientRequirement) {
+        // Calling the object model to access the service
+        this.clientModel.SetGlobalClientRequirement(globalClientRequirement, "REMOVE", this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Getting all the global client requirements
+                this.GetAllGlobalClientRequirements();
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // On click event of adding the client requirement to local
+    addToLocalClientRequirement(globalClientRequirement: ClientRequirement) {
+        //Send data to component
+        this.ref.close(globalClientRequirement);
+    }
 }

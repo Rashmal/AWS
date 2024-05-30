@@ -37,6 +37,6 @@ export class UploadFilesComponent {
 
     // On click on confirmation button
     closePopup(status: boolean) {
-      this.ref.close(status);
+      this.ref.close(this.files);
   }
 }
