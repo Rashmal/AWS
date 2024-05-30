@@ -18,6 +18,7 @@
                     <!--End of Label-->
                     <!--Input area-->
                     <input class="input_field" type="text" [(ngModel)]="clientCustomer.BusinessName"
+                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
                         [disabled]="modificationMode == 'VIEW'" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
                 </div>
@@ -30,6 +31,7 @@
                     <!--End of Label-->
                     <!--Input area-->
                     <input class="input_field" type="text" [(ngModel)]="clientCustomer.FirstName"
+                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
@@ -42,6 +44,7 @@
                     <!--End of Label-->
                     <!--Input area-->
                     <input class="input_field" type="text" [(ngModel)]="clientCustomer.MiddleInitial"
+                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
@@ -67,6 +70,7 @@
                     <!--End of Label-->
                     <!--Input area-->
                     <input class="input_field" type="text" [(ngModel)]="clientCustomer.BusinessNumber"
+                        onKeyPress="if(value.length==20) return false;" inputrestriction="^[a-z A-Z 0-9 #]*$"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
@@ -85,7 +89,8 @@
                     <label class="input_lbl">Billing Name (if any)</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text"
+                    <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9]*$"
+                        onKeyPress="if(value.length==100) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="businessAddress.BuildingName" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
@@ -98,7 +103,8 @@
                     <label class="input_lbl">Street Number and Name</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text"
+                    <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9 / _]*$"
+                        onKeyPress="if(value.length==100) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="businessAddress.StreetName" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
@@ -110,7 +116,8 @@
                     <label class="input_lbl">Suburb</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text"
+                    <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9]*$"
+                        onKeyPress="if(value.length==50) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="businessAddress.Suburb" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
@@ -122,7 +129,7 @@
                     <label class="input_lbl">Pcode / Zip</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text"
+                    <input class="input_field" type="text" onKeyPress="if(value.length==10) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="businessAddress.PostalCode" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
@@ -134,7 +141,8 @@
                     <label class="input_lbl">State / Territory</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text"
+                    <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9]*$"
+                        onKeyPress="if(value.length==50) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="businessAddress.State" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
@@ -166,7 +174,7 @@
                     <label class="input_lbl">Office Job</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text"
+                    <input class="input_field" type="number" onKeyPress="if(value.length==20) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.OfficeJob" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -179,7 +187,7 @@
                     <label class="input_lbl">Work Credit</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text"
+                    <input class="input_field" type="number" onKeyPress="if(value.length==20) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.WorkCredit" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -249,7 +257,8 @@
                     <label class="input_lbl">Client Terms</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text"
+                    <input class="input_field" type="number" inputrestriction="^[0-9]*$"
+                        onKeyPress="if(value.length==20) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.ClientTerms" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -261,7 +270,7 @@
                     <label class="input_lbl">Default Deposit</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text"
+                    <input class="input_field" type="number" onKeyPress="if(value.length==20) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.DefaultDeposit" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -273,7 +282,8 @@
                     <label class="input_lbl">Month Day Alert</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text"
+                    <input class="input_field" type="number" inputrestriction="^[0-9]*$"
+                        onKeyPress="if(value.length==10) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.MonthDayAlert" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -285,7 +295,7 @@
                     <label class="input_lbl">Financial Notes</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <textarea class="input_field" type="text"
+                    <textarea class="input_field" type="text" onKeyPress="if(value.length==200) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.FinancialNotes"
                         (blur)="onBlurEvent('RELATIONSHIP$DETAILS')"></textarea>
@@ -314,7 +324,8 @@
                     <label class="input_lbl">Supplier Terms</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text"
+                    <input class="input_field" type="number" inputrestriction="^[0-9]*$"
+                        onKeyPress="if(value.length==20) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.SupplierTerms" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -447,7 +458,8 @@
                             <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
                                 <tr>
                                     <td>
-                                        <input class="input_field" type="text"
+                                        <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9]*$"
+                                            onKeyPress="if(value.length==100) return false;"
                                             [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             [(ngModel)]="contact.Name"
                                             (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
@@ -461,6 +473,8 @@
                                     </td>
                                     <td>
                                         <input class="input_field" type="text"
+                                            onKeyPress="if(value.length==100) return false;"
+                                            [inputrestriction]="(contact.ContactType.Id == 1)?'^[0-9]*$':(contact.ContactType.Id == 2)?'^[0-9]*$':(contact.ContactType.Id == 3)?'^[0-9]*$':(contact.ContactType.Id == 4)?'^[0-9]*$':(contact.ContactType.Id == 5)?'^[a-z A-Z 0-9 @ . _ -]*$':(contact.ContactType.Id == 6)?'a-z A-Z 0-9 . _ -':(contact.ContactType.Id == 7)?'^[0-9]*$':(contact.ContactType.Id == 8)?'^[0-9]*$':(contact.ContactType.Id == 9)?'a-z A-Z 0-9 @ . _ -':''"
                                             [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             [(ngModel)]="contact.ContactValue"
                                             (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
@@ -519,6 +533,7 @@
                                     </td>
                                     <td>
                                         <input class="input_field " type="text"
+                                            onKeyPress="if(value.length==100) return false;"
                                             [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             [(ngModel)]="socialMedia.Setting"
                                             (blur)="onBlurEvent('SOCIAL$MEDIA$DETAILS',rowSMIndex,null,socialMedia)" />

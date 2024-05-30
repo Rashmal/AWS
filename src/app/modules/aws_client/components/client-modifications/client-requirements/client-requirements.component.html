@@ -45,7 +45,9 @@
                                     <td class="requirement_description">
                                         <!--requirement description-->
                                         <input class="input_field" type="text" placeholder="Enter Title"
-                                            [disabled]="selectedClientId == 0" [(ngModel)]="clientRequirement.Title"
+                                            onKeyPress="if(value.length==100) return false;"
+                                            inputrestriction="^[a-z A-Z 0-9 _ -]*$" [disabled]="selectedClientId == 0"
+                                            [(ngModel)]="clientRequirement.Title"
                                             (blur)="onBlurEvent('CLIENT$REQUIREMENTS',rowIndex,clientRequirement)" />
                                         <!--End of requirement description-->
                                         <!-- Description input -->
@@ -290,18 +292,22 @@
                                 <tr>
                                     <td>
                                         <textarea class="input_field " placeholder="Enter Rate Name"
-                                            [disabled]="selectedClientId == 0" [(ngModel)]="hoursOthersRates.RateName"
+                                            onKeyPress="if(value.length==100) return false;"
+                                            inputrestriction="^[a-z A-Z 0-9 _ -]*$" [disabled]="selectedClientId == 0"
+                                            [(ngModel)]="hoursOthersRates.RateName"
                                             (blur)="onBlurEvent('HOURLY$OTHER$RATES',rowHORIndex,null,null,hoursOthersRates)"></textarea>
                                     </td>
                                     <td>
                                         <input class="input_field " type="number" [disabled]="selectedClientId == 0"
-                                            [(ngModel)]="hoursOthersRates.Rate"
+                                            onKeyPress="if(value.length==20) return false;"
+                                            inputrestriction="^[a-z A-Z 0-9 _ -]*$" [(ngModel)]="hoursOthersRates.Rate"
                                             (blur)="onBlurEvent('HOURLY$OTHER$RATES',rowHORIndex,null,null,hoursOthersRates)" />
                                     </td>
                                     <td>
                                         <input class="input_field " placeholder="Enter Rate Type (eg, per hour)"
-                                            type="text" [disabled]="selectedClientId == 0"
-                                            [(ngModel)]="hoursOthersRates.RateType"
+                                            onKeyPress="if(value.length==100) return false;"
+                                            inputrestriction="^[a-z A-Z 0-9 _ -]*$" type="text"
+                                            [disabled]="selectedClientId == 0" [(ngModel)]="hoursOthersRates.RateType"
                                             (blur)="onBlurEvent('HOURLY$OTHER$RATES',rowHORIndex,null,null,hoursOthersRates)" />
                                     </td>
 
