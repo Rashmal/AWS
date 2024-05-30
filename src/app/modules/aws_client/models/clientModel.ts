@@ -494,4 +494,19 @@ export class ClientModel {
         // return the promise
         return promise;
     }
+
+    // Downloading the file
+    DownloadFile(fileUrl: string, fileName: string) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.clientService.DownloadFile(fileUrl, fileName).subscribe(
+                data => {
+                    let returnData = <Blob>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
 }

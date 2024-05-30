@@ -10,4 +10,5 @@ export interface ImageFiles {
     CreatedByFullName: string;
     RotateXY: number;
     AddedDate: Date;
+    LocalPath: string;
 }

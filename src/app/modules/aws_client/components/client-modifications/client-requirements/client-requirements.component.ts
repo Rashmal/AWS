@@ -14,6 +14,7 @@ import { ClientRequirementFile } from '../../../core/clientRequirementFile';
 import { GlobalFileDetails } from '../../../core/globalFileDetails';
 import { HourlyOtherRates } from '../../../core/hourlyOtherRates';
 import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
+import { saveAs } from 'file-saver';
 
 @Component({
     selector: 'app-client-requirements',
@@ -345,16 +346,19 @@ export class ClientRequirementsComponent implements OnInit {
 
     // On blur event
     onBlurEvent(currentSection: string, currentIndex: number, clientRequirementObject: ClientRequirement = null, event: any = null, hourlyOtherRates: HourlyOtherRates = null) {
+        // Declare the variable
+        let isDescription = false;
         // Check the current section
         switch (currentSection) {
             case 'CLIENT$REQUIREMENTS':
                 // Check if the event is not null
                 if (event) {
                     clientRequirementObject.AdditionalData = event.htmlValue;
+                    isDescription = true;
                 }
                 // End of Check if the event is not null
                 // Update the client requirement object
-                this.updateClientRequirementObject(currentIndex, clientRequirementObject);
+                this.updateClientRequirementObject(currentIndex, clientRequirementObject, isDescription);
                 break;
             case 'HOURLY$OTHER$RATES':
                 // Update the hours others rates object
@@ -365,7 +369,7 @@ export class ClientRequirementsComponent implements OnInit {
     }
 
     // Update the client requirement object
-    updateClientRequirementObject(currentIndex: number, clientRequirementObject: ClientRequirement) {
+    updateClientRequirementObject(currentIndex: number, clientRequirementObject: ClientRequirement, isDescription: boolean = false) {
         // Check the action state
         let actionState = (clientRequirementObject.Id == 0) ? "NEW" : "UPDATE";
 
@@ -391,8 +395,12 @@ export class ClientRequirementsComponent implements OnInit {
                 // }
                 // End of Check if the action type is NEW
 
-                // Getting the client requirements
-                this.GetAllClientRequirements();
+                // Check if its no the description change
+                if (!isDescription) {
+                    // Getting the client requirements
+                    this.GetAllClientRequirements();
+                }
+                // End of Check if its no the description change
             }
         );
         // End of Calling the object model to access the service
@@ -605,6 +613,30 @@ export class ClientRequirementsComponent implements OnInit {
                 // End of Calling the object model to access the service
             }
         });
+    }
+
+    // On click event of downloading the attachment file
+    downloadClientRequirementAttachment(item: ClientRequirementFile) {
+        // Calling the object model to access the service
+        this.clientModel.DownloadFile(item.FileUrl, item.FileName).then(
+            (blob) => {
+                // specify a default file name and extension
+                saveAs(blob, item.FileName);
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // On click event of downloading the global file
+    downloadGlobalFileAttachment(globalFile: GlobalFileDetails) {
+        // Calling the object model to access the service
+        this.clientModel.DownloadFile(globalFile.FileUrl, globalFile.FileName).then(
+            (blob) => {
+                // specify a default file name and extension
+                saveAs(blob, globalFile.FileName);
+            }
+        );
+        // End of Calling the object model to access the service
     }
 
 }

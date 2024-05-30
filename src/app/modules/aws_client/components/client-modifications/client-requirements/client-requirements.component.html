@@ -81,7 +81,8 @@
                                             <!-- Buttons section -->
                                             <div class="action_button">
                                                 <!-- Download button -->
-                                                <button class="blue_btn">
+                                                <button class="blue_btn"
+                                                    (click)="downloadClientRequirementAttachment(item)">
                                                     <i class="fa fa-download" aria-hidden="true"></i>
                                                 </button>
                                                 <!-- End of Download button -->
@@ -215,7 +216,8 @@
                                                 <span>{{globalFile.FileName}}</span>
                                             </div>
                                             <div class="action_button_glbl">
-                                                <button class="blue_btn" [disabled]="selectedClientId == 0">
+                                                <button class="blue_btn" [disabled]="selectedClientId == 0"
+                                                    (click)="downloadGlobalFileAttachment(globalFile)">
                                                     <i class="fa fa-download" aria-hidden="true"></i>
                                                 </button>
                                                 <button class="red_btn" [disabled]="selectedClientId == 0"
