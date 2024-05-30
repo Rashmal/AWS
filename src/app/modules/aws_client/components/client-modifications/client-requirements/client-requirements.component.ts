@@ -12,6 +12,7 @@ import { RoleDetails } from 'src/app/modules/common/core/roleDetails';
 import { Filter } from 'src/app/modules/common/core/filters';
 import { ClientRequirementFile } from '../../../core/clientRequirementFile';
 import { GlobalFileDetails } from '../../../core/globalFileDetails';
+import { HourlyOtherRates } from '../../../core/hourlyOtherRates';
 
 @Component({
     selector: 'app-client-requirements',
@@ -76,7 +77,7 @@ export class ClientRequirementsComponent implements OnInit {
         StatusId: 0
     };
     //Store filter settings
-    filter: Filter = {
+    filterHoursOtherRates: Filter = {
         Param1: 'ALL',
         SearchQuery: '',
         RecordsPerPage: 10,
@@ -105,6 +106,8 @@ export class ClientRequirementsComponent implements OnInit {
     companyId: number = 0;
     // Store all the global files
     globalFilesList: GlobalFileDetails[] = [];
+    // Store the hours and other rates list
+    hoursOthersRatesList: HourlyOtherRates[] = [];
 
     constructor(public dialogService: DialogService, private location: Location,
         private clientService: ClientService
@@ -135,6 +138,9 @@ export class ClientRequirementsComponent implements OnInit {
 
             // Getting the client requirements
             this.GetAllClientRequirements();
+
+            // Getting all the hours and other rates list
+            this.GetAllCHoursOthersRates();
         }
         // End of Set editing client id
 
@@ -169,7 +175,6 @@ export class ClientRequirementsComponent implements OnInit {
         );
         // End of Calling the object model to access the service
     }
-
 
     //On enter editing editor
     enterEditingItem(index: number) {
@@ -328,7 +333,6 @@ export class ClientRequirementsComponent implements OnInit {
         // Perform an action on close the popup
         this.ref.onClose.subscribe((clientRequirement: ClientRequirement) => {
             if (clientRequirement) {
-                debugger
                 // Adding the requirement
                 this.clientRequirementList.push(clientRequirement);
                 this.clientRequirementList[this.clientRequirementList.length - 1].Id = 0;
@@ -339,7 +343,7 @@ export class ClientRequirementsComponent implements OnInit {
     }
 
     // On blur event
-    onBlurEvent(currentSection: string, currentIndex: number, clientRequirementObject: ClientRequirement, event: any = null) {
+    onBlurEvent(currentSection: string, currentIndex: number, clientRequirementObject: ClientRequirement = null, event: any = null, hourlyOtherRates: HourlyOtherRates = null) {
         // Check the current section
         switch (currentSection) {
             case 'CLIENT$REQUIREMENTS':
@@ -350,6 +354,10 @@ export class ClientRequirementsComponent implements OnInit {
                 // End of Check if the event is not null
                 // Update the client requirement object
                 this.updateClientRequirementObject(currentIndex, clientRequirementObject);
+                break;
+            case 'HOURLY$OTHER$RATES':
+                // Update the hours others rates object
+                this.updateHoursOthersRatesObject(currentIndex, hourlyOtherRates);
                 break;
         }
         // End of Check the current section
@@ -477,6 +485,66 @@ export class ClientRequirementsComponent implements OnInit {
             (data) => {
                 // Getting the client requirements
                 this.GetAllGlobalFiles();
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // Getting all the hours and other rates list
+    GetAllCHoursOthersRates() {
+        // Calling the object model to access the service
+        this.clientModel.GetHourlyOtherRateListDetails(this.filterHoursOtherRates, this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Setting the business address Id
+                this.hoursOthersRatesList = <HourlyOtherRates[]>data;
+
+                // Check if the list is empty
+                if (this.hoursOthersRatesList.length == 0) {
+                    // Initializing the object
+                    this.hoursOthersRatesList.push(
+                        {
+                            Id: 0,
+                            Rate: 0,
+                            RateName: '',
+                            RateType: '',
+                            TotalRecords: 0
+                        }
+                    );
+                }
+                // End of Check if the list is empty
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // Update the hours others rates object
+    updateHoursOthersRatesObject(currentIndex: number, hourlyOtherRates: HourlyOtherRates) {
+        // Check the action state
+        let actionState = (hourlyOtherRates.Id == 0) ? "NEW" : "UPDATE";
+
+        // Calling the object model to access the service
+        this.clientModel.SetOtherRateDetails(hourlyOtherRates, actionState, this.selectedClientId, this.companyId).then(
+            (data) => {
+                // Setting the business address Id
+                this.hoursOthersRatesList[currentIndex].Id = <number>data;
+
+                // Check if the action type is NEW
+                if (actionState == "NEW") {
+                    // Initializing the object
+                    this.hoursOthersRatesList.push(
+                        {
+                            Id: 0,
+                            Rate: 0,
+                            RateName: '',
+                            RateType: '',
+                            TotalRecords: 0
+                        }
+                    );
+                }
+                // End of Check if the action type is NEW
+
+                // Getting the client requirements
+                this.GetAllCHoursOthersRates();
             }
         );
         // End of Calling the object model to access the service

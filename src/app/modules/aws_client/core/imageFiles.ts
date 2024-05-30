@@ -7,4 +7,6 @@ export interface ImageFiles {
     InternalNotes: string;
     ResourceType: ResourceType;
     TotalRecords: number;
+    CreatedByFullName: string;
+    RotateXY: number;
 }
