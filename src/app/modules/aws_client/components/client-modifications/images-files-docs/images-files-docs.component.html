@@ -12,7 +12,7 @@
                     <label class="input_lbl">Select A Type To Upload:</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <p-dropdown appendTo="body" [options]="resourceTypes" optionLabel="Name" class="full_width" placeholder="Select an option" />
                     <!--End of Input area-->
                     <button class="button_blue_s" (click)="onClickConfigResource()"><i class="fa fa-cog"
                             aria-hidden="true"></i></button>
@@ -93,7 +93,7 @@
                     <label class="input_lbl">Filter by file type:</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="cities" optionLabel="name" class="full_width" placeholder="Select a City" />
+                    <p-dropdown appendTo="body" [options]="resourceTypes" [(ngModel)]="filterResourceType" (onChange)="changeFilter()"  optionLabel="Name" class="full_width" placeholder="Select an option" />
                     <!--End of Input area-->
                     <button class="button_blue_s" (click)="onClickConfigResource()"><i class="fa fa-cog"
                             aria-hidden="true"></i></button>
@@ -104,8 +104,8 @@
                 <!--End of Input and label-->
 
                 <!--File list-->
-                <div class="col-12 col-md-12 col-lg-8 col-xl-8">
-                    <p-table class="contacts_tbl" [value]="products" dataKey="id"
+                <div *ngIf="imageFilesList && imageFilesList.length > 0" class="col-12 col-md-12 col-lg-8 col-xl-8">
+                    <p-table class="contacts_tbl" [value]="imageFilesList" dataKey="id"
                         [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
                         <ng-template pTemplate="header">
                             <tr class="table_header_row">
@@ -119,25 +119,25 @@
                                 </th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-product let-editing="editing">
+                        <ng-template pTemplate="body" let-fileItem let-editing="editing">
                             <tr>
                                 <td class="table_col">
 
-                                    <div class="created_by">Created by {{'Name'}} at {{'Date'}} </div>
+                                    <div class="created_by">Created by {{!fileItem.CreatedBy && fileItem.CreatedBy != '' ? fileItem.CreatedBy : 'Unavailable'}} at {{!fileItem.CreatedDate && fileItem.CreatedDate != '' ? fileItem.CreatedDate : currentDate | date : 'MMM d, y, h:mm:ss a'}} </div>
                                     <div class="label_input_div">
                                         <label class="lbl_class">Caption:</label>
-                                        <textarea class="input_class"></textarea>
+                                        <textarea class="input_class" [(ngModel)]="fileItem.Caption"></textarea>
                                     </div>
                                     <div class="label_input_div">
                                         <label class="lbl_class">Internal Notes:</label>
-                                        <textarea class="input_class"></textarea>
+                                        <textarea class="input_class"  [(ngModel)]="fileItem.InternalNotes"></textarea>
                                     </div>
                                     <div class="label_input_div_spe">
                                         <label class="lbl_class">Resource Type:</label>
                                         <div class="input_drp">
                                             <!--Config Types-->
-                                            <p-dropdown [options]="cities" optionLabel="name"
-                                                class="full_width margin_r10" placeholder="Select a City" />
+                                            <p-dropdown appendTo="body" [options]="resourceTypes" [(ngModel)]="fileItem.ResourceType" optionLabel="Name"
+                                                class="full_width margin_r10" placeholder="Select an option" />
                                             <!--End of Config Types-->
                                             <!--Setting icon-->
                                             <button class="button_blue_s" (click)="onClickConfigResource()"><i
@@ -149,7 +149,7 @@
 
                                 <td class="action_button">
                                     <div class="action_button_div">
-                                        <button (click)="imagePreviewer(true)" class="green_btn"><i class="fa fa-eye"
+                                        <button (click)="imagePreviewer(fileItem)" class="green_btn"><i class="fa fa-eye"
                                                 aria-hidden="true"></i></button>
                                         <button class="yellow_btn"><i class="fa fa-undo"
                                                 aria-hidden="true"></i></button>
@@ -167,17 +167,17 @@
 
                     <!-- Pagination section -->
                     <p-paginator class="paginator_sec" #modulePaginator
-                        [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
+                        *ngIf="(imageFilesList && imageFilesList.length > 0 && imageFilesList[0].TotalRecords > 10)"
                         [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
-                        [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
+                        [totalRecords]="(imageFilesList.length>0)? imageFilesList[0].TotalRecords:0"></p-paginator>
                     <!-- End of Pagination section -->
                 </div>
                 <!--End of File list-->
 
                 <!--Image view-->
-                <div *ngIf="imagePreview" class="col-12 col-md-12 col-lg-4 col-xl-4">
+                <div *ngIf="imageFilesList && imageFilesList.length > 0 && imagePreview" class="col-12 col-md-12 col-lg-4 col-xl-4">
                     <div class="hide_btn">
-                        <button (click)="imagePreviewer(false)" class="button_blue">Hide</button>
+                        <button (click)="hidePreviewer()" class="button_blue">Hide</button>
                     </div>
                     <!-- Container for the image previewer -->
                     <div class="image-container">

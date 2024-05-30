@@ -1,7 +1,7 @@
 <!-- Main container for the delete confirmation popup content -->
 <div class="popup_content">
     <!-- PrimeNG table displaying items -->
-    <p-table [value]="products" dataKey="code" styleClass="p-datatable-striped">
+    <p-table [value]="resourceTypes" dataKey="code" styleClass="p-datatable-striped">
         <ng-template pTemplate="header">
             <tr class="table_header_row">
                 <!-- Header for Type Text column -->
@@ -10,35 +10,35 @@
                 <th class="header_col">Actions</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+        <ng-template pTemplate="body" let-type let-rowIndex="rowIndex">
             <tr>
                 <!-- Column for item name input -->
                 <td class="req_specs">
                     <div class="req_details_all">
                         <!-- Input field for item name -->
-                        <input type="text" [disabled]="editingIndex != rowIndex && product.Id != 0"
-                            [(ngModel)]="product.name" />
+                        <input type="text" [disabled]="editingIndex != rowIndex && type.Id != 0"
+                            [(ngModel)]="type.Name" />
                     </div>
                 </td>
                 <!-- Column for action buttons -->
                 <td class="action_buttons">
                     <div class="btn_panel">
                         <!-- Display action buttons if item ID is not zero -->
-                        <div *ngIf="product.Id != 0">
+                        <div *ngIf="type.Id != 0">
                             <!-- Update button when in edit mode -->
                             <button *ngIf="editingIndex == rowIndex" class="button_blue"
-                                (click)="onClickUpdateItem()">Update</button>
+                                (click)="onClickUpdateItem(type)">Update</button>
                             <!-- Edit button when not in edit mode -->
                             <button *ngIf="editingIndex != rowIndex" class="button_blue"
                                 (click)="onClickEditItem(rowIndex)">Edit</button>
                         </div>
-                        <div *ngIf="product.Id != 0">
+                        <div *ngIf="type.Id != 0">
                             <!-- Delete button -->
-                            <button class="button_red" (click)="onClickDeleteItem(product)">Delete</button>
+                            <button class="button_red" (click)="onClickDeleteItem(type)">Delete</button>
                         </div>
-                        <div *ngIf="product.Id == 0">
+                        <div *ngIf="type.Id == 0">
                             <!-- Button to add a new type -->
-                            <button class="button_blue_l" (click)="onClickAddNew()">Add A New Type</button>
+                            <button class="button_blue_l" (click)="onClickAddNew(type)">Add A New Type</button>
                         </div>
                     </div>
                 </td>
@@ -47,9 +47,9 @@
     </p-table>
     <!-- Pagination section -->
     <p-paginator class="paginator_sec" #modulePaginator
-        [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
-        [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
-        [totalRecords]="(products.length > 0) ? products[0].TotalRecords : 0">
+        *ngIf="(resourceTypes && resourceTypes.length > 0 && resourceTypes[0].TotalRecords > 10)"
+        [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event)"
+        [totalRecords]="(resourceTypes.length > 0) ? resourceTypes[0].TotalRecords : 0">
     </p-paginator>
 </div>
 
