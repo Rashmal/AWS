@@ -13,6 +13,7 @@ import { Filter } from 'src/app/modules/common/core/filters';
 import { ClientRequirementFile } from '../../../core/clientRequirementFile';
 import { GlobalFileDetails } from '../../../core/globalFileDetails';
 import { HourlyOtherRates } from '../../../core/hourlyOtherRates';
+import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
 
 @Component({
     selector: 'app-client-requirements',
@@ -399,28 +400,46 @@ export class ClientRequirementsComponent implements OnInit {
 
     // On click event of removing the client requirement role
     removeClientRequirementRole(clientRequirement: ClientRequirement, roleIndex: number) {
-        // Removing the role based on the index
-        clientRequirement.RoleDetails.splice(roleIndex, 1);
-        // Calling the object model to access the service
-        this.clientModel.SetClientRequirement(clientRequirement, "UPDATE", this.selectedClientId, this.companyId).then(
-            (data) => {
-                // Getting the client requirements
-                this.GetAllClientRequirements();
+        // Open popup to confirm action
+        this.ref = this.dialogService.open(DeleteConfirmationComponent, {
+            header: 'Delete confirmation'
+        });
+        // Perform an action on close the popup
+        this.ref.onClose.subscribe((confirmation: boolean) => {
+            if (confirmation) {
+                // Removing the role based on the index
+                clientRequirement.RoleDetails.splice(roleIndex, 1);
+                // Calling the object model to access the service
+                this.clientModel.SetClientRequirement(clientRequirement, "UPDATE", this.selectedClientId, this.companyId).then(
+                    (data) => {
+                        // Getting the client requirements
+                        this.GetAllClientRequirements();
+                    }
+                );
+                // End of Calling the object model to access the service
             }
-        );
-        // End of Calling the object model to access the service
+        });
     }
 
     // On click event of removing the client requirement
     removeClientRequirement(clientRequirement: ClientRequirement) {
-        // Calling the object model to access the service
-        this.clientModel.SetClientRequirement(clientRequirement, "REMOVE", this.selectedClientId, this.companyId).then(
-            (data) => {
-                // Getting the client requirements
-                this.GetAllClientRequirements();
+        // Open popup to confirm action
+        this.ref = this.dialogService.open(DeleteConfirmationComponent, {
+            header: 'Delete confirmation'
+        });
+        // Perform an action on close the popup
+        this.ref.onClose.subscribe((confirmation: boolean) => {
+            if (confirmation) {
+                // Calling the object model to access the service
+                this.clientModel.SetClientRequirement(clientRequirement, "REMOVE", this.selectedClientId, this.companyId).then(
+                    (data) => {
+                        // Getting the client requirements
+                        this.GetAllClientRequirements();
+                    }
+                );
+                // End of Calling the object model to access the service
             }
-        );
-        // End of Calling the object model to access the service
+        });
     }
 
     // On change event of the client requirement ranking
@@ -468,26 +487,44 @@ export class ClientRequirementsComponent implements OnInit {
 
     // On click event of removing the client requirement file
     removeClientRequirementFile(clientRequirement: ClientRequirement, ClientRequirementFiles: ClientRequirementFile) {
-        // Calling the object model to access the service
-        this.clientModel.RemoveClientRequirementFile(ClientRequirementFiles.Id, this.selectedClientId, this.companyId).then(
-            (data) => {
-                // Getting the client requirements
-                this.GetAllClientRequirements();
+        // Open popup to confirm action
+        this.ref = this.dialogService.open(DeleteConfirmationComponent, {
+            header: 'Delete confirmation'
+        });
+        // Perform an action on close the popup
+        this.ref.onClose.subscribe((confirmation: boolean) => {
+            if (confirmation) {
+                // Calling the object model to access the service
+                this.clientModel.RemoveClientRequirementFile(ClientRequirementFiles.Id, this.selectedClientId, this.companyId).then(
+                    (data) => {
+                        // Getting the client requirements
+                        this.GetAllClientRequirements();
+                    }
+                );
+                // End of Calling the object model to access the service
             }
-        );
-        // End of Calling the object model to access the service
+        });
     }
 
     // On click event of removing the global file
     removeGlobalFile(globalFile: GlobalFileDetails) {
-        // Calling the object model to access the service
-        this.clientModel.RemoveGlobalFile(globalFile.Id, this.selectedClientId, this.companyId).then(
-            (data) => {
-                // Getting the client requirements
-                this.GetAllGlobalFiles();
+        // Open popup to confirm action
+        this.ref = this.dialogService.open(DeleteConfirmationComponent, {
+            header: 'Delete confirmation'
+        });
+        // Perform an action on close the popup
+        this.ref.onClose.subscribe((confirmation: boolean) => {
+            if (confirmation) {
+                // Calling the object model to access the service
+                this.clientModel.RemoveGlobalFile(globalFile.Id, this.selectedClientId, this.companyId).then(
+                    (data) => {
+                        // Getting the client requirements
+                        this.GetAllGlobalFiles();
+                    }
+                );
+                // End of Calling the object model to access the service
             }
-        );
-        // End of Calling the object model to access the service
+        });
     }
 
     // Getting all the hours and other rates list
@@ -551,14 +588,23 @@ export class ClientRequirementsComponent implements OnInit {
 
     // On click event of the removing hourly other rate
     removeHourlyOtherRates(hoursOthersRates: HourlyOtherRates) {
-        // Calling the object model to access the service
-        this.clientModel.SetOtherRateDetails(hoursOthersRates, "REMOVE", this.selectedClientId, this.companyId).then(
-            (data) => {
-                // Getting the client requirements
-                this.GetAllCHoursOthersRates();
+        // Open popup to confirm action
+        this.ref = this.dialogService.open(DeleteConfirmationComponent, {
+            header: 'Delete confirmation'
+        });
+        // Perform an action on close the popup
+        this.ref.onClose.subscribe((confirmation: boolean) => {
+            if (confirmation) {
+                // Calling the object model to access the service
+                this.clientModel.SetOtherRateDetails(hoursOthersRates, "REMOVE", this.selectedClientId, this.companyId).then(
+                    (data) => {
+                        // Getting the client requirements
+                        this.GetAllCHoursOthersRates();
+                    }
+                );
+                // End of Calling the object model to access the service
             }
-        );
-        // End of Calling the object model to access the service
+        });
     }
 
 }

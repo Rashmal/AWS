@@ -9,4 +9,5 @@ export interface ImageFiles {
     TotalRecords: number;
     CreatedByFullName: string;
     RotateXY: number;
+    AddedDate: Date;
 }

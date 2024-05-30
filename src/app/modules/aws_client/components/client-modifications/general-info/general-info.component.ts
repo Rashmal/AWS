@@ -26,6 +26,7 @@ import { aC } from '@fullcalendar/core/internal-common';
 import { CommonClientService } from '../../../services/common-client.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ExpenseAccountsComponent } from './expense-accounts/expense-accounts.component';
+import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
 
 interface City {
     name: string;
@@ -723,14 +724,23 @@ export class GeneralInfoComponent implements OnInit {
 
     // On delete function for contact
     onDeleteContact(contactObject: Contact) {
-        // Calling the object model to access the service
-        this.clientModel.SetContactDetails(contactObject, "REMOVE", this.selectedClientId, this.companyId).then(
-            (data) => {
-                /// Getting all the contacts list
-                this.getAllContactList();
+        // Open popup to confirm action
+        this.ref = this.dialogService.open(DeleteConfirmationComponent, {
+            header: 'Delete confirmation'
+        });
+        // Perform an action on close the popup
+        this.ref.onClose.subscribe((confirmation: boolean) => {
+            if (confirmation) {
+                // Calling the object model to access the service
+                this.clientModel.SetContactDetails(contactObject, "REMOVE", this.selectedClientId, this.companyId).then(
+                    (data) => {
+                        /// Getting all the contacts list
+                        this.getAllContactList();
+                    }
+                );
+                // End of Calling the object model to access the service
             }
-        );
-        // End of Calling the object model to access the service
+        });
     }
 
     // Getting all the contacts list
@@ -761,14 +771,23 @@ export class GeneralInfoComponent implements OnInit {
 
     // On delete function for social media
     onDeleteSocialMedia(socialMediaObject: SocialMedia) {
-        // Calling the object model to access the service
-        this.clientModel.SetSocialMediaDetails(socialMediaObject, "REMOVE", this.selectedClientId, this.companyId).then(
-            (data) => {
-                // Getting all the social media list
-                this.getAllSocialMediaList();
+        // Open popup to confirm action
+        this.ref = this.dialogService.open(DeleteConfirmationComponent, {
+            header: 'Delete confirmation'
+        });
+        // Perform an action on close the popup
+        this.ref.onClose.subscribe((confirmation: boolean) => {
+            if (confirmation) {
+                // Calling the object model to access the service
+                this.clientModel.SetSocialMediaDetails(socialMediaObject, "REMOVE", this.selectedClientId, this.companyId).then(
+                    (data) => {
+                        // Getting all the social media list
+                        this.getAllSocialMediaList();
+                    }
+                );
+                // End of Calling the object model to access the service
             }
-        );
-        // End of Calling the object model to access the service
+        });
     }
 
     // Getting all the social media list

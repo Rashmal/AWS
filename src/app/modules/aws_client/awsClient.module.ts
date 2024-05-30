@@ -20,6 +20,7 @@ import { GlobalRequirementsComponent } from './components/client-modifications/c
 import { ConfigResourceTypeComponent } from './components/client-modifications/images-files-docs/config-resource-type/config-resource-type.component';
 import { ExpenseAccountsComponent } from './components/client-modifications/general-info/expense-accounts/expense-accounts.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { AuthenticationModule } from '../authentication/authentication.module';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
         InputSwitchModule,
         EditorModule,
         ChipsModule,
-        RadioButtonModule
+        RadioButtonModule,
+        AuthenticationModule
     ],
 })
-export class AWSClientModule {}
+export class AWSClientModule { }
