@@ -4,4 +4,5 @@ export interface GlobalFileDetails {
     FileUrl: string;
     FileType: string;
     TotalRecords: number;
+    LocalPath: string;
 }

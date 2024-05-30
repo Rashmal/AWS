@@ -14,6 +14,7 @@ import { ClientRequirementFile } from '../../../core/clientRequirementFile';
 import { GlobalFileDetails } from '../../../core/globalFileDetails';
 import { HourlyOtherRates } from '../../../core/hourlyOtherRates';
 import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
+import { saveAs } from 'file-saver';
 
 @Component({
     selector: 'app-client-requirements',
@@ -605,6 +606,30 @@ export class ClientRequirementsComponent implements OnInit {
                 // End of Calling the object model to access the service
             }
         });
+    }
+
+    // On click event of downloading the attachment file
+    downloadClientRequirementAttachment(item: ClientRequirementFile) {
+        // Calling the object model to access the service
+        this.clientModel.DownloadFile(item.FileUrl, item.FileName).then(
+            (blob) => {
+                // specify a default file name and extension
+                saveAs(blob, item.FileName);
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // On click event of downloading the global file
+    downloadGlobalFileAttachment(globalFile: GlobalFileDetails) {
+        // Calling the object model to access the service
+        this.clientModel.DownloadFile(globalFile.FileUrl, globalFile.FileName).then(
+            (blob) => {
+                // specify a default file name and extension
+                saveAs(blob, globalFile.FileName);
+            }
+        );
+        // End of Calling the object model to access the service
     }
 
 }

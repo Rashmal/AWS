@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { API$DOMAIN } from 'src/app/core/apiConfigurations';
 import { Filter } from '../../common/core/filters';
-import { catchError } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { ErrorMessage } from '../../common/core/errorMessage';
 import { ClientCustomer, DisplayClientDetails } from '../core/client';
 import { Contact } from '../core/contact';
@@ -52,6 +52,7 @@ export class ClientService {
   private GetGlobalClientRequirementUrl = API$DOMAIN + 'api/Client/GetGlobalClientRequirement';
   private GetClientRequirementUrl = API$DOMAIN + 'api/Client/GetClientRequirement';
   private GetAllSocialMediaListUrl = API$DOMAIN + 'api/Client/GetAllSocialMediaList';
+  private GetFileBlobDataUrl = API$DOMAIN + 'api/Common/GetFileBlobData';
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
@@ -507,6 +508,17 @@ export class ClientService {
       })
     );
   }
+
+  // Downloading the file
+  DownloadFile(url: string, fileName: string): Observable<Blob> {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("fileUrl", url.toString())
+      .set("fileName", fileName.toString());
+
+    return this.http.get(this.GetFileBlobDataUrl + "?fileUrl=" + url.toString() + "&" + "fileName=" + fileName.toString(), { responseType: 'blob' });
+  }
+
 
 
   //----------- Common methods------------------//

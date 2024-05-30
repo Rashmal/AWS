@@ -29,6 +29,7 @@
         "@microsoft/signalr": "^8.0.0",
         "bootstrap": "^5.3.3",
         "chart.js": "^3.3.2",
+        "file-saver": "^2.0.5",
         "font-awesome": "^4.7.0",
         "generator-karma": "^2.0.1",
         "grunt-karma": "^4.0.2",

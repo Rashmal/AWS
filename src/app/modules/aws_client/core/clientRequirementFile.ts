@@ -3,4 +3,5 @@ export interface ClientRequirementFile {
     FileName: string;
     FileUrl: string;
     FileType: string;
+    LocalPath: string;
 }
