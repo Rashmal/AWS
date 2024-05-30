@@ -289,13 +289,13 @@ export class ClientService {
   }
 
   // Upload global file
-  UploadGlobalFile(customerId: number, companyId: number) {
+  UploadGlobalFile(files: any, customerId: number, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("companyId", companyId.toString())
       .set("customerId", customerId.toString());
 
-    return this.http.get<string>(this.UploadGlobalFileUrl, { params: my_params }).pipe(
+    return this.http.post<string>(this.UploadGlobalFileUrl, files, { params: my_params }).pipe(
       catchError(error => {
         return this.handleError('UploadGlobalFile', error)
       })
@@ -419,7 +419,7 @@ export class ClientService {
   }
 
   // Setting the client requirement file
-  SetClientRequirementFile(clientRequirementId: number, actionType: string, customerId: number, companyId: number) {
+  SetClientRequirementFile(clientRequirementId: number, actionType: string, customerId: number, companyId: number, files: any) {
     // Setting the params
     let my_params = new HttpParams()
       .set("companyId", companyId.toString())
@@ -427,7 +427,7 @@ export class ClientService {
       .set("actionType", actionType.toString())
       .set("clientRequirementId", clientRequirementId.toString());
 
-    return this.http.post<string>(this.SetClientRequirementFileUrl, { params: my_params }).pipe(
+    return this.http.post<string>(this.SetClientRequirementFileUrl, files, { params: my_params }).pipe(
       catchError(error => {
         return this.handleError('SetClientRequirementFile', error)
       })

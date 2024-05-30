@@ -256,9 +256,9 @@ export class ClientModel {
     }
 
     // Upload global file
-    UploadGlobalFile(customerId: number, companyId: number) {
+    UploadGlobalFile(files: any, customerId: number, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.clientService.UploadGlobalFile(customerId, companyId).subscribe(
+            this.allSubscriptions.push(this.clientService.UploadGlobalFile(files, customerId, companyId).subscribe(
                 data => {
                     let returnData = <string>data;
                     // Resolve the promise
@@ -391,9 +391,9 @@ export class ClientModel {
     }
 
     // Setting the client requirement file
-    SetClientRequirementFile(clientRequirementId: number, actionType: string, customerId: number, companyId: number) {
+    SetClientRequirementFile(clientRequirementId: number, actionType: string, customerId: number, companyId: number, files: any) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.clientService.SetClientRequirementFile(clientRequirementId, actionType, customerId, companyId).subscribe(
+            this.allSubscriptions.push(this.clientService.SetClientRequirementFile(clientRequirementId, actionType, customerId, companyId, files).subscribe(
                 data => {
                     let returnData = <string>data;
                     // Resolve the promise

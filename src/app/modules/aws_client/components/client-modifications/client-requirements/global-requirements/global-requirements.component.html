@@ -1,50 +1,74 @@
 <!--delete confirmation-->
 <div class="popup_content">
-    <!--Message-->
+    <!-- When the client requirements are empty -->
+    <div *ngIf="globalClientRequirements.length == 0">
+        <span>There are no global client requirements</span>
+    </div>
+    <!-- End of When the client requirements are empty -->
 
-    <p-table [value]="products" dataKey="code" styleClass="p-datatable-striped">
+    <!-- Table data section -->
+    <p-table [value]="globalClientRequirements" dataKey="code" styleClass="p-datatable-striped">
+        <!-- Table header section -->
         <ng-template pTemplate="header">
             <tr class="table_header_row">
-
-
                 <th class="header_col">Global Client Requirements</th>
-
                 <th class="header_col">Actions</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product>
+        <!-- End of Table header section -->
+
+        <!-- Table body section -->
+        <ng-template pTemplate="body" let-globalClientRequirement>
             <tr>
-
-
                 <td class="req_specs">
                     <div class="req_details_all">
-                        <div class="req_title"> {{product.name}}</div>
-                        <div class="req_details"> {{product.name}}</div>
-                        <div class="assinged_roles"> {{product.name}}</div>
+                        <!-- Displaying the title -->
+                        <div class="req_title"> {{globalClientRequirement.Title}}</div>
+                        <!-- End of Displaying the title -->
+
+                        <!-- Displaying the additional data -->
+                        <div class="req_details">
+                            <div [innerHtml]="globalClientRequirement.AdditionalData"></div>
+                        </div>
+                        <!-- End of Displaying the additional data -->
+
+                        <!-- Displaying the assigned roles -->
+                        <div class="assinged_roles">
+                            <!-- Loop through the roles -->
+                            <div *ngFor="let crRole of globalClientRequirement.RoleDetails">
+                                <!-- Display the role name -->
+                                <span>{{crRole.Name}}</span>
+                                <!-- End of Display the role name -->
+                            </div>
+                            <!-- End of Loop through the roles -->
+                        </div>
+                        <!-- End of Displaying the assigned roles -->
                     </div>
                 </td>
                 <td class="action_buttons">
+                    <!-- Buttons section -->
                     <div class="btn_panel">
                         <div>
-                            <button class="button_blue">Add To Local</button>
+                            <button class="button_blue"
+                                (click)="addToLocalClientRequirement(globalClientRequirement)">Add To Local</button>
                         </div>
                         <div>
-                            <button class="button_red">Delete</button>
+                            <button class="button_red"
+                                (click)="deleteGlobalClientRequirement(globalClientRequirement)">Delete</button>
                         </div>
-                        
-                       
                     </div>
-
+                    <!-- End of Buttons section -->
                 </td>
-
             </tr>
         </ng-template>
+        <!-- End of Table body section -->
     </p-table>
+    <!-- End of Table data section -->
 
     <!-- Pagination section -->
     <p-paginator class="paginator_sec" #modulePaginator
         [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
-        [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
+        [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event)"
         [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
     <!-- End of Pagination section -->
 </div>
@@ -54,8 +78,6 @@
 <div class="button_panel_outer">
     <!--Button panel-->
     <div class="button_panel">
-
-
         <button class="button_blue" (click)="onClickCancel()">Close</button>
     </div>
     <!--End of Button panel-->

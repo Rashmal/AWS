@@ -69,19 +69,11 @@
                                         </div>
                                         <!-- End of When the files is empty -->
 
-                                        <!--Upload button-->
-                                        <div class="action_button_upl">
-                                            <button (click)="clickOnUploadRequirementFile(product)"
-                                                [disabled]="selectedClientId == 0" class="yellow_btn">Upload
-                                                Files</button>
-                                        </div>
-                                        <!--End of Upload button-->
-
                                         <!--File List-->
                                         <div *ngFor="let item of clientRequirement.ClientRequirementFiles"
                                             class="uploaded_files_list">
                                             <!-- Display label section -->
-                                            <div>{{item.name}}</div>
+                                            <div>{{item.FileName}}</div>
                                             <!-- End of Display label section -->
 
                                             <!-- Buttons section -->
@@ -93,7 +85,8 @@
                                                 <!-- End of Download button -->
 
                                                 <!-- Delete button -->
-                                                <button class="red_btn">
+                                                <button class="red_btn"
+                                                    (click)="removeClientRequirementFile(clientRequirement,item)">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
                                                 <!-- End of Delete button -->
@@ -101,6 +94,14 @@
                                             <!-- End of Buttons section -->
                                         </div>
                                         <!--End of File List-->
+
+                                        <!--Upload button-->
+                                        <div class="action_button_upl">
+                                            <button (click)="clickOnUploadRequirementFile(clientRequirement)"
+                                                [disabled]="selectedClientId == 0" class="yellow_btn">Upload
+                                                Files</button>
+                                        </div>
+                                        <!--End of Upload button-->
 
                                     </td>
                                     <!--End of Uploaded file section-->
@@ -193,7 +194,7 @@
 
                     <!-- Global files section -->
                     <div class="col-12 col-lg-3">
-                        <p-table class="contacts_tbl" [value]="products" dataKey="id">
+                        <p-table class="contacts_tbl" [value]="globalFilesList" dataKey="id">
                             <ng-template pTemplate="header">
                                 <tr class="table_header_row">
 
@@ -203,19 +204,19 @@
 
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-product let-editing="editing">
+                            <ng-template pTemplate="body" let-globalFile let-editing="editing">
                                 <tr class="global_file_list">
                                     <td>
                                         <!--Global file item div-->
                                         <div class="global_file_div">
                                             <div class="global_file">
-                                                <span>{{product.name}}</span>
+                                                <span>{{globalFile.FileName}}</span>
                                             </div>
                                             <div class="action_button_glbl">
                                                 <button class="blue_btn" [disabled]="selectedClientId == 0">
                                                     <i class="fa fa-download" aria-hidden="true"></i>
                                                 </button>
-                                                <button class="red_btn" [disabled]="selectedClientId == 0">
+                                                <button class="red_btn" [disabled]="selectedClientId == 0" (click)="removeGlobalFile(globalFile)">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -230,9 +231,10 @@
                         </p-table>
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
-                            [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
-                            [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event,'GLOBAL$FILES')"
-                            [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
+                            [ngClass]="(globalFilesList && globalFilesList.length > 0 && globalFilesList[0].TotalRecords > 10)?'':'display_hide'"
+                            [rows]="filterGlobalFiles.RecordsPerPage"
+                            (onPageChange)="onPageChange($event,'GLOBAL$FILES')"
+                            [totalRecords]="(globalFilesList.length>0)? globalFilesList[0].TotalRecords:0"></p-paginator>
                         <!-- End of Pagination section -->
                         <button class="long_txt_btn full_width" (click)="clickOnUploadGlobalFile()"
                             [disabled]="selectedClientId == 0">Add New Global
