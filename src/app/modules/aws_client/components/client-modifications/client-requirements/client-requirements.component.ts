@@ -499,7 +499,7 @@ export class ClientRequirementsComponent implements OnInit {
                 this.hoursOthersRatesList = <HourlyOtherRates[]>data;
 
                 // Check if the list is empty
-                if (this.hoursOthersRatesList.length == 0) {
+                if (this.hoursOthersRatesList.length == 0 || this.hoursOthersRatesList[this.hoursOthersRatesList.length - 1].Id !== 0) {
                     // Initializing the object
                     this.hoursOthersRatesList.push(
                         {
@@ -519,12 +519,14 @@ export class ClientRequirementsComponent implements OnInit {
 
     // Update the hours others rates object
     updateHoursOthersRatesObject(currentIndex: number, hourlyOtherRates: HourlyOtherRates) {
+        debugger
         // Check the action state
         let actionState = (hourlyOtherRates.Id == 0) ? "NEW" : "UPDATE";
 
         // Calling the object model to access the service
         this.clientModel.SetOtherRateDetails(hourlyOtherRates, actionState, this.selectedClientId, this.companyId).then(
             (data) => {
+                debugger
                 // Setting the business address Id
                 this.hoursOthersRatesList[currentIndex].Id = <number>data;
 
@@ -542,7 +544,16 @@ export class ClientRequirementsComponent implements OnInit {
                     );
                 }
                 // End of Check if the action type is NEW
+            }
+        );
+        // End of Calling the object model to access the service
+    }
 
+    // On click event of the removing hourly other rate
+    removeHourlyOtherRates(hoursOthersRates: HourlyOtherRates) {
+        // Calling the object model to access the service
+        this.clientModel.SetOtherRateDetails(hoursOthersRates, "REMOVE", this.selectedClientId, this.companyId).then(
+            (data) => {
                 // Getting the client requirements
                 this.GetAllCHoursOthersRates();
             }
