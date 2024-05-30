@@ -89,10 +89,10 @@ export class ConfigResourceTypeComponent implements OnInit {
                 this.selectedClientId,
                 0
             )
-            .then((data: ResourceType[]) => {
-                if (data) {
+            .then((data: number) => {
+                
                     this.getAllResourceFileTypes();
-                }
+                
             });
     }
 

@@ -346,11 +346,12 @@ export class ClientService {
   }
 
   // Setting the image doc files
-  UploadImageDocFile(files: any, resourceTypeId: number, customerId: number, companyId: number) {
+  UploadImageDocFile(files: any, resourceTypeId: number, customerId: number, companyId: number, staffId: string) {
     // Setting the params
     let my_params = new HttpParams()
       .set("companyId", companyId.toString())
       .set("customerId", customerId.toString())
+      .set("staffId", staffId.toString())
       .set("resourceTypeId", resourceTypeId.toString());
 
     return this.http.post<string>(this.UploadImageDocFileUrl, files, { params: my_params }).pipe(
@@ -361,10 +362,11 @@ export class ClientService {
   }
 
   // Updating the image doc files
-  UpdateImageDocFile(imageFiles: ImageFiles, customerId: number, companyId: number) {
+  UpdateImageDocFile(imageFiles: ImageFiles, customerId: number, companyId: number, staffId: string) {
     // Setting the params
     let my_params = new HttpParams()
       .set("companyId", companyId.toString())
+      .set("staffId", staffId.toString())
       .set("customerId", customerId.toString());
 
     return this.http.post<number>(this.UpdateImageDocFileUrl, imageFiles, { params: my_params }).pipe(

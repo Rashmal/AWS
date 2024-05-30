@@ -12,7 +12,7 @@
                     <label class="input_lbl">Select A Type To Upload:</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown appendTo="body" [options]="resourceTypes" optionLabel="Name" class="full_width" placeholder="Select an option" />
+                    <p-dropdown appendTo="body" [options]="resourceTypes" [(ngModel)]="selectedResourceType" optionLabel="Name" class="full_width" placeholder="Select an option" />
                     <!--End of Input area-->
                     <button class="button_blue_s" (click)="onClickConfigResource()"><i class="fa fa-cog"
                             aria-hidden="true"></i></button>
@@ -123,20 +123,20 @@
                             <tr>
                                 <td class="table_col">
 
-                                    <div class="created_by">Created by {{!fileItem.CreatedBy && fileItem.CreatedBy != '' ? fileItem.CreatedBy : 'Unavailable'}} at {{!fileItem.CreatedDate && fileItem.CreatedDate != '' ? fileItem.CreatedDate : currentDate | date : 'MMM d, y, h:mm:ss a'}} </div>
+                                    <div class="created_by">Created by {{!fileItem.CreatedByFullName && fileItem.CreatedByFullName != '' ? fileItem.CreatedByFullName : 'Unavailable'}} at {{!fileItem.CreatedDate && fileItem.CreatedDate != '' ? fileItem.CreatedDate : currentDate | date : 'MMM d, y, h:mm:ss a'}} </div>
                                     <div class="label_input_div">
                                         <label class="lbl_class">Caption:</label>
-                                        <textarea class="input_class" [(ngModel)]="fileItem.Caption"></textarea>
+                                        <textarea class="input_class" [(ngModel)]="fileItem.Caption" (blur)="onChangeImageFileProperty(fileItem)"></textarea>
                                     </div>
                                     <div class="label_input_div">
                                         <label class="lbl_class">Internal Notes:</label>
-                                        <textarea class="input_class"  [(ngModel)]="fileItem.InternalNotes"></textarea>
+                                        <textarea class="input_class"  [(ngModel)]="fileItem.InternalNotes" (blur)="onChangeImageFileProperty(fileItem)"></textarea>
                                     </div>
                                     <div class="label_input_div_spe">
                                         <label class="lbl_class">Resource Type:</label>
                                         <div class="input_drp">
                                             <!--Config Types-->
-                                            <p-dropdown appendTo="body" [options]="resourceTypes" [(ngModel)]="fileItem.ResourceType" optionLabel="Name"
+                                            <p-dropdown appendTo="body" [options]="resourceTypes" [(ngModel)]="fileItem.ResourceType" (onChange)="onChangeImageFileProperty(fileItem)" optionLabel="Name"
                                                 class="full_width margin_r10" placeholder="Select an option" />
                                             <!--End of Config Types-->
                                             <!--Setting icon-->
@@ -151,13 +151,13 @@
                                     <div class="action_button_div">
                                         <button (click)="imagePreviewer(fileItem)" class="green_btn"><i class="fa fa-eye"
                                                 aria-hidden="true"></i></button>
-                                        <button class="yellow_btn"><i class="fa fa-undo"
+                                        <button class="yellow_btn" (click)="rotateImage(fileItem, 'ACLW')"><i class="fa fa-undo"
                                                 aria-hidden="true"></i></button>
-                                        <button class="yellow_btn"><i class="fa fa-repeat"
+                                        <button class="yellow_btn" (click)="rotateImage(fileItem, 'CLW')"><i class="fa fa-repeat"
                                                 aria-hidden="true"></i></button>
                                         <button class="blue_btn"><i class="fa fa-download"
                                                 aria-hidden="true"></i></button>
-                                        <button class="red_btn"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        <button class="red_btn" (click)="removeImageDocFile(fileItem)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </div>
 
                                 </td>
@@ -184,7 +184,7 @@
                         <!-- Image element with data binding for the source and transform style -->
                         <!-- (wheel) event binding for zooming functionality -->
                         <div class="image-container">
-                            <img [src]="imageSrc" alt="Preview" class="preview-image" (wheel)="onMouseWheel($event)"
+                            <img [src]="imageSrc" alt="Preview" [style.rotate]="rotateAngle + 'deg'" class="preview-image" (wheel)="onMouseWheel($event)"
                                 (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)"
                                 (mousemove)="onMouseMove($event)" [style.transform]="transform"
                                 [style.left.px]="position.x" [style.top.px]="position.y" />

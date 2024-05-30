@@ -316,9 +316,9 @@ export class ClientModel {
     }
 
     // Setting the image doc files
-    UploadImageDocFile(files: any, resourceTypeId: number, customerId: number, companyId: number) {
+    UploadImageDocFile(files: any, resourceTypeId: number, customerId: number, companyId: number, staffId: string) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.clientService.UploadImageDocFile(files, resourceTypeId, customerId, companyId).subscribe(
+            this.allSubscriptions.push(this.clientService.UploadImageDocFile(files, resourceTypeId, customerId, companyId, staffId).subscribe(
                 data => {
                     let returnData = <string>data;
                     // Resolve the promise
@@ -331,9 +331,9 @@ export class ClientModel {
     }
 
     // Updating the image doc files
-    UpdateImageDocFile(imageFiles: ImageFiles, customerId: number, companyId: number) {
+    UpdateImageDocFile(imageFiles: ImageFiles, customerId: number, companyId: number, staffId: string) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.clientService.UpdateImageDocFile(imageFiles, customerId, companyId).subscribe(
+            this.allSubscriptions.push(this.clientService.UpdateImageDocFile(imageFiles, customerId, companyId, staffId).subscribe(
                 data => {
                     let returnData = <number>data;
                     // Resolve the promise
