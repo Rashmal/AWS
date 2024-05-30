@@ -252,7 +252,7 @@ export class GeneralInfoComponent implements OnInit {
         this.InitClientRatingList();
         // Initializing the term types list
         this.InitTermTypeList();
-        
+
         // Initializing the day details list
         this.InitDayDetailsList();
         // Initializing the contact type list
@@ -467,7 +467,7 @@ export class GeneralInfoComponent implements OnInit {
     }
 
     //On click expense account dropdown to get full account list
-    onClickExpAccountDD(){
+    onClickExpAccountDD() {
         // Open popup to select user roles
         this.ref = this.dialogService.open(ExpenseAccountsComponent, {
             header: 'Select An Expense Account',
@@ -486,7 +486,7 @@ export class GeneralInfoComponent implements OnInit {
 
     }
 
-   
+
 
     // Initializing the day details list
     InitDayDetailsList() {
@@ -605,7 +605,6 @@ export class GeneralInfoComponent implements OnInit {
         // Calling the object model to access the service
         this.clientModel.SetClientCustomer(this.clientCustomer, this.overallCookieInterface.GetUserId(), actionState, this.companyId).then(
             (data) => {
-                debugger
                 // Assign new client Id
                 this.selectedClientId = <number>data;
                 // Check if the action state is new
@@ -680,6 +679,8 @@ export class GeneralInfoComponent implements OnInit {
             (data) => {
                 // Setting the business address Id
                 this.contactList[currentIndex].Id = <number>data;
+                /// Getting all the contacts list
+                this.getAllContactList();
             }
         );
         // End of Calling the object model to access the service
@@ -713,6 +714,8 @@ export class GeneralInfoComponent implements OnInit {
             (data) => {
                 // Setting the business address Id
                 this.socialMediaList[currentIndex].Id = <number>data;
+                // Getting all the social media list
+                this.getAllSocialMediaList();
             }
         );
         // End of Calling the object model to access the service

@@ -1,7 +1,7 @@
 <!--Gen info main-->
 <div class="card flex justify-content-center gen_info_main">
     <!-- Error message -->
-    <div class="col-12" *ngIf="!clientCustomer.BusinessName">
+    <div class="col-12" *ngIf="(!clientCustomer.BusinessName) && modificationMode !== 'VIEW'">
         <span class="error_label">Business name/surname is mandatory in order to fill the rest of the fields</span>
     </div>
     <!-- End of Error message -->
@@ -18,7 +18,7 @@
                     <!--End of Label-->
                     <!--Input area-->
                     <input class="input_field" type="text" [(ngModel)]="clientCustomer.BusinessName"
-                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                        [disabled]="modificationMode == 'VIEW'" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -30,7 +30,8 @@
                     <!--End of Label-->
                     <!--Input area-->
                     <input class="input_field" type="text" [(ngModel)]="clientCustomer.FirstName"
-                        [disabled]="!clientCustomer.BusinessName" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -41,7 +42,8 @@
                     <!--End of Label-->
                     <!--Input area-->
                     <input class="input_field" type="text" [(ngModel)]="clientCustomer.MiddleInitial"
-                        [disabled]="!clientCustomer.BusinessName" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -53,7 +55,8 @@
                     <!--Input area-->
                     <p-dropdown [options]="displayBusinessNumberTypeList" class="width_50" autoWidth="false"
                         placeholder="Select an option" [(ngModel)]="clientCustomer.BusinessNumberType.Id"
-                        [disabled]="!clientCustomer.BusinessName" (onChange)="onBlurEvent('CLIENT$CUSTOMER')" />
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                        (onChange)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -64,7 +67,8 @@
                     <!--End of Label-->
                     <!--Input area-->
                     <input class="input_field" type="text" [(ngModel)]="clientCustomer.BusinessNumber"
-                        [disabled]="!clientCustomer.BusinessName" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -81,7 +85,8 @@
                     <label class="input_lbl">Billing Name (if any)</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="text"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="businessAddress.BuildingName" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
                 </div>
@@ -93,7 +98,8 @@
                     <label class="input_lbl">Street Number and Name</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="text"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="businessAddress.StreetName" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
                 </div>
@@ -104,7 +110,8 @@
                     <label class="input_lbl">Suburb</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="text"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="businessAddress.Suburb" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
                 </div>
@@ -115,7 +122,8 @@
                     <label class="input_lbl">Pcode / Zip</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="text"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="businessAddress.PostalCode" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
                 </div>
@@ -126,7 +134,8 @@
                     <label class="input_lbl">State / Territory</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="text"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="businessAddress.State" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
                 </div>
@@ -138,9 +147,10 @@
                     <label class="input_lbl">Country</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayCountryList" class="width_50" autoWidth="false" placeholder="Select an option"
-                        [disabled]="!clientCustomer.BusinessName" [(ngModel)]="businessAddress.Country.Id"
-                        (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
+                    <p-dropdown [options]="displayCountryList" class="width_50" autoWidth="false"
+                        placeholder="Select an option"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                        [(ngModel)]="businessAddress.Country.Id" (onChange)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -156,7 +166,8 @@
                     <label class="input_lbl">Office Job</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="text"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.OfficeJob" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
                 </div>
@@ -168,7 +179,8 @@
                     <label class="input_lbl">Work Credit</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="text"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.WorkCredit" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
                 </div>
@@ -180,7 +192,8 @@
                     <!--End of Label-->
                     <!--Input area-->
                     <p-dropdown [options]="displayPriceClassificationList" class="width_50" autoWidth="false"
-                        placeholder="Select an option" [disabled]="!clientCustomer.BusinessName"
+                        placeholder="Select an option"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.PriceClassification.Id"
                         (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -192,8 +205,10 @@
                     <label class="input_lbl">Client Rating</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayClientRatingList" class="width_50" autoWidth="false" placeholder="Select an option"
-                        [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.RatingDetails.Id"
+                    <p-dropdown [options]="displayClientRatingList" class="width_50" autoWidth="false"
+                        placeholder="Select an option"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                        [(ngModel)]="relationshipDetails.RatingDetails.Id"
                         (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
                 </div>
@@ -205,7 +220,8 @@
                     <!--End of Label-->
                     <!--Input area-->
                     <p-dropdown [options]="displayPriceClassificationList" class="width_50" autoWidth="false"
-                        placeholder="Select an option" [disabled]="!clientCustomer.BusinessName"
+                        placeholder="Select an option"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.ClientSize.Id"
                         (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -218,8 +234,10 @@
                     <label class="input_lbl">Client Term Type</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayTermTypeList" class="width_50" autoWidth="false" placeholder="Select an option"
-                        [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.ClientTermType.Id"
+                    <p-dropdown [options]="displayTermTypeList" class="width_50" autoWidth="false"
+                        placeholder="Select an option"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                        [(ngModel)]="relationshipDetails.ClientTermType.Id"
                         (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
                 </div>
@@ -231,7 +249,8 @@
                     <label class="input_lbl">Client Terms</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="text"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.ClientTerms" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
                 </div>
@@ -242,7 +261,8 @@
                     <label class="input_lbl">Default Deposit</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="text"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.DefaultDeposit" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
                 </div>
@@ -253,7 +273,8 @@
                     <label class="input_lbl">Month Day Alert</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="text"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.MonthDayAlert" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
                 </div>
@@ -264,7 +285,8 @@
                     <label class="input_lbl">Financial Notes</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <textarea class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                    <textarea class="input_field" type="text"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.FinancialNotes"
                         (blur)="onBlurEvent('RELATIONSHIP$DETAILS')"></textarea>
                     <!--End of Input area-->
@@ -277,9 +299,11 @@
                     <label class="input_lbl">Supplier Term Type</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayTermTypeList" class="width_50" autoWidth="false" placeholder="Select an option"
-                        [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.SupplierTermType.Id"
-                        (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
+                    <p-dropdown [options]="displayTermTypeList" class="width_50" autoWidth="false"
+                        placeholder="Select an option"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                        [(ngModel)]="relationshipDetails.SupplierTermType.Id"
+                        (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -290,7 +314,8 @@
                     <label class="input_lbl">Supplier Terms</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="text"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.SupplierTerms" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
                 </div>
@@ -301,7 +326,7 @@
                     <label class="input_lbl">Is Supplier</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-inputSwitch [disabled]="!clientCustomer.BusinessName"
+                    <p-inputSwitch [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.IsSupplier" (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
                 </div>
@@ -312,14 +337,17 @@
                     <label class="input_lbl">Expense Account</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    
-                   
-                    <button class="exp_acc_ddp_btn" [disabled]="!clientCustomer.BusinessName" (click)="onClickExpAccountDD()">
-                        <div>{{relationshipDetails.ExpenseAccount.Name == '' ? 'Select an option' : relationshipDetails.ExpenseAccount.Name }}</div>
-                        
+
+
+                    <button class="exp_acc_ddp_btn"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                        (click)="onClickExpAccountDD()">
+                        <div>{{relationshipDetails.ExpenseAccount.Name == '' ? 'Select an option' :
+                            relationshipDetails.ExpenseAccount.Name }}</div>
+
                         <i class="fa fa-angle-down" aria-hidden="true"></i>
                     </button>
-                    
+
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -329,7 +357,7 @@
                     <label class="input_lbl">Is Subcontractor</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-inputSwitch [(ngModel)]="checked" [disabled]="!clientCustomer.BusinessName"
+                    <p-inputSwitch [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.IsSubcontractor"
                         (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -342,7 +370,7 @@
                     <label class="input_lbl">Is Client</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-inputSwitch [(ngModel)]="checked" [disabled]="!clientCustomer.BusinessName"
+                    <p-inputSwitch [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.IsClient" (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
                 </div>
@@ -354,7 +382,7 @@
                     <label class="input_lbl">Auto Progress Report</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-inputSwitch [(ngModel)]="checked" [disabled]="!clientCustomer.BusinessName"
+                    <p-inputSwitch [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.IsAutoProgressReport"
                         (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -366,8 +394,10 @@
                     <label class="input_lbl">Report Day</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown [options]="displayDayDetailsList" class="width_50" autoWidth="false" placeholder="Select an option"
-                        [disabled]="!clientCustomer.BusinessName" [(ngModel)]="relationshipDetails.DayDetails.Id"
+                    <p-dropdown [options]="displayDayDetailsList" class="width_50" autoWidth="false"
+                        placeholder="Select an option"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                        [(ngModel)]="relationshipDetails.DayDetails.Id"
                         (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
                 </div>
@@ -378,7 +408,8 @@
                     <label class="input_lbl">Next Report Date / Time</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="datetime-local" [disabled]="!clientCustomer.BusinessName"
+                    <input class="input_field" type="datetime-local"
+                        [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.NextReportDateTime"
                         (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -416,24 +447,27 @@
                             <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
                                 <tr>
                                     <td>
-                                        <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                                        <input class="input_field" type="text"
+                                            [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             [(ngModel)]="contact.Name"
                                             (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
                                     </td>
                                     <td>
-                                        <p-dropdown [options]="displayContactTypeList" class="width_50" autoWidth="false"
-                                            appendTo="body" placeholder="Select an option"
-                                            [disabled]="!clientCustomer.BusinessName"
+                                        <p-dropdown [options]="displayContactTypeList" class="width_50"
+                                            autoWidth="false" appendTo="body" placeholder="Select an option"
+                                            [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             [(ngModel)]="contact.ContactType.Id"
                                             (onChange)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
                                     </td>
                                     <td>
-                                        <input class="input_field" type="text" [disabled]="!clientCustomer.BusinessName"
+                                        <input class="input_field" type="text"
+                                            [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             [(ngModel)]="contact.ContactValue"
                                             (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
                                     </td>
                                     <td class="action_button">
-                                        <button class="red_btn" [disabled]="!clientCustomer.BusinessName"
+                                        <button class="red_btn"
+                                            [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             (click)="onDeleteContact(contact)">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </button>
@@ -444,7 +478,7 @@
 
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
-                            [ngClass]="(contactList && contactList.length > 0 && contactList[0].TotalRecords > 10)?'':'display_hide'"
+                            *ngIf="(contactList && contactList.length > 0 && contactList[0].TotalRecords > 10)"
                             [rows]="contactFilter.RecordsPerPage" (onPageChange)="onPageChange($event, 'CONTACT')"
                             [totalRecords]="(contactList.length>0)? contactList[0].TotalRecords:0"></p-paginator>
                         <!-- End of Pagination section -->
@@ -477,19 +511,21 @@
                             <ng-template pTemplate="body" let-socialMedia let-rowSMIndex="rowIndex">
                                 <tr>
                                     <td>
-                                        <p-dropdown [options]="displaySocialMediaTypeList" class="width_50" autoWidth="false"
-                                            appendTo="body" placeholder="Select an option"
-                                            [disabled]="!clientCustomer.BusinessName"
+                                        <p-dropdown [options]="displaySocialMediaTypeList" class="width_50"
+                                            autoWidth="false" appendTo="body" placeholder="Select an option"
+                                            [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             [(ngModel)]="socialMedia.SocialMediaType.Id"
                                             (onChange)="onBlurEvent('SOCIAL$MEDIA$DETAILS',rowSMIndex,null,socialMedia)" />
                                     </td>
                                     <td>
                                         <input class="input_field " type="text"
-                                            [disabled]="!clientCustomer.BusinessName" [(ngModel)]="socialMedia.Setting"
+                                            [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                                            [(ngModel)]="socialMedia.Setting"
                                             (blur)="onBlurEvent('SOCIAL$MEDIA$DETAILS',rowSMIndex,null,socialMedia)" />
                                     </td>
                                     <td class="action_button">
-                                        <button class="red_btn" [disabled]="!clientCustomer.BusinessName"
+                                        <button class="red_btn"
+                                            [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             (click)="onDeleteSocialMedia(socialMedia)">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </button>
@@ -500,7 +536,7 @@
 
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
-                            [ngClass]="(socialMediaList && socialMediaList.length > 0 && socialMediaList[0].TotalRecords > 10)?'':'display_hide'"
+                            *ngIf="(socialMediaList && socialMediaList.length > 0 && socialMediaList[0].TotalRecords > 10)"
                             [rows]="socialMediaFilter.RecordsPerPage"
                             (onPageChange)="onPageChange($event, 'SOCIAL$MEDIA')"
                             [totalRecords]="(socialMediaList.length>0)? socialMediaList[0].TotalRecords:0"></p-paginator>

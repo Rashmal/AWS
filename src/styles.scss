@@ -218,8 +218,13 @@ input {
 }
 
 input:disabled {
-    background-color: #7a7e83;
-    opacity: 0.2;
+    // background-color: #7a7e83;
+    opacity: 0.5;
+}
+
+button:disabled,
+button[disabled]{
+    opacity: 0.5;
 }
 
 .error_label {

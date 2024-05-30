@@ -79,7 +79,7 @@ export class ExpenseAccountsComponent {
         //Send data to component
         this.ref.close({
             Id: this.selectedAccount.value,
-            Name: this.selectedAccount.label,
+            Name: this.displayAccountDetailsList.find(obj => obj.value == this.selectedAccount.value).label,
         });
     }
 
@@ -91,7 +91,7 @@ export class ExpenseAccountsComponent {
         this.commonModel.GetAccountDetails(this.filter).then((data) => {
             // Getting the country list
             let dataList: AccountDetails[] = <AccountDetails[]>data;
-            if(dataList && dataList.length > 0){
+            if (dataList && dataList.length > 0) {
                 this.totalRecords = dataList[0].Total;
             }
             // Loop through the country list

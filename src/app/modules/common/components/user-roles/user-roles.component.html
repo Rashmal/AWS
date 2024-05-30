@@ -5,9 +5,9 @@
 
         <div >
             <p-table 
-                [value]="products" 
-                [(selection)]="selectedProducts" 
-                dataKey="code" 
+                [value]="userRoles" 
+                [(selection)]="selectedUserRoles" 
+                dataKey="Id" 
                 >
                     <ng-template pTemplate="header">
                         <tr class="table_header_row">
@@ -17,13 +17,13 @@
                           
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-product>
+                    <ng-template pTemplate="body" let-userRole>
                         <tr>
                             <td>
-                                <p-tableCheckbox [value]="product" />
+                                <p-tableCheckbox [value]="userRole" />
                             </td>
                            
-                            <td>{{product.name}}</td>
+                            <td>{{userRole.Name}}</td>
                             
                         </tr>
                     </ng-template>

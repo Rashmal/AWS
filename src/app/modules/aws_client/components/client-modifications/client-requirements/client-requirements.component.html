@@ -10,6 +10,13 @@
                 <div class="row">
                     <!-- Client requirements table section -->
                     <div class="col-12 col-lg-9">
+                        <!-- When the client requirements are empty -->
+                        <div *ngIf="clientRequirementList.length == 0">
+                            <span>There are no client requirements</span>
+                        </div>
+                        <!-- End of When the client requirements are empty -->
+
+                        <!-- When the client requirements are not empty -->
                         <p-table class="contacts_tbl" [value]="clientRequirementList" dataKey="id"
                             [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
                             <!-- Header section -->
@@ -45,6 +52,7 @@
                                         <div (click)="enterEditingItem(rowIndex)" (mouseleave)="enterLeaveItem()"
                                             [class]="editingItem_index == rowIndex ? 'show_editor_header': 'hide_editor_header'">
                                             <p-editor [readonly]="selectedClientId == 0"
+                                                (onTextChange)="onBlurEvent('CLIENT$REQUIREMENTS',rowIndex,clientRequirement,$event)"
                                                 [(ngModel)]="clientRequirement.AdditionalData">
                                             </p-editor>
                                         </div>
@@ -102,13 +110,16 @@
                                         <div class="">
                                             <!--Action buttons-->
                                             <div class="action_button">
-                                                <button class="red_btn" [disabled]="selectedClientId == 0">
+                                                <button class="red_btn" [disabled]="selectedClientId == 0"
+                                                    (click)="removeClientRequirement(clientRequirement)">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
-                                                <button class="grey_btn margin_lr_5" [disabled]="selectedClientId == 0">
+                                                <button class="grey_btn margin_lr_5" [disabled]="selectedClientId == 0"
+                                                    (click)="rankChangeClientRequirement(clientRequirement,'UP')">
                                                     <i class="fa fa-arrow-up" aria-hidden="true"></i>
                                                 </button>
-                                                <button class="grey_btn" [disabled]="selectedClientId == 0">
+                                                <button class="grey_btn" [disabled]="selectedClientId == 0"
+                                                    (click)="rankChangeClientRequirement(clientRequirement,'DOWN')">
                                                     <i class="fa fa-arrow-down" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -116,8 +127,9 @@
 
                                             <!--Add to Global-->
                                             <div class="action_button">
-                                                <button (click)="clickOnAddToGlobal(product)" class="blue_btn_spe"
-                                                    [disabled]="selectedClientId == 0">Add
+                                                <button (click)="clickOnAddToGlobal(clientRequirement)"
+                                                    class="blue_btn_spe"
+                                                    [disabled]="selectedClientId == 0 || clientRequirement.Title == ''">Add
                                                     To Global</button>
                                             </div>
                                             <!--End of Add to Global-->
@@ -134,17 +146,8 @@
                                         </div>
                                         <!-- End of When the roles is empty -->
 
-                                        <!-- Select Buttons section -->
-                                        <div class="action_button_upl">
-                                            <button [disabled]="selectedClientId == 0" class="green_btn"
-                                                (click)="onClickUserRole(product)">
-                                                Select Roles
-                                            </button>
-                                        </div>
-                                        <!-- End of Select Buttons section -->
-
                                         <!-- Display Role list -->
-                                        <div *ngFor="let item of clientRequirement.RoleDetails"
+                                        <div *ngFor="let item of clientRequirement.RoleDetails; let roleIndex = index"
                                             class="uploaded_files_list">
                                             <!-- Role name -->
                                             <div>{{item.Name}}</div>
@@ -152,24 +155,37 @@
 
                                             <!-- Delete button -->
                                             <div class="action_button">
-                                                <button class="red_btn" [disabled]="selectedClientId == 0">
+                                                <button class="red_btn" [disabled]="selectedClientId == 0"
+                                                    (click)="removeClientRequirementRole(clientRequirement, roleIndex)">
                                                     <i class="fa fa-times" aria-hidden="true"></i>
                                                 </button>
                                             </div>
                                             <!-- End of Delete button -->
                                         </div>
                                         <!-- End of Display Role list -->
+
+                                        <!-- Select Buttons section -->
+                                        <div class="action_button_upl">
+                                            <button [disabled]="selectedClientId == 0" class="green_btn"
+                                                (click)="onClickUserRole(clientRequirement,rowIndex)">
+                                                Select Roles
+                                            </button>
+                                        </div>
+                                        <!-- End of Select Buttons section -->
                                     </td>
                                     <!--End of Roles-->
                                 </tr>
                             </ng-template>
                             <!-- End of Body table section -->
                         </p-table>
+                        <!-- End of When the client requirements are not empty -->
+
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
-                            [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
-                            [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
-                            [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
+                            *ngIf="(clientRequirementList && clientRequirementList.length > 0 && clientRequirementList[0].TotalRecords > 10)"
+                            [rows]="filterClientRequirements.RecordsPerPage"
+                            (onPageChange)="onPageChange($event,'CLIENT$REQUIREMENTS')"
+                            [totalRecords]="(clientRequirementList.length>0)? clientRequirementList[0].TotalRecords:0"></p-paginator>
                         <!-- End of Pagination section -->
 
                     </div>
@@ -215,7 +231,7 @@
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
                             [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
-                            [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
+                            [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event,'GLOBAL$FILES')"
                             [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
                         <!-- End of Pagination section -->
                         <button class="long_txt_btn full_width" (click)="clickOnUploadGlobalFile()"
@@ -232,7 +248,8 @@
                         <!-- Buttons section -->
                         <button [disabled]="selectedClientId == 0" class="long_txt_btn"
                             (click)="onClickAddFromGlobalReq()">Add New From Global</button>
-                        <button [disabled]="selectedClientId == 0" class="long_txt_btn">Add New From Empty</button>
+                        <button [disabled]="selectedClientId == 0" class="long_txt_btn"
+                            (click)="addNewEmptyClientRequirement()">Add New From Empty</button>
                         <!-- End of Buttons section -->
                     </div>
                 </div>
@@ -284,7 +301,7 @@
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
                             [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
-                            [rows]="filter.ItemsPerPage" (onPageChange)="onPageChange($event)"
+                            [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event,'HOURLY$OTHER$RATES')"
                             [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
                         <!-- End of Pagination section -->
                     </div>

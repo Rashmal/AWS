@@ -278,7 +278,6 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
 
     // Getting all the display module list
     getAllSystemEnhancementModuleList(status: boolean = false) {
-        debugger
         // Start loading
         this.showLoading = true;
         // Clear the list

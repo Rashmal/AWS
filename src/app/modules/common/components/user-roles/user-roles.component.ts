@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CommonModel } from '../../models/commonModel';
 import { CommonService } from '../../services/common.service';
+import { RoleDetails } from '../../core/roleDetails';
 
 
 @Component({
@@ -11,34 +12,12 @@ import { CommonService } from '../../services/common.service';
   styleUrl: './user-roles.component.scss'
 })
 export class UserRolesComponent implements OnInit {
-
-  products: any[] = [
-    {
-      code: 'P001',
-      name: 'Product 1',
-      category: 'Category 1',
-      TotalRecords: 10,
-    },
-    {
-      code: 'P002',
-      name: 'Product 2',
-      category: 'Category 2',
-      TotalRecords: 10,
-    },
-    {
-      code: 'P003',
-      name: 'Product 3',
-      category: 'Category 3',
-      TotalRecords: 10,
-    },
-  ];
-
-  selectedProducts!: any;
-
   //Store client details
-  userRoles: any[] = [];
+  userRoles: RoleDetails[] = [];
   // Store the common model
   commonModel: CommonModel;
+  // Store the selected user roles
+  selectedUserRoles: RoleDetails[] = [];
 
   constructor(public ref: DynamicDialogRef, private config: DynamicDialogConfig,
     private commonService: CommonService) {
@@ -47,25 +26,36 @@ export class UserRolesComponent implements OnInit {
 
     // Getting the passed data
     if (JSON.stringify(this.config.data)) {
-      this.userRoles = <any[]>this.config.data;
+      this.selectedUserRoles = <RoleDetails[]>this.config.data;
     }
     // End of Getting the passed data
   }
 
   ngOnInit(): void {
+    // Initialize the user roles
+    this.InitUserRoles();
+  }
 
+  // Initialize the user roles
+  InitUserRoles() {
+    // Calling the model to retrieve the data
+    this.commonModel.GetAllRoleDetails().then((data) => {
+      // Getting the list
+      this.userRoles = <RoleDetails[]>data;
+    });
+    // End of Calling the model to retrieve the data
   }
 
   //On  click cancel
   onClickCancel() {
     //Send data to component
-    this.ref.close([]);
+    this.ref.close();
   }
 
   //ON click save select roles
   onClickSave() {
     //Send data to component
-    this.ref.close([]);
+    this.ref.close(this.selectedUserRoles);
   }
 
 
