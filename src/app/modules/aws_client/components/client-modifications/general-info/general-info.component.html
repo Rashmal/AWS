@@ -477,6 +477,7 @@
                                             [inputrestriction]="(contact.ContactType.Id == 1)?'^[0-9]*$':(contact.ContactType.Id == 2)?'^[0-9]*$':(contact.ContactType.Id == 3)?'^[0-9]*$':(contact.ContactType.Id == 4)?'^[0-9]*$':(contact.ContactType.Id == 5)?'^[a-z A-Z 0-9 @ . _ -]*$':(contact.ContactType.Id == 6)?'a-z A-Z 0-9 . _ -':(contact.ContactType.Id == 7)?'^[0-9]*$':(contact.ContactType.Id == 8)?'^[0-9]*$':(contact.ContactType.Id == 9)?'a-z A-Z 0-9 @ . _ -':''"
                                             [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             [(ngModel)]="contact.ContactValue"
+                                            (focusout)="contactValueFocusOut(contact,rowIndex)"
                                             (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
                                     </td>
                                     <td class="action_button">

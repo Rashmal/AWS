@@ -764,6 +764,14 @@ export class GeneralInfoComponent implements OnInit {
                         TotalRecords: 0
                     }
                 );
+                // Loop through the list
+                for (let i = 0; i < this.contactList.length; i++) {
+                    if (this.contactList[i].Id == 1 || this.contactList[i].Id == 2 || this.contactList[i].Id == 3 || this.contactList[i].Id == 4 || this.contactList[i].Id == 7 || this.contactList[i].Id == 8) {
+                        // Update the field
+                        this.contactValueFocusOut(this.contactList[i], i);
+                    }
+                }
+                // End of Loop through the list
             }
         );
         // End of Calling the object model to access the service
@@ -813,5 +821,36 @@ export class GeneralInfoComponent implements OnInit {
             }
         );
         // End of Calling the object model to access the service
+    }
+
+    // Focus out event of contact values
+    contactValueFocusOut(contactObject: Contact, rowIndex: number) {
+        // Getting the current value
+        let currentValue = contactObject.ContactValue;
+        // Replace all ( , ) with empty
+        currentValue = currentValue.replaceAll("(", "").replaceAll(")", "").replaceAll(" ", "");
+        // Check if the value has more than 2 numbers
+        if (currentValue.length > 2) {
+            // Getting the first 2 numbers
+            let first2Numbers = currentValue[0] + '' + currentValue[1];
+            let restNumbers = currentValue.substring(2);
+            let rest1stSet = "";
+            let rest2ndSet = "";
+            // Check if the rest numbers are more than 4
+            if (restNumbers.length > 4) {
+                rest1stSet = restNumbers.substring(0, 4);
+                rest2ndSet = restNumbers.substring(5);
+            } else {
+                rest1stSet = restNumbers;
+            }
+            // End of Check if the rest numbers are more than 4
+
+            // Setting the new format
+            this.contactList[rowIndex].ContactValue = "(" + first2Numbers + ") " + rest1stSet + " " + rest2ndSet;
+        } else {
+            // Setting the new format
+            this.contactList[rowIndex].ContactValue = "(" + currentValue + ") ";
+        }
+        // End of Check if the value has more than 2 numbers
     }
 }

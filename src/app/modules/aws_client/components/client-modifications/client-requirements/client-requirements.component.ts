@@ -23,27 +23,10 @@ import { saveAs } from 'file-saver';
     providers: [DialogService],
 })
 export class ClientRequirementsComponent implements OnInit {
+    // Store the editing index
     editingItem_index = -1;
-    products: any[] = [
-        {
-            code: 'P001',
-            name: 'Product 1',
-            category: 'Category 1',
-            TotalRecords: 10,
-        },
-        {
-            code: 'P002',
-            name: 'Product 2',
-            category: 'Category 2',
-            TotalRecords: 10,
-        },
-        {
-            code: 'P003',
-            name: 'Product 3',
-            category: 'Category 3',
-            TotalRecords: 10,
-        },
-    ];
+    // Store the modification mode
+    modificationMode = 'NEW';
     //Store filter settings for client requirements
     filterClientRequirements: Filter = {
         Param1: 'ALL',
@@ -133,6 +116,11 @@ export class ClientRequirementsComponent implements OnInit {
                 TotalRecords: 0
             }
         );
+
+        //Set editing mode
+        if (paramObject['EditingMode']) {
+            this.modificationMode = paramObject['EditingMode'];
+        }
 
         // Set editing client id
         if (paramObject['ClientId']) {
@@ -564,14 +552,12 @@ export class ClientRequirementsComponent implements OnInit {
 
     // Update the hours others rates object
     updateHoursOthersRatesObject(currentIndex: number, hourlyOtherRates: HourlyOtherRates) {
-        debugger
         // Check the action state
         let actionState = (hourlyOtherRates.Id == 0) ? "NEW" : "UPDATE";
 
         // Calling the object model to access the service
         this.clientModel.SetOtherRateDetails(hourlyOtherRates, actionState, this.selectedClientId, this.companyId).then(
             (data) => {
-                debugger
                 // Setting the business address Id
                 this.hoursOthersRatesList[currentIndex].Id = <number>data;
 
