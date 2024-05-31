@@ -236,7 +236,7 @@
                         </p-table>
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
-                            [ngClass]="(globalFilesList && globalFilesList.length > 0 && globalFilesList[0].TotalRecords > 10)?'':'display_hide'"
+                            *ngIf="(globalFilesList && globalFilesList.length > 0 && globalFilesList[0].TotalRecords > 10)"
                             [rows]="filterGlobalFiles.RecordsPerPage"
                             (onPageChange)="onPageChange($event,'GLOBAL$FILES')"
                             [totalRecords]="(globalFilesList.length>0)? globalFilesList[0].TotalRecords:0"></p-paginator>

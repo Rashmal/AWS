@@ -4,7 +4,7 @@
 
 .popup_content {
     width: auto;
-
+    margin-bottom: 10px;
     .button_panel_outer {
         display: flex;
         align-items: center;
@@ -80,10 +80,14 @@
         text-align: center;
         min-width: 130px;
     }
+    .header_col_l{
+        min-width: 300px;
+    }
 
 }
 
 ::ng-deep p-table {
+    
     .req_specs {
         background-color: transparent;
 

@@ -11,7 +11,7 @@
         <!-- Table header section -->
         <ng-template pTemplate="header">
             <tr class="table_header_row">
-                <th class="header_col">Global Client Requirements</th>
+                <th class="header_col_l">Global Client Requirements</th>
                 <th class="header_col">Actions</th>
             </tr>
         </ng-template>
@@ -67,7 +67,7 @@
 
     <!-- Pagination section -->
     <p-paginator class="paginator_sec" #modulePaginator
-        [ngClass]="(products && products.length > 0 && products[0].TotalRecords > 10)?'':'display_hide'"
+        *ngIf="(products && products.length > 0 && products[0].TotalRecords > 10)"
         [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event)"
         [totalRecords]="(products.length>0)? products[0].TotalRecords:0"></p-paginator>
     <!-- End of Pagination section -->

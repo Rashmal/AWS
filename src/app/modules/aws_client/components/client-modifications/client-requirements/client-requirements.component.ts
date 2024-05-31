@@ -618,7 +618,7 @@ export class ClientRequirementsComponent implements OnInit {
     // On click event of downloading the attachment file
     downloadClientRequirementAttachment(item: ClientRequirementFile) {
         // Calling the object model to access the service
-        this.clientModel.DownloadFile(item.FileUrl, item.FileName).then(
+        this.clientModel.DownloadFile(item.LocalPath, item.FileName).then(
             (blob) => {
                 // specify a default file name and extension
                 saveAs(blob, item.FileName);
@@ -630,7 +630,7 @@ export class ClientRequirementsComponent implements OnInit {
     // On click event of downloading the global file
     downloadGlobalFileAttachment(globalFile: GlobalFileDetails) {
         // Calling the object model to access the service
-        this.clientModel.DownloadFile(globalFile.FileUrl, globalFile.FileName).then(
+        this.clientModel.DownloadFile(globalFile.LocalPath, globalFile.FileName).then(
             (blob) => {
                 // specify a default file name and extension
                 saveAs(blob, globalFile.FileName);

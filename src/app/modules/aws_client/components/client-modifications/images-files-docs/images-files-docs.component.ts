@@ -10,6 +10,8 @@ import { ImageFiles } from '../../../core/imageFiles';
 import { ResourceType } from '../../../core/resourceType';
 import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
 import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
+import { saveAs } from 'file-saver';
+import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
 
 @Component({
     selector: 'app-images-files-docs',
@@ -43,7 +45,7 @@ export class ImagesFilesDocsComponent implements OnInit {
     // Property to hold the image source URL
     imageSrc: string | ArrayBuffer | null =
         'https://media.istockphoto.com/id/628087738/photo/portrait-of-siberian-husky.jpg?b=1&s=170667a&w=0&k=20&c=KuMYvonNURC5RMD6iwJH3FhoLuBgIRZpgbhyKc9ioSM=';
-        rotateAngle = 0;
+    rotateAngle = 0;
 
     scale: number = 1;
     transform: string = 'scale(1)';
@@ -76,9 +78,27 @@ export class ImagesFilesDocsComponent implements OnInit {
     // store current date
     currentDate = new Date();
     // Store filter resource type
-    filterResourceType: ResourceType;
+    filterResourceType: ResourceType = {
+        Code: '',
+        Id: 0,
+        Name: '',
+        TotalRecords: 10,
+    };
     // Store the cookie interface
     overallCookieInterface: OverallCookieInterface;
+    // List of common image file extensions
+    imageExtensions: string[] = [
+        'jpg',
+        'jpeg',
+        'png',
+        'gif',
+        'bmp',
+        'webp',
+        'tiff',
+        'svg',
+    ];
+    //preview availability
+    previewUnavailable: boolean = false;
 
     constructor(
         public dialogService: DialogService,
@@ -115,12 +135,22 @@ export class ImagesFilesDocsComponent implements OnInit {
             .then((data: ResourceType[]) => {
                 if (data) {
                     this.resourceTypes = data;
+                    this.resourceTypes.unshift({
+                        Code: 'All',
+                        Id: 0,
+                        Name: 'All',
+                        TotalRecords: 10,
+                    });
                 }
             });
     }
 
     // Get all files from db based on client
-    getAllFiles() {
+    getAllFiles(removeLastItem = false) {
+        //Change page to previous page when items are empty for the current page
+        if (removeLastItem && this.filter.CurrentPage > 1) {
+            this.filter.CurrentPage = this.filter.CurrentPage - 1;
+        }
         // Call services
         this.clientModel
             .GetAllImageDocFiles(this.filter, this.selectedClientId, 0)
@@ -170,8 +200,12 @@ export class ImagesFilesDocsComponent implements OnInit {
         this.files = [];
     }
 
+    //store uploading state
+    uploadingState = 'INITIAL';
     //Upload selected files
     uploadSelected(event: any) {
+        //set uploading state
+        this.uploadingState = 'UPLOADING';
         //Setting the form data
         const frmDataObj = new FormData();
         // Loop through the files
@@ -188,26 +222,47 @@ export class ImagesFilesDocsComponent implements OnInit {
                 this.overallCookieInterface.GetUserId()
             )
             .then((data: string) => {
-                this.getAllFiles();
+                //set uploading state
+                this.uploadingState = 'INITIAL';
                 this.files = [];
+                this.getAllFiles();
             });
     }
 
     // Update image file item
     updateImageDocFile(item: ImageFiles) {
         this.clientModel
-            .UpdateImageDocFile(item, this.selectedClientId, 0, this.overallCookieInterface.GetUserId())
+            .UpdateImageDocFile(
+                item,
+                this.selectedClientId,
+                0,
+                this.overallCookieInterface.GetUserId()
+            )
             .then((data) => {
                 this.getAllFiles();
             });
     }
     //Remove image file item
     removeImageDocFile(item: ImageFiles) {
-        this.clientModel
-            .RemoveImageDocFile(item.Id, this.selectedClientId, 0)
-            .then((data) => {
-                this.getAllFiles();
-            });
+        // Open popup to confirm action
+        this.ref = this.dialogService.open(DeleteConfirmationComponent, {
+            header: 'Delete confirmation',
+        });
+        // Perform an action on close the popup
+        this.ref.onClose.subscribe((confirmation: boolean) => {
+            if (confirmation) {
+                let removeLastItem = false;
+                this.hidePreviewer();
+                if (this.imageFilesList.length === 1) {
+                    removeLastItem = true;
+                }
+                this.clientModel
+                    .RemoveImageDocFile(item.Id, this.selectedClientId, 0)
+                    .then((data) => {
+                        this.getAllFiles(removeLastItem);
+                    });
+            }
+        });
     }
     //Rotate image
     rotateImage(item: ImageFiles, rotate: string) {
@@ -223,7 +278,7 @@ export class ImagesFilesDocsComponent implements OnInit {
         }
 
         item.RotateXY = this.rotateAngle;
-       
+
         this.updateImageDocFile(item);
     }
 
@@ -275,15 +330,44 @@ export class ImagesFilesDocsComponent implements OnInit {
 
     //Show image preview
     imagePreviewer(event: ImageFiles) {
-        this.imageSrc = event.ResourceFile;
-        this.rotateAngle = event.RotateXY;
+        //Reset preview properties
+        this.resetPreviewProp();
         this.imagePreview = true;
+        //Check if it is image
+        let isImage = this.checkIfImage(event.Caption);
+        if (isImage) {
+            this.imageSrc = event.ResourceFile;
+            this.rotateAngle = event.RotateXY;
+
+            this.previewUnavailable = false;
+        } else {
+            this.previewUnavailable = true;
+            this.imageSrc =
+                '../../../../../../assets/images/image_unavilable.jpg';
+        }
+    }
+    // Function to check if the file is an image
+    checkIfImage(fileName: string): boolean {
+        // Split the file name to get the extension
+        let strAr = fileName.split('.');
+        let ext =
+            strAr && strAr.length > 0
+                ? strAr[strAr.length - 1].toLowerCase()
+                : '';
+
+        // Check if the extracted extension is in the list of image extensions
+        return this.imageExtensions.includes(ext);
     }
     //Hide image preview
     hidePreviewer() {
         this.imageSrc = '';
-        this.rotateAngle = 0;
         this.imagePreview = false;
+        this.resetPreviewProp();
+    }
+    // Reset preview properties
+    resetPreviewProp() {
+        this.rotateAngle = 0;
+
         this.transform = 'scale(1)';
         this.scale = 1;
         this.position = { x: 0, y: 0 };
@@ -293,5 +377,17 @@ export class ImagesFilesDocsComponent implements OnInit {
     changeFilter() {
         this.filter.StatusId = this.filterResourceType.Id;
         this.getAllFiles();
+    }
+
+    // On click event of downloading the attachment file
+    downloadItems(item: ImageFiles) {
+        // Calling the object model to access the service
+        this.clientModel
+            .DownloadFile(item.LocalPath, item.Caption)
+            .then((blob) => {
+                // specify a default file name and extension
+                saveAs(blob, item.Caption);
+            });
+        // End of Calling the object model to access the service
     }
 }

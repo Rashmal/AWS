@@ -37,7 +37,7 @@ export class ClientListComponent implements OnInit {
        ModuleId: 0,
        ParentId: 0,
        PriorityId: 0,
-       RecordsPerPage: 10,
+       RecordsPerPage: 20,
        SearchQuery: '',
        SortColumn: '',
        SortDirection: 'DESC',
