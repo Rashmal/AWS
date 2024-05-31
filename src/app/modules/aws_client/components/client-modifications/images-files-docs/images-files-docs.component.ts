@@ -12,6 +12,7 @@ import { OverallCookieInterface } from 'src/app/modules/common/core/overallCooki
 import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
 import { saveAs } from 'file-saver';
 import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
+import { ClientCustomer } from '../../../core/client';
 
 @Component({
     selector: 'app-images-files-docs',
@@ -99,7 +100,9 @@ export class ImagesFilesDocsComponent implements OnInit {
     ];
     //preview availability
     previewUnavailable: boolean = false;
-
+    // Store company id
+    companyId = 0;
+  
     constructor(
         public dialogService: DialogService,
         private location: Location,
@@ -124,8 +127,11 @@ export class ImagesFilesDocsComponent implements OnInit {
             this.getAllResourceFileTypes();
             // Get resources list
             this.getAllFiles();
+           
         }
     }
+
+  
 
     //Get All Resource File Types
     getAllResourceFileTypes() {

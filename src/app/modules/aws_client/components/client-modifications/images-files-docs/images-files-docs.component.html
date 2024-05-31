@@ -12,10 +12,10 @@
                     <label class="input_lbl">Select A Type To Upload:</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown appendTo="body" [options]="resourceTypes" [(ngModel)]="selectedResourceType"
+                    <p-dropdown [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" appendTo="body" [options]="resourceTypes" [(ngModel)]="selectedResourceType"
                         optionLabel="Name" class="full_width" placeholder="Select an option" />
                     <!--End of Input area-->
-                    <button class="button_blue_s" (click)="onClickConfigResource()"><i class="fa fa-cog"
+                    <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="button_blue_s" (click)="onClickConfigResource()"><i class="fa fa-cog"
                             aria-hidden="true"></i></button>
 
 
@@ -43,7 +43,7 @@
                         <!-- Hidden file input element that supports multiple file selection of any type -->
                         <input type="file" #fileInput multiple (change)="onFileSelected($event)" hidden>
                         <!-- Button to trigger the file input click event -->
-                        <button (click)="fileInput.click()" class="button_blue">Upload Files</button>
+                        <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" (click)="fileInput.click()" class="button_blue">Upload Files</button>
                         <!-- Instructional text for drag-and-drop functionality -->
                         <p>or drag and drop files here</p>
                         <!-- Additional message to indicate supported file types -->
@@ -68,8 +68,8 @@
                                 <!--Button panel-->
                                 <div class="button_panel">
 
-                                    <button class="button_red" (click)="cancelSelection(true)">Cancel</button>
-                                    <button class="button_blue" (click)="uploadSelected(false)">Upload</button>
+                                    <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="button_red" (click)="cancelSelection(true)">Cancel</button>
+                                    <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="button_blue" (click)="uploadSelected(false)">Upload</button>
                                 </div>
                                 <!--End of Button panel-->
                             </div>
@@ -100,11 +100,11 @@
                     <label class="input_lbl">Filter by file type:</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <p-dropdown appendTo="body" [options]="resourceTypes" [(ngModel)]="filterResourceType"
+                    <p-dropdown [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" appendTo="body" [options]="resourceTypes" [(ngModel)]="filterResourceType"
                         (onChange)="changeFilter()" optionLabel="Name" class="full_width"
                         placeholder="Select an option" />
                     <!--End of Input area-->
-                    <button class="button_blue_s" (click)="onClickConfigResource()"><i class="fa fa-cog"
+                    <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="button_blue_s" (click)="onClickConfigResource()"><i class="fa fa-cog"
                             aria-hidden="true"></i></button>
 
 
@@ -138,25 +138,25 @@
                                         : currentDate | date : 'MMM d, y, h:mm:ss a'}} </div>
                                     <div class="label_input_div">
                                         <label class="lbl_class">Caption:</label>
-                                        <textarea class="input_class" [(ngModel)]="fileItem.Caption"
+                                        <textarea [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="input_class" [(ngModel)]="fileItem.Caption"
                                             (blur)="onChangeImageFileProperty(fileItem)"></textarea>
                                     </div>
                                     <div class="label_input_div">
                                         <label class="lbl_class">Internal Notes:</label>
-                                        <textarea class="input_class" [(ngModel)]="fileItem.InternalNotes"
+                                        <textarea [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="input_class" [(ngModel)]="fileItem.InternalNotes"
                                             (blur)="onChangeImageFileProperty(fileItem)"></textarea>
                                     </div>
                                     <div class="label_input_div_spe">
                                         <label class="lbl_class">Resource Type:</label>
                                         <div class="input_drp">
                                             <!--Config Types-->
-                                            <p-dropdown appendTo="body" [options]="resourceTypes"
+                                            <p-dropdown [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" appendTo="body" [options]="resourceTypes"
                                                 [(ngModel)]="fileItem.ResourceType"
                                                 (onChange)="onChangeImageFileProperty(fileItem)" optionLabel="Name"
                                                 class="full_width margin_r10" placeholder="Select an option" />
                                             <!--End of Config Types-->
                                             <!--Setting icon-->
-                                            <button class="button_blue_s" (click)="onClickConfigResource()"><i
+                                            <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="button_blue_s" (click)="onClickConfigResource()"><i
                                                     class="fa fa-cog" aria-hidden="true"></i></button>
                                             <!--End of Setting icon-->
                                         </div>
@@ -167,13 +167,13 @@
                                     <div class="action_button_div">
                                         <button (click)="imagePreviewer(fileItem)" class="green_btn"><i
                                                 class="fa fa-eye" aria-hidden="true"></i></button>
-                                        <button class="yellow_btn" (click)="rotateImage(fileItem, 'ACLW')"><i
+                                        <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="yellow_btn" (click)="rotateImage(fileItem, 'ACLW')"><i
                                                 class="fa fa-undo" aria-hidden="true"></i></button>
-                                        <button class="yellow_btn" (click)="rotateImage(fileItem, 'CLW')"><i
+                                        <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="yellow_btn" (click)="rotateImage(fileItem, 'CLW')"><i
                                                 class="fa fa-repeat" aria-hidden="true"></i></button>
-                                        <button class="blue_btn" (click)="downloadItems(fileItem)"><i
+                                        <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="blue_btn" (click)="downloadItems(fileItem)"><i
                                                 class="fa fa-download" aria-hidden="true"></i></button>
-                                        <button class="red_btn" (click)="removeImageDocFile(fileItem)"><i
+                                        <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="red_btn" (click)="removeImageDocFile(fileItem)"><i
                                                 class="fa fa-trash" aria-hidden="true"></i></button>
                                     </div>
 
@@ -183,7 +183,7 @@
                     </p-table>
 
                     <!-- Pagination section -->
-                    <p-paginator class="paginator_sec" #modulePaginator
+                    <p-paginator  class="paginator_sec" #modulePaginator
                         *ngIf="(imageFilesList && imageFilesList.length > 0 && imageFilesList[0].TotalRecords > 10)"
                         [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event)"
                         [totalRecords]="(imageFilesList.length>0)? imageFilesList[0].TotalRecords:0"></p-paginator>

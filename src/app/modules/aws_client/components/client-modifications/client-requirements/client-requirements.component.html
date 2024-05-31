@@ -53,7 +53,7 @@
                                         <!--End of requirement description-->
                                         <!-- Description input -->
                                         <div (click)="enterEditingItem(rowIndex)" (mouseleave)="enterLeaveItem()"
-                                            [class]="editingItem_index == rowIndex ? 'show_editor_header': 'hide_editor_header'">
+                                            [class]="(selectedClientId == 0 || modificationMode != 'VIEW') && editingItem_index == rowIndex ? 'show_editor_header': 'hide_editor_header'">
                                             <p-editor [readonly]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                                 (onTextChange)="onBlurEvent('CLIENT$REQUIREMENTS',rowIndex,clientRequirement,$event)"
                                                 [(ngModel)]="clientRequirement.AdditionalData">
@@ -118,15 +118,15 @@
                                         <div class="">
                                             <!--Action buttons-->
                                             <div class="action_button">
-                                                <button class="red_btn" [disabled]="selectedClientId == 0"
+                                                <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="red_btn" 
                                                     (click)="removeClientRequirement(clientRequirement)">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
-                                                <button class="grey_btn margin_lr_5" [disabled]="selectedClientId == 0"
+                                                <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="grey_btn margin_lr_5" 
                                                     (click)="rankChangeClientRequirement(clientRequirement,'UP')">
                                                     <i class="fa fa-arrow-up" aria-hidden="true"></i>
                                                 </button>
-                                                <button class="grey_btn" [disabled]="selectedClientId == 0"
+                                                <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="grey_btn" 
                                                     (click)="rankChangeClientRequirement(clientRequirement,'DOWN')">
                                                     <i class="fa fa-arrow-down" aria-hidden="true"></i>
                                                 </button>
