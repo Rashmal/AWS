@@ -706,6 +706,11 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     this.filter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
     this.modulesFilter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
     this.filterStartDate = this.filter.StartDate;
+
+    // Setting the end date one moth after today
+    this.filter.EndDate.setMonth(oneYearBefore.getMonth() + 1);
+    this.modulesFilter.EndDate.setMonth(oneYearBefore.getMonth() + 1);
+    this.filterEndDate = this.modulesFilter.EndDate;
   }
 
   // Making a deep copy

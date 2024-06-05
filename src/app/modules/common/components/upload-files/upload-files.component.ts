@@ -11,9 +11,9 @@ export class UploadFilesComponent {
 
     // Constructor
     constructor(
-      public ref: DynamicDialogRef,
-      private config: DynamicDialogConfig
-  ) {}
+        public ref: DynamicDialogRef,
+        private config: DynamicDialogConfig
+    ) { }
 
     // Handle files dropped into the upload container
     onFileDropped($event: FileList) {
@@ -37,6 +37,11 @@ export class UploadFilesComponent {
 
     // On click on confirmation button
     closePopup(status: boolean) {
-      this.ref.close(this.files);
-  }
+        this.ref.close(null);
+    }
+
+    // On click upload
+    uploadPopup(status: boolean) {
+        this.ref.close(this.files);
+    }
 }

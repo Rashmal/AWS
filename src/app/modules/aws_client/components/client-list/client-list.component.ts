@@ -1,17 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { DisplayClientDetails } from '../../core/client';
+import { ClientCustomer, DisplayClientDetails } from '../../core/client';
 import { ContactType } from 'src/app/modules/common/core/contactType';
 import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { ClientModel } from '../../models/clientModel';
 import { ClientService } from '../../services/client.service';
 import { Filter } from 'src/app/modules/common/core/filters';
+import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
+import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
 
 
 @Component({
     selector: 'app-client-list',
     templateUrl: './client-list.component.html',
     styleUrl: './client-list.component.scss',
+    providers: [DialogService],
 })
 export class ClientListComponent implements OnInit {
     contactTypes: ContactType[] = [
@@ -30,34 +35,41 @@ export class ClientListComponent implements OnInit {
     clientList: DisplayClientDetails[] = [];
     //Store filter settings
     filter: Filter = {
-       
-       CurrentPage: 1,
-       EndDate: new Date(),
-       Id: '',
-       ModuleId: 0,
-       ParentId: 0,
-       PriorityId: 0,
-       RecordsPerPage: 20,
-       SearchQuery: '',
-       SortColumn: '',
-       SortDirection: 'DESC',
-       StaffId: '',
-       StartDate: new Date(),
-       StatusId: 0,
-       Param1: 'ALL'
+
+        CurrentPage: 1,
+        EndDate: new Date(),
+        Id: '',
+        ModuleId: 0,
+        ParentId: 0,
+        PriorityId: 0,
+        RecordsPerPage: 20,
+        SearchQuery: '',
+        SortColumn: '',
+        SortDirection: 'DESC',
+        StaffId: '',
+        StartDate: new Date(),
+        StatusId: 0,
+        Param1: 'ALL'
 
     };
 
     //Store client model
     clientModel !: ClientModel;
+    // Store the cookie interface
+    overallCookieInterface: OverallCookieInterface;
+    // Store the company Id
+    companyId: number = 0;
+    // Store dynamic dialog ref
+    ref: DynamicDialogRef | undefined;
 
-    constructor(private route: Router, private clientService: ClientService) {
+    constructor(private route: Router, private clientService: ClientService, public dialogService: DialogService) {
         this.clientModel = new ClientModel(this.clientService);
+        this.overallCookieInterface = new OverallCookieModel();
     }
 
     ngOnInit(): void {
-     //get client list
-     this.getDisplayClientList();
+        //get client list
+        this.getDisplayClientList();
     }
 
     //on change module list paginator
@@ -80,11 +92,11 @@ export class ClientListComponent implements OnInit {
     }
 
     //Get display client list from db
-    getDisplayClientList(){
+    getDisplayClientList() {
         //Call service to get data
         this.clientModel.GetDisplayClientDetails(this.filter, 0).then(
             (data: DisplayClientDetails[]) => {
-                if(data){
+                if (data) {
                     this.clientList = data;
                 }
             }
@@ -92,7 +104,41 @@ export class ClientListComponent implements OnInit {
     }
 
     //On change filter
-    onChangeFilter(type: string){
+    onChangeFilter(type: string) {
         this.getDisplayClientList();
+    }
+
+    //Get display client list from db
+    onRemoveCLientCustomer(client: DisplayClientDetails) {
+        // Open popup to confirm action
+        this.ref = this.dialogService.open(DeleteConfirmationComponent, {
+            header: 'Delete confirmation'
+        });
+        // Perform an action on close the popup
+        this.ref.onClose.subscribe((confirmation: boolean) => {
+            if (confirmation) {
+                // Client object
+                let clientCustomer: ClientCustomer = {
+                    Id: client.Id,
+                    BusinessName: '',
+                    BusinessNumber: '',
+                    BusinessNumberType: {
+                        Id: 0,
+                        Code: '',
+                        Name: ''
+                    },
+                    FirstName: '',
+                    MiddleInitial: ''
+                };
+                //Call service to get data
+                this.clientModel.SetClientCustomer(clientCustomer, this.overallCookieInterface.GetUserId(), "RMV", this.companyId).then(
+                    (data: DisplayClientDetails[]) => {
+                        if (data) {
+                            this.getDisplayClientList();
+                        }
+                    }
+                );
+            }
+        });
     }
 }

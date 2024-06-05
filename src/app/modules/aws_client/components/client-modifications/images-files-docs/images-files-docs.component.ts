@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfigResourceTypeComponent } from './config-resource-type/config-resource-type.component';
 
@@ -13,6 +13,7 @@ import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieMod
 import { saveAs } from 'file-saver';
 import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
 import { ClientCustomer } from '../../../core/client';
+import { Paginator } from 'primeng/paginator';
 
 @Component({
     selector: 'app-images-files-docs',
@@ -102,7 +103,8 @@ export class ImagesFilesDocsComponent implements OnInit {
     previewUnavailable: boolean = false;
     // Store company id
     companyId = 0;
-  
+    @ViewChild('modulePaginator') filterPaginator!: Paginator;
+
     constructor(
         public dialogService: DialogService,
         private location: Location,
@@ -127,11 +129,11 @@ export class ImagesFilesDocsComponent implements OnInit {
             this.getAllResourceFileTypes();
             // Get resources list
             this.getAllFiles();
-           
+
         }
     }
 
-  
+
 
     //Get All Resource File Types
     getAllResourceFileTypes() {
@@ -382,7 +384,12 @@ export class ImagesFilesDocsComponent implements OnInit {
     //On change filter
     changeFilter() {
         this.filter.StatusId = this.filterResourceType.Id;
-        this.getAllFiles();
+        if (this.filterPaginator) {
+            this.filterPaginator.changePage(0);
+        } else {
+            this.filter.CurrentPage = 1;
+            this.getAllFiles();
+        }
     }
 
     // On click event of downloading the attachment file

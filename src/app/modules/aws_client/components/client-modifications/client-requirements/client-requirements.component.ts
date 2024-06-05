@@ -346,7 +346,7 @@ export class ClientRequirementsComponent implements OnInit {
                 }
                 // End of Check if the event is not null
                 // Update the client requirement object
-                this.updateClientRequirementObject(currentIndex, clientRequirementObject, isDescription);
+                this.updateClientRequirementObject(currentIndex, clientRequirementObject, true);
                 break;
             case 'HOURLY$OTHER$RATES':
                 // Update the hours others rates object

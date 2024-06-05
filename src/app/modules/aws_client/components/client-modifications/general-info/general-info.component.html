@@ -7,7 +7,7 @@
     <!-- End of Error message -->
 
     <!-- Accordion section -->
-    <p-accordion [multiple]="true" [activeIndex]="[0, 1, 2, 3, 4]">
+    <p-accordion [multiple]="true" [activeIndex]="[0,1,4]">
         <p-accordionTab header="Client / Customer">
             <!--Client Customer-->
             <div class="row gen_info_item">
@@ -350,7 +350,7 @@
                     <!--Input area-->
 
 
-                    <button class="exp_acc_ddp_btn"
+                    <button pTooltip="Select expense account" tooltipPosition="top" class="exp_acc_ddp_btn"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         (click)="onClickExpAccountDD()">
                         <div>{{relationshipDetails.ExpenseAccount.Name == '' ? 'Select an option' :
@@ -473,7 +473,7 @@
                                     </td>
                                     <td>
                                         <input class="input_field" type="text"
-                                            onKeyPress="if(value.length==100) return false;"
+                                            onKeyPress="if(value.length==50) return false;"
                                             [inputrestriction]="(contact.ContactType.Id == 1)?'^[0-9]*$':(contact.ContactType.Id == 2)?'^[0-9]*$':(contact.ContactType.Id == 3)?'^[0-9]*$':(contact.ContactType.Id == 4)?'^[0-9]*$':(contact.ContactType.Id == 5)?'^[a-z A-Z 0-9 @ . _ -]*$':(contact.ContactType.Id == 6)?'a-z A-Z 0-9 . _ -':(contact.ContactType.Id == 7)?'^[0-9]*$':(contact.ContactType.Id == 8)?'^[0-9]*$':(contact.ContactType.Id == 9)?'a-z A-Z 0-9 @ . _ -':''"
                                             [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             [(ngModel)]="contact.ContactValue"
@@ -481,7 +481,7 @@
                                             (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
                                     </td>
                                     <td class="action_button">
-                                        <button class="red_btn"
+                                        <button pTooltip="Delete" tooltipPosition="top" class="red_btn"
                                             [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             (click)="onDeleteContact(contact)">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
@@ -540,7 +540,7 @@
                                             (blur)="onBlurEvent('SOCIAL$MEDIA$DETAILS',rowSMIndex,null,socialMedia)" />
                                     </td>
                                     <td class="action_button">
-                                        <button class="red_btn"
+                                        <button pTooltip="Delete" tooltipPosition="top" class="red_btn"
                                             [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             (click)="onDeleteSocialMedia(socialMedia)">
                                             <i class="fa fa-trash" aria-hidden="true"></i>

@@ -21,6 +21,8 @@ import { ConfigResourceTypeComponent } from './components/client-modifications/i
 import { ExpenseAccountsComponent } from './components/client-modifications/general-info/expense-accounts/expense-accounts.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { AuthenticationModule } from '../authentication/authentication.module';
+import { DragDropDirective } from '../common/directives/drag-drop.directive';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
     declarations: [
@@ -47,7 +49,9 @@ import { AuthenticationModule } from '../authentication/authentication.module';
         EditorModule,
         ChipsModule,
         RadioButtonModule,
-        AuthenticationModule
+        AuthenticationModule,
+        DragDropDirective,
+        TooltipModule
     ],
 })
 export class AWSClientModule { }

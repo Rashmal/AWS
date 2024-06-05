@@ -766,7 +766,7 @@ export class GeneralInfoComponent implements OnInit {
                 );
                 // Loop through the list
                 for (let i = 0; i < this.contactList.length; i++) {
-                    if (this.contactList[i].Id == 1 || this.contactList[i].Id == 2 || this.contactList[i].Id == 3 || this.contactList[i].Id == 4 || this.contactList[i].Id == 7 || this.contactList[i].Id == 8) {
+                    if (this.contactList[i].ContactType.Id == 1 || this.contactList[i].ContactType.Id == 2 || this.contactList[i].ContactType.Id == 3 || this.contactList[i].ContactType.Id == 4 || this.contactList[i].ContactType.Id == 7 || this.contactList[i].ContactType.Id == 8) {
                         // Update the field
                         this.contactValueFocusOut(this.contactList[i], i);
                     }
