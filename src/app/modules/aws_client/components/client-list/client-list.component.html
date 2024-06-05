@@ -58,7 +58,7 @@
                 </td>
                 <td>{{client.FullName}}</td>
                 <td>
-                    <div *ngFor="let contact of client.Contacts">
+                    <div *ngFor="let contact of client.Contacts" [style.display]="contact.ContactValue.trim().length == 0 ? 'none' : ''">
                         <span>{{contact.ContactType.Name}}: </span><span>{{contact.ContactValue}}</span>
                     </div>
                 </td>
