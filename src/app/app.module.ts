@@ -36,7 +36,16 @@ import { DragDropDirective } from './modules/common/directives/drag-drop.directi
         ActionConfirmationComponent,
         UploadFilesComponent
     ],
-    imports: [AppRoutingModule, AppLayoutModule, DynamicDialogModule, TableModule,  FormsModule, CommonModule, CheckboxModule],
+    imports: [
+        AppRoutingModule,
+        AppLayoutModule,
+        DynamicDialogModule,
+        TableModule,
+        FormsModule,
+        CommonModule,
+        CheckboxModule,
+        DragDropDirective
+    ],
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },
         CountryService,
@@ -49,4 +58,4 @@ import { DragDropDirective } from './modules/common/directives/drag-drop.directi
     ],
     bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

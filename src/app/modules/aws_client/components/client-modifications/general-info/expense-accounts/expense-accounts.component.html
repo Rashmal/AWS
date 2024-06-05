@@ -1,33 +1,29 @@
 <!--delete confirmation-->
 <div class="popup_content">
-    <!--Message-->
-    <div *ngFor="let option of displayAccountDetailsList" class="p-field-radiobutton">
-        <p-radioButton
-          name="group"
-          [(ngModel)]="selectedAccount.value"
-          [value]="option.value"
-          inputId="option_{{ option.value }}"
-        ></p-radioButton>
-        <label for="option_{{ option.value }}">{{ option.label }}</label>
-      </div>
-    <!--End of Message-->
-     <!-- Pagination section -->
-     <p-paginator class="paginator_sec" #modulePaginator *ngIf="displayAccountDetailsList && displayAccountDetailsList.length > 0 && totalRecords > filter.RecordsPerPage"
-        
-        [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event)"
-        [totalRecords]="(displayAccountDetailsList.length>0)? totalRecords:0"></p-paginator>
-    <!-- End of Pagination section -->
-    <!--Button panel outer div-->
-    <div class="button_panel_outer">
-        <!--Button panel-->
-        <div class="button_panel">
-            
-            <button class="button_red" (click)="onClickCancel()">Cancel</button>
-            <button class="button_blue" (click)="onClickSave()">Save</button>
-        </div>
-        <!--End of Button panel-->
+  <!--Message-->
+  <div *ngFor="let option of displayAccountDetailsList" class="p-field-radiobutton">
+    <p-radioButton name="group" [(ngModel)]="selectedAccount.value" [value]="option.value"
+      inputId="option_{{ option.value }}"></p-radioButton>
+    <label for="option_{{ option.value }}">{{ option.label }}</label>
+  </div>
+  <!--End of Message-->
+  <!-- Pagination section -->
+  <p-paginator class="paginator_sec" #modulePaginator
+    *ngIf="displayAccountDetailsList && displayAccountDetailsList.length > 0 && totalRecords > filter.RecordsPerPage"
+    [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event)"
+    [totalRecords]="(displayAccountDetailsList.length>0)? totalRecords:0"></p-paginator>
+  <!-- End of Pagination section -->
+  <!--Button panel outer div-->
+  <div class="button_panel_outer">
+    <!--Button panel-->
+    <div class="button_panel">
+
+      <button pTooltip="Cancel" tooltipPosition="top" class="button_red" (click)="onClickCancel()">Cancel</button>
+      <button pTooltip="Save" tooltipPosition="top" class="button_blue" (click)="onClickSave()">Save</button>
     </div>
-    <!--End of Button panel outer div-->
+    <!--End of Button panel-->
+  </div>
+  <!--End of Button panel outer div-->
 
 
 

@@ -14,6 +14,7 @@ import { SYSTEM_ENHANCEMENT$TITLE$LIMIT } from 'src/app/core/apiConfigurations';
 import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
 import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
 import { Location } from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-manage-system-enhancement',
@@ -67,6 +68,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     this.overallCookieInterface = new OverallCookieModel();
     // Getting the user access level
     this.userAccessLevel = this.overallCookieInterface.GetUserRole();
+
   }
 
   ngOnDestroy() {
@@ -120,7 +122,6 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
       );
     }
     // End of Check the editing type
-
   }
 
   // Getting the system enhancement details by Id

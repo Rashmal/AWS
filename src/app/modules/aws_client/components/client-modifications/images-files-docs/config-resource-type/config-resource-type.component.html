@@ -26,19 +26,21 @@
                         <!-- Display action buttons if item ID is not zero -->
                         <div *ngIf="type.Id != 0">
                             <!-- Update button when in edit mode -->
-                            <button *ngIf="editingIndex == rowIndex" class="button_blue"
-                                (click)="onClickUpdateItem(type)">Update</button>
+                            <button pTooltip="Update" tooltipPosition="top" *ngIf="editingIndex == rowIndex"
+                                class="button_blue" (click)="onClickUpdateItem(type)">Update</button>
                             <!-- Edit button when not in edit mode -->
-                            <button *ngIf="editingIndex != rowIndex" class="button_blue"
-                                (click)="onClickEditItem(rowIndex)">Edit</button>
+                            <button pTooltip="Edit" tooltipPosition="top" *ngIf="editingIndex != rowIndex"
+                                class="button_blue" (click)="onClickEditItem(rowIndex)">Edit</button>
                         </div>
                         <div *ngIf="type.Id != 0">
                             <!-- Delete button -->
-                            <button class="button_red" (click)="onClickDeleteItem(type)">Delete</button>
+                            <button pTooltip="Delete" tooltipPosition="top" class="button_red"
+                                (click)="onClickDeleteItem(type)">Delete</button>
                         </div>
                         <div *ngIf="type.Id == 0">
                             <!-- Button to add a new type -->
-                            <button class="button_blue_l" (click)="onClickAddNew(type)">Add A New Type</button>
+                            <button pTooltip="Add new" tooltipPosition="top" class="button_blue_l"
+                                (click)="onClickAddNew(type)">Add A New Type</button>
                         </div>
                     </div>
                 </td>

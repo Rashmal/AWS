@@ -4,31 +4,28 @@
     <div class="filter_section row">
         <!--Add new item-->
         <div class="col-lg-3 add_new">
-            <button (click)="onClickClientModifications('NEW', 0)">+ Add New Client</button>
+            <button (click)="onClickClientModifications('NEW', 0)" pTooltip="Add new client" tooltipPosition="top">+ Add
+                New Client</button>
         </div>
         <!--End of Add new item-->
 
         <!--Person type-->
-        <div class="col-lg-3 filter_item" >
+        <div class="col-lg-3 filter_item">
             <label>Filter by : </label>
-            <p-dropdown 
-            [options]="personTypes" 
-            [(ngModel)]="filter.Param1" 
-            (onChange)="onChangeFilter('DRP')"
-            />
+            <p-dropdown [options]="personTypes" [(ngModel)]="filter.Param1" (onChange)="onChangeFilter('DRP')" />
         </div>
         <!--End of Person type-->
         <!--Search by name-->
         <div class="col-lg-3 filter_item">
             <label>Client name : </label>
-            <input type="text"  [(ngModel)]="filter.SearchQuery" (change)="onChangeFilter('SEARCH')"/>
+            <input type="text" [(ngModel)]="filter.SearchQuery" (change)="onChangeFilter('SEARCH')" />
         </div>
         <!--End of Search by name-->
 
         <!--Items per page-->
         <div class="col-lg-3 filter_item">
             <label>Records Per Page : </label>
-            <input type="number" min="1" [(ngModel)]="filter.RecordsPerPage" (change)="onChangeFilter('RPP')"/>
+            <input type="number" min="1" [(ngModel)]="filter.RecordsPerPage" (change)="onChangeFilter('RPP')" />
         </div>
         <!--Items per page-->
 
@@ -40,7 +37,7 @@
         <ng-template pTemplate="header" class="table_header">
             <tr class="table_header_row">
                 <th class="header_col created_details">Created By</th>
-                
+
                 <th class="header_col">Full Name</th>
                 <th class="header_col">Contacts</th>
                 <th class="header_col">Payment Term</th>
@@ -51,37 +48,48 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-client>
-            <tr  class="table_body">
+            <tr class="table_body">
                 <td class="created_details">
-                    <div>{{client.CreatedBy}}</div>
-                    <div class="created_date_txt">(on {{client.CreatedDate | date : 'MMM d, y, h:mm:ss a'}})</div>
+                    <div [pTooltip]="client.CreatedBy" tooltipPosition="top">{{client.CreatedBy}}</div>
+                    <div class="created_date_txt" [pTooltip]="client.CreatedDate | date : 'MMM d, y, h:mm:ss a'"
+                        tooltipPosition="top">(on
+                        {{client.CreatedDate | date : 'MMM d, y, h:mm:ss a'}})</div>
                 </td>
-                <td>{{client.FullName}}</td>
+                <td [pTooltip]="client.FullName" tooltipPosition="top">{{client.FullName}}</td>
                 <td>
                     <div *ngFor="let contact of client.Contacts">
-                        <span>{{contact.ContactType.Name}}: </span><span>{{contact.ContactValue}}</span>
+                        <span>{{contact.ContactType.Name}}:
+                        </span><span [pTooltip]="contact.ContactValue"
+                            tooltipPosition="top">{{contact.ContactValue}}</span>
                     </div>
                 </td>
-                <td>{{client.PaymentTerm}}</td>
-                <td>{{client.BillingAddress}}</td>
-                <td>{{client.FinancialNotes}}</td>
-                <td>{{client.ExpenseAccount}}</td>
+                <td [pTooltip]="client.PaymentTerm" tooltipPosition="top">{{client.PaymentTerm}}</td>
+                <td [pTooltip]="client.BillingAddress" tooltipPosition="top">{{client.BillingAddress}}</td>
+                <td [pTooltip]="client.FinancialNotes" tooltipPosition="top">{{client.FinancialNotes}}</td>
+                <td [pTooltip]="client.ExpenseAccount" tooltipPosition="top">{{client.ExpenseAccount}}</td>
                 <td class="action_button">
-                    <button class="green_btn"(click)="onClickClientModifications('VIEW', client.Id)"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                    <button class="blue_btn" (click)="onClickClientModifications('EDIT', client.Id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                    <button class="red_btn"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button pTooltip="View" tooltipPosition="top" class="green_btn"
+                        (click)="onClickClientModifications('VIEW', client.Id)"><i class="fa fa-eye"
+                            aria-hidden="true"></i></button>
+                    <button pTooltip="Edit" tooltipPosition="top" class="blue_btn"
+                        (click)="onClickClientModifications('EDIT', client.Id)"><i class="fa fa-pencil"
+                            aria-hidden="true"></i></button>
+                    <button pTooltip="Delete" tooltipPosition="top" class="red_btn"
+                        (click)="onRemoveCLientCustomer(client)"><i class="fa fa-trash"
+                            aria-hidden="true"></i></button>
                 </td>
             </tr>
         </ng-template>
     </p-table>
     <!--End of Client list table-->
 
-     <!-- Pagination section -->
-     <p-paginator class="paginator_sec" #modulePaginator *ngIf="clientList && clientList.length > 0 && clientList[0].TotalRecords > filter.RecordsPerPage"
-     [ngClass]="(clientList && clientList.length > 0 && clientList[0].TotalRecords > 10)?'':'display_hide'"
-     [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event)"
-     [totalRecords]="(clientList.length>0)? clientList[0].TotalRecords:0"></p-paginator>
- <!-- End of Pagination section -->
+    <!-- Pagination section -->
+    <p-paginator class="paginator_sec" #modulePaginator
+        *ngIf="clientList && clientList.length > 0 && clientList[0].TotalRecords > filter.RecordsPerPage"
+        [ngClass]="(clientList && clientList.length > 0 && clientList[0].TotalRecords > 10)?'':'display_hide'"
+        [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event)"
+        [totalRecords]="(clientList.length>0)? clientList[0].TotalRecords:0"></p-paginator>
+    <!-- End of Pagination section -->
 
 </div>
 <!--End of Main client list-->

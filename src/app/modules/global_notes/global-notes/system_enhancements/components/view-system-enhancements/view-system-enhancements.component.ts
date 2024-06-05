@@ -20,6 +20,7 @@ import { OverallCookieInterface } from 'src/app/modules/common/core/overallCooki
 import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
 import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
 import { Paginator } from 'primeng/paginator';
+import * as moment from 'moment';
 @Component({
     selector: 'app-view-system-enhancements',
     standalone: false,
@@ -704,6 +705,11 @@ export class ViewSystemEnhancementsComponent implements OnInit, OnDestroy {
         this.filter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
         this.modulesFilter.StartDate.setFullYear(oneYearBefore.getFullYear() - 1);
         this.filterStartDate = this.filter.StartDate;
+
+        // Setting the end date one moth after today
+        this.filter.EndDate.setMonth(oneYearBefore.getMonth() + 1);
+        this.modulesFilter.EndDate.setMonth(oneYearBefore.getMonth() + 1);
+        this.filterEndDate = this.modulesFilter.EndDate;
     }
 
     // Making a deep copy
