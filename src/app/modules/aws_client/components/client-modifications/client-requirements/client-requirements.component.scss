@@ -78,6 +78,7 @@
                 align-items: center;
                 justify-content: center;
                 margin-top: 5px;
+                margin-top: 0;
 
                 button {
                     height: 30px;
@@ -332,4 +333,8 @@
             display: flex !important;
         }
     }
+}
+
+.marginTop0 {
+    margin-top: 0 !important;
 }

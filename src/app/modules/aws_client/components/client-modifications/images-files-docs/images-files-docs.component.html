@@ -114,7 +114,7 @@
                 <!--File list-->
                 <div *ngIf="imageFilesList && imageFilesList.length > 0" class="col-12 col-md-12 col-lg-8 col-xl-8">
                     <p-table class="contacts_tbl" [value]="imageFilesList" dataKey="id"
-                        [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
+                        [tableStyle]="{ 'min-width': '50rem' }">
                         <ng-template pTemplate="header">
                             <tr class="table_header_row">
 
@@ -168,7 +168,7 @@
                                 </td>
 
                                 <td class="action_button">
-                                    <div class="action_button_div">
+                                    <div class="action_button_div paddingTop21">
                                         <button pTooltip="Preview" tooltipPosition="top"
                                             (click)="imagePreviewer(fileItem)" class="green_btn"><i class="fa fa-eye"
                                                 aria-hidden="true"></i></button>

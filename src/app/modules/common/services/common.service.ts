@@ -238,6 +238,10 @@ export class CommonService {
     );
   }
 
+
+  // checking the details
+  
+
   // Getting the priority list
   GetPriorityList() {
     // Setting the params
