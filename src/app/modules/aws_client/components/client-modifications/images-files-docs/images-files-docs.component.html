@@ -132,8 +132,8 @@
                                 <td class="table_col">
 
                                     <div class="created_by">Created by {{!fileItem.CreatedByFullName &&
-                                        fileItem.CreatedByFullName != '' ? fileItem.CreatedByFullName : 'Unavailable'}}
-                                        at {{!fileItem.CreatedDate && fileItem.CreatedDate != '' ? fileItem.CreatedDate
+                                        fileItem.CreatedByFullName != '' ? 'Unavailable'  : fileItem.CreatedByFullName}}
+                                        on {{!fileItem.AddedDate && fileItem.AddedDate != '' ? fileItem.AddedDate
                                         : currentDate | date : 'MMM d, y, h:mm:ss a'}} </div>
                                     <div class="label_input_div">
                                         <label class="lbl_class">Caption:</label>
