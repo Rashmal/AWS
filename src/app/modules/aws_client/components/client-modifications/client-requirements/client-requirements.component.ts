@@ -15,6 +15,8 @@ import { GlobalFileDetails } from '../../../core/globalFileDetails';
 import { HourlyOtherRates } from '../../../core/hourlyOtherRates';
 import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
 import { saveAs } from 'file-saver';
+import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
+import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
 
 @Component({
     selector: 'app-client-requirements',
@@ -93,12 +95,15 @@ export class ClientRequirementsComponent implements OnInit {
     globalFilesList: GlobalFileDetails[] = [];
     // Store the hours and other rates list
     hoursOthersRatesList: HourlyOtherRates[] = [];
+    // Store the cookie interface
+    overallCookieInterface: OverallCookieInterface;
 
     constructor(public dialogService: DialogService, private location: Location,
         private clientService: ClientService
     ) {
         // Initialize the model
         this.clientModel = new ClientModel(this.clientService);
+        this.overallCookieInterface = new OverallCookieModel();
     }
 
     ngOnInit(): void {
@@ -141,7 +146,7 @@ export class ClientRequirementsComponent implements OnInit {
     // Getting the client requirements
     GetAllClientRequirements() {
         // Calling the object model to access the service
-        this.clientModel.GetClientRequirement(this.filterClientRequirements, this.selectedClientId, this.companyId).then(
+        this.clientModel.GetClientRequirement(this.filterClientRequirements, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Setting the business address Id
                 this.clientRequirementList = <ClientRequirement[]>data;
@@ -253,7 +258,7 @@ export class ClientRequirementsComponent implements OnInit {
                 // End of Loop through the files
 
                 // Calling the object model to access the service
-                this.clientModel.UploadGlobalFile(frmDataObj, this.selectedClientId, this.companyId).then(
+                this.clientModel.UploadGlobalFile(frmDataObj, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
                     (data) => {
                         // Getting all the Global files
                         this.GetAllGlobalFiles();
@@ -268,7 +273,7 @@ export class ClientRequirementsComponent implements OnInit {
     // Getting all the Global files
     GetAllGlobalFiles() {
         // Calling the object model to access the service
-        this.clientModel.GetAllFilesList(this.filterGlobalFiles, this.selectedClientId, this.companyId).then(
+        this.clientModel.GetAllFilesList(this.filterGlobalFiles, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Setting the global files
                 this.globalFilesList = <GlobalFileDetails[]>data;
@@ -298,7 +303,7 @@ export class ClientRequirementsComponent implements OnInit {
                 // End of Loop through the files
 
                 // Calling the object model to access the service
-                this.clientModel.SetClientRequirementFile(clientRequirement.Id, "", this.selectedClientId, this.companyId, frmDataObj).then(
+                this.clientModel.SetClientRequirementFile(clientRequirement.Id, "", this.selectedClientId, this.overallCookieInterface.GetCompanyId(), frmDataObj).then(
                     (data) => {
                         // Getting the client requirements
                         this.GetAllClientRequirements();
@@ -362,7 +367,7 @@ export class ClientRequirementsComponent implements OnInit {
         let actionState = (clientRequirementObject.Id == 0) ? "NEW" : "UPDATE";
 
         // Calling the object model to access the service
-        this.clientModel.SetClientRequirement(clientRequirementObject, actionState, this.selectedClientId, this.companyId).then(
+        this.clientModel.SetClientRequirement(clientRequirementObject, actionState, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Setting the business address Id
                 this.clientRequirementList[currentIndex].Id = <number>data;
@@ -406,7 +411,7 @@ export class ClientRequirementsComponent implements OnInit {
                 // Removing the role based on the index
                 clientRequirement.RoleDetails.splice(roleIndex, 1);
                 // Calling the object model to access the service
-                this.clientModel.SetClientRequirement(clientRequirement, "UPDATE", this.selectedClientId, this.companyId).then(
+                this.clientModel.SetClientRequirement(clientRequirement, "UPDATE", this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
                     (data) => {
                         // Getting the client requirements
                         this.GetAllClientRequirements();
@@ -427,7 +432,7 @@ export class ClientRequirementsComponent implements OnInit {
         this.ref.onClose.subscribe((confirmation: boolean) => {
             if (confirmation) {
                 // Calling the object model to access the service
-                this.clientModel.SetClientRequirement(clientRequirement, "REMOVE", this.selectedClientId, this.companyId).then(
+                this.clientModel.SetClientRequirement(clientRequirement, "REMOVE", this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
                     (data) => {
                         // Getting the client requirements
                         this.GetAllClientRequirements();
@@ -441,7 +446,7 @@ export class ClientRequirementsComponent implements OnInit {
     // On change event of the client requirement ranking
     rankChangeClientRequirement(clientRequirement: ClientRequirement, rankDirection: string) {
         // Calling the object model to access the service
-        this.clientModel.UpdateClientRequirementRanking(clientRequirement.Id, rankDirection, this.selectedClientId, this.companyId).then(
+        this.clientModel.UpdateClientRequirementRanking(clientRequirement.Id, rankDirection, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Getting the client requirements
                 this.GetAllClientRequirements();
@@ -472,7 +477,7 @@ export class ClientRequirementsComponent implements OnInit {
         // Making its ID as 0
         globalClientRequirement.Id = 0;
         // Calling the object model to access the service
-        this.clientModel.SetGlobalClientRequirement(globalClientRequirement, "NEW", this.selectedClientId, this.companyId).then(
+        this.clientModel.SetGlobalClientRequirement(globalClientRequirement, "NEW", this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Getting the client requirements
                 this.GetAllClientRequirements();
@@ -491,7 +496,7 @@ export class ClientRequirementsComponent implements OnInit {
         this.ref.onClose.subscribe((confirmation: boolean) => {
             if (confirmation) {
                 // Calling the object model to access the service
-                this.clientModel.RemoveClientRequirementFile(ClientRequirementFiles.Id, this.selectedClientId, this.companyId).then(
+                this.clientModel.RemoveClientRequirementFile(ClientRequirementFiles.Id, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
                     (data) => {
                         // Getting the client requirements
                         this.GetAllClientRequirements();
@@ -512,7 +517,7 @@ export class ClientRequirementsComponent implements OnInit {
         this.ref.onClose.subscribe((confirmation: boolean) => {
             if (confirmation) {
                 // Calling the object model to access the service
-                this.clientModel.RemoveGlobalFile(globalFile.Id, this.selectedClientId, this.companyId).then(
+                this.clientModel.RemoveGlobalFile(globalFile.Id, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
                     (data) => {
                         // Getting the client requirements
                         this.GetAllGlobalFiles();
@@ -526,7 +531,7 @@ export class ClientRequirementsComponent implements OnInit {
     // Getting all the hours and other rates list
     GetAllCHoursOthersRates() {
         // Calling the object model to access the service
-        this.clientModel.GetHourlyOtherRateListDetails(this.filterHoursOtherRates, this.selectedClientId, this.companyId).then(
+        this.clientModel.GetHourlyOtherRateListDetails(this.filterHoursOtherRates, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Setting the business address Id
                 this.hoursOthersRatesList = <HourlyOtherRates[]>data;
@@ -556,7 +561,7 @@ export class ClientRequirementsComponent implements OnInit {
         let actionState = (hourlyOtherRates.Id == 0) ? "NEW" : "UPDATE";
 
         // Calling the object model to access the service
-        this.clientModel.SetOtherRateDetails(hourlyOtherRates, actionState, this.selectedClientId, this.companyId).then(
+        this.clientModel.SetOtherRateDetails(hourlyOtherRates, actionState, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Setting the business address Id
                 this.hoursOthersRatesList[currentIndex].Id = <number>data;
@@ -590,7 +595,7 @@ export class ClientRequirementsComponent implements OnInit {
         this.ref.onClose.subscribe((confirmation: boolean) => {
             if (confirmation) {
                 // Calling the object model to access the service
-                this.clientModel.SetOtherRateDetails(hoursOthersRates, "REMOVE", this.selectedClientId, this.companyId).then(
+                this.clientModel.SetOtherRateDetails(hoursOthersRates, "REMOVE", this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
                     (data) => {
                         // Getting the client requirements
                         this.GetAllCHoursOthersRates();

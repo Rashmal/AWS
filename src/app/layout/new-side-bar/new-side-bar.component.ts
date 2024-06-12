@@ -98,7 +98,7 @@ export class NewSideBarComponent implements OnInit {
 
   // Get global notes notification count
   getGlobalNotesNotCount() {
-    this.commonModel.GetNotificationCount('TOTAL', this.overallCookieInterface.GetUserId()).then(
+    this.commonModel.GetNotificationCount('TOTAL', this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId()).then(
       (data: number) => {
         // Set notification count
         this.ttlNotCount = data;
@@ -118,12 +118,12 @@ export class NewSideBarComponent implements OnInit {
     this.staticMenuItems = [];
 
     // Getting the menu list based on the user role for static
-    this.commonModel.GetModuleListBasedUserRoleService(this.overallCookieInterface.GetUserRole(), true).then(
+    this.commonModel.GetModuleListBasedUserRoleService(this.overallCookieInterface.GetUserRole(), true, this.overallCookieInterface.GetCompanyId(), this.overallCookieInterface.GetUserId()).then(
       (data) => {
         this.staticMenuItems = <Module[]>data;
 
         // Getting the menu list based on the user role for not static
-        this.commonModel.GetModuleListBasedUserRoleService(this.overallCookieInterface.GetUserRole(), false).then(
+        this.commonModel.GetModuleListBasedUserRoleService(this.overallCookieInterface.GetUserRole(), false, this.overallCookieInterface.GetCompanyId(), this.overallCookieInterface.GetUserId()).then(
           (data) => {
             this.sideMenuItems = <Module[]>data;
           }

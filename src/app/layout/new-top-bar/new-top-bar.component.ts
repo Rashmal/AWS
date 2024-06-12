@@ -126,11 +126,11 @@ export class NewTopBarComponent {
         this.staticMenuItemsDisplay = [];
 
         // Getting the menu list based on the user role for static
-        this.commonModel.GetModuleListBasedUserRoleService(this.overallCookieInterface.GetUserRole(), true).then(
+        this.commonModel.GetModuleListBasedUserRoleService(this.overallCookieInterface.GetUserRole(), true, this.overallCookieInterface.GetCompanyId(), this.overallCookieInterface.GetUserId()).then(
             (data) => {
                 this.staticMenuItems = <Module[]>data;
                 // Getting the menu list based on the user role for not static
-                this.commonModel.GetModuleListBasedUserRoleService(this.overallCookieInterface.GetUserRole(), false).then(
+                this.commonModel.GetModuleListBasedUserRoleService(this.overallCookieInterface.GetUserRole(), false, this.overallCookieInterface.GetCompanyId(), this.overallCookieInterface.GetUserId()).then(
                     (data) => {
                         this.sideMenuItems = <Module[]>data;
                         this.staticMenuItemsDisplay = this.staticMenuItems;
@@ -149,7 +149,7 @@ export class NewTopBarComponent {
     // On click function of the logout
     logoutOnClick() {
         // Calling the model to logout function
-        this.authenticationModel.LogoutUserService(this.overallCookieInterface.GetUserEmail()).then(
+        this.authenticationModel.LogoutUserService(this.overallCookieInterface.GetUserEmail(), this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Clear the local storage cookie data
                 this.overallCookieInterface.ClearCookies();
@@ -205,7 +205,7 @@ export class NewTopBarComponent {
 
     // Get global notes notification count
     getGlobalNotesNotCount() {
-        this.commonModel.GetNotificationCount('TOTAL', this.overallCookieInterface.GetUserId()).then(
+        this.commonModel.GetNotificationCount('TOTAL', this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId()).then(
             (data: number) => {
                 // Set notification count
                 this.ttlNotCount = data;

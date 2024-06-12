@@ -52,9 +52,9 @@ export class CommonModel {
     }
 
     // Getting the priority list
-    GetPriorityListService() {
+    GetPriorityListService(companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.commonService.GetPriorityList().subscribe(
+            this.allSubscriptions.push(this.commonService.GetPriorityList(companyId).subscribe(
                 data => {
                     let returnData = <Priority[]>data;;
                     // Resolve the promise
@@ -67,9 +67,9 @@ export class CommonModel {
     }
 
     // Getting the status list
-    GetStatusListService(moduleCode: string) {
+    GetStatusListService(moduleCode: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.commonService.GetStatusList(moduleCode).subscribe(
+            this.allSubscriptions.push(this.commonService.GetStatusList(moduleCode, companyId).subscribe(
                 data => {
                     let returnData = <Status[]>data;;
                     // Resolve the promise
@@ -82,9 +82,9 @@ export class CommonModel {
     }
 
     // Getting the module list
-    GetModuleListService() {
+    GetModuleListService(companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.commonService.GetModuleList().subscribe(
+            this.allSubscriptions.push(this.commonService.GetModuleList(companyId).subscribe(
                 data => {
                     let returnData = <Module[]>data;;
                     // Resolve the promise
@@ -112,9 +112,9 @@ export class CommonModel {
     }
 
     // Getting all the staff list
-    GetAllStaffListService() {
+    GetAllStaffListService(companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.commonService.GetAllStaffList().subscribe(
+            this.allSubscriptions.push(this.commonService.GetAllStaffList(companyId).subscribe(
                 data => {
                     let returnData = <BasicUserDetails[]>data;
                     // Resolve the promise
@@ -127,9 +127,9 @@ export class CommonModel {
     }
 
     // Get notification count for tabs
-    GetNotificationCount(tabSelection: string, userId: string) {
+    GetNotificationCount(tabSelection: string, userId: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.commonService.GetNotificationCount(tabSelection, userId).subscribe(
+            this.allSubscriptions.push(this.commonService.GetNotificationCount(tabSelection, userId, companyId).subscribe(
                 data => {
                     let returnData = <number>data;
                     // Resolve the promise
@@ -142,9 +142,9 @@ export class CommonModel {
     }
 
     // Getting the module list based on user role
-    GetModuleListBasedUserRoleService(userRole: string, isStatic: boolean) {
+    GetModuleListBasedUserRoleService(userRole: string, isStatic: boolean, companyId: number, userId: string) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.commonService.GetModuleListBasedUserRole(userRole, isStatic).subscribe(
+            this.allSubscriptions.push(this.commonService.GetModuleListBasedUserRole(userRole, isStatic, companyId, userId).subscribe(
                 data => {
                     let returnData = <Module[]>data;
                     // Resolve the promise
@@ -157,9 +157,9 @@ export class CommonModel {
     }
 
     // Getting all the access list based on the user role
-    GetAccessListBasedUserRoleService(userRole: string) {
+    GetAccessListBasedUserRoleService(userRole: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.commonService.GetAccessListBasedUserRole(userRole).subscribe(
+            this.allSubscriptions.push(this.commonService.GetAccessListBasedUserRole(userRole, companyId).subscribe(
                 data => {
                     let returnData = <UserRoleAccessDetail[]>data;
                     // Resolve the promise
@@ -172,9 +172,9 @@ export class CommonModel {
     }
 
     // Getting all the access list based on the user role for view
-    GetViewAccessListBasedUserRole(userRole: string) {
+    GetViewAccessListBasedUserRole(userRole: string, companyId: number, userId: string) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.commonService.GetViewAccessListBasedUserRole(userRole).subscribe(
+            this.allSubscriptions.push(this.commonService.GetViewAccessListBasedUserRole(userRole, companyId, userId).subscribe(
                 data => {
                     let returnData = <Module[]>data;
                     // Resolve the promise

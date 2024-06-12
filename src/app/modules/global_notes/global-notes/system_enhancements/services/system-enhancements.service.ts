@@ -38,11 +38,12 @@ export class SystemEnhancementsService {
   }
 
   // Adding the view Id for the system enhancement
-  AddViewId(itemId: string, userId: string) {
+  AddViewId(itemId: string, userId: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("itemId", itemId.toString())
-      .set("userId", userId.toString());
+      .set("userId", userId.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.get<boolean>(this.AddViewIdUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -52,11 +53,12 @@ export class SystemEnhancementsService {
   }
 
   // Approval of change date history
-  ApprovalChangeDate(SystemEnhancementsChangeHistoryId: number, approval: string) {
+  ApprovalChangeDate(SystemEnhancementsChangeHistoryId: number, approval: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("SystemEnhancementsChangeHistoryId", SystemEnhancementsChangeHistoryId.toString())
-      .set("approval", approval.toString());
+      .set("approval", approval.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.get<boolean>(this.ApprovalChangeDateUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -66,11 +68,12 @@ export class SystemEnhancementsService {
   }
 
   // Set System Enhancement Details
-  SetSystemEnhancementDetails(systemEnhancement: SystemEnhancement, actionState: string, userId: string) {
+  SetSystemEnhancementDetails(systemEnhancement: SystemEnhancement, actionState: string, userId: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("actionState", actionState.toString())
-      .set("userId", userId.toString());
+      .set("userId", userId.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.post<string>(this.SetSystemEnhancementDetailsUrl, systemEnhancement, { params: my_params }).pipe(
       catchError(error => {
@@ -80,9 +83,10 @@ export class SystemEnhancementsService {
   }
 
   // Getting the system enhancements modules to display
-  GetSystemEnhancementDisplayModules(filter: Filter) {
+  GetSystemEnhancementDisplayModules(filter: Filter, companyId: number) {
     // Setting the params
-    let my_params = new HttpParams();
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString());
 
     return this.http.post<DisplayModule[]>(this.GetSystemEnhancementDisplayModulesUrl, filter, { params: my_params }).pipe(
       catchError(error => {
@@ -92,10 +96,11 @@ export class SystemEnhancementsService {
   }
 
   // Getting the system enhancements display list
-  GetSystemEnhancementDisplayList(filter: Filter, userId: string) {
+  GetSystemEnhancementDisplayList(filter: Filter, userId: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("UserId", userId.toString());
+      .set("UserId", userId.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.post<ViewSystemEnhancement[]>(this.GetSystemEnhancementDisplayListUrl, filter, { params: my_params }).pipe(
       catchError(error => {
@@ -105,11 +110,12 @@ export class SystemEnhancementsService {
   }
 
   // Getting the system enhancements details based on the Id
-  GetSystemEnhancementDetailsById(systemEnhancementId: string, userId: string) {
+  GetSystemEnhancementDetailsById(systemEnhancementId: string, userId: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("systemEnhancementId", systemEnhancementId.toString())
-      .set("userId", userId.toString());
+      .set("userId", userId.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.get<SystemEnhancement>(this.GetSystemEnhancementDetailsByIdUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -119,11 +125,12 @@ export class SystemEnhancementsService {
   }
 
   // Updating the status of the system enhancement
-  UpdateSystemEnhancementStatus(systemEnhancementId: string, statusId: number) {
+  UpdateSystemEnhancementStatus(systemEnhancementId: string, statusId: number, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("systemEnhancementId", systemEnhancementId.toString())
-      .set("statusId", statusId.toString());
+      .set("statusId", statusId.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.get<boolean>(this.UpdateSystemEnhancementStatusUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -133,10 +140,11 @@ export class SystemEnhancementsService {
   }
 
   // Set System Enhancement Change date history
-  SetSystemEhancementChangeDate(systemEnhancementChangeDate: SystemEnhancementChangeDate, actionState: string) {
+  SetSystemEhancementChangeDate(systemEnhancementChangeDate: SystemEnhancementChangeDate, actionState: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("actionState", actionState.toString());
+      .set("actionState", actionState.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.post<string>(this.SetSystemEhancementChangeDateUrl, systemEnhancementChangeDate, { params: my_params }).pipe(
       catchError(error => {
@@ -146,10 +154,11 @@ export class SystemEnhancementsService {
   }
 
   // Get System Enhancement Change date history
-  GetSystemEhancementChangeDate(filter: Filter, systemEnhancementId: string) {
+  GetSystemEhancementChangeDate(filter: Filter, systemEnhancementId: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("systemEnhancementId", systemEnhancementId.toString());
+      .set("systemEnhancementId", systemEnhancementId.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.post<ViewSystemEnhancementChangeDate[]>(this.GetSystemEhancementChangeDateUrl, filter, { params: my_params }).pipe(
       catchError(error => {
@@ -159,10 +168,11 @@ export class SystemEnhancementsService {
   }
 
   // Set System Enhancement Comment
-  SetSystemEhancementComment(systemEnhancementComment: SystemEnhancementComment, actionState: string) {
+  SetSystemEhancementComment(systemEnhancementComment: SystemEnhancementComment, actionState: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("actionState", actionState.toString());
+      .set("actionState", actionState.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.post<string>(this.SetSystemEhancementCommentUrl, systemEnhancementComment, { params: my_params }).pipe(
       catchError(error => {
@@ -172,9 +182,10 @@ export class SystemEnhancementsService {
   }
 
   // Get System Enhancement Comment
-  GetSystemEhancementComment(filter: Filter) {
+  GetSystemEhancementComment(filter: Filter, companyId: number) {
     // Setting the params
-    let my_params = new HttpParams();
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString());
 
     return this.http.post<ViewSystemEnhancementComment[]>(this.GetSystemEhancementCommentUrl, filter, { params: my_params }).pipe(
       catchError(error => {
@@ -184,9 +195,10 @@ export class SystemEnhancementsService {
   }
 
   // Getting the stat boxes
-  GetStatBoxes() {
+  GetStatBoxes(companyId: number) {
     // Setting the params
-    let my_params = new HttpParams();
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString());
 
     return this.http.get<StatisticsBoxData[]>(this.GetStatBoxesUrl, { params: my_params }).pipe(
       catchError(error => {

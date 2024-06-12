@@ -287,7 +287,7 @@ export class GeneralInfoComponent implements OnInit {
     // getting the Client Customer details based on the selected client Id
     GetClientCustomerDetails() {
         // Calling the object model to access the service
-        this.clientModel.GetClientCustomer(this.selectedClientId, this.companyId).then(
+        this.clientModel.GetClientCustomer(this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Getting the list of social media list
                 this.clientCustomer = <ClientCustomer>data;
@@ -299,7 +299,7 @@ export class GeneralInfoComponent implements OnInit {
     // getting the Client Business details based on the selected client Id
     GetBusinessCustomerDetails() {
         // Calling the object model to access the service
-        this.clientModel.GetBillingAddress(this.selectedClientId, this.companyId).then(
+        this.clientModel.GetBillingAddress(this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Getting the list of social media list
                 this.businessAddress = <BusinessAddress>data;
@@ -311,7 +311,7 @@ export class GeneralInfoComponent implements OnInit {
     // getting the Client Relationship details based on the selected client Id
     GetRelationshipDetails() {
         // Calling the object model to access the service
-        this.clientModel.GetRelationshipDetails(this.selectedClientId, this.companyId).then(
+        this.clientModel.GetRelationshipDetails(this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Getting the list of social media list
                 this.relationshipDetails = <RelationshipDetails>data;
@@ -604,7 +604,7 @@ export class GeneralInfoComponent implements OnInit {
         let actionState = (this.selectedClientId == 0) ? "NEW" : "UPD";
 
         // Calling the object model to access the service
-        this.clientModel.SetClientCustomer(this.clientCustomer, this.overallCookieInterface.GetUserId(), actionState, this.companyId).then(
+        this.clientModel.SetClientCustomer(this.clientCustomer, this.overallCookieInterface.GetUserId(), actionState, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Assign new client Id
                 this.selectedClientId = <number>data;
@@ -627,7 +627,7 @@ export class GeneralInfoComponent implements OnInit {
         let actionState = (this.businessAddress.Id == 0) ? "NEW" : "UPD";
 
         // Calling the object model to access the service
-        this.clientModel.SetBillingAddress(this.businessAddress, actionState, this.selectedClientId, this.companyId).then(
+        this.clientModel.SetBillingAddress(this.businessAddress, actionState, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Setting the business address Id
                 this.businessAddress.Id = <number>data;
@@ -642,7 +642,7 @@ export class GeneralInfoComponent implements OnInit {
         let actionState = (this.relationshipDetails.Id == 0) ? "NEW" : "UPD";
 
         // Calling the object model to access the service
-        this.clientModel.SetRelationshipDetails(this.relationshipDetails, actionState, this.selectedClientId, this.companyId).then(
+        this.clientModel.SetRelationshipDetails(this.relationshipDetails, actionState, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Setting the business address Id
                 this.relationshipDetails.Id = <number>data;
@@ -676,7 +676,7 @@ export class GeneralInfoComponent implements OnInit {
         // End of Check if the action is new
 
         // Calling the object model to access the service
-        this.clientModel.SetContactDetails(contactObject, actionState, this.selectedClientId, this.companyId).then(
+        this.clientModel.SetContactDetails(contactObject, actionState, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Setting the business address Id
                 this.contactList[currentIndex].Id = <number>data;
@@ -711,7 +711,7 @@ export class GeneralInfoComponent implements OnInit {
         // End of Check if the action is new
 
         // Calling the object model to access the service
-        this.clientModel.SetSocialMediaDetails(socialMediaObject, actionState, this.selectedClientId, this.companyId).then(
+        this.clientModel.SetSocialMediaDetails(socialMediaObject, actionState, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Setting the business address Id
                 this.socialMediaList[currentIndex].Id = <number>data;
@@ -732,7 +732,7 @@ export class GeneralInfoComponent implements OnInit {
         this.ref.onClose.subscribe((confirmation: boolean) => {
             if (confirmation) {
                 // Calling the object model to access the service
-                this.clientModel.SetContactDetails(contactObject, "REMOVE", this.selectedClientId, this.companyId).then(
+                this.clientModel.SetContactDetails(contactObject, "REMOVE", this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
                     (data) => {
                         /// Getting all the contacts list
                         this.getAllContactList();
@@ -746,7 +746,7 @@ export class GeneralInfoComponent implements OnInit {
     // Getting all the contacts list
     getAllContactList() {
         // Calling the object model to access the service
-        this.clientModel.GetAllContactList(this.contactFilter, this.selectedClientId, this.companyId).then(
+        this.clientModel.GetAllContactList(this.contactFilter, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Getting the list of contacts
                 this.contactList = <Contact[]>data;
@@ -787,7 +787,7 @@ export class GeneralInfoComponent implements OnInit {
         this.ref.onClose.subscribe((confirmation: boolean) => {
             if (confirmation) {
                 // Calling the object model to access the service
-                this.clientModel.SetSocialMediaDetails(socialMediaObject, "REMOVE", this.selectedClientId, this.companyId).then(
+                this.clientModel.SetSocialMediaDetails(socialMediaObject, "REMOVE", this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
                     (data) => {
                         // Getting all the social media list
                         this.getAllSocialMediaList();
@@ -801,7 +801,7 @@ export class GeneralInfoComponent implements OnInit {
     // Getting all the social media list
     getAllSocialMediaList() {
         // Calling the object model to access the service
-        this.clientModel.GetAllSocialMediaList(this.socialMediaFilter, this.selectedClientId, this.companyId).then(
+        this.clientModel.GetAllSocialMediaList(this.socialMediaFilter, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Getting the list of social media list
                 this.socialMediaList = <SocialMedia[]>data;

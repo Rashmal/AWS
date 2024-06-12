@@ -17,7 +17,8 @@ export class OverallCookieModel implements OverallCookieInterface {
             LoggedUserEmail: '',
             LoggedUserFullName: '',
             LoggedUserId: '',
-            LoggedUserRole: ''
+            LoggedUserRole: '',
+            CompanyId: 0
         };
         // End of Initialize the object
     }
@@ -38,6 +39,8 @@ export class OverallCookieModel implements OverallCookieInterface {
         this.cookieObject.LoggedUserId = decodedToken['nameid'];
         // Setting the user role
         this.cookieObject.LoggedUserRole = decodedToken['amr'];
+        // Setting the user role
+        this.cookieObject.CompanyId = decodedToken['azp'];
         // Store the cookie details
         this.StoreCookie();
     }
@@ -124,6 +127,14 @@ export class OverallCookieModel implements OverallCookieInterface {
         this.ValidateCookie();
         // Return the value
         return this.cookieObject.LoggedUserRole;
+    }
+
+    // Getting the company id
+    GetCompanyId() {
+        // Validate the cookie object
+        this.ValidateCookie();
+        // Return the value
+        return this.cookieObject.CompanyId;
     }
 
     // Clearing the data from the local storage

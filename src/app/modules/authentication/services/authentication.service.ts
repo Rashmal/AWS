@@ -35,10 +35,11 @@ export class AuthenticationService {
   }
 
   // Logout user
-  LogoutUser(email: string) {
+  LogoutUser(email: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("email", email.toString());
+      .set("email", email.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.get<boolean>(this.LogoutUserUrl, { params: my_params }).pipe(
       catchError(error => {

@@ -127,7 +127,7 @@ export class TabViewComponent {
 
     // Get SystemEnhancement notification count
     getSystemEnhancementCount() {
-        this.commonModal.GetNotificationCount('SE', this.overallCookieInterface.GetUserId()).then((data: number) => {
+        this.commonModal.GetNotificationCount('SE', this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId()).then((data: number) => {
             // Set notification count
             this.countSE = data;
         });
@@ -135,7 +135,7 @@ export class TabViewComponent {
 
     // Get SystemEnhancement notification count
     getBugFixesCount() {
-        this.commonModal.GetNotificationCount('BGF', this.overallCookieInterface.GetUserId()).then((data: number) => {
+        this.commonModal.GetNotificationCount('BGF', this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId()).then((data: number) => {
             // Set notification count
             this.countBF = data;
         });

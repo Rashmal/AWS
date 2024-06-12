@@ -97,7 +97,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
     // Start loading
     this.showLoading = true;
     // Getting the system enhancement old details
-    this.systemEnhancementModel.GetSystemEnhancementDetailsByIdService(this.systemEnhancementId, this.overallCookieInterface.GetUserId()).then(
+    this.systemEnhancementModel.GetSystemEnhancementDetailsByIdService(this.systemEnhancementId, this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting the system enhancement details
         let systemEnhancement = <SystemEnhancement>data;
@@ -120,7 +120,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
     // Start loading
     this.showLoading = true;
     // Calling the model to retrieve the data list
-    this.systemEnhancementModel.GetSystemEhancementChangeDateService(this.filter, this.systemEnhancementId).then(
+    this.systemEnhancementModel.GetSystemEhancementChangeDateService(this.filter, this.systemEnhancementId, this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting the change date history list
         this.viewSystemEnhancementChangeDate = <ViewSystemEnhancementChangeDate[]>data;
@@ -206,7 +206,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
     this.systemEnhancementChangeDate.NewToDate = new Date(this.toDate.setDate(this.toDate.getDate() + 1));
 
     // Calling the modal to save the data
-    this.systemEnhancementModel.SetSystemEhancementChangeDateService(this.systemEnhancementChangeDate, "NEW").then(
+    this.systemEnhancementModel.SetSystemEhancementChangeDateService(this.systemEnhancementChangeDate, "NEW", this.overallCookieInterface.GetCompanyId()).then(
       () => {
         // Clear the object
         this.systemEnhancementChangeDate = {
@@ -237,7 +237,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
   // Approve on click function
   approveOnClick(changeHistoryId: number) {
     // Calling the model to update
-    this.systemEnhancementModel.ApprovalChangeDate(changeHistoryId, "APPROVE").then(
+    this.systemEnhancementModel.ApprovalChangeDate(changeHistoryId, "APPROVE", this.overallCookieInterface.GetCompanyId()).then(
       () => {
         // Getting the change date history list
         this.getChangeDateHistoryList();
@@ -249,7 +249,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
   // Approve on click function
   declineOnClick(changeHistoryId: number) {
     // Calling the model to update
-    this.systemEnhancementModel.ApprovalChangeDate(changeHistoryId, "DECLINE").then(
+    this.systemEnhancementModel.ApprovalChangeDate(changeHistoryId, "DECLINE", this.overallCookieInterface.GetCompanyId()).then(
       () => {
         // Getting the change date history list
         this.getChangeDateHistoryList();

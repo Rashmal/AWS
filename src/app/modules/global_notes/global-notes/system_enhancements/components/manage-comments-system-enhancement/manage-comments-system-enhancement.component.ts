@@ -96,7 +96,7 @@ export class ManageCommentsSystemEnhancementComponent implements OnInit, OnDestr
     // Start loading
     this.showLoading = true;
     // Calling the model to retrieve all the comments list
-    this.systemEnhancementModel.GetSystemEhancementCommentService(this.filter).then(
+    this.systemEnhancementModel.GetSystemEhancementCommentService(this.filter, this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting all the comments
         this.viewSystemEnhancementComment = <ViewSystemEnhancementComment[]>data;
@@ -166,7 +166,7 @@ export class ManageCommentsSystemEnhancementComponent implements OnInit, OnDestr
     // End of Check if the error messages length
 
     // Calling the modal to save the data
-    this.systemEnhancementModel.SetSystemEhancementCommentService(this.systemEnhancementComment, "NEW").then(
+    this.systemEnhancementModel.SetSystemEhancementCommentService(this.systemEnhancementComment, "NEW", this.overallCookieInterface.GetCompanyId()).then(
       () => {
         // Clear the object
         this.systemEnhancementComment = {

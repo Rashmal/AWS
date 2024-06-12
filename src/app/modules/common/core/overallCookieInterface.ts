@@ -8,4 +8,5 @@ export interface OverallCookieInterface {
     GetUserId(): string;
     GetUserEmail(): string;
     GetUserRole(): string;
+    GetCompanyId(): number;
 }

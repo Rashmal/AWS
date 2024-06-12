@@ -37,9 +37,9 @@ export class AuthenticationModel {
     }
 
     // Logout user
-    LogoutUserService(email: string) {
+    LogoutUserService(email: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.authenticationService.LogoutUser(email).subscribe(
+            this.allSubscriptions.push(this.authenticationService.LogoutUser(email, companyId).subscribe(
                 data => {
                     let returnData = <boolean>data;
                     // Resolve the promise

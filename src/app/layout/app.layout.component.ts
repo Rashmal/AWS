@@ -162,7 +162,7 @@ export class AppLayoutComponent implements OnDestroy {
 
     // Get global notes notification count
     getGlobalNotesNotCount() {
-        this.commonModal.GetNotificationCount('TOTAL', this.overallCookieInterface.GetUserId()).then(
+        this.commonModal.GetNotificationCount('TOTAL', this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId()).then(
             (data: number) => {
                 // Set notification count
                 this.ttlNotCount = data;
