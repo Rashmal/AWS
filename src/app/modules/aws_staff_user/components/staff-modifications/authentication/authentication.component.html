@@ -1,0 +1,56 @@
+<!--Gen info main-->
+<div class="card flex justify-content-center gen_info_main">
+    <!-- Accordion section -->
+    <p-accordion [multiple]="true" [activeIndex]="[0,1]">
+        <p-accordionTab header="Basic Information">
+            <!--Client Customer-->
+            <div class="row gen_info_item">
+
+
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Current Password</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
+                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
+                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
+                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">New Password</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
+                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
+                        [disabled]="modificationMode == 'VIEW'" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Confirm Password</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
+                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
+                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
+                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+
+            </div>
+            <!--End of Client Customer-->
+
+        </p-accordionTab>
+        
+    </p-accordion>
+</div>
+<!--End of Gen info main-->

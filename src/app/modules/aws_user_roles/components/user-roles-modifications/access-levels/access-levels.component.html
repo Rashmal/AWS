@@ -1,0 +1,176 @@
+<!--Gen info main-->
+<div class="card flex justify-content-center gen_info_main">
+
+
+
+    <!-- Accordion section -->
+    <p-accordion [multiple]="true" [activeIndex]="[0,1]">
+        <!--User role row-->
+        <div class="row gen_info_item margin_bot_n">
+            <!--End of Access level header label-->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-6 flex input_area">
+                <label class="input_lbl_role  user_rl_lbl">User Role</label>
+                <!--Input area-->
+                <p-dropdown [options]="displayCountryList" class="width_50 user_rl_dd" autoWidth="false"
+                    placeholder="Select an option" [(ngModel)]="staffDetails"
+                    (onChange)="onBlurEvent('BUSINESS$ADDRESS')" />
+                <!--End of Input area-->
+                <!--Action buttons-->
+                <div class="btn_panel">
+                    <button *ngIf="userRoleModState =='INITIAL'" class="btn_green" (click)="onClickDuplicateRole()">Duplicate</button>
+                    <button *ngIf="userRoleModState =='INITIAL'" class="btn_lgt_green" (click)="onClickAddNewRole()">Add New</button>
+                    <button *ngIf="userRoleModState =='INITIAL'" class="btn_blue" (click)="onClickEditRole()">Edit</button>
+                    <button *ngIf="userRoleModState =='INITIAL'" class="btn_red" (click)="onClickDeleteRole()">Delete</button>
+                    <button *ngIf="userRoleModState =='UPDATE'" class="btn_blue" (click)="onClickUpdateRole()">Update</button>
+                    <button *ngIf="userRoleModState =='NEW'" class="btn_blue" (click)="onClickCreateRole()">Create</button>
+                    <button *ngIf="userRoleModState =='UPDATE' || userRoleModState =='NEW'" class="btn_red" (click)="onClickCancelRole()">Cancel</button>
+                </div>
+                <!--End of Action buttons-->
+            </div>
+            <!--Module selector dropdown-->
+
+
+        </div>
+        <!--End of User role row-->
+        <p-accordionTab header="Module Access Levels">
+
+            <!--Module access row-->
+            <div class="row gen_info_item">
+                <!--Input and label-->
+                <div *ngFor="let module of moduleList"
+                    class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area_switch">
+
+
+                    <!--Label-->
+                    <label class="input_lbl">{{module.Name}}</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-inputSwitch [(ngModel)]="module.IsDisable" (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
+                    <!--End of Input area-->
+
+                </div>
+                <!--End of Input and label-->
+
+            </div>
+            <!--End of Module access row-->
+
+        </p-accordionTab>
+
+        <p-accordionTab header="Module Feature Access Levels">
+            <!--Module selector and header-->
+            <div class="row gen_info_item">
+                <label class="input_lbl_hdr">Access levels for the role (View Only)</label>
+            </div>
+            <!--End of Module selector and header-->
+
+
+
+            <!--Module selector and header-->
+            <div class="row gen_info_item">
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 flex input_area">
+                    <label class="module_drp_lbl">Access modules for the role</label>
+                    <!--Input area-->
+                    <p-dropdown [options]="displayCountryList" class="width_50" autoWidth="false"
+                        placeholder="Select an option" [(ngModel)]="staffDetails"
+                        (onChange)="onBlurEvent('BUSINESS$ADDRESS')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+            </div>
+            <!--End of Module selector and header-->
+
+            <!--Module access row-->
+            <div class="row gen_info_item">
+                <!--Input and label-->
+                <div *ngFor="let tab of subTabs" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 sub_tab_item">
+
+
+                    <div class="sub_tab">
+
+                        <!--Input area-->
+                        <p-inputSwitch [(ngModel)]="tab.OverallAccess"
+                            (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
+                        <!--End of Input area-->
+                        <!--Label-->
+                        <label class="input_lbl">{{tab.Name}}</label>
+                        <!--End of Label-->
+                    </div>
+
+                    <!--Tab features-->
+                    <div class="features_list">
+                        <!--Single feature-->
+                        <div class="feature_item" *ngFor="let feature of tab.Features">
+                            <div>
+
+                                <!--Label-->
+                                <label class="input_lbl">{{feature.Feature}}</label>
+                                <!--End of Label-->
+
+
+                            </div>
+
+
+
+                            <div class="feature_actions">
+                                <div class="switch_and_lbl">
+                                    <!--Input area-->
+                                    <p-inputSwitch [(ngModel)]="feature.AddItem"
+                                        (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
+                                    <!--End of Input area-->
+                                    <!--Label-->
+                                    <label class="lbl">Add</label>
+                                    <!--End of Label-->
+                                </div>
+
+                                <div class="switch_and_lbl">
+
+                                    <!--Input area-->
+                                    <p-inputSwitch [(ngModel)]="feature.EditItem"
+                                        (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
+                                    <!--End of Input area-->
+                                    <!--Label-->
+                                    <label class="lbl">Edit</label>
+                                    <!--End of Label-->
+                                </div>
+
+                                <div class="switch_and_lbl">
+                                    <!--Input area-->
+                                    <p-inputSwitch [(ngModel)]="feature.DeleteItem"
+                                        (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
+                                    <!--End of Input area-->
+                                    <!--Label-->
+                                    <label class="lbl">Delete</label>
+                                    <!--End of Label-->
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Single feature-->
+
+                    </div>
+                    <!--End of Tab features-->
+
+
+
+                </div>
+                <!--End of Input and label-->
+                <!-- Pagination section -->
+                <p-paginator class="paginator_sec" #modulePaginator
+                    *ngIf="subTabs && subTabs.length > 0 && subTabs[0].TotalRecords > filter.RecordsPerPage"
+                    [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event)"
+                    [totalRecords]="(subTabs.length>0)? subTabs[0].TotalRecords:0"></p-paginator>
+                <!-- End of Pagination section -->
+
+            </div>
+            <!--End of Module access row-->
+
+
+
+
+
+
+        </p-accordionTab>
+    </p-accordion>
+</div>
+<!--End of Gen info main-->

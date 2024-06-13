@@ -1,0 +1,167 @@
+<!--Gen info main-->
+<div class="card flex justify-content-center gen_info_main">
+    <!-- Accordion section -->
+    <p-accordion [multiple]="true" [activeIndex]="[0,1]">
+        <p-accordionTab header="Basic Information">
+            <!--Client Customer-->
+            <div class="row gen_info_item">
+
+
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">First Name</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
+                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
+                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
+                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Last Name</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
+                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
+                        [disabled]="modificationMode == 'VIEW'" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Email</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
+                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
+                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
+                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Date of Birth</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
+                        onKeyPress="if(value.length==20) return false;" inputrestriction="^[a-z A-Z 0-9 #]*$"
+                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
+                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Select State</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <!-- <p-dropdown [options]="displayCountryList" class="width_50" autoWidth="false"
+                        placeholder="Select an option" [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
+                        [(ngModel)]="staffDetails" (onChange)="onBlurEvent('BUSINESS$ADDRESS')" /> -->
+                    <p-multiSelect [options]="displayCountryList" [(ngModel)]="selectedRoles" 
+                        placeholder="Select State" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+
+            </div>
+            <!--End of Client Customer-->
+
+        </p-accordionTab>
+        <p-accordionTab header="Address">
+            <!--Billing Address-->
+            <div class="row gen_info_item">
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Billing Name (if any)</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9]*$"
+                        onKeyPress="if(value.length==100) return false;"
+                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'" [(ngModel)]="staffDetails"
+                        (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Street Number and Name</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9 / _]*$"
+                        onKeyPress="if(value.length==100) return false;"
+                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'" [(ngModel)]="staffDetails"
+                        (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Suburb</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9]*$"
+                        onKeyPress="if(value.length==50) return false;"
+                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'" [(ngModel)]="staffDetails"
+                        (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Pcode / Zip</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" onKeyPress="if(value.length==10) return false;"
+                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'" [(ngModel)]="staffDetails"
+                        (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">State / Territory</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9]*$"
+                        onKeyPress="if(value.length==50) return false;"
+                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'" [(ngModel)]="staffDetails"
+                        (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl">Country</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+                    <p-dropdown [options]="displayCountryList" class="width_50" autoWidth="false"
+                        placeholder="Select an option" [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
+                        [(ngModel)]="staffDetails" (onChange)="onBlurEvent('BUSINESS$ADDRESS')" />
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+            </div>
+            <!--End of Billing Address-->
+        </p-accordionTab>
+    </p-accordion>
+</div>
+<!--End of Gen info main-->

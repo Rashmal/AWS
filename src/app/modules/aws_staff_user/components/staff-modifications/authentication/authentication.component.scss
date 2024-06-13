@@ -1,0 +1,93 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+.gen_info_main {
+    border-top: none;
+    border-radius: 0px 0px 6px 6px;
+    margin-bottom: 20px;
+
+    .gen_info_item {
+        .input_area {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+
+            .input_lbl {
+                background-color: transparent;
+                min-width: 200px;
+                display: flex;
+                align-items: center;
+            }
+
+            .input_field {
+
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                width: 100%;
+
+            }
+        }
+
+        .input_area_switch {
+            display: flex !important;
+        }
+
+    }
+}
+.gen_info_item {
+    .input_area {
+        display: block !important;
+    }
+
+    .input_area_switch {
+        display: flex !important;
+    }
+
+
+}
+
+::ng-deep p-accordionTab {
+    .p-accordion-header-link {
+        padding: 10px;
+        background-color: #2185D0;
+        color: #fff !important;
+    }
+    .p-accordion-content{
+        background-color: #f7f7f7;
+    }
+}
+
+::ng-deep p-table .table_header_row{
+    background-color: #2185D0  !important;
+    th{
+        background-color: transparent;
+        color: #ffffff;
+        padding: 5px;
+        height: 30px;
+    }
+    .header_col{
+        text-align: center;
+        min-width: 130px;
+    }
+    .created_details{
+        min-width: 200px;
+    }
+ 
+}
+
+::ng-deep p-table {
+    .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+        background-color: #EDF7FF;
+    }
+    .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(odd) {
+        background-color: #ffffff;
+    }
+   
+    .p-datatable .p-datatable-tbody > tr:hover{
+        background-color:  #c8e4fb !important;
+    }
+    .p-datatable .p-datatable-tbody > tr > td{
+        padding: 5px;
+        vertical-align: top;
+    }
+}

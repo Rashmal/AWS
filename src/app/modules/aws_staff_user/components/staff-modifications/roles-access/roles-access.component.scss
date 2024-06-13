@@ -1,0 +1,183 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+.gen_info_main {
+    border-top: none;
+    border-radius: 0px 0px 6px 6px;
+    margin-bottom: 20px;
+
+    .gen_info_item {
+        margin-bottom: 10px;
+        .input_area {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-grow: 1;
+
+            .input_lbl {
+                background-color: transparent;
+                min-width: 200px;
+                display: flex;
+                align-items: center;
+            }
+            .input_lbl_role{
+                background-color: transparent;
+                display: flex;
+                align-items: center;
+                width: max-content;
+                padding-right: 20px;
+            }
+            .module_drp_lbl{
+                background-color: transparent;
+                display: flex;
+                align-items: center;
+                width: max-content;
+                padding-right: 20px;
+            }
+            
+
+            .input_field {
+
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                width: 100%;
+
+            }
+        }
+
+        .input_lbl_hdr{
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .input_area_switch {
+            display: flex !important;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-grow: 1;
+
+            .input_lbl {
+                background-color: transparent;
+                min-width: 200px;
+                display: flex;
+                align-items: center;
+            }
+
+            .input_field {
+
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                width: 100%;
+
+            }
+            
+        }
+
+        .sub_tab_item{
+           display: block; 
+           .sub_tab{
+            display: flex;
+            align-items: center;
+            .input_lbl{
+                min-width: 200px;
+                margin-left: 10px;
+                font-weight: bold;
+                margin-bottom: 10px; 
+                text-decoration: underline;
+            }
+           }
+           .features_list{
+           
+            .feature_item{
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                flex-grow: 1;
+                .input_lbl{
+                    min-width: 200px;
+                    font-weight: bold;
+                    margin-bottom: 10px; 
+                    
+                }
+                .feature_actions{
+                    display: flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+                flex-grow: 1;
+                    .switch_and_lbl{
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 10px;
+                        .lbl{
+                            margin-left: 10px;
+                            min-width: 50px;
+                        }
+                    }
+                }
+                
+
+            }
+           }
+        }
+
+    }
+}
+
+.paginator_sec{
+    margin-top: 10px;
+}
+
+
+::ng-deep p-accordionTab {
+    .p-accordion-header-link {
+        padding: 10px;
+        background-color: #2185D0;
+        color: #fff !important;
+    }
+    .p-accordion-content{
+        background-color: #f7f7f7;
+    }
+}
+
+::ng-deep p-table .table_header_row{
+    background-color: #2185D0  !important;
+    th{
+        background-color: transparent;
+        color: #ffffff;
+        padding: 5px;
+        height: 30px;
+    }
+    .header_col{
+        text-align: center;
+        min-width: 130px;
+    }
+    .created_details{
+        min-width: 200px;
+    }
+ 
+}
+
+::ng-deep p-table {
+    .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+        background-color: #EDF7FF;
+    }
+    .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(odd) {
+        background-color: #ffffff;
+    }
+   
+    .p-datatable .p-datatable-tbody > tr:hover{
+        background-color:  #c8e4fb !important;
+    }
+    .p-datatable .p-datatable-tbody > tr > td{
+        padding: 5px;
+        vertical-align: top;
+    }
+}
+
+::ng-deep .p-dropdown {
+    height: 30px;
+    width: 100% !important;
+    border-radius: 3px;
+}

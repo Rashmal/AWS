@@ -1,0 +1,38 @@
+.staff_main{
+    padding: 0;
+    .no_side_padding {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .header_section {
+        padding: 0;
+        margin-bottom: 10px;
+        .module_title {
+            font-size: 20pt;
+            color: #2867af;
+            letter-spacing: 0px;
+            font-weight: bold;
+        }
+    }
+    .top_bar_common {
+        height: 39px;
+        align-items: center;
+        background-color: #f9f9f9;
+        padding: 3px;
+        border: 1px solid #ccc;
+    }
+
+    .tab_content {
+        background-color: #f9f9f9;
+        padding: 0;
+        border: 1px solid #ccc;
+    }
+}
+
+
+@media (max-width: 991px) {
+    .top_bar_common{
+        height: auto !important;
+    }
+}

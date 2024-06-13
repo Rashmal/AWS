@@ -524,9 +524,9 @@
         <!-- Prime ng table -->
         <p-table [value]="displayTable" dataKey="name" [tableStyle]="{ 'min-width': '60rem' }" [responsive]="true">
             <!-- Header section -->
-            <ng-template pTemplate="header">
+            <ng-template pTemplate="header" >
                 <!-- Header row section -->
-                <tr>
+                <tr class="table_header_row">
                     <th>No:</th>
                     <th class="title_content title_by_width sort_click" (click)="sortItems('TITLE')">
                         <i class="fa fa-sort-asc " aria-hidden="true"
@@ -594,7 +594,7 @@
                 <!-- End of Body row section -->
 
                 <!-- Enhancement list for module-->
-                <tr *ngFor="let enhancement of moduleData.ExpandedContent; let eRowIndex = index">
+                <tr class="inner_row" *ngFor="let enhancement of moduleData.ExpandedContent; let eRowIndex = index">
                     <td>
                         <div class="number_col" [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'">
                             <span class="stator_strip"

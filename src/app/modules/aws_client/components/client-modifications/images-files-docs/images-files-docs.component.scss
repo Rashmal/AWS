@@ -51,7 +51,7 @@
             border-radius: 3px;
             border: none;
             color: #ffffff;
-            background-color: #126095;
+            background-color: #21ba45;
         }
 
         .button_red {
@@ -60,7 +60,7 @@
             border-radius: 3px;
             border: none;
             color: #ffffff;
-            background-color: #ff5757;
+            background-color: #DB2828;
             margin-right: 10px;
         }
     }
@@ -93,7 +93,7 @@
     border-radius: 3px;
     border: none;
     color: #ffffff;
-    background-color: #126095;
+    background-color: #21ba45;
 
 }
 
@@ -104,7 +104,7 @@
     border-radius: 3px;
     border: none;
     color: #ffffff;
-    background-color: #126095;
+    background-color: #21ba45;
 
     i {
         color: #fff;
@@ -115,7 +115,7 @@
 .upload_icon {
     i {
         font-size: 50px;
-        color: #126095;
+        color: #21ba45;
     }
 }
 
@@ -158,12 +158,12 @@
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.6);
     /* opacity: 0.4; */
-    color: #126095;
+    color: #21ba45;
     font-size: 15px;
     font-weight: bold;
 
     i {
-        color: #126095;
+        color: #21ba45;
         font-size: 20px;
         font-weight: bold;
         margin-right: 10px;
@@ -180,12 +180,12 @@
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.6);
     /* opacity: 0.4; */
-    color: #126095;
+    color: #21ba45;
     font-size: 15px;
     font-weight: bold;
 
     i {
-        color: #126095;
+        color: #21ba45;
         font-size: 20px;
         font-weight: bold;
         margin-right: 10px;
@@ -279,11 +279,11 @@
             }
 
             .red_btn {
-                background-color: #ff5757;
+                background-color: #DB2828;
             }
 
             .blue_btn {
-                background-color: #126095;
+                background-color: #21ba45;
             }
 
             .yellow_btn {
@@ -294,5 +294,51 @@
                 background-color: #21ba45;
             }
         }
+    }
+}
+
+::ng-deep p-accordionTab {
+    .p-accordion-header-link {
+        padding: 10px;
+        background-color: #2185D0;
+        color: #fff !important;
+    }
+    .p-accordion-content{
+        background-color: #f7f7f7;
+    }
+}
+
+::ng-deep p-table .table_header_row{
+    background-color: #2185D0  !important;
+    th{
+        background-color: transparent;
+        color: #ffffff;
+        padding: 5px;
+        height: 30px;
+    }
+    .header_col{
+        text-align: center;
+        min-width: 130px;
+    }
+    .created_details{
+        min-width: 200px;
+    }
+ 
+}
+
+::ng-deep p-table {
+    .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+        background-color: #EDF7FF;
+    }
+    .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(odd) {
+        background-color: #ffffff;
+    }
+   
+    .p-datatable .p-datatable-tbody > tr:hover{
+        background-color:  #c8e4fb !important;
+    }
+    .p-datatable .p-datatable-tbody > tr > td{
+        padding: 5px;
+        vertical-align: top;
     }
 }

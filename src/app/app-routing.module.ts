@@ -40,6 +40,8 @@ import { ReportBugComponent } from './layout/common/report-bug/report-bug.compon
                     { path: 'trello', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'client', loadChildren: () => import('./modules/aws_client/awsClient.module').then(m => m.AWSClientModule) },
                     { path: 'company', loadChildren: () => import('./modules/aws_company/awsCompany.module').then(m => m.AWSCompanyModule) },
+                    { path: 'staff', loadChildren: () => import('./modules/aws_staff_user/awsStaffUser.module').then(m => m.AWSStaffUserModule) },
+                    { path: 'user_roles', loadChildren: () => import('./modules/aws_user_roles/awsUserRoles.module').then(m => m.AWSUserRolesModule) },
                     { path: 'report-bug', component: ReportBugComponent }
                 ]
             },

@@ -1,0 +1,31 @@
+<!--Avatar main-->
+<div class="card flex justify-content-center gen_info_main">
+    <!-- Accordion section -->
+    <p-accordion [multiple]="true" [activeIndex]="[0,1]">
+        <p-accordionTab header="Avatar">
+            <!--Avatar-->
+            <div class="row gen_info_item">
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex justify_center">
+                    <img class="avatar_img" src="../../../../../../assets/images/default_avatar.png" />
+                </div>
+                <!--End of Input and label-->
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex avatar_action">
+                    <!--Label-->
+                    <label class="input_lbl">Change Avatar</label>
+                    <!--End of Label-->
+                    
+                        <!-- Hidden file input element that supports multiple file selection of any type -->
+                        <input type="file" #fileInput accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)" hidden>
+                    <button class="select_file_btn" (click)="fileInput.click()">Select File</button>
+                    <button class="remove_btn">Remove Avatar</button>
+                </div>
+                <!--End of Input and label-->
+            </div>
+            <!--End of Avatar-->
+        </p-accordionTab>
+    </p-accordion>
+    <!-- End of Accordion section -->
+</div>
+<!--End of Avatar main-->
