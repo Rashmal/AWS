@@ -94,7 +94,7 @@ export class ClientListComponent implements OnInit {
     //Get display client list from db
     getDisplayClientList() {
         //Call service to get data
-        this.clientModel.GetDisplayClientDetails(this.filter, 0).then(
+        this.clientModel.GetDisplayClientDetails(this.filter, this.overallCookieInterface.GetCompanyId()).then(
             (data: DisplayClientDetails[]) => {
                 if (data) {
                     this.clientList = data;

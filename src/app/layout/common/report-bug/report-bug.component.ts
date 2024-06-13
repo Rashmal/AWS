@@ -102,7 +102,7 @@ export class ReportBugComponent {
     this.viewManagedStaffDropdownList = [];
     this.viewRequestedStaffDropdownList = [];
     // Calling the model to retrieve the data
-    this.commonModel.GetAllStaffListService().then(
+    this.commonModel.GetAllStaffListService(this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting the staff list
         let staffListLocal: BasicUserDetails[] = <BasicUserDetails[]>data;
@@ -126,7 +126,7 @@ export class ReportBugComponent {
     // Clear the list
     this.viewPriorityDropdownList = [];
     // Calling the model to retrieve the data
-    this.commonModel.GetPriorityListService().then(
+    this.commonModel.GetPriorityListService(this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting the staff list
         let priorityListLocal: Priority[] = <Priority[]>data;
@@ -152,7 +152,7 @@ export class ReportBugComponent {
     // Clear the list
     this.viewStatusDropdownList = [];
     // Calling the model to retrieve the data
-    this.commonModel.GetStatusListService("BG").then(
+    this.commonModel.GetStatusListService("BG", this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting the staff list
         let statusListLocal: Status[] = <Status[]>data;
@@ -178,7 +178,7 @@ export class ReportBugComponent {
     // Clear the list
     this.viewModulesDropdownList = [];
     // Calling the model to retrieve the data
-    this.commonModel.GetModuleListService().then(
+    this.commonModel.GetModuleListService(this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting the staff list
         let modulesListLocal: Status[] = <Status[]>data;
@@ -250,7 +250,7 @@ export class ReportBugComponent {
     // Check if the bug fix ID exists
     if (this.bugFix.Id && this.bugFix.Id != '') {
       // Calling the modal to save the data
-      this.bugFixModel.SetBugFixesDetailsService(this.bugFix, "UPDATE", this.overallCookieInterface.GetUserId()).then(
+      this.bugFixModel.SetBugFixesDetailsService(this.bugFix, "UPDATE", this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId()).then(
         () => {
           // Route to the list
           this.route.navigate(['/layout']);
@@ -259,7 +259,7 @@ export class ReportBugComponent {
       // End of Calling the modal to save the data
     } else {
       // Calling the modal to save the data
-      this.bugFixModel.SetBugFixesDetailsService(this.bugFix, "NEW", this.overallCookieInterface.GetUserId()).then(
+      this.bugFixModel.SetBugFixesDetailsService(this.bugFix, "NEW", this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId()).then(
         () => {
           // Route to the list
           this.route.navigate(['/layout']);

@@ -18,7 +18,7 @@
 
                         <!-- When the client requirements are not empty -->
                         <p-table class="contacts_tbl" [value]="clientRequirementList" dataKey="id"
-                            [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
+                            [tableStyle]="{ 'min-width': '50rem' }">
                             <!-- Header section -->
                             <ng-template pTemplate="header">
                                 <tr class="table_header_row">
@@ -73,8 +73,8 @@
                                         <!-- End of When the files is empty -->
 
                                         <!--File List-->
-                                        <div *ngFor="let item of clientRequirement.ClientRequirementFiles"
-                                            class="uploaded_files_list">
+                                        <div *ngFor="let item of clientRequirement.ClientRequirementFiles; let index = index"
+                                            class="uploaded_files_list" [ngClass]="(index == 0)?'marginTop0':''">
                                             <!-- Display label section -->
                                             <div>{{item.FileName}}</div>
                                             <!-- End of Display label section -->
@@ -163,7 +163,7 @@
 
                                         <!-- Display Role list -->
                                         <div *ngFor="let item of clientRequirement.RoleDetails; let roleIndex = index"
-                                            class="uploaded_files_list">
+                                            class="uploaded_files_list" [ngClass]="(roleIndex == 0)?'marginTop0':''">
                                             <!-- Role name -->
                                             <div>{{item.Name}}</div>
                                             <!-- End of Role name -->
@@ -291,7 +291,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-6">
                         <p-table class="contacts_tbl" [value]="hoursOthersRatesList" dataKey="id"
-                            [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
+                            [tableStyle]="{ 'min-width': '50rem' }">
                             <ng-template pTemplate="header">
                                 <tr class="table_header_row">
                                     <th class="header_col" style="width:25%">

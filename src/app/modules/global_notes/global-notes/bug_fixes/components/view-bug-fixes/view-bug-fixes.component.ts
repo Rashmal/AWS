@@ -158,7 +158,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     // Clear the list
     this.viewStaffDropdownList = [];
     // Calling the model to retrieve the data
-    this.commonModel.GetAllStaffListService().then((data) => {
+    this.commonModel.GetAllStaffListService(this.overallCookieInterface.GetCompanyId()).then((data) => {
       // Getting the staff list
       let staffListLocal: BasicUserDetails[] = <BasicUserDetails[]>data;
       // Setting the all option
@@ -187,7 +187,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     // Clear the list
     this.viewPriorityDropdownList = [];
     // Calling the model to retrieve the data
-    this.commonModel.GetPriorityListService().then((data) => {
+    this.commonModel.GetPriorityListService(this.overallCookieInterface.GetCompanyId()).then((data) => {
       // Getting the staff list
       let priorityListLocal: Priority[] = <Priority[]>data;
       // Setting the all option
@@ -214,7 +214,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     this.viewStatusDropdownList = [];
     this.viewStatusMobileDropdownList = [];
     // Calling the model to retrieve the data
-    this.commonModel.GetStatusListService('BG').then((data) => {
+    this.commonModel.GetStatusListService('BG', this.overallCookieInterface.GetCompanyId()).then((data) => {
       // Getting the staff list
       let statusListLocal: Status[] = <Status[]>data;
       this.originalStatusListLocal = statusListLocal;
@@ -245,7 +245,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     // Clear the list
     this.viewModulesDropdownList = [];
     // Calling the model to retrieve the data
-    this.commonModel.GetModuleListService().then((data) => {
+    this.commonModel.GetModuleListService(this.overallCookieInterface.GetCompanyId()).then((data) => {
       // Getting the staff list
       let modulesListLocal: Status[] = <Status[]>data;
       // Setting the all option
@@ -271,7 +271,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     // Clear the list
     this.statBoxesList = [];
     // Calling the model to retrieve the data
-    this.bugFixModel.GetStatBoxes().then((data) => {
+    this.bugFixModel.GetStatBoxes(this.overallCookieInterface.GetCompanyId()).then((data) => {
       // Getting the staff list
       this.statBoxesList = <StatisticsBoxData[]>data;
     });
@@ -302,7 +302,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     // Calling the model to retrieve the data
 
     this.bugFixModel
-      .GetBugFixesDisplayModulesService(this.modulesFilter)
+      .GetBugFixesDisplayModulesService(this.modulesFilter, this.overallCookieInterface.GetCompanyId())
       .then((data) => {
         // Getting the staff list
         this.displayModuleList = <DisplayModule[]>data;
@@ -348,7 +348,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     // Calling the model to retrieve the data
 
     this.bugFixModel
-      .GetBugFixesDisplayModulesService(modulesFilter)
+      .GetBugFixesDisplayModulesService(modulesFilter, this.overallCookieInterface.GetCompanyId())
       .then((data) => {
         // Getting the staff list
         let displayModuleList = <DisplayModule[]>data;
@@ -501,7 +501,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     };
     // Calling the modal to save the data
     this.bugFixModel
-      .SetBugFixesDetailsService(bug, 'DELETE', this.overallCookieInterface.GetUserId())
+      .SetBugFixesDetailsService(bug, 'DELETE', this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId())
       .then(() => {
         this.filter.CurrentPage = 1;
         // Refresh the bugFix list
@@ -529,7 +529,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     localFilter.ModuleId = moduleId;
     // Calling the model to retrieve the data
     this.bugFixModel
-      .GetBugFixesDisplayListService(localFilter, this.overallCookieInterface.GetUserId())
+      .GetBugFixesDisplayListService(localFilter, this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId())
       .then((data) => {
         // Getting the staff list
         this.bugFixesList = <ViewBugFix[]>data;
@@ -562,7 +562,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     this.bugFixesList = [];
     // Calling the model to retrieve the data
     this.bugFixModel
-      .GetBugFixesDisplayListService(this.filter, this.overallCookieInterface.GetUserId())
+      .GetBugFixesDisplayListService(this.filter, this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId())
       .then((data) => {
         // Getting the staff list
         this.bugFixesList = <ViewBugFix[]>data;
@@ -614,7 +614,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     this.bugFixesList = [];
     // Calling the model to retrieve the data
     this.bugFixModel
-      .GetBugFixesDisplayListService(this.filter, this.overallCookieInterface.GetUserId())
+      .GetBugFixesDisplayListService(this.filter, this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId())
       .then((data) => {
         // Getting the staff list
         this.bugFixesList = <ViewBugFix[]>data;
@@ -724,7 +724,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
     this.showLoading = true;
     // Calling the model to update the status
     this.bugFixModel
-      .UpdateBugFixesStatusStatus(bugFix.Id, status.Id)
+      .UpdateBugFixesStatusStatus(bugFix.Id, status.Id, this.overallCookieInterface.GetCompanyId())
       .then((data) => {
         //this.filter.CurrentPage = 1;
         // Refresh the list
@@ -757,7 +757,7 @@ export class ViewBugFixesComponent implements OnInit, OnDestroy {
 
     // Calling the model to update the status
     this.bugFixModel
-      .UpdateBugFixesStatusStatus(bugFix.Id, statusID)
+      .UpdateBugFixesStatusStatus(bugFix.Id, statusID, this.overallCookieInterface.GetCompanyId())
       .then((data) => {
         // Setting the module filter current page to be 1
         this.modulesFilter.CurrentPage = 1;

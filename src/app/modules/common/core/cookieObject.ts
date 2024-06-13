@@ -6,4 +6,5 @@ export class CookieObject {
     LoggedUserId: string;
     LoggedUserEmail: string;
     LoggedUserRole: string;
+    CompanyId: number;
 }

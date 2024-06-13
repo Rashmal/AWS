@@ -38,11 +38,12 @@ export class BugFixesService {
   }
 
   // Adding the view Id for the system enhancement
-  AddViewId(itemId: string, userId: string) {
+  AddViewId(itemId: string, userId: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("itemId", itemId.toString())
-      .set("userId", userId.toString());
+      .set("userId", userId.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.get<boolean>(this.AddViewIdUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -52,11 +53,12 @@ export class BugFixesService {
   }
 
   // Approval of change date history
-  ApprovalChangeDate(BugFixChangeHistoryId: number, approval: string) {
+  ApprovalChangeDate(BugFixChangeHistoryId: number, approval: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("BugFixChangeHistoryId", BugFixChangeHistoryId.toString())
-      .set("approval", approval.toString());
+      .set("approval", approval.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.get<boolean>(this.ApprovalChangeDateUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -66,11 +68,12 @@ export class BugFixesService {
   }
 
   // Set System Enhancement Details
-  SetBugFixesDetails(bugFixes: BugFix, actionState: string, userId: string) {
+  SetBugFixesDetails(bugFixes: BugFix, actionState: string, userId: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("actionState", actionState.toString())
-      .set("userId", userId.toString());
+      .set("userId", userId.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.post<string>(this.SetBugFixesDetailsUrl, bugFixes, { params: my_params }).pipe(
       catchError(error => {
@@ -80,9 +83,10 @@ export class BugFixesService {
   }
 
   // Getting the system enhancements modules to display
-  GetBugFixesDisplayModules(filter: Filter) {
+  GetBugFixesDisplayModules(filter: Filter, companyId: number) {
     // Setting the params
-    let my_params = new HttpParams();
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString());
 
     return this.http.post<DisplayModule[]>(this.GetBugFixesDisplayModulesUrl, filter, { params: my_params }).pipe(
       catchError(error => {
@@ -92,10 +96,11 @@ export class BugFixesService {
   }
 
   // Getting the system enhancements display list
-  GetBugFixesDisplayList(filter: Filter, userId: string) {
+  GetBugFixesDisplayList(filter: Filter, userId: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("UserId", userId.toString());
+      .set("UserId", userId.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.post<ViewBugFix[]>(this.GetBugFixesDisplayListUrl, filter, { params: my_params }).pipe(
       catchError(error => {
@@ -105,11 +110,13 @@ export class BugFixesService {
   }
 
   // Getting the system enhancements details based on the Id
-  GetBugFixesDetailsById(bugFixesId: string, userId: string) {
+  GetBugFixesDetailsById(bugFixesId: string, userId: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("bugFixesId", bugFixesId.toString())
-	  .set("userId", userId.toString());
+      .set("userId", userId.toString())
+      .set("companyId", companyId.toString());
+
     return this.http.get<BugFix>(this.GetBugFixesDetailsByIdUrl, { params: my_params }).pipe(
       catchError(error => {
         return this.handleError('GetBugFixesDetailsById', error)
@@ -118,11 +125,12 @@ export class BugFixesService {
   }
 
   // Updating the status of the system enhancement
-  UpdateBugFixesStatus(bugFixesId: string, statusId: number) {
+  UpdateBugFixesStatus(bugFixesId: string, statusId: number, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("bugFixesId", bugFixesId.toString())
-      .set("statusId", statusId.toString());
+      .set("statusId", statusId.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.get<boolean>(this.UpdateBugFixesStatusUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -132,10 +140,11 @@ export class BugFixesService {
   }
 
   // Set System Enhancement Change date history
-  SetBugFixesChangeDate(bugFixesChangeDate: BugFixChangeDate, actionState: string) {
+  SetBugFixesChangeDate(bugFixesChangeDate: BugFixChangeDate, actionState: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("actionState", actionState.toString());
+      .set("actionState", actionState.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.post<string>(this.SetBugFixesChangeDateUrl, bugFixesChangeDate, { params: my_params }).pipe(
       catchError(error => {
@@ -145,10 +154,11 @@ export class BugFixesService {
   }
 
   // Get System Enhancement Change date history
-  GetBugFixesChangeDate(filter: Filter, bugFixesId: string) {
+  GetBugFixesChangeDate(filter: Filter, bugFixesId: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("bugFixesId", bugFixesId.toString());
+      .set("bugFixesId", bugFixesId.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.post<ViewBugFixChangeDate[]>(this.GetBugFixesChangeDateUrl, filter, { params: my_params }).pipe(
       catchError(error => {
@@ -158,10 +168,11 @@ export class BugFixesService {
   }
 
   // Set System Enhancement Comment
-  SetBugFixesComment(bugFixComment: BugFixComment, actionState: string) {
+  SetBugFixesComment(bugFixComment: BugFixComment, actionState: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("actionState", actionState.toString());
+      .set("actionState", actionState.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.post<string>(this.SetBugFixesCommentUrl, bugFixComment, { params: my_params }).pipe(
       catchError(error => {
@@ -171,9 +182,10 @@ export class BugFixesService {
   }
 
   // Get System Enhancement Comment
-  GetBugFixesComment(filter: Filter) {
+  GetBugFixesComment(filter: Filter, companyId: number) {
     // Setting the params
-    let my_params = new HttpParams();
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString());
 
     return this.http.post<ViewBugFixComment[]>(this.GetBugFixesCommentUrl, filter, { params: my_params }).pipe(
       catchError(error => {
@@ -183,9 +195,10 @@ export class BugFixesService {
   }
 
   // Getting the stat boxes
-  GetStatBoxes() {
+  GetStatBoxes(companyId: number) {
     // Setting the params
-    let my_params = new HttpParams();
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString());
 
     return this.http.get<StatisticsBoxData[]>(this.GetStatBoxesUrl, { params: my_params }).pipe(
       catchError(error => {

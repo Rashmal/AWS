@@ -41,7 +41,7 @@ export class ErrorMessageComponent {
     // Starting the loading
     this.showLoading = true;
     // Calling the model to logout function
-    this.authenticationModel.LogoutUserService(this.overallCookieInterface.GetUserEmail()).then(
+    this.authenticationModel.LogoutUserService(this.overallCookieInterface.GetUserEmail(), this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Clear the local storage cookie data
         this.overallCookieInterface.ClearCookies();

@@ -225,8 +225,7 @@ export class ImagesFilesDocsComponent implements OnInit {
             .UploadImageDocFile(
                 frmDataObj,
                 this.selectedResourceType.Id,
-                this.selectedClientId,
-                0,
+                this.selectedClientId, this.overallCookieInterface.GetCompanyId(),
                 this.overallCookieInterface.GetUserId()
             )
             .then((data: string) => {
@@ -242,8 +241,7 @@ export class ImagesFilesDocsComponent implements OnInit {
         this.clientModel
             .UpdateImageDocFile(
                 item,
-                this.selectedClientId,
-                0,
+                this.selectedClientId, this.overallCookieInterface.GetCompanyId(),
                 this.overallCookieInterface.GetUserId()
             )
             .then((data) => {

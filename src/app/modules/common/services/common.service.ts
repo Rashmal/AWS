@@ -186,10 +186,12 @@ export class CommonService {
   }
 
   // Getting all the access list based on the user role for view
-  GetViewAccessListBasedUserRole(userRole: string) {
+  GetViewAccessListBasedUserRole(userRole: string, companyId: number, userId: string) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("userRole", userRole.toString());
+      .set("userRole", userRole.toString())
+      .set("companyId", companyId.toString())
+      .set("userId", userId.toString());
 
     return this.http.get<Module[]>(this.GetViewAccessListBasedUserRoleUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -199,10 +201,11 @@ export class CommonService {
   }
 
   // Getting all the access list based on the user role
-  GetAccessListBasedUserRole(userRole: string) {
+  GetAccessListBasedUserRole(userRole: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("userRole", userRole.toString());
+      .set("userRole", userRole.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.get<UserRoleAccessDetail[]>(this.GetAccessListBasedUserRoleUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -212,11 +215,13 @@ export class CommonService {
   }
 
   // Getting the module list based on user role
-  GetModuleListBasedUserRole(userRole: string, isStatic: boolean) {
+  GetModuleListBasedUserRole(userRole: string, isStatic: boolean, companyId: number, userId: string) {
     // Setting the params
     let my_params = new HttpParams()
       .set("userRole", userRole.toString())
-      .set("isStatic", isStatic.toString());
+      .set("isStatic", isStatic.toString())
+      .set("companyId", companyId.toString())
+      .set("userId", userId.toString());
 
     return this.http.get<Module[]>(this.GetModuleListBasedUserRoleUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -238,10 +243,15 @@ export class CommonService {
     );
   }
 
+
+  // checking the details
+
+
   // Getting the priority list
-  GetPriorityList() {
+  GetPriorityList(companyId: number) {
     // Setting the params
-    let my_params = new HttpParams();
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString());
 
     return this.http.get<Priority[]>(this.GetPriorityListUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -251,10 +261,11 @@ export class CommonService {
   }
 
   // Getting the status list
-  GetStatusList(moduleCode: string) {
+  GetStatusList(moduleCode: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
-      .set("moduleCode", moduleCode.toString());
+      .set("moduleCode", moduleCode.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.get<Status[]>(this.GetStatusListUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -264,9 +275,10 @@ export class CommonService {
   }
 
   // Getting the module list
-  GetModuleList() {
+  GetModuleList(companyId: number) {
     // Setting the params
-    let my_params = new HttpParams();
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString());
 
     return this.http.get<Module[]>(this.GetModuleListUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -284,9 +296,10 @@ export class CommonService {
   }
 
   // Getting all the staff list
-  GetAllStaffList() {
+  GetAllStaffList(companyId: number) {
     // Setting the params
-    let my_params = new HttpParams();
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString());
 
     return this.http.get<BasicUserDetails[]>(this.GetAllStaffListUrl, { params: my_params }).pipe(
       catchError(error => {
@@ -296,11 +309,12 @@ export class CommonService {
   }
 
   // Getting all the staff list
-  GetNotificationCount(tabSelection: string, userId: string) {
+  GetNotificationCount(tabSelection: string, userId: string, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("tabSection", tabSelection.toString())
-      .set("userId", userId.toString());
+      .set("userId", userId.toString())
+      .set("companyId", companyId.toString());
 
     return this.http.get<number>(this.GetNotificationCountUrl, { params: my_params }).pipe(
       catchError(error => {

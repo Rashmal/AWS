@@ -19,6 +19,7 @@ export class SystemEnhancementModel {
 
     }
 
+    
     // Unsubscribe all
     UnsubscribeAll() {
         // Loop through the services
@@ -29,9 +30,9 @@ export class SystemEnhancementModel {
     }
 
     // Set System Enhancement Details
-    SetSystemEnhancementDetailsService(systemEnhancement: SystemEnhancement, actionState: string, userId: string) {
+    SetSystemEnhancementDetailsService(systemEnhancement: SystemEnhancement, actionState: string, userId: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.SetSystemEnhancementDetails(systemEnhancement, actionState, userId).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.SetSystemEnhancementDetails(systemEnhancement, actionState, userId, companyId).subscribe(
                 data => {
                     let returnData = <string>data;
                     // Resolve the promise
@@ -44,9 +45,9 @@ export class SystemEnhancementModel {
     }
 
     // Getting the system enhancements modules to display
-    GetSystemEnhancementDisplayModulesService(filter: Filter) {
+    GetSystemEnhancementDisplayModulesService(filter: Filter, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEnhancementDisplayModules(filter).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEnhancementDisplayModules(filter, companyId).subscribe(
                 data => {
                     let returnData = <DisplayModule[]>data;
                     // Resolve the promise
@@ -59,9 +60,9 @@ export class SystemEnhancementModel {
     }
 
     // Getting the system enhancements display list
-    GetSystemEnhancementDisplayListService(filter: Filter, userId: string) {
+    GetSystemEnhancementDisplayListService(filter: Filter, userId: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEnhancementDisplayList(filter, userId).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEnhancementDisplayList(filter, userId, companyId).subscribe(
                 data => {
                     let returnData = <ViewSystemEnhancement[]>data;
                     // Resolve the promise
@@ -74,9 +75,9 @@ export class SystemEnhancementModel {
     }
 
     // Getting the system enhancements details based on the Id
-    GetSystemEnhancementDetailsByIdService(systemEnhancementId: string, userId: string) {
+    GetSystemEnhancementDetailsByIdService(systemEnhancementId: string, userId: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEnhancementDetailsById(systemEnhancementId, userId).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEnhancementDetailsById(systemEnhancementId, userId, companyId).subscribe(
                 data => {
                     let returnData = <SystemEnhancement>data;
                     // Resolve the promise
@@ -89,9 +90,9 @@ export class SystemEnhancementModel {
     }
 
     // Updating the status of the system enhancement
-    UpdateSystemEnhancementStatus(systemEnhancementId: string, statusId: number) {
+    UpdateSystemEnhancementStatus(systemEnhancementId: string, statusId: number, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.UpdateSystemEnhancementStatus(systemEnhancementId, statusId).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.UpdateSystemEnhancementStatus(systemEnhancementId, statusId, companyId).subscribe(
                 data => {
                     let returnData = <boolean>data;
                     // Resolve the promise
@@ -104,9 +105,9 @@ export class SystemEnhancementModel {
     }
 
     // Set System Enhancement Change date history
-    SetSystemEhancementChangeDateService(systemEnhancementId: SystemEnhancementChangeDate, actionState: string) {
+    SetSystemEhancementChangeDateService(systemEnhancementId: SystemEnhancementChangeDate, actionState: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.SetSystemEhancementChangeDate(systemEnhancementId, actionState).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.SetSystemEhancementChangeDate(systemEnhancementId, actionState, companyId).subscribe(
                 data => {
                     let returnData = <string>data;
                     // Resolve the promise
@@ -119,9 +120,9 @@ export class SystemEnhancementModel {
     }
 
     // Get System Enhancement Change date history
-    GetSystemEhancementChangeDateService(filter: Filter, systemEnhancementId: string) {
+    GetSystemEhancementChangeDateService(filter: Filter, systemEnhancementId: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEhancementChangeDate(filter, systemEnhancementId).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEhancementChangeDate(filter, systemEnhancementId, companyId).subscribe(
                 data => {
                     let returnData = <ViewSystemEnhancementChangeDate[]>data;
                     // Resolve the promise
@@ -134,9 +135,9 @@ export class SystemEnhancementModel {
     }
 
     // Set System Enhancement Comment
-    SetSystemEhancementCommentService(systemEnhancementComment: SystemEnhancementComment, actionState: string) {
+    SetSystemEhancementCommentService(systemEnhancementComment: SystemEnhancementComment, actionState: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.SetSystemEhancementComment(systemEnhancementComment, actionState).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.SetSystemEhancementComment(systemEnhancementComment, actionState, companyId).subscribe(
                 data => {
                     let returnData = <string>data;
                     // Resolve the promise
@@ -149,9 +150,9 @@ export class SystemEnhancementModel {
     }
 
     // Get System Enhancement Comment
-    GetSystemEhancementCommentService(filter: Filter) {
+    GetSystemEhancementCommentService(filter: Filter, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEhancementComment(filter).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.GetSystemEhancementComment(filter, companyId).subscribe(
                 data => {
                     let returnData = <ViewSystemEnhancementComment[]>data;
                     // Resolve the promise
@@ -164,9 +165,9 @@ export class SystemEnhancementModel {
     }
 
     // Getting the stat boxes
-    GetStatBoxes() {
+    GetStatBoxes(companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.GetStatBoxes().subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.GetStatBoxes(companyId).subscribe(
                 data => {
                     let returnData = <StatisticsBoxData[]>data;
                     // Resolve the promise
@@ -179,9 +180,9 @@ export class SystemEnhancementModel {
     }
 
     // Approval of change date history
-    ApprovalChangeDate(SystemEnhancementsChangeHistoryId: number, approval: string) {
+    ApprovalChangeDate(SystemEnhancementsChangeHistoryId: number, approval: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.ApprovalChangeDate(SystemEnhancementsChangeHistoryId, approval).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.ApprovalChangeDate(SystemEnhancementsChangeHistoryId, approval, companyId).subscribe(
                 data => {
                     let returnData = <boolean>data;
                     // Resolve the promise
@@ -194,9 +195,9 @@ export class SystemEnhancementModel {
     }
 
     // Adding the view Id for the system enhancement
-    AddViewId(itemId: string, userId: string) {
+    AddViewId(itemId: string, userId: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.systemEnhancementsService.AddViewId(itemId, userId).subscribe(
+            this.allSubscriptions.push(this.systemEnhancementsService.AddViewId(itemId, userId, companyId).subscribe(
                 data => {
                     let returnData = <boolean>data;
                     // Resolve the promise

@@ -37,7 +37,7 @@ export class AppTopBarComponent {
     // On click function of the logout
     logoutOnClick() {
         // Calling the model to logout function
-        this.authenticationModel.LogoutUserService(this.overallCookieInterface.GetUserEmail()).then(
+        this.authenticationModel.LogoutUserService(this.overallCookieInterface.GetUserEmail(), this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Clear the local storage cookie data
                 this.overallCookieInterface.ClearCookies();

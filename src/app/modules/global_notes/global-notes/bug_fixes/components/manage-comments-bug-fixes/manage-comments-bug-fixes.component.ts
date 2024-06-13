@@ -96,7 +96,7 @@ export class ManageCommentsBugFixesComponent implements OnInit, OnDestroy {
     // Start loading
     this.showLoading = true;
     // Calling the model to retrieve all the comments list
-    this.bugFixModel.GetBugFixesCommentService(this.filter).then(
+    this.bugFixModel.GetBugFixesCommentService(this.filter, this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting all the comments
         this.viewBugFixComment = <ViewBugFixComment[]>data;
@@ -166,7 +166,7 @@ export class ManageCommentsBugFixesComponent implements OnInit, OnDestroy {
     // End of Check if the error messages length
 
     // Calling the modal to save the data
-    this.bugFixModel.SetBugFixesCommentService(this.bugFixComment, "NEW").then(
+    this.bugFixModel.SetBugFixesCommentService(this.bugFixComment, "NEW", this.overallCookieInterface.GetCompanyId()).then(
       () => {
         // Clear the object
         this.bugFixComment = {

@@ -97,7 +97,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
     // Start loading
     this.showLoading = true;
     // Getting the bug fixes old details
-    this.bugFixModel.GetBugFixesDetailsByIdService(this.bugFixesId, this.overallCookieInterface.GetUserId()).then(
+    this.bugFixModel.GetBugFixesDetailsByIdService(this.bugFixesId, this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting the bug fixes details
         let bugFix = <BugFix>data;
@@ -120,7 +120,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
     // Start loading
     this.showLoading = true;
     // Calling the model to retrieve the data list
-    this.bugFixModel.GetBugFixesChangeDateService(this.filter, this.bugFixesId).then(
+    this.bugFixModel.GetBugFixesChangeDateService(this.filter, this.bugFixesId, this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting the change date history list
         this.viewBugFixChangeDate = <ViewBugFixChangeDate[]>data;
@@ -206,7 +206,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
     this.bugFixChangeDate.NewToDate = new Date(this.toDate.setDate(this.toDate.getDate() + 1));
 
     // Calling the modal to save the data
-    this.bugFixModel.SetBugFixesChangeDateService(this.bugFixChangeDate, "NEW").then(
+    this.bugFixModel.SetBugFixesChangeDateService(this.bugFixChangeDate, "NEW", this.overallCookieInterface.GetCompanyId()).then(
       () => {
         // Clear the object
         this.bugFixChangeDate = {
@@ -237,7 +237,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
   // Approve on click function
   approveOnClick(changeHistoryId: number) {
     // Calling the model to update
-    this.bugFixModel.ApprovalChangeDate(changeHistoryId, "APPROVE").then(
+    this.bugFixModel.ApprovalChangeDate(changeHistoryId, "APPROVE", this.overallCookieInterface.GetCompanyId()).then(
       () => {
         // Getting the change date history list
         this.getChangeDateHistoryList();
@@ -249,7 +249,7 @@ export class DateChangeHistoryComponent implements OnInit, OnDestroy {
   // Approve on click function
   declineOnClick(changeHistoryId: number) {
     // Calling the model to update
-    this.bugFixModel.ApprovalChangeDate(changeHistoryId, "DECLINE").then(
+    this.bugFixModel.ApprovalChangeDate(changeHistoryId, "DECLINE", this.overallCookieInterface.GetCompanyId()).then(
       () => {
         // Getting the change date history list
         this.getChangeDateHistoryList();

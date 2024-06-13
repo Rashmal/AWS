@@ -31,13 +31,13 @@ export class ModuleSelectorComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getModuleAccessList();
+        this.getModuleAccessList(this.overallCookieInterface.GetCompanyId());
     }
 
     // Getting all the access list based on the user role for view
-    getModuleAccessList() {
+    getModuleAccessList(companyId: number) {
         this.commonModel
-            .GetViewAccessListBasedUserRole(this.userRoleCode)
+            .GetViewAccessListBasedUserRole(this.userRoleCode, companyId, this.overallCookieInterface.GetUserId())
             .then((data: Module[]) => {
                 this.moduleList = data;
             });

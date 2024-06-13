@@ -115,7 +115,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     // Check the editing type
     if (this.editingType == 'VIEW' || this.editingType == 'EDIT') {
       // Set as visited
-      this.systemEnhancementModel.AddViewId(this.systemEnhancementId, this.overallCookieInterface.GetUserId()).then(
+      this.systemEnhancementModel.AddViewId(this.systemEnhancementId, this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId()).then(
         () => {
 
         }
@@ -148,7 +148,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
       IsNew: false
     };
     // Getting the system enhancement details by ID
-    this.systemEnhancementModel.GetSystemEnhancementDetailsByIdService(paramObject['SystemEnhancementID'], this.overallCookieInterface.GetUserId()).then(
+    this.systemEnhancementModel.GetSystemEnhancementDetailsByIdService(paramObject['SystemEnhancementID'], this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting the system enhancement details
         this.systemEnhancement = <SystemEnhancement>data;
@@ -181,7 +181,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     this.viewManagedStaffDropdownList = [];
     this.viewRequestedStaffDropdownList = [];
     // Calling the model to retrieve the data
-    this.commonModel.GetAllStaffListService().then(
+    this.commonModel.GetAllStaffListService(this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting the staff list
         let staffListLocal: BasicUserDetails[] = <BasicUserDetails[]>data;
@@ -198,7 +198,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     // Clear the list
     this.viewPriorityDropdownList = [];
     // Calling the model to retrieve the data
-    this.commonModel.GetPriorityListService().then(
+    this.commonModel.GetPriorityListService(this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting the staff list
         let priorityListLocal: Priority[] = <Priority[]>data;
@@ -229,7 +229,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     // Clear the list
     this.viewStatusDropdownList = [];
     // Calling the model to retrieve the data
-    this.commonModel.GetStatusListService("SE").then(
+    this.commonModel.GetStatusListService("SE", this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting the staff list
         let statusListLocal: Status[] = <Status[]>data;
@@ -260,7 +260,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     // Clear the list
     this.viewModulesDropdownList = [];
     // Calling the model to retrieve the data
-    this.commonModel.GetModuleListService().then(
+    this.commonModel.GetModuleListService(this.overallCookieInterface.GetCompanyId()).then(
       (data) => {
         // Getting the staff list
         let modulesListLocal: Status[] = <Status[]>data;
@@ -321,7 +321,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
     // Check if the system ID exists
     if (this.systemEnhancement.Id && this.systemEnhancement.Id != '') {
       // Calling the modal to save the data
-      this.systemEnhancementModel.SetSystemEnhancementDetailsService(this.systemEnhancement, "UPDATE", this.overallCookieInterface.GetUserId()).then(
+      this.systemEnhancementModel.SetSystemEnhancementDetailsService(this.systemEnhancement, "UPDATE", this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId()).then(
         () => {
           // Route to the list
           this.route.navigate(['/layout/global/globalNotes/systemEnhancements']);
@@ -330,7 +330,7 @@ export class ManageSystemEnhancementComponent implements OnInit, OnDestroy {
       // End of Calling the modal to save the data
     } else {
       // Calling the modal to save the data
-      this.systemEnhancementModel.SetSystemEnhancementDetailsService(this.systemEnhancement, "NEW", this.overallCookieInterface.GetUserId()).then(
+      this.systemEnhancementModel.SetSystemEnhancementDetailsService(this.systemEnhancement, "NEW", this.overallCookieInterface.GetUserId(), this.overallCookieInterface.GetCompanyId()).then(
         () => {
           // Route to the list
           this.route.navigate(['/layout/global/globalNotes/systemEnhancements']);

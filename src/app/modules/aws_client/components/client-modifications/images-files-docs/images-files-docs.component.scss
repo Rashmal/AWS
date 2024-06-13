@@ -64,7 +64,6 @@
             margin-right: 10px;
         }
     }
-
 }
 
 .input_area {
@@ -83,22 +82,23 @@
     button {
         margin-right: 10px;
     }
-
 }
 
 .button_blue {
-
     height: 30px;
     width: 100px;
     border-radius: 3px;
     border: none;
     color: #ffffff;
+<<<<<<< HEAD
     background-color: #21ba45;
 
+=======
+    background-color: #126095;
+>>>>>>> 949b6dc7e08d044194763260b7b1a43f50f7ec04
 }
 
 .button_blue_s {
-
     height: 30px;
     width: 33px;
     border-radius: 3px;
@@ -109,7 +109,6 @@
     i {
         color: #fff;
     }
-
 }
 
 .upload_icon {
@@ -126,7 +125,6 @@
     overflow: hidden;
     border: 1px solid #ccc;
     position: relative;
-
 }
 
 .preview-image {
@@ -151,8 +149,7 @@
     margin-bottom: 10px;
 }
 
-.uploading_txt{
-   
+.uploading_txt {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -168,7 +165,7 @@
         font-weight: bold;
         margin-right: 10px;
         margin-bottom: 3px;
-    } 
+    }
 }
 .unavailable_preview_txt {
     position: absolute;
@@ -204,7 +201,6 @@
         text-align: center;
         min-width: 130px;
     }
-
 }
 
 ::ng-deep p-table {
@@ -248,14 +244,12 @@
 
             .input_class {
                 width: 100%;
-
             }
 
             .lbl_class {
                 min-width: 200px;
             }
         }
-
     }
 
     .action_button {
@@ -297,6 +291,7 @@
     }
 }
 
+<<<<<<< HEAD
 ::ng-deep p-accordionTab {
     .p-accordion-header-link {
         padding: 10px;
@@ -342,3 +337,8 @@
         vertical-align: top;
     }
 }
+=======
+.paddingTop21 {
+    padding-top: 21px;
+}
+>>>>>>> 949b6dc7e08d044194763260b7b1a43f50f7ec04

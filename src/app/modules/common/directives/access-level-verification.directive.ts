@@ -28,7 +28,7 @@ export class AccessLevelVerificationDirective {
 
   ngOnInit(): void {
     // Getting the access list
-    this.commonModel.GetAccessListBasedUserRoleService(this.OverallCookieAccessible.GetUserRole()).then(
+    this.commonModel.GetAccessListBasedUserRoleService(this.OverallCookieAccessible.GetUserRole(), this.OverallCookieAccessible.GetCompanyId()).then(
       (data) => {
         // Getting the access list
         let userAccessList: UserRoleAccessDetail[] = <UserRoleAccessDetail[]>data;

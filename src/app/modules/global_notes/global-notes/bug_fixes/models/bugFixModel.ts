@@ -29,9 +29,9 @@ export class BugFixModel {
     }
 
     // Set System Enhancement Details
-    SetBugFixesDetailsService(bugFix: BugFix, actionState: string, userId: string) {
+    SetBugFixesDetailsService(bugFix: BugFix, actionState: string, userId: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.SetBugFixesDetails(bugFix, actionState, userId).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.SetBugFixesDetails(bugFix, actionState, userId, companyId).subscribe(
                 data => {
                     let returnData = <string>data;
                     // Resolve the promise
@@ -44,9 +44,9 @@ export class BugFixModel {
     }
 
     // Getting the system enhancements modules to display
-    GetBugFixesDisplayModulesService(filter: Filter) {
+    GetBugFixesDisplayModulesService(filter: Filter, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.GetBugFixesDisplayModules(filter).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.GetBugFixesDisplayModules(filter, companyId).subscribe(
                 data => {
                     let returnData = <DisplayModule[]>data;
                     // Resolve the promise
@@ -59,9 +59,9 @@ export class BugFixModel {
     }
 
     // Getting the system enhancements display list
-    GetBugFixesDisplayListService(filter: Filter, userId: string) {
+    GetBugFixesDisplayListService(filter: Filter, userId: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.GetBugFixesDisplayList(filter, userId).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.GetBugFixesDisplayList(filter, userId, companyId).subscribe(
                 data => {
                     let returnData = <ViewBugFix[]>data;
                     // Resolve the promise
@@ -74,9 +74,9 @@ export class BugFixModel {
     }
 
     // Getting the system enhancements details based on the Id
-    GetBugFixesDetailsByIdService(bugFixId: string, userId: string) {
+    GetBugFixesDetailsByIdService(bugFixId: string, userId: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.GetBugFixesDetailsById(bugFixId, userId).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.GetBugFixesDetailsById(bugFixId, userId, companyId).subscribe(
                 data => {
                     let returnData = <BugFix>data;
                     // Resolve the promise
@@ -89,9 +89,9 @@ export class BugFixModel {
     }
 
     // Updating the status of the system enhancement
-    UpdateBugFixesStatusStatus(bugFixId: string, statusId: number) {
+    UpdateBugFixesStatusStatus(bugFixId: string, statusId: number, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.UpdateBugFixesStatus(bugFixId, statusId).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.UpdateBugFixesStatus(bugFixId, statusId, companyId).subscribe(
                 data => {
                     let returnData = <boolean>data;
                     // Resolve the promise
@@ -104,9 +104,9 @@ export class BugFixModel {
     }
 
     // Set System Enhancement Change date history
-    SetBugFixesChangeDateService(bugFixChangeDate: BugFixChangeDate, actionState: string) {
+    SetBugFixesChangeDateService(bugFixChangeDate: BugFixChangeDate, actionState: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.SetBugFixesChangeDate(bugFixChangeDate, actionState).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.SetBugFixesChangeDate(bugFixChangeDate, actionState, companyId).subscribe(
                 data => {
                     let returnData = <string>data;
                     // Resolve the promise
@@ -119,9 +119,9 @@ export class BugFixModel {
     }
 
     // Get System Enhancement Change date history
-    GetBugFixesChangeDateService(filter: Filter, bugFixId: string) {
+    GetBugFixesChangeDateService(filter: Filter, bugFixId: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.GetBugFixesChangeDate(filter, bugFixId).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.GetBugFixesChangeDate(filter, bugFixId, companyId).subscribe(
                 data => {
                     let returnData = <ViewBugFixChangeDate[]>data;
                     // Resolve the promise
@@ -134,9 +134,9 @@ export class BugFixModel {
     }
 
     // Set System Enhancement Comment
-    SetBugFixesCommentService(bugFixComment: BugFixComment, actionState: string) {
+    SetBugFixesCommentService(bugFixComment: BugFixComment, actionState: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.SetBugFixesComment(bugFixComment, actionState).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.SetBugFixesComment(bugFixComment, actionState, companyId).subscribe(
                 data => {
                     let returnData = <string>data;
                     // Resolve the promise
@@ -149,9 +149,9 @@ export class BugFixModel {
     }
 
     // Get System Enhancement Comment
-    GetBugFixesCommentService(filter: Filter) {
+    GetBugFixesCommentService(filter: Filter, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.GetBugFixesComment(filter).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.GetBugFixesComment(filter, companyId).subscribe(
                 data => {
                     let returnData = <ViewBugFixComment[]>data;
                     // Resolve the promise
@@ -164,9 +164,9 @@ export class BugFixModel {
     }
 
     // Getting the stat boxes
-    GetStatBoxes() {
+    GetStatBoxes(companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.GetStatBoxes().subscribe(
+            this.allSubscriptions.push(this.bugFixesService.GetStatBoxes(companyId).subscribe(
                 data => {
                     let returnData = <StatisticsBoxData[]>data;
                     // Resolve the promise
@@ -179,9 +179,9 @@ export class BugFixModel {
     }
 
     // Approval of change date history
-    ApprovalChangeDate(BugFixChangeHistoryId: number, approval: string) {
+    ApprovalChangeDate(BugFixChangeHistoryId: number, approval: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.ApprovalChangeDate(BugFixChangeHistoryId, approval).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.ApprovalChangeDate(BugFixChangeHistoryId, approval, companyId).subscribe(
                 data => {
                     let returnData = <boolean>data;
                     // Resolve the promise
@@ -194,9 +194,9 @@ export class BugFixModel {
     }
 
     // Adding the view Id for the system enhancement
-    AddViewId(itemId: string, userId: string) {
+    AddViewId(itemId: string, userId: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.bugFixesService.AddViewId(itemId, userId).subscribe(
+            this.allSubscriptions.push(this.bugFixesService.AddViewId(itemId, userId, companyId).subscribe(
                 data => {
                     let returnData = <boolean>data;
                     // Resolve the promise

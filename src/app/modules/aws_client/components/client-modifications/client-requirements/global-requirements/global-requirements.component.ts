@@ -5,6 +5,8 @@ import { ClientModel } from 'src/app/modules/aws_client/models/clientModel';
 import { ClientService } from 'src/app/modules/aws_client/services/client.service';
 import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
 import { Filter } from 'src/app/modules/common/core/filters';
+import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
+import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
 
 @Component({
     selector: 'app-global-requirements',
@@ -61,12 +63,15 @@ export class GlobalRequirementsComponent {
     selectedClientId = 0;
     // Store the company Id
     companyId: number = 0;
+    // Store the cookie interface
+    overallCookieInterface: OverallCookieInterface;
 
     constructor(public ref: DynamicDialogRef, private config: DynamicDialogConfig,
         private clientService: ClientService, public dialogService: DialogService
     ) {
         // Initialize the model
         this.clientModel = new ClientModel(this.clientService);
+        this.overallCookieInterface = new OverallCookieModel();
     }
 
     ngOnInit() {
@@ -97,7 +102,7 @@ export class GlobalRequirementsComponent {
     // Getting all the global client requirements
     GetAllGlobalClientRequirements() {
         // Calling the object model to access the service
-        this.clientModel.GetGlobalClientRequirement(this.filter, this.selectedClientId, this.companyId).then(
+        this.clientModel.GetGlobalClientRequirement(this.filter, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Setting the business address Id
                 this.globalClientRequirements = <ClientRequirement[]>data;
@@ -116,7 +121,7 @@ export class GlobalRequirementsComponent {
         this.ref.onClose.subscribe((confirmation: boolean) => {
             if (confirmation) {
                 // Calling the object model to access the service
-                this.clientModel.SetGlobalClientRequirement(globalClientRequirement, "REMOVE", this.selectedClientId, this.companyId).then(
+                this.clientModel.SetGlobalClientRequirement(globalClientRequirement, "REMOVE", this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
                     (data) => {
                         // Getting all the global client requirements
                         this.GetAllGlobalClientRequirements();
