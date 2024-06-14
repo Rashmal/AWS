@@ -7,6 +7,12 @@ import { CommonModel } from 'src/app/modules/common/models/commonModel';
 import { CommonService } from 'src/app/modules/common/services/common.service';
 import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
 import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
+import { UserRoleAccessDetail } from 'src/app/modules/common/core/userRoleAccessDetail';
+import { UserRole } from 'src/app/modules/common/core/userRole';
+import { UserRolesModel } from '../../../models/userRoleModel';
+import { UserRolesService } from '../../../services/user-roles.service';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
 interface SubTabList {
     Name: string;
     OverallAccess: boolean;
@@ -25,15 +31,12 @@ interface Features {
     selector: 'app-access-levels',
     templateUrl: './access-levels.component.html',
     styleUrl: './access-levels.component.scss',
+    providers: [DialogService]
 })
 export class AccessLevelsComponent {
-    // Store the display country list
-    displayCountryList: SelectItem[] = [];
+
     // Store the modification mode
     modificationMode = 'NEW';
-
-    //store selected staff
-    staffDetails: any;
     // Store the cookie interface
     overallCookieInterface: OverallCookieInterface;
     // Store the common model
@@ -177,12 +180,30 @@ export class AccessLevelsComponent {
         StatusId: 0,
         Param1: 'ALL',
     };
+    userRoles: UserRole[] = [];
+    //Selected user role from table
+    selectedRoleId: number = -1;
 
     userRoleModState = 'INITIAL';
-    // Store the products list
+    //Store user role model
+    userRoleModel: UserRolesModel;
+    //Store editing using role Id
+    editingUserRole = -1;
+    //Store user role name
+    newUserRoleName = '';
+    // Store dynamic dialog ref
+    ref: DynamicDialogRef | undefined;
+
+    //Store accessible module list for dropdown
+    accessibleModules: Module[] = [];
+    //Selected accessible module
+    selectedAccModule: Module;
+
     constructor(
         private location: Location,
-        private commonService: CommonService
+        private commonService: CommonService,
+        private userRoleService: UserRolesService,
+        public dialogService: DialogService,
     ) {
         // Initialize the model
         this.commonModel = new CommonModel(this.commonService);
@@ -192,6 +213,7 @@ export class AccessLevelsComponent {
             .GetUserRole()
             .toUpperCase();
         this.commonModel = new CommonModel(this.commonService);
+        this.userRoleModel = new UserRolesModel(this.userRoleService);
     }
 
     ngOnInit(): void {
@@ -201,22 +223,97 @@ export class AccessLevelsComponent {
         if (paramObject['EditingMode']) {
             this.modificationMode = paramObject['EditingMode'];
         }
-        //Set editing staff id
+        //Check user role
         if (this.userRoleCode) {
-            this.getModuleAccessList();
+            //Get system user roles
+            this.getAllUserRoles(true);
         }
     }
-    //On bluer event of input
-    onBlurEvent(type: string) {}
 
-    // Getting all the access list based on the user role for view
-    getModuleAccessList() {
-        this.commonModel
-            .GetViewAccessListBasedUserRole(this.userRoleCode)
-            .then((data: Module[]) => {
-                this.moduleList = data;
-            });
+    //Get all accessible modules
+    getAccessibleModules() {
+         //Call services to get modules by user role
+         this.userRoleModel.GetAccessibleModules(this.overallCookieInterface.GetCompanyId(), this.selectedRoleId).then(
+            (data: Module[]) => {
+                //Check data is not undefined
+                if (data) {
+                    this.accessibleModules = data;
+                    
+                }
+
+            }
+        );
     }
+
+    //On change module access
+    onChangeModuleAccess(module: Module) {
+        //set module access on change toggle
+        this.SetModuleAccess(module);
+
+    }
+
+    //Set module access
+    SetModuleAccess(module: Module) {
+        //Call services to set module access
+        this.userRoleModel.SetModuleAccess(this.overallCookieInterface.GetCompanyId(), this.selectedRoleId, module.IsDisable, module.Id).then(
+            (data: boolean) => {
+                //Get all accessible modules
+                this.getAccessibleModules();
+
+
+            }
+        );
+    }
+
+    //Get all modules by user role
+    getAllModulesBasedUserRole() {
+        //Call services to get modules by user role
+        this.userRoleModel.GetAllModulesBasedUserRole(this.overallCookieInterface.GetCompanyId(), this.selectedRoleId).then(
+            (data: Module[]) => {
+                //Check data is not undefined
+                if (data) {
+                    this.moduleList = data;
+                     //Get all accessible modules
+                    this.getAccessibleModules();
+                }
+
+            }
+        );
+    }
+
+    //On click select user role from table
+    selectUserRole(role: UserRole) {
+        //Set selected user role Id
+        this.selectedRoleId = role.Id;
+        //Get module list
+        this.getAllModulesBasedUserRole();
+       
+    }
+
+    //Get system user roles
+    getAllUserRoles(isInitial = false) {
+        //Call services to get user roles
+        this.userRoleModel.GetAllUserRoles(this.overallCookieInterface.GetCompanyId()).then(
+            (data: UserRole[]) => {
+                //Check data is not undefined
+                if (data) {
+                    this.userRoles = data;
+                    //Set first selected if it is initial
+                    if (isInitial) {
+                        this.selectedRoleId = this.userRoles.length > 0 ? this.userRoles[0].Id : -1;
+                    }
+
+                    //Get module list
+                    this.getAllModulesBasedUserRole();
+                }
+
+            }
+        );
+    }
+
+    //On bluer event of input
+    onBlurEvent(type: string) { }
+
     //on change module list paginator
     onPageChange(event: any) {
         this.filter.CurrentPage = event.page + 1;
@@ -228,35 +325,86 @@ export class AccessLevelsComponent {
     }
 
     // Handles editing an existing role.
-    onClickEditRole() {
+    onClickEditRole(roleId: number) {
         // Edit role logic here
         this.userRoleModState = 'UPDATE';
+        this.editingUserRole = roleId;
     }
 
     // Handles deleting an existing role.
-    onClickDeleteRole() {
-        // Delete role logic here
+    onClickDeleteRole(role: UserRole) {
+        // Open popup to confirm action
+        this.ref = this.dialogService.open(DeleteConfirmationComponent, {
+            header: 'Delete confirmation'
+        });
+        // Perform an action on close the popup
+        this.ref.onClose.subscribe((confirmation: boolean) => {
+            if (confirmation) {
+                //Call services to update role
+                this.userRoleModel.SetUserRoles(this.overallCookieInterface.GetCompanyId(), role, 'DELETE').then(
+                    (data) => {
+                        // Update role logic here
+                        this.editingUserRole = -1;
+                        //Refresh user role list
+                        this.getAllUserRoles();
+                    }
+                );
+            }
+        });
+
+
     }
 
     // Handles updating role details.
-    onClickUpdateRole() {
-        // Update role logic here
-        this.userRoleModState = 'UPDATE';
+    onClickUpdateRole(role: UserRole) {
+        //Call services to update role
+        this.userRoleModel.SetUserRoles(this.overallCookieInterface.GetCompanyId(), role, 'UPDATE').then(
+            (data) => {
+                // Update role logic here
+                this.editingUserRole = -1;
+                //Refresh user role list
+                this.getAllUserRoles();
+            }
+        );
+
     }
 
     // Handles creating a new role.
     onClickCreateRole() {
-        // Create role logic here
-        
+
+        //Call services to add role
+        this.userRoleModel.SetUserRoles(this.overallCookieInterface.GetCompanyId(), { Id: 0, Name: this.newUserRoleName }, 'NEW').then(
+            (data) => {
+
+                this.editingUserRole = -1;
+                this.userRoleModState = 'INITIAL';
+                //Refresh user role list
+                this.getAllUserRoles();
+            }
+        );
+
+
     }
 
     // Handles canceling the role operation.
     onClickCancelRole() {
         // Cancel role logic here
+        this.editingUserRole = -1;
         this.userRoleModState = 'INITIAL';
+        this.newUserRoleName = '';
     }
+
     // Handles duplicating an existing role.
-    onClickDuplicateRole() {
+    onClickDuplicateRole(role: UserRole) {
         // Duplicate role logic here
+        //Call services to update role
+        this.userRoleModel.SetUserRoles(this.overallCookieInterface.GetCompanyId(), role, 'DUPLICATE').then(
+            (data) => {
+                // Update role logic here
+                this.editingUserRole = -1;
+                //Refresh user role list
+                this.getAllUserRoles();
+            }
+        );
     }
 }

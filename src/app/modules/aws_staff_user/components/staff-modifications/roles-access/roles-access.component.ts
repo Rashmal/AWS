@@ -215,7 +215,7 @@ export class RolesAccessComponent implements OnInit {
     // Getting all the access list based on the user role for view
     getModuleAccessList() {
         this.commonModel
-            .GetViewAccessListBasedUserRole(this.userRoleCode)
+            .GetViewAccessListBasedUserRole(this.userRoleCode, this.overallCookieInterface.GetCompanyId(),  this.overallCookieInterface.GetUserId())
             .then((data: Module[]) => {
                 this.moduleList = data;
             });
