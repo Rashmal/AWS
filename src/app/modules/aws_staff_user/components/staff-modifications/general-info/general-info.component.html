@@ -1,5 +1,5 @@
 <!--Gen info main-->
-<div class="card flex justify-content-center gen_info_main">
+<div class="card flex justify-content-center gen_info_main" *ngIf="staffDetails">
     <!-- Accordion section -->
     <p-accordion [multiple]="true" [activeIndex]="[0,1]">
         <p-accordionTab header="Basic Information">
@@ -13,10 +13,10 @@
                     <label class="input_lbl">First Name</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
+                    <input class="input_field" type="text" [(ngModel)]="staffDetails.FirstName"
                         onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
-                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
-                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                        [disabled]="(!staffDetails.Email) || modificationMode == 'VIEW'"
+                        (blur)="onBlurEvent('STAFF$DETAILS')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -26,9 +26,10 @@
                     <label class="input_lbl">Last Name</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
+                    <input class="input_field" type="text" [(ngModel)]="staffDetails.LastName"
                         onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
-                        [disabled]="modificationMode == 'VIEW'" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                        [disabled]="(!staffDetails.Email) || modificationMode == 'VIEW'"
+                        (blur)="onBlurEvent('STAFF$DETAILS')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -37,12 +38,31 @@
                     <!--Label-->
                     <label class="input_lbl">Email</label>
                     <!--End of Label-->
+
                     <!--Input area-->
-                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
+                    <input class="input_field" type="text" [(ngModel)]="staffDetails.Email"
                         onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
-                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
-                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                        [disabled]="modificationMode == 'VIEW' || modificationMode == 'EDIT'"
+                        (blur)="onBlurEvent('STAFF$DETAILS')" />
                     <!--End of Input area-->
+
+                    <!-- Error Message -->
+                    <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$EMAIL')">
+                        <span>{{CheckErrorCode('EMPTY$EMAIL').ErrorMessage}}</span>
+                    </div>
+                    <!-- End of Error Message -->
+
+                    <!-- Error Message -->
+                    <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('INVALID$EMAIL')">
+                        <span>{{CheckErrorCode('INVALID$EMAIL').ErrorMessage}}</span>
+                    </div>
+                    <!-- End of Error Message -->
+
+                    <!-- Error Message -->
+                    <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('EXISTS$EMAIL')">
+                        <span>{{CheckErrorCode('EXISTS$EMAIL').ErrorMessage}}</span>
+                    </div>
+                    <!-- End of Error Message -->
                 </div>
                 <!--End of Input and label-->
 
@@ -52,24 +72,29 @@
                     <label class="input_lbl">Date of Birth</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
+                    <input class="input_field" type="datetime-local" [(ngModel)]="staffDetails.DateOfBirth"
                         onKeyPress="if(value.length==20) return false;" inputrestriction="^[a-z A-Z 0-9 #]*$"
-                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
-                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                        [disabled]="(!staffDetails.Email) ||  modificationMode == 'VIEW'"
+                        (blur)="onBlurEvent('STAFF$DETAILS')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
                     <!--Label-->
-                    <label class="input_lbl">Select State</label>
+                    <label class="input_lbl">User Roles</label>
                     <!--End of Label-->
+
+                    <!-- Error Message -->
+                    <div class="col-12 no-side-padding error_message" *ngIf="CheckErrorCode('EMPTY$USER_ROLE')">
+                        <span>{{CheckErrorCode('EMPTY$USER_ROLE').ErrorMessage}}</span>
+                    </div>
+                    <!-- End of Error Message -->
+
                     <!--Input area-->
-                    <!-- <p-dropdown [options]="displayCountryList" class="width_50" autoWidth="false"
-                        placeholder="Select an option" [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
-                        [(ngModel)]="staffDetails" (onChange)="onBlurEvent('BUSINESS$ADDRESS')" /> -->
-                    <p-multiSelect [options]="displayCountryList" [(ngModel)]="selectedRoles" 
-                        placeholder="Select State" />
+                    <p-multiSelect [options]="displayUserRolesList" [(ngModel)]="staffDetails.UserRoleList"
+                        [disabled]="(!staffDetails.Email) || modificationMode == 'VIEW'" placeholder="Select User Role"
+                        (onChange)="onBlurEvent('STAFF$DETAILS')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -89,8 +114,8 @@
                     <!--Input area-->
                     <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9]*$"
                         onKeyPress="if(value.length==100) return false;"
-                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'" [(ngModel)]="staffDetails"
-                        (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
+                        [disabled]="(!staffDetails.Email) || modificationMode == 'VIEW'"
+                        [(ngModel)]="staffDetails.BusinessAddress.BuildingName" (blur)="onBlurEvent('STAFF$DETAILS')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -103,8 +128,8 @@
                     <!--Input area-->
                     <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9 / _]*$"
                         onKeyPress="if(value.length==100) return false;"
-                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'" [(ngModel)]="staffDetails"
-                        (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
+                        [disabled]="(!staffDetails.Email) || modificationMode == 'VIEW'"
+                        [(ngModel)]="staffDetails.BusinessAddress.StreetName" (blur)="onBlurEvent('STAFF$DETAILS')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -116,8 +141,8 @@
                     <!--Input area-->
                     <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9]*$"
                         onKeyPress="if(value.length==50) return false;"
-                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'" [(ngModel)]="staffDetails"
-                        (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
+                        [disabled]="(!staffDetails.Email) || modificationMode == 'VIEW'"
+                        [(ngModel)]="staffDetails.BusinessAddress.Suburb" (blur)="onBlurEvent('STAFF$DETAILS')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -128,8 +153,8 @@
                     <!--End of Label-->
                     <!--Input area-->
                     <input class="input_field" type="text" onKeyPress="if(value.length==10) return false;"
-                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'" [(ngModel)]="staffDetails"
-                        (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
+                        [disabled]="(!staffDetails.Email) || modificationMode == 'VIEW'"
+                        [(ngModel)]="staffDetails.BusinessAddress.PostalCode" (blur)="onBlurEvent('STAFF$DETAILS')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -141,8 +166,8 @@
                     <!--Input area-->
                     <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9]*$"
                         onKeyPress="if(value.length==50) return false;"
-                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'" [(ngModel)]="staffDetails"
-                        (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
+                        [disabled]="(!staffDetails.Email) || modificationMode == 'VIEW'"
+                        [(ngModel)]="staffDetails.BusinessAddress.State" (blur)="onBlurEvent('STAFF$DETAILS')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -154,8 +179,9 @@
                     <!--End of Label-->
                     <!--Input area-->
                     <p-dropdown [options]="displayCountryList" class="width_50" autoWidth="false"
-                        placeholder="Select an option" [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
-                        [(ngModel)]="staffDetails" (onChange)="onBlurEvent('BUSINESS$ADDRESS')" />
+                        placeholder="Select an option" [disabled]="(!staffDetails.Email) || modificationMode == 'VIEW'"
+                        [(ngModel)]="staffDetails.BusinessAddress.Country.Id"
+                        (onChange)="onBlurEvent('STAFF$DETAILS')" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->

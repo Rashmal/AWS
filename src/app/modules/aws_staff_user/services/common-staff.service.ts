@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class CommonStaffService {
 
   // Store the common methods
-  selectedStaffFunc: (value: number) => void;
+  selectedStaffFunc: (value: string) => void;
 
   constructor() { }
 

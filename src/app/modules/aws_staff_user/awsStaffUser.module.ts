@@ -16,6 +16,8 @@ import { AccordionModule } from "primeng/accordion";
 import { InputSwitchModule } from "primeng/inputswitch";
 import { PaginatorModule } from "primeng/paginator";
 import { MultiSelectModule } from 'primeng/multiselect';
+import { TooltipModule } from "primeng/tooltip";
+import { AuthenticationModule } from "../authentication/authentication.module";
 
 @NgModule({
     declarations: [
@@ -37,7 +39,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
         AccordionModule,
         InputSwitchModule,
         PaginatorModule,
-        MultiSelectModule
+        MultiSelectModule,
+        TooltipModule,
+        AuthenticationModule,
     ]
 })
 
