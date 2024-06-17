@@ -12,7 +12,8 @@
     <!-- End of Title section -->
 
     <!-- Body content section -->
-    <div class="d-none d-xl-block body_content_section ">
+    <div class="d-none d-xl-block body_content_section " appAccessLevelVerification SelectedModuleCode="STAT1"
+        SelectedModuleAccessCode="BugFixes" SelectedFeatureAccessCode="BCDH" [IsTab]="false" ActionState="ADD">
         <div class="col-xl-12 first_row_section marginBottom5">
             <div class="each_section" *ngIf="bugFixDetails.HasRequest == 0">
                 <span class="error_message">Adding the date change history will be disabled since it has a pending
@@ -104,7 +105,9 @@
 
 
     <!-- Body content section -->
-    <div class="d-none d-md-block d-lg-block d-xl-none body_content_section smaller_screen_content">
+    <div class="d-none d-md-block d-lg-block d-xl-none body_content_section smaller_screen_content"
+        appAccessLevelVerification SelectedModuleCode="STAT1" SelectedModuleAccessCode="BugFixes"
+        SelectedFeatureAccessCode="BCDH" [IsTab]="false" ActionState="ADD">
         <div class="row">
             <!-- From date section -->
             <div class="col-6 each_section">
@@ -183,7 +186,9 @@
 
 
     <!-- Body content section -->
-    <div class="d-block d-sm-block d-md-none d-lg-none d-xl-none body_content_section smaller_screen_content">
+    <div class="d-block d-sm-block d-md-none d-lg-none d-xl-none body_content_section smaller_screen_content"
+        appAccessLevelVerification SelectedModuleCode="STAT1" SelectedModuleAccessCode="BugFixes"
+        SelectedFeatureAccessCode="BCDH" [IsTab]="false" ActionState="ADD">
         <div class="row">
             <!-- From date section -->
             <div class="col-12 each_section">
@@ -382,7 +387,9 @@
             <!-- End of Close button -->
 
             <!-- Save button -->
-            <button *ngIf="bugFixDetails.HasRequest !== 0" class="save_btn" (click)="saveOnClickFunction()"
+            <button appAccessLevelVerification SelectedModuleCode="STAT1" SelectedModuleAccessCode="BugFixes"
+                SelectedFeatureAccessCode="BCDH" [IsTab]="false" ActionState="ADD"
+                *ngIf="bugFixDetails.HasRequest !== 0" class="save_btn" (click)="saveOnClickFunction()"
                 pTooltip="Save button" tooltipPosition="top">
                 <span>Save</span>
             </button>

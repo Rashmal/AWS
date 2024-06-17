@@ -611,22 +611,23 @@
                         </div>
                     </td>
                     <td class="title_content title_by_width">
-                        <div appAccessLevelVerification SelectedModuleCode="STAT1"
-                            SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SYSFET"
-                            [IsTab]="false" [isViewClickable]="true" ActionState="VIEW"
-                            class="expanded_content_title paddingRight5 cursor_pointer ">
-                            <div class="ellipsis" (click)="titleOnClickFunction(enhancement)"
+                        <div class="expanded_content_title paddingRight5 cursor_pointer " appAccessLevelVerification
+                            SelectedModuleCode="STAT1" SelectedModuleAccessCode="SystemEnhancement"
+                            SelectedFeatureAccessCode="SYSFET" [IsTab]="false" ActionState="VIEW"
+                            ActionType="DISABLE$DIV">
+                            <div class="ellipsis access_div" (click)="titleOnClickFunction(enhancement)"
                                 [pTooltip]="enhancement.Title" tooltipPosition="top">
                                 {{enhancement.Title}}<span class="new-label" *ngIf="enhancement.IsNew">New</span>
                             </div>
                         </div>
-                        <div appAccessLevelVerification SelectedModuleCode="STAT1"
+                        <!-- <div appAccessLevelVerification SelectedModuleCode="STAT1"
                             SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SYSFET"
-                            [IsTab]="false" [isViewClickable]="false" ActionState="VIEW" class="expanded_content_title_view paddingRight5">
+                            [IsTab]="false" [isViewClickable]="false" ActionState="VIEW"
+                            class="expanded_content_title_view paddingRight5">
                             <div class="ellipsis" [pTooltip]="enhancement.Title" tooltipPosition="top">
                                 {{enhancement.Title}}<span class="new-label" *ngIf="enhancement.IsNew">New</span>
                             </div>
-                        </div>
+                        </div> -->
 
                     </td>
                     <td class="text_center status_by_width">
@@ -634,7 +635,9 @@
                             class="module_display_section paddingRight5 ">
 
                             <!-- Display the status list in desktop view -->
-                            <div class="status_display_section">
+                            <div class="status_display_section" appAccessLevelVerification SelectedModuleCode="STAT1"
+                                SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SYSFET"
+                                [IsTab]="false" ActionState="EDIT">
                                 <!-- Loop through the statuses -->
                                 <div class="status_list" [style.borderColor]="status.ColorCode"
                                     [style.background]="(status.Name == enhancement.StatusName)?status.ColorCode:'white'"
@@ -657,7 +660,10 @@
 
                             <!-- Display the status list in mobile view -->
                             <div class="status_display_section_mobile" *ngIf="userRoleCode == 'AD'">
-                                <p-dropdown [options]="viewStatusMobileDropdownList" optionLabel="label"
+                                <p-dropdown appAccessLevelVerification SelectedModuleCode="STAT1"
+                                    SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SYSFET"
+                                    [IsTab]="false" ActionState="EDIT" ActionType="DISABLE"
+                                    [options]="viewStatusMobileDropdownList" optionLabel="label"
                                     [(ngModel)]="enhancement.StatusName" optionValue="label"
                                     (onChange)="onChangeSystemEnhancementStatus(enhancement)">
                                     <ng-template let-status pTemplate="item">

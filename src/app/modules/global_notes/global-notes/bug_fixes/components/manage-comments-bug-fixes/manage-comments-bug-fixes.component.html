@@ -45,7 +45,8 @@
     <!-- End of Body content section -->
 
     <!-- Top row section -->
-    <div class="marginTop5">
+    <div class="marginTop5" appAccessLevelVerification SelectedModuleCode="STAT1" SelectedModuleAccessCode="BugFixes"
+        SelectedFeatureAccessCode="BCCM" [IsTab]="false" ActionState="ADD">
         <!-- Label section -->
         <div class="prior_label">
             <!-- Label section -->
@@ -60,7 +61,8 @@
     <!-- End of Top row section -->
 
     <!-- Comments Entering section -->
-    <div class="marginTop5 comments_create_section">
+    <div class="marginTop5 comments_create_section" appAccessLevelVerification SelectedModuleCode="STAT1"
+        SelectedModuleAccessCode="BugFixes" SelectedFeatureAccessCode="BCCM" [IsTab]="false" ActionState="ADD">
         <p-editor [(ngModel)]="bugFixComment.Description" [style]="{ height: '320px' }"></p-editor>
     </div>
     <!-- End of Comments Entering section -->
@@ -72,7 +74,8 @@
     <!-- End of Error Message -->
 
     <!-- Add reply button -->
-    <div class="marginTop5">
+    <div class="marginTop5" appAccessLevelVerification SelectedModuleCode="STAT1" SelectedModuleAccessCode="BugFixes"
+        SelectedFeatureAccessCode="BCCM" [IsTab]="false" ActionState="ADD">
         <button class="add_reply_btn" (click)="addReplyOnClick()" pTooltip="Add reply" tooltipPosition="top">Add
             Reply</button>
     </div>

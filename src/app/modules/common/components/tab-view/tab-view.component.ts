@@ -87,8 +87,6 @@ export class TabViewComponent {
     }
 
     getNotificationCount() {
-
-debugger
         this.hubConnectionBuilder = new HubConnectionBuilder()
             .withUrl(this.url)
             .configureLogging(LogLevel.Information)

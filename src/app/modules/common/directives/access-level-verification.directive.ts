@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Inject, Input } from '@angular/core';
+import { Directive, ElementRef, Inject, Input, Renderer2 } from '@angular/core';
 import { OverallCookieInterface } from '../core/overallCookieInterface';
 import { OverallCookieModel } from '../core/overallCookieModel';
 import { DOCUMENT } from '@angular/common';
@@ -20,6 +20,7 @@ export class AccessLevelVerificationDirective {
   @Input() SelectedFeatureAccessCode = '';
   @Input() IsTab = false;
   @Input() ActionState = 'ADD'; // ADD,EDIT,DELETE
+  @Input() ActionType = 'HIDE'; // HIDE,DISABLE
   @Input() isViewClickable = false;
   // Storing the cookie modal
   OverallCookieAccessible: OverallCookieInterface;
@@ -29,7 +30,8 @@ export class AccessLevelVerificationDirective {
   staffModel !: StaffModel;
 
   constructor(private elf: ElementRef<HTMLElement>, @Inject(DOCUMENT) private document: any,
-    private commonService: CommonService, private staffService: StaffService) {
+    private commonService: CommonService, private staffService: StaffService,
+    private renderer: Renderer2) {
     // Initializing the model
     this.OverallCookieAccessible = new OverallCookieModel();
     this.commonModel = new CommonModel(this.commonService);
@@ -37,7 +39,6 @@ export class AccessLevelVerificationDirective {
   }
 
   ngOnInit(): void {
-    debugger
     // Getting the access list
     this.staffModel.GetTabDetailsBasedOnModuleCode(this.SelectedModuleCode, this.OverallCookieAccessible.GetUserRole(), this.OverallCookieAccessible.GetCompanyId()).then(
       (data) => {
@@ -49,10 +50,10 @@ export class AccessLevelVerificationDirective {
           // Check whether access level exists
           let tabAccessLevelIndex = userAccessList.findIndex(obj => obj.SubTabCode == this.SelectedModuleAccessCode);
           if (tabAccessLevelIndex !== -1 && userAccessList[tabAccessLevelIndex].EnableAccess == false) {
-            this.elf.nativeElement.remove();
+            // Performing the action
+            this.performDisabledAction();
           }
         } else {
-          debugger
           // Check for the access level feature code
           let tabAccessLevelIndex = userAccessList.findIndex(obj => obj.SubTabCode == this.SelectedModuleAccessCode);
 
@@ -62,37 +63,29 @@ export class AccessLevelVerificationDirective {
 
             // Checking the ADD access
             if (featureAccessCode != -1 && this.ActionState == 'ADD' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].AddAccess == false) {
-              this.elf.nativeElement.remove();
+              // Performing the action
+              this.performDisabledAction();
             }
             // End of Checking the ADD access
 
             // Checking the EDIT access
             else if (featureAccessCode != -1 && this.ActionState == 'EDIT' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].EditAccess == false) {
-              this.elf.nativeElement.remove();
+              // Performing the action
+              this.performDisabledAction();
             }
             // End of Checking the EDIT access
 
             // Checking the DELETE access
             else if (featureAccessCode != -1 && this.ActionState == 'DELETE' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].DeleteAccess == false) {
-              this.elf.nativeElement.remove();
+              // Performing the action
+              this.performDisabledAction();
             }
             // End of Checking the DELETE access
 
             // Checking the VIEW access
-            else if (featureAccessCode != -1 && this.ActionState == 'VIEW') {
-              if (userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].ViewAccess == false) {
-                //Remove only clickable item
-                if (this.isViewClickable === true) {
-                  this.elf.nativeElement.remove();
-                }
-              } else {
-                //Remove only clickable item
-                if (this.isViewClickable === false) {
-                  this.elf.nativeElement.remove();
-                }
-              }
-
-
+            else if (featureAccessCode != -1 && this.ActionState == 'VIEW' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].ViewAccess == false) {
+              // Performing the action
+              this.performDisabledAction();
             }
             // End of Checking the VIEW access
           }
@@ -103,26 +96,41 @@ export class AccessLevelVerificationDirective {
       }
     );
     // End of Getting the access list
+  }
 
-    // Getting the access list
-    // this.commonModel.GetAccessListBasedUserRoleService(this.OverallCookieAccessible.GetUserRole(), this.OverallCookieAccessible.GetCompanyId()).then(
-    //   (data) => {
-    //     // Getting the access list
-    //     let userAccessList: UserRoleAccessDetail[] = <UserRoleAccessDetail[]>data;
-    //     // Filter by the list
-    //     let userAccessListObject: UserRoleAccessDetail = userAccessList.filter(obj => obj.ModuleCode == this.SelectedModuleCode)[0];
-    //     // Check whether access level exists
-    //     let accessExistsAll = userAccessListObject.AccessList.split(',').findIndex(obj => obj.toUpperCase() == 'ALL');
-    //     let accessExistsCode = userAccessListObject.AccessList.split(',').findIndex(obj => obj.toUpperCase() == this.SelectedModuleAccessCode.toUpperCase());
+  // Performing the action
+  performDisabledAction() {
+    // Checking the action type
+    switch (this.ActionType) {
+      case 'HIDE':
+        this.elf.nativeElement.remove();
+        break;
+      case 'DISABLE':
+        // Making the element disabled
+        this.elf.nativeElement.setAttribute('disabled', 'true');
 
-    //     // Check if the user has no access
-    //     if (accessExistsAll == -1 && accessExistsCode == -1) {
-    //       this.elf.nativeElement.remove();
-    //     }
-    //     // End of Check if the user has no access
-    //   }
-    // );
-    // End of Getting the access list
+        // Check if its a prime ng dropdown and disabling it
+        const dropdownElement = this.elf.nativeElement.querySelector('.p-dropdown');
+        if (dropdownElement) {
+          dropdownElement.classList.add('p-disabled');
+        }
+        // End of Check if its a prime ng dropdown and disabling it
+        break;
+      case 'DISABLE$DIV':
+        // Disabling any normal click event
+        const divElement = this.elf.nativeElement.querySelector('.access_div');
+        if (divElement) {
+          divElement.classList.add('disabled_div');
+        }
+        // End of Disabling any normal click event
+        break;
+    }
+    // End of Checking the action type
+  }
+
+  private preventClick(event: Event): void {
+    event.stopPropagation();
+    event.preventDefault();
   }
 
 }
