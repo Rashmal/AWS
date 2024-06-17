@@ -13,6 +13,8 @@ import { UserRolesModel } from '../../../models/userRoleModel';
 import { UserRolesService } from '../../../services/user-roles.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
+import { SubTabDetails } from 'src/app/modules/common/core/subTabDetails';
+import { AccessLevelFeatureDetails } from 'src/app/modules/common/core/accessLevelFeatureDetails';
 interface SubTabList {
     Name: string;
     OverallAccess: boolean;
@@ -48,120 +50,7 @@ export class AccessLevelsComponent {
     //Store module list
     moduleList: Module[] = [];
     //sub tab list
-    subTabs: SubTabList[] = [
-        {
-            Name: 'User Management',
-            OverallAccess: true,
-            TotalRecords: 4,
-            Features: [
-                {
-                    Feature: 'Add User',
-                    OverallAccess: true,
-                    AddItem: true,
-                    EditItem: false,
-                    DeleteItem: false,
-                },
-                {
-                    Feature: 'Edit User',
-                    OverallAccess: true,
-                    AddItem: false,
-                    EditItem: true,
-                    DeleteItem: false,
-                },
-                {
-                    Feature: 'Delete User',
-                    OverallAccess: true,
-                    AddItem: false,
-                    EditItem: false,
-                    DeleteItem: true,
-                },
-            ],
-        },
-        {
-            Name: 'Product Management',
-            OverallAccess: true,
-            TotalRecords: 4,
-            Features: [
-                {
-                    Feature: 'Add Product',
-                    OverallAccess: true,
-                    AddItem: true,
-                    EditItem: false,
-                    DeleteItem: false,
-                },
-                {
-                    Feature: 'Edit Product',
-                    OverallAccess: true,
-                    AddItem: false,
-                    EditItem: true,
-                    DeleteItem: false,
-                },
-                {
-                    Feature: 'Delete Product',
-                    OverallAccess: true,
-                    AddItem: false,
-                    EditItem: false,
-                    DeleteItem: true,
-                },
-            ],
-        },
-        // {
-        //     Name: 'Order Management',
-        //     OverallAccess: true,
-        //     TotalRecords: 4,
-        //     Features: [
-        //         {
-        //             Feature: 'Add Order',
-        //             OverallAccess: true,
-        //             AddItem: true,
-        //             EditItem: false,
-        //             DeleteItem: false,
-        //         },
-        //         {
-        //             Feature: 'Edit Order',
-        //             OverallAccess: true,
-        //             AddItem: false,
-        //             EditItem: true,
-        //             DeleteItem: false,
-        //         },
-        //         {
-        //             Feature: 'Delete Order',
-        //             OverallAccess: true,
-        //             AddItem: false,
-        //             EditItem: false,
-        //             DeleteItem: true,
-        //         },
-        //     ],
-        // },
-        // {
-        //     Name: 'Inventory Management',
-        //     OverallAccess: true,
-        //     TotalRecords: 4,
-        //     Features: [
-        //         {
-        //             Feature: 'Add Inventory',
-        //             OverallAccess: true,
-        //             AddItem: true,
-        //             EditItem: false,
-        //             DeleteItem: false,
-        //         },
-        //         {
-        //             Feature: 'Edit Inventory',
-        //             OverallAccess: true,
-        //             AddItem: false,
-        //             EditItem: true,
-        //             DeleteItem: false,
-        //         },
-        //         {
-        //             Feature: 'Delete Inventory',
-        //             OverallAccess: true,
-        //             AddItem: false,
-        //             EditItem: false,
-        //             DeleteItem: true,
-        //         },
-        //     ],
-        // },
-    ];
+    subTabs: SubTabDetails[] = [];
 
     //Store filter settings
     filter: Filter = {
@@ -228,6 +117,45 @@ export class AccessLevelsComponent {
             //Get system user roles
             this.getAllUserRoles(true);
         }
+    }
+
+    //on Change Sub Tab Feature Access Level
+    onChangeSubTabFeature(feature: AccessLevelFeatureDetails){
+        //Set sub tab Feature access
+        this.userRoleModel.SetSubTabFeatureAccessLevel(this.overallCookieInterface.GetCompanyId(), feature.DeleteAccess, feature.EditAccess, feature.AddAccess, feature.Id).then(
+            (subTabs: SubTabDetails[])=>{
+                if(subTabs){
+                    this.subTabs = subTabs;
+                }
+
+            }
+        );
+    }
+
+    //on Change Sub Tab Access Level
+    onChangeSubTabAccessLevel(subTab: SubTabDetails){
+        //Set sub tab access
+        this.userRoleModel.SetTabDetailsAccessLevelBasedOnModuleUserRole(this.overallCookieInterface.GetCompanyId(), subTab.EnableAccess, subTab.Id).then(
+            (subTabs: SubTabDetails[])=>{
+                if(subTabs){
+                    this.subTabs = subTabs;
+                }
+
+            }
+        );
+    }
+
+    //On changeAccessible Module
+    onChangeAccessibleModule(){
+        //Get sub tab list
+        this.userRoleModel.GetTabDetailsBasedOnModuleUserRole(this.overallCookieInterface.GetCompanyId(), this.selectedRoleId, this.filter, this.selectedAccModule.Id).then(
+            (subTabs: SubTabDetails[])=>{
+                if(subTabs){
+                    this.subTabs = subTabs;
+                }
+
+            }
+        );
     }
 
     //Get all accessible modules

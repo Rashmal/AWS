@@ -16,15 +16,17 @@
             </div>
             <!--End of Header-->
 
-            <div  class="user_role" *ngIf="userRoleModState == 'NEW'">
+            <div class="user_role" *ngIf="userRoleModState == 'NEW'">
                 <!--Label-->
                 <input placeholder="Add New..." class="input_ur" [(ngModel)]="newUserRoleName" />
                 <!--End of Label-->
 
                 <!--Button panel-->
                 <div class="btn_panel">
-                    <button class="btn_blue" (click)="onClickCreateRole()"><i class="fa fa-check" aria-hidden="true"></i></button>
-                    <button class="btn_red" (click)="onClickCancelRole()"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    <button class="btn_blue" (click)="onClickCreateRole()"><i class="fa fa-check"
+                            aria-hidden="true"></i></button>
+                    <button class="btn_red" (click)="onClickCancelRole()"><i class="fa fa-times"
+                            aria-hidden="true"></i></button>
                 </div>
                 <!--End of Button panel-->
 
@@ -32,24 +34,31 @@
 
             <div *ngFor="let role of userRoles" class="user_role">
                 <!--Label-->
-                <label *ngIf="role.Id != editingUserRole" (click)="selectUserRole(role)" [ngClass]="role.Id == selectedRoleId ? 'user_role_selected' : ''">{{role.Name}}</label>
-                <input *ngIf="role.Id == editingUserRole" [(ngModel)]="role.Name" value="General Manager" class="input_ur"/>
+                <label *ngIf="role.Id != editingUserRole" (click)="selectUserRole(role)"
+                    [ngClass]="role.Id == selectedRoleId ? 'user_role_selected' : ''">{{role.Name}}</label>
+                <input *ngIf="role.Id == editingUserRole" [(ngModel)]="role.Name" value="General Manager"
+                    class="input_ur" />
                 <!--End of Label-->
-                
+
                 <!--Button panel-->
                 <div class="btn_panel">
-                    <button *ngIf="role.Id != editingUserRole" class="btn_green" (click)="onClickDuplicateRole(role)"><i class="fa fa-files-o" aria-hidden="true"></i></button>
-                    <button *ngIf="role.Id != editingUserRole" class="btn_blue" (click)="onClickEditRole(role.Id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                    <button *ngIf="role.Id != editingUserRole" class="btn_red" (click)="onClickDeleteRole(role)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button *ngIf="role.Id != editingUserRole" class="btn_green" (click)="onClickDuplicateRole(role)"><i
+                            class="fa fa-files-o" aria-hidden="true"></i></button>
+                    <button *ngIf="role.Id != editingUserRole" class="btn_blue" (click)="onClickEditRole(role.Id)"><i
+                            class="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button *ngIf="role.Id != editingUserRole" class="btn_red" (click)="onClickDeleteRole(role)"><i
+                            class="fa fa-trash" aria-hidden="true"></i></button>
 
-                    <button *ngIf="role.Id == editingUserRole" class="btn_blue" (click)="onClickUpdateRole(role)"><i class="fa fa-check" aria-hidden="true"></i></button>
-                    <button *ngIf="role.Id == editingUserRole" class="btn_red" (click)="onClickCancelRole()"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    <button *ngIf="role.Id == editingUserRole" class="btn_blue" (click)="onClickUpdateRole(role)"><i
+                            class="fa fa-check" aria-hidden="true"></i></button>
+                    <button *ngIf="role.Id == editingUserRole" class="btn_red" (click)="onClickCancelRole()"><i
+                            class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
                 <!--End of Button panel-->
 
             </div>
 
-            
+
         </div>
         <!--End of user roles-->
 
@@ -70,8 +79,7 @@
                             <label class="input_lbl">{{module.Name}}</label>
                             <!--End of Label-->
                             <!--Input area-->
-                            <p-inputSwitch [(ngModel)]="module.IsDisable"
-                                (onChange)="onChangeModuleAccess(module)" />
+                            <p-inputSwitch [(ngModel)]="module.IsDisable" (onChange)="onChangeModuleAccess(module)" />
                             <!--End of Input area-->
 
                         </div>
@@ -98,8 +106,8 @@
                             <label class="module_drp_lbl">Access modules for the role</label>
                             <!--Input area-->
                             <p-dropdown [options]="accessibleModules" class="width_50" autoWidth="false"
-                                placeholder="Select an option" [(ngModel)]="selectedAccModule"  optionLabel="Name"
-                                (onChange)="onBlurEvent('BUSINESS$ADDRESS')" />
+                                placeholder="Select an option" [(ngModel)]="selectedAccModule" optionLabel="Name"
+                                (onChange)="onChangeAccessibleModule()" />
                             <!--End of Input area-->
                         </div>
                         <!--End of Input and label-->
@@ -107,7 +115,7 @@
                     <!--End of Module selector and header-->
 
                     <!--Module access row-->
-                    <div class="row gen_info_item">
+                    <div *ngIf="selectedAccModule" class="row gen_info_item">
                         <!--Input and label-->
                         <div *ngFor="let tab of subTabs"
                             class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 sub_tab_item">
@@ -116,8 +124,8 @@
                             <div class="sub_tab">
 
                                 <!--Input area-->
-                                <p-inputSwitch [(ngModel)]="tab.OverallAccess"
-                                    (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
+                                <p-inputSwitch [(ngModel)]="tab.EnableAccess"
+                                    (onChange)="onChangeSubTabAccessLevel(tab)" />
                                 <!--End of Input area-->
                                 <!--Label-->
                                 <label class="input_lbl">{{tab.Name}}</label>
@@ -127,11 +135,11 @@
                             <!--Tab features-->
                             <div class="features_list">
                                 <!--Single feature-->
-                                <div class="feature_item" *ngFor="let feature of tab.Features">
+                                <div class="feature_item" *ngFor="let feature of tab.AccessLevelFeatureDetailsList">
                                     <div>
 
                                         <!--Label-->
-                                        <label class="input_lbl">{{feature.Feature}}</label>
+                                        <label class="input_lbl">{{feature.Name}}</label>
                                         <!--End of Label-->
 
 
@@ -142,8 +150,8 @@
                                     <div class="feature_actions">
                                         <div class="switch_and_lbl">
                                             <!--Input area-->
-                                            <p-inputSwitch [(ngModel)]="feature.AddItem"
-                                                (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
+                                            <p-inputSwitch [(ngModel)]="feature.AddAccess"
+                                                (onChange)="onChangeSubTabFeature(feature)" />
                                             <!--End of Input area-->
                                             <!--Label-->
                                             <label class="lbl">Add</label>
@@ -153,8 +161,8 @@
                                         <div class="switch_and_lbl">
 
                                             <!--Input area-->
-                                            <p-inputSwitch [(ngModel)]="feature.EditItem"
-                                                (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
+                                            <p-inputSwitch [(ngModel)]="feature.EditAccess"
+                                                (onChange)="onChangeSubTabFeature(feature)" />
                                             <!--End of Input area-->
                                             <!--Label-->
                                             <label class="lbl">Edit</label>
@@ -163,8 +171,8 @@
 
                                         <div class="switch_and_lbl">
                                             <!--Input area-->
-                                            <p-inputSwitch [(ngModel)]="feature.DeleteItem"
-                                                (onChange)="onBlurEvent('RELATIONSHIP$DETAILS')" />
+                                            <p-inputSwitch [(ngModel)]="feature.DeleteAccess"
+                                                (onChange)="onChangeSubTabFeature(feature)" />
                                             <!--End of Input area-->
                                             <!--Label-->
                                             <label class="lbl">Delete</label>
@@ -192,6 +200,22 @@
                     </div>
                     <!--End of Module access row-->
 
+                    <!--Module access row-->
+                    <div *ngIf="!selectedAccModule" class="row gen_info_item">
+                        <div class="col-12 flex justify-content-center">
+                            Select module from dropdown
+                        </div>
+                    </div>
+                    <!--End of Module access row-->
+
+
+                    <!--Module access row-->
+                    <div *ngIf="selectedAccModule && subTabs.length == 0" class="row gen_info_item">
+                        <div class="col-12 flex justify-content-center">
+                            No features sub tabs for the selected module.
+                        </div>
+                    </div>
+                    <!--End of Module access row-->
 
 
 

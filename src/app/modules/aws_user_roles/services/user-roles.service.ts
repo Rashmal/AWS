@@ -6,23 +6,79 @@ import { catchError } from 'rxjs';
 import { UserRole } from '../../common/core/userRole';
 import { API$DOMAIN } from 'src/app/core/apiConfigurations';
 import { Module } from '../../common/core/module';
+import { Filter } from '../../common/core/filters';
+import { SubTabDetails } from '../../common/core/subTabDetails';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserRolesService {
-   // API Urls
-   private GetAllUserRolesUrl = API$DOMAIN + 'api/Staff/GetAllUserRoles';
-   private SetUserRolesUrl = API$DOMAIN + 'api/Staff/SetUserRoles';
-   private GetAllModulesBasedUserRoleUrl = API$DOMAIN + 'api/Staff/GetAllModulesbasedUserRole';
-   private SetModuleAccessUrl = API$DOMAIN + 'api/Staff/SetModuleAccess';
-   private GetAccessibleModulesUrl = API$DOMAIN + 'api/Staff/GetAccessibleModules';
+  // API Urls
+  private GetAllUserRolesUrl = API$DOMAIN + 'api/Staff/GetAllUserRoles';
+  private SetUserRolesUrl = API$DOMAIN + 'api/Staff/SetUserRoles';
+  private GetAllModulesBasedUserRoleUrl = API$DOMAIN + 'api/Staff/GetAllModulesbasedUserRole';
+  private SetModuleAccessUrl = API$DOMAIN + 'api/Staff/SetModuleAccess';
+  private GetAccessibleModulesUrl = API$DOMAIN + 'api/Staff/GetAccessibleModules';
+  private GetTabDetailsBasedOnModuleUserRoleUrl = API$DOMAIN + 'api/Staff/GetTabDetailaBasedOnModuleUserRole';
+  private SetTabDetailsAccessLevelBasedOnModuleUserRoleUrl = API$DOMAIN + 'api/Staff/SetTabDetailaAccessLevelBasedOnModuleUserRole';
+  private SetSubTabFeatureAccessLevelUrl = API$DOMAIN + 'api/Staff/SetSubTabFeatureAccessLevel';
 
- 
+
+
+
 
   constructor(private http: HttpClient, private router: Router) {
 
-   }
+  }
+
+  //SetTabDetailsAccessLevelBasedOnModuleUserRole(int subTabId, bool accessLevel, int companyId)
+
+  SetSubTabFeatureAccessLevel(companyId: number, deleteAccessLevel: boolean, editAccessLevel: boolean, addAccessLevel: boolean, subTabFeatureId: number) {
+
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString())
+      .set("deleteAccessLevel", deleteAccessLevel.toString())
+      .set("editAccessLevel", editAccessLevel.toString())
+      .set("addAccessLevel", addAccessLevel.toString())
+      .set("subTabFeatureId", subTabFeatureId.toString());
+
+    return this.http.get<boolean>(this.SetSubTabFeatureAccessLevelUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('SetSubTabFeatureAccessLevel', error)
+      })
+    );
+  }
+  //SetSubTabFeatureAccessLevel(int subTabFeatureId, bool addAccessLevel, bool editAccessLevel, bool deleteAccessLevel, int companyId)
+
+  SetTabDetailsAccessLevelBasedOnModuleUserRole(companyId: number, accessLevel: boolean, subTabId: number) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString())
+      .set("subTabId", subTabId.toString())
+      .set("accessLevel", accessLevel.toString());
+
+    return this.http.get<boolean>(this.SetTabDetailsAccessLevelBasedOnModuleUserRoleUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('SetTabDetailsAccessLevelBasedOnModuleUserRole', error)
+      })
+    );
+  }
+  // Get all modules based on role
+  GetTabDetailsBasedOnModuleUserRole(companyId: number, userRoleId: number, moduleId: number, filter: Filter) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString())
+      .set("userRoleId", userRoleId.toString())
+      .set("moduleId", moduleId.toString());
+
+    return this.http.post<SubTabDetails[]>(this.GetTabDetailsBasedOnModuleUserRoleUrl, filter, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetTabDetailsBasedOnModuleUserRole', error)
+      })
+    );
+  }
+
 
   // Get all modules based on role
   GetAccessibleModules(companyId: number, userRoleId: number) {
@@ -69,8 +125,8 @@ export class UserRolesService {
     );
   }
 
-   // Set the user role
-   SetUserRoles(companyId: number, userRole: UserRole, actionType: string) {
+  // Set the user role
+  SetUserRoles(companyId: number, userRole: UserRole, actionType: string) {
     // Setting the params
     let my_params = new HttpParams()
       .set("companyId", companyId.toString())
@@ -83,8 +139,8 @@ export class UserRolesService {
     );
   }
 
-   // Getting the user role list
-   GetAllUserRoles(companyId: number) {
+  // Getting the user role list
+  GetAllUserRoles(companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("companyId", companyId.toString());
@@ -96,8 +152,8 @@ export class UserRolesService {
     );
   }
 
-  
-    //----------- Common methods------------------//
+
+  //----------- Common methods------------------//
   //The function of handling the error
   private handleError(methodName: string, exception: Error) {
     // Creating the error message object 
