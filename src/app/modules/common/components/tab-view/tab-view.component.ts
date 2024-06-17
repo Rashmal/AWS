@@ -23,6 +23,7 @@ import { AuthenticationModule } from 'src/app/modules/authentication/authenticat
 })
 export class TabViewComponent {
     // Input fields
+    @Input() SelectedModuleCode: string = "";
     @Input() TabViewType: string;
     @Input()
     TabViewList: SelectItem[] = [

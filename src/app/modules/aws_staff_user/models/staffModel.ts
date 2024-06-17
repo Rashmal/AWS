@@ -4,6 +4,7 @@ import { StaffDetails } from "../core/staffDetails";
 import { Filter } from "../../common/core/filters";
 import { DisplayStaffDetails } from "../core/displayStaffDetails";
 import { UserRole } from "../../common/core/userRole";
+import { AccessSubTabDetails } from "../core/subTabDetails";
 
 export class StaffModel {
     //Store subscriptions
@@ -149,6 +150,21 @@ export class StaffModel {
             this.allSubscriptions.push(this.staffService.RemoveStaffAvatar(staffId, companyId).subscribe(
                 data => {
                     let returnData = <boolean>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting all access level tab details by module code
+    GetTabDetailsBasedOnModuleCode(selectedModuleCode: string, userRoleCode: string, companyId: number) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.staffService.GetTabDetailsBasedOnModuleCode(selectedModuleCode, userRoleCode, companyId).subscribe(
+                data => {
+                    let returnData = <AccessSubTabDetails[]>data;
                     // Resolve the promise
                     resolve(returnData);
                 })

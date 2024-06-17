@@ -8,6 +8,7 @@ import { ErrorMessage } from '../../common/core/errorMessage';
 import { Filter } from '../../common/core/filters';
 import { DisplayStaffDetails } from '../core/displayStaffDetails';
 import { UserRole } from '../../common/core/userRole';
+import { AccessSubTabDetails } from '../core/subTabDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,26 @@ export class StaffService {
   private GetAllUserRolesUrl = API$DOMAIN + 'api/Staff/GetAllUserRoles';
   private GetStaffAvatarUrl = API$DOMAIN + 'api/Staff/GetStaffAvatar';
   private RemoveStaffAvatarUrl = API$DOMAIN + 'api/Staff/RemoveStaffAvatar';
+  private GetTabDetailsBasedOnModuleCodeUrl = API$DOMAIN + 'api/Staff/GetTabDetailsBasedOnModuleCode';
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
 
+  }
+
+  // Getting all access level tab details by module code
+  GetTabDetailsBasedOnModuleCode(selectedModuleCode: string, userRoleCode: string, companyId: number) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("userRoleCode", userRoleCode.toString())
+      .set("selectedModuleCode", selectedModuleCode.toString())
+      .set("companyId", companyId.toString());
+
+    return this.http.get<AccessSubTabDetails[]>(this.GetTabDetailsBasedOnModuleCodeUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetTabDetailsBasedOnModuleCode', error)
+      })
+    );
   }
 
   // Remove the staff avatar
