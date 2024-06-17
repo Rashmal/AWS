@@ -7,19 +7,23 @@
             <div class="row gen_info_item">
                 <!--Input and label-->
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex justify_center">
-                    <img class="avatar_img" src="../../../../../../assets/images/default_avatar.png" />
+                    <img *ngIf="userAvatar == ''" class="avatar_img"
+                        src="../../../../../../assets/images/default_avatar.png" />
+                    <img *ngIf="userAvatar !== ''" class="avatar_img" [src]="userAvatar" />
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex avatar_action">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex avatar_action"
+                    *ngIf="modificationMode !== 'VIEW' && selectedStaffId !== ''">
                     <!--Label-->
                     <label class="input_lbl">Change Avatar</label>
                     <!--End of Label-->
-                    
-                        <!-- Hidden file input element that supports multiple file selection of any type -->
-                        <input type="file" #fileInput accept="image/png, image/gif, image/jpeg" (change)="onFileSelected($event)" hidden>
+
+                    <!-- Hidden file input element that supports multiple file selection of any type -->
+                    <input type="file" #fileInput accept="image/png, image/gif, image/jpeg"
+                        (change)="onFileSelected($event)" hidden>
                     <button class="select_file_btn" (click)="fileInput.click()">Select File</button>
-                    <button class="remove_btn">Remove Avatar</button>
+                    <button class="remove_btn" (click)="removeAvatar()">Remove Avatar</button>
                 </div>
                 <!--End of Input and label-->
             </div>

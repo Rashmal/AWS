@@ -1,7 +1,6 @@
 <!-- Main section -->
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 tab-custom-element tap-height">
-    <div *ngFor="let tabObject of TabViewList; let i=index" class="flex_center_just_center" appAccessLevelVerification
-        SelectedModuleCode='STAT1' SelectedModuleAccessCode='{{tabObject.value}}'
+    <div *ngFor="let tabObject of TabViewList; let i=index" class="flex_center_just_center"
         [ngClass]="[(SelectedTab && SelectedTab.value && SelectedTab.value == tabObject.value)?'selected-tab':'', (tabObject.value=='Deals 11')?'disabled_tab':'',(TabViewType=='SUB')?'sub tab-section':'tab-section']"
         (click)="onclickTabView(i)">
         <span>{{tabObject.label}}</span>

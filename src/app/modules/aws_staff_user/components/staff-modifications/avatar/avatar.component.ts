@@ -4,6 +4,8 @@ import { OverallCookieInterface } from 'src/app/modules/common/core/overallCooki
 import { CommonModel } from 'src/app/modules/common/models/commonModel';
 import { CommonService } from 'src/app/modules/common/services/common.service';
 import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
+import { StaffModel } from '../../../models/staffModel';
+import { StaffService } from '../../../services/staff.service';
 
 @Component({
     selector: 'app-avatar',
@@ -11,39 +13,57 @@ import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieMod
     styleUrl: './avatar.component.scss',
 })
 export class AvatarComponent {
-  files: File[] = [];
-   // Store the modification mode
-   modificationMode = 'NEW';
-   // Store the selected client Id
-   selectedStaffId = 0;
-   // Store the cookie interface
-   overallCookieInterface: OverallCookieInterface;
-   // Store the common model
-   commonModel: CommonModel;
+    files: File[] = [];
+    // Store the modification mode
+    modificationMode = 'NEW';
+    // Store the selected client Id
+    selectedStaffId = "";
+    // Store the cookie interface
+    overallCookieInterface: OverallCookieInterface;
+    // Store the common model
+    commonModel: CommonModel;
+    //Store staff model
+    staffModel !: StaffModel;
+    // Store the user avatar
+    userAvatar: string = "";
 
-   // Store the products list
-   constructor(
-       private location: Location,
-       private commonService: CommonService
-   ) {
-       // Initialize the model
-       this.commonModel = new CommonModel(this.commonService);
-       this.overallCookieInterface = new OverallCookieModel();
-   }
-   ngOnInit(): void {
-    
-    // Getting the passed params
-    let paramObject = this.location.getState();
-    //Set editing mode
-    if (paramObject['EditingMode']) {
-        this.modificationMode = paramObject['EditingMode'];
+    // Store the products list
+    constructor(
+        private location: Location, private staffService: StaffService,
+        private commonService: CommonService
+    ) {
+        // Initialize the model
+        this.commonModel = new CommonModel(this.commonService);
+        this.overallCookieInterface = new OverallCookieModel();
+        this.staffModel = new StaffModel(this.staffService);
     }
-    //Set editing staff id
-    if (paramObject['StaffId']) {
-        this.selectedStaffId = paramObject['StaffId'];
+    ngOnInit(): void {
+        
+        // Getting the passed params
+        let paramObject = this.location.getState();
+        //Set editing mode
+        if (paramObject['EditingMode']) {
+            this.modificationMode = paramObject['EditingMode'];
+        }
+        //Set editing staff id
+        if (paramObject['StaffId']) {
+            this.selectedStaffId = paramObject['StaffId'];
+            // Getting the current user avatar
+            this.GetUserAvatar();
+        }
     }
-}
 
+    // Getting the user avatar
+    GetUserAvatar() {
+        // Calling the object model to access the service
+        this.staffModel.GetStaffAvatar(this.selectedStaffId, this.overallCookieInterface.GetCompanyId()).then(
+            (data) => {
+                // Getting the list of social media list
+                this.userAvatar = <string>data;
+            }
+        );
+        // End of Calling the object model to access the service
+    }
 
     // Handle files selected via the file input element
     onFileSelected(event: Event) {
@@ -55,8 +75,33 @@ export class AvatarComponent {
 
     // Process the file list and add to the files array
     handleFiles(fileList: FileList) {
-      for (let i = 0; i < fileList.length; i++) {
-          this.files.push(fileList[i]);
-      }
-  }
+        for (let i = 0; i < fileList.length; i++) {
+            this.files.push(fileList[i]);
+        }
+
+        //Setting the form data
+        const frmDataObj = new FormData();
+        // Loop through the files
+        for (let i = 0; i < this.files.length; i++) {
+            frmDataObj.append('fileUpload', this.files[i]);
+        }
+        // End of Loop through the files
+        this.staffModel.UploadStaffAvatar(this.selectedStaffId, this.overallCookieInterface.GetCompanyId(), frmDataObj)
+            .then((data: string) => {
+                // Getting the user avatar
+                this.GetUserAvatar();
+            });
+    }
+
+    // On click event of remove avatar
+    removeAvatar() {
+        // Calling the object model to access the service
+        this.staffModel.RemoveStaffAvatar(this.selectedStaffId, this.overallCookieInterface.GetCompanyId()).then(
+            (data) => {
+                // Getting the user avatar
+                this.GetUserAvatar();
+            }
+        );
+        // End of Calling the object model to access the service
+    }
 }

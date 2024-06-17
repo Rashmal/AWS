@@ -8,49 +8,83 @@
 
 
                 <!--Input and label-->
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 flex input_area">
                     <!--Label-->
                     <label class="input_lbl">Current Password</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
-                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
-                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
-                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                    <input class="input_field" type="password" [(ngModel)]="userPromptCurrentPassword"
+                        onKeyPress="if(value.length==20) return false;"
+                        [disabled]="(selectedStaffId == '') || modificationMode == 'VIEW'" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 flex input_area">
                     <!--Label-->
                     <label class="input_lbl">New Password</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
-                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
-                        [disabled]="modificationMode == 'VIEW'" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                    <input class="input_field" type="password" [(ngModel)]="userPromptNewPassword"
+                        onKeyPress="if(value.length==20) return false;" [disabled]="(selectedStaffId == '') || modificationMode == 'VIEW'" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 flex input_area">
                     <!--Label-->
                     <label class="input_lbl">Confirm Password</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" [(ngModel)]="staffDetails"
-                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
-                        [disabled]="(!staffDetails) || modificationMode == 'VIEW'"
-                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                    <input class="input_field" type="password" [(ngModel)]="userPromptNewRePassword"
+                        onKeyPress="if(value.length==20) return false;"
+                        [disabled]="(selectedStaffId == '') || modificationMode == 'VIEW'" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
+
+                <!-- Error Message -->
+                <div class="col-12 error_message" *ngIf="CheckErrorCode('CP$EMPTY')">
+                    <span>{{CheckErrorCode('CP$EMPTY').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
+
+                <!-- Error Message -->
+                <div class="col-12 error_message" *ngIf="CheckErrorCode('CP_NOT$MATCH')">
+                    <span>{{CheckErrorCode('CP_NOT$MATCH').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
+
+                <!-- Error Message -->
+                <div class="col-12 error_message" *ngIf="CheckErrorCode('NP$EMPTY')">
+                    <span>{{CheckErrorCode('NP$EMPTY').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
+
+                <!-- Error Message -->
+                <div class="col-12 error_message" *ngIf="CheckErrorCode('RNP$EMPTY')">
+                    <span>{{CheckErrorCode('RNP$EMPTY').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
+
+                <!-- Error Message -->
+                <div class="col-12 error_message" *ngIf="CheckErrorCode('NP_NOT$MATCH')">
+                    <span>{{CheckErrorCode('NP_NOT$MATCH').ErrorMessage}}</span>
+                </div>
+                <!-- End of Error Message -->
+
+                <!-- Change password button -->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 flex input_area change_pass" *ngIf="modificationMode !== 'VIEW' && (selectedStaffId !== '')">
+                    <button (click)="onClickChangePassword()" pTooltip="Change Password" tooltipPosition="top">Change
+                        Password</button>
+                </div>
+                <!-- End of Change password button -->
 
             </div>
             <!--End of Client Customer-->
 
         </p-accordionTab>
-        
+
     </p-accordion>
 </div>
 <!--End of Gen info main-->

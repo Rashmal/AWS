@@ -1,76 +1,78 @@
-.clients_main{
+.clients_main {
     margin: 10px 0px;
-   .filter_section{
-    margin-bottom: 20px;
-    .add_new{
-        button{
-            height: 30px;
-            width: 100%;
-            border-radius: 3px;
-            border: none;
+    .filter_section {
+        margin-bottom: 20px;
+        .add_new {
+            button {
+                height: 30px;
+                width: 100%;
+                border-radius: 3px;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #21ba45;
+                color: #fff;
+            }
+        }
+        .filter_item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            background-color: #21ba45;
-            color: #fff;
+            label {
+                min-width: 150px;
+            }
+            input {
+                width: 100%;
+                margin-left: 10px;
+                border-radius: 3px;
+                border: 1px solid #ccc;
+            }
         }
     }
-    .filter_item{
-        display: flex;
-        align-items: center;
-        label{
-            min-width: 150px;
-        }
-        input{
-            width: 100%;
-            margin-left: 10px;
-            border-radius: 3px;
-            border: 1px solid #ccc;
-        }
-    }
-   }
 
-   .paginator_sec{
-    margin-top: 10px;
-   }
-   
+    .paginator_sec {
+        margin-top: 10px;
+    }
 }
 
-::ng-deep p-table .table_header_row{
-    background-color: #dddddd  !important;
-    th{
+.text_align_left {
+    text-align: left !important;
+}
+
+::ng-deep p-table .table_header_row {
+    background-color: #dddddd !important;
+    th {
         background-color: transparent;
     }
-    .header_col{
+    .header_col {
         text-align: center;
         min-width: 130px;
     }
-    .created_details{
+    .created_details {
         min-width: 200px;
     }
- 
 }
 
-::ng-deep p-table .table_body{
-    .created_details{
-        .created_date_txt{
+::ng-deep p-table .table_body {
+    .created_details {
+        .created_date_txt {
             color: #9f9f9f;
             font-size: 11px;
         }
     }
-    .contact_details{
-        .contact_item{
+    .contact_details {
+        .contact_item {
             max-width: 250px;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
         }
     }
-    .action_button{
+    .action_button {
         display: flex;
         align-items: center;
         justify-content: center;
-        button{
+        button {
             height: 30px;
             width: 33px;
             border-radius: 3px;
@@ -78,65 +80,60 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            
-            i{
-                color:#fff;
+
+            i {
+                color: #fff;
             }
         }
-        .red_btn{
-            background-color: #DB2828;
+        .red_btn {
+            background-color: #db2828;
         }
-        .blue_btn{
-           
+        .blue_btn {
             background-color: #2867af;
             margin-left: 5px;
             margin-right: 5px;
         }
-        .green_btn{
+        .green_btn {
             background-color: #21ba45;
         }
     }
 }
-::ng-deep p-dropdown  {
+::ng-deep p-dropdown {
     width: 100% !important;
 }
 ::ng-deep .p-dropdown {
     width: 100% !important;
 }
 
-
-::ng-deep p-table .table_header_row{
-    background-color: #2185D0  !important;
-    th{
+::ng-deep p-table .table_header_row {
+    background-color: #2185d0 !important;
+    th {
         background-color: transparent;
         color: #ffffff;
         padding: 5px;
         height: 30px;
     }
-    .header_col{
+    .header_col {
         text-align: center;
         min-width: 130px;
     }
-    .created_details{
+    .created_details {
         min-width: 200px;
     }
- 
 }
-
-
 
 ::ng-deep p-table {
     .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
-        background-color: #EDF7FF;
+        background-color: #edf7ff;
     }
     .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(odd) {
         background-color: #ffffff;
     }
-   
-    .p-datatable .p-datatable-tbody > tr:hover{
-        background-color:  #c8e4fb !important;
+
+    .p-datatable .p-datatable-tbody > tr:hover {
+        background-color: #c8e4fb !important;
     }
-    .p-datatable .p-datatable-tbody > tr > td{
+    .p-datatable .p-datatable-tbody > tr > td {
         padding: 5px;
         vertical-align: top;
     }

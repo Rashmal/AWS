@@ -192,6 +192,7 @@
     }
 
     .enh_module_row_w {
+<<<<<<< HEAD
 
         background: transparent;
 
@@ -202,6 +203,19 @@
 
         background: transparent;
 
+=======
+        background: transparent;
+        align-items: center;
+        display: flex;
+        height: 30px;
+    }
+
+    .enh_module_row_g {
+        // background: #ebeaea;
+        align-items: center;
+        display: flex;
+        height: 30px;
+>>>>>>> a287ef6572a87b6419b7c3608ab14eaeb7d3ba64
     }
 
     .stator_strip {
