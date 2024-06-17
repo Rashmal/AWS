@@ -37,7 +37,7 @@ export class AccessLevelVerificationDirective {
   }
 
   ngOnInit(): void {
-
+    debugger
     // Getting the access list
     this.staffModel.GetTabDetailsBasedOnModuleCode(this.SelectedModuleCode, this.OverallCookieAccessible.GetUserRole(), this.OverallCookieAccessible.GetCompanyId()).then(
       (data) => {
@@ -79,12 +79,20 @@ export class AccessLevelVerificationDirective {
             // End of Checking the DELETE access
 
             // Checking the VIEW access
-            else if (featureAccessCode != -1 && this.ActionState == 'VIEW' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].ViewAccess == false) {
-              //Remove only clickable item
-              if(this.isViewClickable === true){
-                this.elf.nativeElement.remove();
+            else if (featureAccessCode != -1 && this.ActionState == 'VIEW') {
+              if (userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].ViewAccess == false) {
+                //Remove only clickable item
+                if (this.isViewClickable === true) {
+                  this.elf.nativeElement.remove();
+                }
+              } else {
+                //Remove only clickable item
+                if (this.isViewClickable === false) {
+                  this.elf.nativeElement.remove();
+                }
               }
-              
+
+
             }
             // End of Checking the VIEW access
           }
