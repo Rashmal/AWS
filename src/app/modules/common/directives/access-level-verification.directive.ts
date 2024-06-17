@@ -51,6 +51,7 @@ export class AccessLevelVerificationDirective {
             this.elf.nativeElement.remove();
           }
         } else {
+          debugger
           // Check for the access level feature code
           let tabAccessLevelIndex = userAccessList.findIndex(obj => obj.SubTabCode == this.SelectedModuleAccessCode);
 
