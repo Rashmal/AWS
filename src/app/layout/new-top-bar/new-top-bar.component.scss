@@ -1,12 +1,13 @@
 .layout-topbar {
     .active-route {
-       
+
         .tab_label {
             font-weight: bold !important;
             text-decoration: underline !important;
         }
-        .icon_label{
-            i{
+
+        .icon_label {
+            i {
                 font-weight: bold !important;
             }
         }
@@ -33,19 +34,23 @@
         display: flex;
         align-items: center;
         margin-right: 10px;
+
         .tab_label {
             width: max-content;
             padding-bottom: 1px;
             color: #126095;
         }
+
         .icon_label {
             margin-right: 5px;
             color: #126095;
         }
+
         cursor: pointer;
         padding-right: 10px;
-       
+
     }
+
     .divider_vr {
         height: 30px;
         width: 1px;
@@ -72,5 +77,20 @@
 
     .user_top_menu {
         display: none;
+    }
+
+    .company_btns {
+        button {
+            border: 1px solid #E8E7E7;
+            border-radius: 3px;
+            background-color: #ffffff;
+            margin-right: 5px;
+            height: 30px;
+            width: 100px;
+        }
+        .button_selected{
+            background-color: #E8E7E7;
+            font-weight: bold;
+        }
     }
 }

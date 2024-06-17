@@ -123,10 +123,8 @@ export class AccessLevelsComponent {
     onChangeSubTabFeature(feature: AccessLevelFeatureDetails){
         //Set sub tab Feature access
         this.userRoleModel.SetSubTabFeatureAccessLevel(this.overallCookieInterface.GetCompanyId(), feature.DeleteAccess, feature.EditAccess, feature.AddAccess, feature.Id).then(
-            (subTabs: SubTabDetails[])=>{
-                if(subTabs){
-                    this.subTabs = subTabs;
-                }
+            (data: boolean)=>{
+               
 
             }
         );
@@ -136,11 +134,8 @@ export class AccessLevelsComponent {
     onChangeSubTabAccessLevel(subTab: SubTabDetails){
         //Set sub tab access
         this.userRoleModel.SetTabDetailsAccessLevelBasedOnModuleUserRole(this.overallCookieInterface.GetCompanyId(), subTab.EnableAccess, subTab.Id).then(
-            (subTabs: SubTabDetails[])=>{
-                if(subTabs){
-                    this.subTabs = subTabs;
-                }
-
+            (data: boolean)=>{
+               
             }
         );
     }

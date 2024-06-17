@@ -179,6 +179,16 @@
                                             <!--End of Label-->
 
                                         </div>
+                                        <div class="switch_and_lbl">
+                                            <!--Input area-->
+                                            <p-inputSwitch [(ngModel)]="feature.ViewAccess"
+                                                (onChange)="onChangeSubTabFeature(feature)" />
+                                            <!--End of Input area-->
+                                            <!--Label-->
+                                            <label class="lbl">View</label>
+                                            <!--End of Label-->
+
+                                        </div>
                                     </div>
                                 </div>
                                 <!--End Single feature-->
