@@ -242,6 +242,13 @@
     .expanded_content_title:hover {
         text-decoration: underline;
     }
+    .expanded_content_title_view {
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        
+    }
 
     .table_row {
         cursor: pointer;

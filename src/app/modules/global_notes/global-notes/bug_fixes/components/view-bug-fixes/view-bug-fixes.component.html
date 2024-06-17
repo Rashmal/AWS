@@ -610,9 +610,20 @@
                         </div>
                     </td>
                     <td class="title_content title_by_width">
-                        <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
+                        <div appAccessLevelVerification SelectedModuleCode="STAT1"
+                        SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SANRC" [IsTab]="false" [isViewClickable]="true"
+                        ActionState="VIEW"
                             class="expanded_content_title paddingRight5 cursor_pointer ">
                             <div class="ellipsis" (click)="titleOnClickFunction(enhancement)"
+                                [pTooltip]="enhancement.Title" tooltipPosition="top">
+                                {{enhancement.Title}}<span class="new-label" *ngIf="enhancement.IsNew">New</span>
+                            </div>
+                        </div>
+                        <div appAccessLevelVerification SelectedModuleCode="STAT1"
+                        SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SANRC" [IsTab]="false" 
+                        ActionState="VIEW"
+                            class="expanded_content_title_view paddingRight5 cursor_pointer ">
+                            <div class="ellipsis" 
                                 [pTooltip]="enhancement.Title" tooltipPosition="top">
                                 {{enhancement.Title}}<span class="new-label" *ngIf="enhancement.IsNew">New</span>
                             </div>
