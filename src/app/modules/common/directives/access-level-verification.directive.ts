@@ -19,7 +19,7 @@ export class AccessLevelVerificationDirective {
   @Input() SelectedModuleAccessCode = '';
   @Input() SelectedFeatureAccessCode = '';
   @Input() IsTab = false;
-  @Input() ActionState = 'ADD'; // ADD,EDIT,DELETE
+  @Input() ActionState = 'ADD'; // ADD,EDIT,DELETE,VIEW
   // Storing the cookie modal
   OverallCookieAccessible: OverallCookieInterface;
   // Storing the common model
@@ -76,6 +76,12 @@ export class AccessLevelVerificationDirective {
               this.elf.nativeElement.remove();
             }
             // End of Checking the DELETE access
+
+            // Checking the VIEW access
+            else if (featureAccessCode != -1 && this.ActionState == 'VIEW' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].ViewAccess == false) {
+              this.elf.nativeElement.remove();
+            }
+            // End of Checking the VIEW access
           }
           // End of Check for the access level feature code
         }

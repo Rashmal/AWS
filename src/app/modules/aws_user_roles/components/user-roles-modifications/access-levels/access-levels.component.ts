@@ -120,37 +120,29 @@ export class AccessLevelsComponent {
     }
 
     //on Change Sub Tab Feature Access Level
-    onChangeSubTabFeature(feature: AccessLevelFeatureDetails){
+    onChangeSubTabFeature(feature: AccessLevelFeatureDetails) {
         //Set sub tab Feature access
         this.userRoleModel.SetSubTabFeatureAccessLevel(this.overallCookieInterface.GetCompanyId(), feature.DeleteAccess, feature.EditAccess, feature.AddAccess, feature.Id).then(
-            (subTabs: SubTabDetails[])=>{
-                if(subTabs){
-                    this.subTabs = subTabs;
-                }
-
+            (subTabs: SubTabDetails[]) => {
             }
         );
     }
 
     //on Change Sub Tab Access Level
-    onChangeSubTabAccessLevel(subTab: SubTabDetails){
+    onChangeSubTabAccessLevel(subTab: SubTabDetails) {
         //Set sub tab access
         this.userRoleModel.SetTabDetailsAccessLevelBasedOnModuleUserRole(this.overallCookieInterface.GetCompanyId(), subTab.EnableAccess, subTab.Id).then(
-            (subTabs: SubTabDetails[])=>{
-                if(subTabs){
-                    this.subTabs = subTabs;
-                }
-
+            (subTabs: SubTabDetails[]) => {
             }
         );
     }
 
     //On changeAccessible Module
-    onChangeAccessibleModule(){
+    onChangeAccessibleModule() {
         //Get sub tab list
         this.userRoleModel.GetTabDetailsBasedOnModuleUserRole(this.overallCookieInterface.GetCompanyId(), this.selectedRoleId, this.filter, this.selectedAccModule.Id).then(
-            (subTabs: SubTabDetails[])=>{
-                if(subTabs){
+            (subTabs: SubTabDetails[]) => {
+                if (subTabs) {
                     this.subTabs = subTabs;
                 }
 
@@ -160,13 +152,12 @@ export class AccessLevelsComponent {
 
     //Get all accessible modules
     getAccessibleModules() {
-         //Call services to get modules by user role
-         this.userRoleModel.GetAccessibleModules(this.overallCookieInterface.GetCompanyId(), this.selectedRoleId).then(
+        //Call services to get modules by user role
+        this.userRoleModel.GetAccessibleModules(this.overallCookieInterface.GetCompanyId(), this.selectedRoleId).then(
             (data: Module[]) => {
                 //Check data is not undefined
                 if (data) {
                     this.accessibleModules = data;
-                    
                 }
 
             }
@@ -201,7 +192,7 @@ export class AccessLevelsComponent {
                 //Check data is not undefined
                 if (data) {
                     this.moduleList = data;
-                     //Get all accessible modules
+                    //Get all accessible modules
                     this.getAccessibleModules();
                 }
 
@@ -215,7 +206,7 @@ export class AccessLevelsComponent {
         this.selectedRoleId = role.Id;
         //Get module list
         this.getAllModulesBasedUserRole();
-       
+
     }
 
     //Get system user roles
