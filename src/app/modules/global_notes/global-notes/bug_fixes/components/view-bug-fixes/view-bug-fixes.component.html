@@ -14,7 +14,9 @@
             <!-- End of Title section -->
 
             <!-- Add button section -->
-            <div class=" marginRight5 marginBottom5 marginTop5">
+            <div class=" marginRight5 marginBottom5 marginTop5" appAccessLevelVerification SelectedModuleCode="STAT1"
+                SelectedModuleAccessCode="BugFixes" SelectedFeatureAccessCode="BANRC" [IsTab]="false"
+                ActionState="ADD">
                 <button class="add_button" (click)="addNewBugFixClick()">+Add new</button>
             </div>
             <!-- End of Add button section -->
@@ -723,8 +725,8 @@
                                 (click)="changeDateHistoryOnClick(enhancement)" pTooltip="Change History"
                                 tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button>
                             <button disabled *ngIf="userRoleCode!=='AD' && enhancement.HasRequest == 0"
-                                class="button_orange disabled" pTooltip="Change History Has Previous Requests" tooltipPosition="top"><i
-                                    class="fa fa-history" aria-hidden="true"></i></button>
+                                class="button_orange disabled" pTooltip="Change History Has Previous Requests"
+                                tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button>
                             <!--End of Change history button-->
                             <!--Edit button-->
                             <button class="button_blue" *ngIf="userRoleCode=='AD'"

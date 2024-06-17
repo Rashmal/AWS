@@ -14,7 +14,8 @@
 
             <!-- Add button section -->
             <div class=" marginRight5 marginBottom5 marginTop5" appAccessLevelVerification SelectedModuleCode="STAT1"
-                SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SANRC" [IsTab]="false" ActionState="ADD">
+                SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SANRC" [IsTab]="false"
+                ActionState="ADD">
                 <button class="add_button" (click)="addNewSystemEnhancementClick()">+Add new</button>
             </div>
             <!-- End of Add button section -->
@@ -712,14 +713,18 @@
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section_btn paddingRight5 action_button">
                             <!--Comments button-->
-                            <button class="button_green" (click)="commentOnClickFunction(enhancement)"
-                                pTooltip="Comments" tooltipPosition="top"><i class="fa fa-comments"
-                                    aria-hidden="true"></i></button>
+                            <button appAccessLevelVerification SelectedModuleCode="STAT1"
+                                SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SCM"
+                                [IsTab]="false" ActionState="ADD" class="button_green"
+                                (click)="commentOnClickFunction(enhancement)" pTooltip="Comments"
+                                tooltipPosition="top"><i class="fa fa-comments" aria-hidden="true"></i></button>
                             <!--End of Comments button-->
+
                             <!--Change history button-->
                             <button *ngIf="userRoleCode=='AD'" class="button_orange"
                                 (click)="changeDateHistoryOnClick(enhancement)" pTooltip="Change History"
                                 tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button>
+                                
                             <button *ngIf="userRoleCode!=='AD' && enhancement.HasRequest !== 0" class="button_orange"
                                 (click)="changeDateHistoryOnClick(enhancement)" pTooltip="Change History"
                                 tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button>

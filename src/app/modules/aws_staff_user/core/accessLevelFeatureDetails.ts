@@ -5,4 +5,6 @@ export interface AccessFeatureDetails {
     AddAccess: boolean;
     EditAccess: boolean;
     DeleteAccess: boolean;
+    ViewAccess: boolean;
+    Accessible: string;
 }
