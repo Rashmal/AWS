@@ -123,8 +123,8 @@ export class AccessLevelsComponent {
     onChangeSubTabFeature(feature: AccessLevelFeatureDetails) {
         //Set sub tab Feature access
         this.userRoleModel.SetSubTabFeatureAccessLevel(this.overallCookieInterface.GetCompanyId(), feature.DeleteAccess, feature.EditAccess, feature.AddAccess, feature.ViewAccess, feature.Id).then(
-            (data: boolean)=>{
-               
+            (data: boolean) => {
+
 
             }
         );
@@ -134,8 +134,8 @@ export class AccessLevelsComponent {
     onChangeSubTabAccessLevel(subTab: SubTabDetails) {
         //Set sub tab access
         this.userRoleModel.SetTabDetailsAccessLevelBasedOnModuleUserRole(this.overallCookieInterface.GetCompanyId(), subTab.EnableAccess, subTab.Id).then(
-            (data: boolean)=>{
-               
+            (data: boolean) => {
+
 
             }
         );
@@ -329,5 +329,21 @@ export class AccessLevelsComponent {
                 this.getAllUserRoles();
             }
         );
+    }
+
+    // Check if the option is default disabled
+    checkIfDefaultDisabled(tab: SubTabDetails, feature: AccessLevelFeatureDetails, switchType: string) {
+        // Status
+        let status = false;
+        // Getting the accessble list
+        let accessibleList = feature.Accessible;
+        // Split by commar
+        let splittedList = accessibleList.split(',');
+        // Check if the type exists
+        let indexObj = splittedList.findIndex(obj => obj.toUpperCase() == switchType.toUpperCase());
+        // Setting the option
+        status = (indexObj == -1) ? true : false;
+        // Return the value
+        return { value: status }
     }
 }

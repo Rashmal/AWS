@@ -21,7 +21,7 @@ export class AccessLevelVerificationDirective {
   @Input() IsTab = false;
   @Input() ActionState = 'ADD'; // ADD,EDIT,DELETE
   @Input() ActionType = 'HIDE'; // HIDE,DISABLE
-  @Input() isViewClickable = false;
+  //@Input() isViewClickable = false;
   // Storing the cookie modal
   OverallCookieAccessible: OverallCookieInterface;
   // Storing the common model

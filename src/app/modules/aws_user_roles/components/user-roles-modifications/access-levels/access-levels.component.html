@@ -146,7 +146,8 @@
                                         <div class="switch_and_lbl">
                                             <!--Input area-->
                                             <p-inputSwitch [(ngModel)]="feature.AddAccess"
-                                                (onChange)="onChangeSubTabFeature(feature)" />
+                                                (onChange)="onChangeSubTabFeature(feature)"
+                                                [disabled]="checkIfDefaultDisabled(tab,feature,'A').value" />
                                             <!--End of Input area-->
                                             <!--Label-->
                                             <label class="lbl">Add</label>
@@ -157,7 +158,8 @@
 
                                             <!--Input area-->
                                             <p-inputSwitch [(ngModel)]="feature.EditAccess"
-                                                (onChange)="onChangeSubTabFeature(feature)" />
+                                                (onChange)="onChangeSubTabFeature(feature)"
+                                                [disabled]="checkIfDefaultDisabled(tab,feature,'E').value" />
                                             <!--End of Input area-->
                                             <!--Label-->
                                             <label class="lbl">Edit</label>
@@ -167,7 +169,8 @@
                                         <div class="switch_and_lbl">
                                             <!--Input area-->
                                             <p-inputSwitch [(ngModel)]="feature.DeleteAccess"
-                                                (onChange)="onChangeSubTabFeature(feature)" />
+                                                (onChange)="onChangeSubTabFeature(feature)"
+                                                [disabled]="checkIfDefaultDisabled(tab,feature,'D').value" />
                                             <!--End of Input area-->
                                             <!--Label-->
                                             <label class="lbl">Delete</label>
@@ -177,7 +180,8 @@
                                         <div class="switch_and_lbl">
                                             <!--Input area-->
                                             <p-inputSwitch [(ngModel)]="feature.ViewAccess"
-                                                (onChange)="onChangeSubTabFeature(feature)" />
+                                                (onChange)="onChangeSubTabFeature(feature)"
+                                                [disabled]="checkIfDefaultDisabled(tab,feature,'E').value" />
                                             <!--End of Input area-->
                                             <!--Label-->
                                             <label class="lbl">View</label>
