@@ -122,7 +122,7 @@ export class AccessLevelsComponent {
     //on Change Sub Tab Feature Access Level
     onChangeSubTabFeature(feature: AccessLevelFeatureDetails) {
         //Set sub tab Feature access
-        this.userRoleModel.SetSubTabFeatureAccessLevel(this.overallCookieInterface.GetCompanyId(), feature.DeleteAccess, feature.EditAccess, feature.AddAccess, feature.Id).then(
+        this.userRoleModel.SetSubTabFeatureAccessLevel(this.overallCookieInterface.GetCompanyId(), feature.DeleteAccess, feature.EditAccess, feature.AddAccess, feature.ViewAccess, feature.Id).then(
             (data: boolean)=>{
                
 

@@ -128,9 +128,9 @@ export class UserRolesModel{
     }
 
     //Set Sub Tab Feature Access Level
-    SetSubTabFeatureAccessLevel(companyId: number, deleteAccessLevel: boolean, editAccessLevel: boolean, addAccessLevel: boolean, subTabFeatureId: number) {
+    SetSubTabFeatureAccessLevel(companyId: number, deleteAccessLevel: boolean, editAccessLevel: boolean, addAccessLevel: boolean, viewAccessLevel: boolean, subTabFeatureId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.clientService.SetSubTabFeatureAccessLevel(companyId, deleteAccessLevel, editAccessLevel, addAccessLevel, subTabFeatureId).subscribe(
+            this.allSubscriptions.push(this.clientService.SetSubTabFeatureAccessLevel(companyId, deleteAccessLevel, editAccessLevel, addAccessLevel, viewAccessLevel, subTabFeatureId).subscribe(
                 data => {
                     let returnData = <boolean>data;
                     // Resolve the promise

@@ -33,7 +33,7 @@ export class UserRolesService {
 
   //SetTabDetailsAccessLevelBasedOnModuleUserRole(int subTabId, bool accessLevel, int companyId)
 
-  SetSubTabFeatureAccessLevel(companyId: number, deleteAccessLevel: boolean, editAccessLevel: boolean, addAccessLevel: boolean, subTabFeatureId: number) {
+  SetSubTabFeatureAccessLevel(companyId: number, deleteAccessLevel: boolean, editAccessLevel: boolean, addAccessLevel: boolean, viewAccessLevel: boolean, subTabFeatureId: number) {
 
     // Setting the params
     let my_params = new HttpParams()
@@ -41,6 +41,7 @@ export class UserRolesService {
       .set("deleteAccessLevel", deleteAccessLevel.toString())
       .set("editAccessLevel", editAccessLevel.toString())
       .set("addAccessLevel", addAccessLevel.toString())
+      .set("viewAccessLevel", viewAccessLevel.toString())
       .set("subTabFeatureId", subTabFeatureId.toString());
 
     return this.http.get<boolean>(this.SetSubTabFeatureAccessLevelUrl, { params: my_params }).pipe(
