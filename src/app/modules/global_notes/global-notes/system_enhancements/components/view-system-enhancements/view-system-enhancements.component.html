@@ -14,7 +14,7 @@
 
             <!-- Add button section -->
             <div class=" marginRight5 marginBottom5 marginTop5" appAccessLevelVerification SelectedModuleCode="STAT1"
-                SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SANRC" [IsTab]="false"
+                SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SYSFET" [IsTab]="false"
                 ActionState="ADD">
                 <button class="add_button" (click)="addNewSystemEnhancementClick()">+Add new</button>
             </div>
@@ -725,31 +725,37 @@
                             class="module_display_section_btn paddingRight5 action_button">
                             <!--Comments button-->
                             <button appAccessLevelVerification SelectedModuleCode="STAT1"
-                                SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SCM"
-                                [IsTab]="false" ActionState="ADD" class="button_green"
+                                SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SYSFET"
+                                [IsTab]="false" ActionState="EDIT" class="button_green"
                                 (click)="commentOnClickFunction(enhancement)" pTooltip="Comments"
                                 tooltipPosition="top"><i class="fa fa-comments" aria-hidden="true"></i></button>
                             <!--End of Comments button-->
 
                             <!--Change history button-->
-                            <button *ngIf="userRoleCode=='AD'" class="button_orange"
+                            <button appAccessLevelVerification SelectedModuleCode="STAT1"
+                                SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SCDH"
+                                [IsTab]="false" ActionState="VIEW" class="button_orange"
                                 (click)="changeDateHistoryOnClick(enhancement)" pTooltip="Change History"
                                 tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button>
-                                
-                            <button *ngIf="userRoleCode!=='AD' && enhancement.HasRequest !== 0" class="button_orange"
+
+                            <!-- <button *ngIf="userRoleCode!=='AD' && enhancement.HasRequest !== 0" class="button_orange"
                                 (click)="changeDateHistoryOnClick(enhancement)" pTooltip="Change History"
                                 tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button>
                             <button disabled *ngIf="userRoleCode!=='AD' && enhancement.HasRequest == 0"
                                 class="button_orange disabled" pTooltip="Change History Has Previous Requests"
-                                tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button>
+                                tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button> -->
                             <!--End of Change history button-->
                             <!--Edit button-->
-                            <button *ngIf="userRoleCode=='AD'" class="button_blue"
+                            <button appAccessLevelVerification SelectedModuleCode="STAT1"
+                                SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SYSFET"
+                                [IsTab]="false" ActionState="EDIT" class="button_blue"
                                 (click)="editOnClickFunction(enhancement)" pTooltip="Edit" tooltipPosition="top"><i
                                     class="fa fa-pencil" aria-hidden="true"></i></button>
                             <!--End of Edit button-->
                             <!--Delete button-->
-                            <button *ngIf="userRoleCode=='AD'" class="button_red"
+                            <button appAccessLevelVerification SelectedModuleCode="STAT1"
+                                SelectedModuleAccessCode="SystemEnhancement" SelectedFeatureAccessCode="SYSFET"
+                                [IsTab]="false" ActionState="DELETE" class="button_red"
                                 (click)="deleteConfirmation(enhancement)" pTooltip="Delete" tooltipPosition="top"><i
                                     class="fa fa-trash" aria-hidden="true"></i></button>
                             <!--End of Delete button-->

@@ -15,8 +15,7 @@
 
             <!-- Add button section -->
             <div class=" marginRight5 marginBottom5 marginTop5" appAccessLevelVerification SelectedModuleCode="STAT1"
-                SelectedModuleAccessCode="BugFixes" SelectedFeatureAccessCode="BANRC" [IsTab]="false"
-                ActionState="ADD">
+                SelectedModuleAccessCode="BugFixes" SelectedFeatureAccessCode="BFXS" [IsTab]="false" ActionState="ADD">
                 <button class="add_button" (click)="addNewBugFixClick()">+Add new</button>
             </div>
             <!-- End of Add button section -->
@@ -713,30 +712,36 @@
                         <div [ngClass]="eRowIndex%2 == 0 ? 'enh_module_row_w' : 'enh_module_row_g'"
                             class="module_display_section_btn paddingRight5 action_button">
                             <!--Comments button-->
-                            <button class="button_green" (click)="commentOnClickFunction(enhancement)"
+                            <button appAccessLevelVerification SelectedModuleCode="STAT1"
+                                SelectedModuleAccessCode="BugFixes" SelectedFeatureAccessCode="BCCM" [IsTab]="false"
+                                ActionState="VIEW" class="button_green" (click)="commentOnClickFunction(enhancement)"
                                 pTooltip="Comments" tooltipPosition="top"><i class="fa fa-comments"
                                     aria-hidden="true"></i></button>
                             <!--End of Comments button-->
                             <!--Change history button-->
-                            <button *ngIf="userRoleCode=='AD'" class="button_orange"
-                                (click)="changeDateHistoryOnClick(enhancement)" pTooltip="Change History"
-                                tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button>
-                            <button *ngIf="userRoleCode!=='AD' && enhancement.HasRequest !== 0" class="button_orange"
+                            <button appAccessLevelVerification SelectedModuleCode="STAT1"
+                                SelectedModuleAccessCode="BugFixes" SelectedFeatureAccessCode="BCDH" [IsTab]="false"
+                                ActionState="VIEW" class="button_orange" (click)="changeDateHistoryOnClick(enhancement)"
+                                pTooltip="Change History" tooltipPosition="top"><i class="fa fa-history"
+                                    aria-hidden="true"></i></button>
+                            <!-- <button *ngIf="userRoleCode!=='AD' && enhancement.HasRequest !== 0" class="button_orange"
                                 (click)="changeDateHistoryOnClick(enhancement)" pTooltip="Change History"
                                 tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button>
                             <button disabled *ngIf="userRoleCode!=='AD' && enhancement.HasRequest == 0"
                                 class="button_orange disabled" pTooltip="Change History Has Previous Requests"
-                                tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button>
+                                tooltipPosition="top"><i class="fa fa-history" aria-hidden="true"></i></button> -->
                             <!--End of Change history button-->
                             <!--Edit button-->
-                            <button class="button_blue" *ngIf="userRoleCode=='AD'"
-                                (click)="editOnClickFunction(enhancement)" pTooltip="Edit" tooltipPosition="top"><i
-                                    class="fa fa-pencil" aria-hidden="true"></i></button>
+                            <button class="button_blue" appAccessLevelVerification SelectedModuleCode="STAT1"
+                                SelectedModuleAccessCode="BugFixes" SelectedFeatureAccessCode="BFXS" [IsTab]="false"
+                                ActionState="EDIT" (click)="editOnClickFunction(enhancement)" pTooltip="Edit"
+                                tooltipPosition="top"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                             <!--End of Edit button-->
                             <!--Delete button-->
-                            <button class="button_red" *ngIf="userRoleCode=='AD'"
-                                (click)="deleteConfirmation(enhancement)" pTooltip="Delete" tooltipPosition="top"><i
-                                    class="fa fa-trash" aria-hidden="true"></i></button>
+                            <button class="button_red" appAccessLevelVerification SelectedModuleCode="STAT1"
+                                SelectedModuleAccessCode="BugFixes" SelectedFeatureAccessCode="BFXS" [IsTab]="false"
+                                ActionState="DELETE" (click)="deleteConfirmation(enhancement)" pTooltip="Delete"
+                                tooltipPosition="top"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             <!--End of Delete button-->
                             <!--Send feature list button-->
                             <button *ngIf="false" class="button_grey"><i class="fa fa-archive"
