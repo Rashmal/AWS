@@ -5,6 +5,7 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
 import { ErrorMessageComponent } from './modules/common/components/error-message/error-message.component';
 import { ModuleSelectorComponent } from './layout/common/module-selector/module-selector.component';
 import { ReportBugComponent } from './layout/common/report-bug/report-bug.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
     imports: [
@@ -41,7 +42,12 @@ import { ReportBugComponent } from './layout/common/report-bug/report-bug.compon
                     { path: 'client', loadChildren: () => import('./modules/aws_client/awsClient.module').then(m => m.AWSClientModule) },
                     { path: 'company', loadChildren: () => import('./modules/aws_company/awsCompany.module').then(m => m.AWSCompanyModule) },
                     { path: 'staff', loadChildren: () => import('./modules/aws_staff_user/awsStaffUser.module').then(m => m.AWSStaffUserModule) },
-                    { path: 'user_roles', loadChildren: () => import('./modules/aws_user_roles/awsUserRoles.module').then(m => m.AWSUserRolesModule) },
+                    {
+                        path: 'user_roles',
+                        loadChildren: () => import('./modules/aws_user_roles/awsUserRoles.module').then(m => m.AWSUserRolesModule),
+                        canActivate: [AuthGuard],
+                        data: { moduleCode: 'USRL' }
+                    },
                     { path: 'report-bug', component: ReportBugComponent }
                 ]
             },
