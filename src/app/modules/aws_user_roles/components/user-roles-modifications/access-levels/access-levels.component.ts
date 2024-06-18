@@ -15,6 +15,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
 import { SubTabDetails } from 'src/app/modules/common/core/subTabDetails';
 import { AccessLevelFeatureDetails } from 'src/app/modules/common/core/accessLevelFeatureDetails';
+import { ActionConfirmationComponent } from 'src/app/modules/common/components/action-confirmation/action-confirmation.component';
 interface SubTabList {
     Name: string;
     OverallAccess: boolean;
@@ -170,9 +171,35 @@ export class AccessLevelsComponent {
 
     //On change module access
     onChangeModuleAccess(module: Module) {
-        //set module access on change toggle
-        this.SetModuleAccess(module);
+        // Original value
+        let originalValue = !module.IsDisable;
+        // Check the tab code
+        if (module.ModuleCode == 'USRL') {
+            // Display the confirmation box
+            // Open popup to confirm action
+            this.ref = this.dialogService.open(ActionConfirmationComponent, {
+                header: 'Change confirmation',
+                data: "Confirmation"
+            });
+            // Perform an action on close the popup
+            this.ref.onClose.subscribe((confirmation: boolean) => {
+                if (confirmation) {
+                    //set module access on change toggle
+                    this.SetModuleAccess(module);
+                } else {
+                    // Getting the module index
+                    let moduleINdex = this.moduleList.findIndex(obj => obj.Id == module.Id);
+                    // Setting the value
+                    this.moduleList[moduleINdex].IsDisable = originalValue;
+                }
+            });
 
+            // End of Display the confirmation box
+        } else {
+            //set module access on change toggle
+            this.SetModuleAccess(module);
+        }
+        // End of Check the tab code
     }
 
     //Set module access

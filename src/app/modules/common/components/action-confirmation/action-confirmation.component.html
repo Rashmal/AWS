@@ -2,15 +2,20 @@
 <div class="popup_content">
     <!--Message-->
     <div class="flex flex-column align-items-center w-full gap-3 p-3 mb-3">
-
-        <p>Are you sure want to perform this action?</p>
+        <p *ngIf="popupMessage == ''">Are you sure want to perform this action?</p>
+        <div *ngIf="popupMessage !== ''">
+            <p>Are you sure you want to change this access level</p>
+            <p class="red_color">Note: if you do it on the admin role, you will not be able to change it back and you
+                will lose the access
+                level on managing the access levels</p>
+        </div>
     </div>
     <!--End of Message-->
     <!--Button panel outer div-->
     <div class="button_panel_outer">
         <!--Button panel-->
         <div class="button_panel">
-           
+
             <button class="button_red" (click)="confirmDeleteItem(false)">Cancel</button>
             <button class="button_blue" (click)="confirmDeleteItem(true)">Confirm</button>
         </div>
