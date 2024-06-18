@@ -133,7 +133,7 @@
                             </div>
 
                             <!--Tab features-->
-                            <div class="features_list">
+                            <div *ngIf="tab.EnableAccess" class="features_list">
                                 <!--Single feature-->
                                 <div class="feature_item" *ngFor="let feature of tab.AccessLevelFeatureDetailsList">
                                     <div>
