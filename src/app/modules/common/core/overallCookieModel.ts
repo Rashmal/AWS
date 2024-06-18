@@ -45,6 +45,16 @@ export class OverallCookieModel implements OverallCookieInterface {
         this.StoreCookie();
     }
 
+    // Setting the company Id
+    SetCompanyId(companyId: number) {
+        // Validate the cookie object
+        this.ValidateCookie();
+        // Setting the user token
+        this.cookieObject.CompanyId = companyId;
+        // Store the cookie details
+        this.StoreCookie();
+    }
+
     // Method to store the cookie
     private StoreCookie() {
         // Encrypt the object

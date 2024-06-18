@@ -21,6 +21,7 @@ import { ClientSize } from '../core/clientSize';
 import { BusinessNumberType } from '../core/businessNumberType';
 import { AccountDetails } from '../core/accountDetails';
 import { Filter } from '../core/filters';
+import { ParentGroup } from '../core/parentGroup';
 
 @Injectable({
   providedIn: 'root'
@@ -47,10 +48,24 @@ export class CommonService {
   private GetAllSocialMediaTypesUrl = API$DOMAIN + 'api/Common/GetAllSocialMediaTypes';
   private GetAllTermTypesUrl = API$DOMAIN + 'api/Common/GetAllTermTypes';
   private GetAllRoleDetailsUrl = API$DOMAIN + 'api/Common/GetAllRoleDetails';
+  private GetAllParentGroupsDetailsByEmailUrl = API$DOMAIN + 'api/Common/GetAllParentGroupsDetailsByEmail';
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
 
+  }
+
+  // Getting all the parent groups by email
+  GetAllParentGroupsDetailsByEmail(email: string) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("email", email.toString());
+
+    return this.http.get<ParentGroup[]>(this.GetAllParentGroupsDetailsByEmailUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('GetAllParentGroupsDetailsByEmail', error)
+      })
+    );
   }
 
   // Getting all the account details

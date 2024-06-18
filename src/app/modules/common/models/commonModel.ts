@@ -17,6 +17,7 @@ import { SocialMediaType } from "../core/socialMediaType";
 import { TermType } from "../core/termType";
 import { RoleDetails } from "../core/roleDetails";
 import { Filter } from "../core/filters";
+import { ParentGroup } from "../core/parentGroup";
 
 export class CommonModel {
     //Store subscriptions
@@ -34,6 +35,21 @@ export class CommonModel {
             this.allSubscriptions[i].unsubscribe();
         }
         // End of Loop through the services
+    }
+
+    // Getting all the parent groups by email
+    GetAllParentGroupsDetailsByEmail(email: string) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.commonService.GetAllParentGroupsDetailsByEmail(email).subscribe(
+                data => {
+                    let returnData = <ParentGroup[]>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
     }
 
     // Check if the email exists
