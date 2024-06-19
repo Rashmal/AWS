@@ -7,13 +7,14 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
     styleUrl: './action-confirmation.component.scss',
 })
 export class ActionConfirmationComponent {
+
+    // Store the popup message
+    popupMessage: string = "";
+
     // Constructor
-    constructor(
-        public ref: DynamicDialogRef,
-        private config: DynamicDialogConfig
-    ) {
+    constructor(public ref: DynamicDialogRef, private config: DynamicDialogConfig) {
         if (JSON.stringify(this.config.data)) {
-           
+            this.popupMessage = <string>this.config.data;
         }
     }
 

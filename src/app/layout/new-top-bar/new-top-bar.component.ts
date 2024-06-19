@@ -11,6 +11,7 @@ import { CommonModel } from 'src/app/modules/common/models/commonModel';
 import { CommonService } from 'src/app/modules/common/services/common.service';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { API$DOMAIN } from 'src/app/core/apiConfigurations';
+import { ParentGroup } from 'src/app/modules/common/core/parentGroup';
 
 @Component({
     selector: 'app-new-top-bar',
@@ -91,9 +92,11 @@ export class NewTopBarComponent {
     private hubConnectionBuilder!: HubConnection;
     // Store common modal
     commonModal: CommonModel;
-
-
     url = API$DOMAIN + 'notificationHub';
+    // Store the parent groups
+    parentGroupList: ParentGroup[] = [];
+    // Store the selected parent group
+    selectedParentGroupId: number = 0;
 
     // Constructor
     constructor(public layoutService: LayoutService, private authenticationService: AuthenticationService,
@@ -107,6 +110,35 @@ export class NewTopBarComponent {
         this.getNotificationCount();
         // Get global notes notification count
         this.getGlobalNotesNotCount();
+        // Getting all the parent groups
+        this.getParentGroups();
+    }
+
+    // Getting all the parent groups
+    getParentGroups() {
+        // Getting the menu list based on the user role for static
+        this.commonModel.GetAllParentGroupsDetailsByEmail(this.overallCookieInterface.GetUserEmail()).then(
+            (data) => {
+                this.parentGroupList = <ParentGroup[]>data;
+                // Setting the default group
+                this.selectedParentGroupId = this.overallCookieInterface.GetCompanyId();
+                if (!(this.selectedParentGroupId && this.selectedParentGroupId != 0)) {
+                    this.selectedParentGroupId = this.parentGroupList[0].Id;
+                    this.overallCookieInterface.SetCompanyId(this.selectedParentGroupId);
+                }
+
+            }
+        );
+        // End of Getting the menu list based on the user role for static
+    }
+
+    // On click event of company
+    onSelectCompany(btn: ParentGroup) {
+        // Setting the default group
+        this.selectedParentGroupId = btn.Id;
+        this.overallCookieInterface.SetCompanyId(this.selectedParentGroupId);
+        // Refresh the page
+        window.location.reload();
     }
 
     //Get site menu items

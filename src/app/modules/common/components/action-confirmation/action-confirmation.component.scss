@@ -1,15 +1,19 @@
-.font_bold{
+.font_bold {
     font-weight: bold;
 }
 
-.popup_content{
+.red_color {
+    color: #db2828;
+}
+
+.popup_content {
     width: 400px;
-    .button_panel_outer{
+    .button_panel_outer {
         display: flex;
         align-items: center;
         width: 100%;
         justify-content: center;
-        .button_panel{
+        .button_panel {
             display: flex;
             align-items: center;
             width: 80%;
@@ -28,10 +32,8 @@
                 border-radius: 3px;
                 border: none;
                 color: #ffffff;
-                background-color: #DB2828;
+                background-color: #db2828;
             }
         }
-        
     }
 }
-

@@ -35,12 +35,13 @@
         <!--Company button panel-->
         <div class="company_btns">
             <!--Company button-->
-            <button class="button_selected">AWS-VIC</button>
-            <button> AWS-WA</button>
+            <button [ngClass]="(selectedParentGroupId == btn.Id)?'button_selected':''"
+                *ngFor="let btn of parentGroupList" (click)="onSelectCompany(btn)">{{btn.Name}}</button>
+            <!-- <button> AWS-WA</button>
             <button>AWS_ASW</button>
             <button>Sandbox</button>
             <button>AWS-Build</button>
-            <button>TENDERING</button>
+            <button>TENDERING</button> -->
             <!--End of Company button-->
 
         </div>
