@@ -4,6 +4,8 @@ import { ResourceType } from 'src/app/modules/aws_client/core/resourceType';
 import { ClientModel } from 'src/app/modules/aws_client/models/clientModel';
 import { ClientService } from 'src/app/modules/aws_client/services/client.service';
 import { Filter } from 'src/app/modules/common/core/filters';
+import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
+import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
 
 @Component({
     selector: 'app-config-resource-type',
@@ -35,6 +37,9 @@ export class ConfigResourceTypeComponent implements OnInit {
     resourceTypes: ResourceType[] = [];
     // Store the selected client Id
     selectedClientId = 0;
+    // Store the cookie interface
+    overallCookieInterface: OverallCookieInterface;
+
     constructor(
         public ref: DynamicDialogRef,
         private config: DynamicDialogConfig,
@@ -42,6 +47,8 @@ export class ConfigResourceTypeComponent implements OnInit {
     ) {
         // Initialize the model
         this.clientModel = new ClientModel(this.clientService);
+        this.overallCookieInterface = new OverallCookieModel();
+
         if (JSON.stringify(this.config.data)) {
             this.selectedClientId = <number>this.config.data.clientId;
             if (this.selectedClientId && this.selectedClientId > 0) {
@@ -61,26 +68,26 @@ export class ConfigResourceTypeComponent implements OnInit {
             .GetAllResourceFilesWithPagination(
                 this.filter,
                 this.selectedClientId,
-                0
+                this.overallCookieInterface.GetCompanyId()
             )
             .then((data: ResourceType[]) => {
                 if (data) {
                     this.resourceTypes = data;
-                    
-                        this.resourceTypes.push({
-                            Id: 0,
-                            Name: '',
-                            Code: '',
-                            TotalRecords: 10,
-                        });
-                   
-                   
+
+                    this.resourceTypes.push({
+                        Id: 0,
+                        Name: '',
+                        Code: '',
+                        TotalRecords: 10,
+                    });
+
+
                 }
             });
     }
 
     //Set new resource type
-    setResource(type: string, resource: ResourceType, ){
+    setResource(type: string, resource: ResourceType,) {
         // Call services
         this.clientModel
             .SetResourceTypeDetails(
@@ -90,9 +97,9 @@ export class ConfigResourceTypeComponent implements OnInit {
                 0
             )
             .then((data: number) => {
-                
-                    this.getAllResourceFileTypes();
-                
+
+                this.getAllResourceFileTypes();
+
             });
     }
 
@@ -122,7 +129,7 @@ export class ConfigResourceTypeComponent implements OnInit {
     }
 
     //Remove resource
-    onClickDeleteItem(resource: ResourceType){
+    onClickDeleteItem(resource: ResourceType) {
         this.setResource('REMOVE', resource);
     }
 

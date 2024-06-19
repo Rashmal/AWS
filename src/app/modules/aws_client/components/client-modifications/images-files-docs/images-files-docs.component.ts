@@ -139,7 +139,7 @@ export class ImagesFilesDocsComponent implements OnInit {
     getAllResourceFileTypes() {
         // Call services
         this.clientModel
-            .GetAllResourceFiles(this.selectedClientId, 0)
+            .GetAllResourceFiles(this.selectedClientId, this.overallCookieInterface.GetCompanyId())
             .then((data: ResourceType[]) => {
                 if (data) {
                     this.resourceTypes = data;
@@ -161,7 +161,7 @@ export class ImagesFilesDocsComponent implements OnInit {
         }
         // Call services
         this.clientModel
-            .GetAllImageDocFiles(this.filter, this.selectedClientId, 0)
+            .GetAllImageDocFiles(this.filter, this.selectedClientId, this.overallCookieInterface.GetCompanyId())
             .then((data: ImageFiles[]) => {
                 if (data) {
                     this.imageFilesList = data;

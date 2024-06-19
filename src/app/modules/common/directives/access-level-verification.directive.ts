@@ -8,6 +8,7 @@ import { UserRoleAccessDetail } from '../core/userRoleAccessDetail';
 import { StaffModel } from '../../aws_staff_user/models/staffModel';
 import { StaffService } from '../../aws_staff_user/services/staff.service';
 import { AccessSubTabDetails } from '../../aws_staff_user/core/subTabDetails';
+import { AccessListStorage } from '../core/accessListStorage';
 
 @Directive({
   selector: '[appAccessLevelVerification]',
@@ -39,63 +40,73 @@ export class AccessLevelVerificationDirective {
   }
 
   ngOnInit(): void {
-    // Getting the access list
-    this.staffModel.GetTabDetailsBasedOnModuleCode(this.SelectedModuleCode, this.OverallCookieAccessible.GetUserRole(), this.OverallCookieAccessible.GetCompanyId()).then(
-      (data) => {
-        // Getting the access list
-        let userAccessList: AccessSubTabDetails[] = <AccessSubTabDetails[]>data;
+    // Getting the access list from the local storage
+    let userAccessListFromStorage: AccessListStorage[] = <AccessListStorage[]>JSON.parse(localStorage.getItem('ASL'));
 
-        // Check whether to check only the tab
-        if (this.IsTab == true) {
-          // Check whether access level exists
-          let tabAccessLevelIndex = userAccessList.findIndex(obj => obj.SubTabCode == this.SelectedModuleAccessCode);
-          if (tabAccessLevelIndex !== -1 && userAccessList[tabAccessLevelIndex].EnableAccess == false) {
-            // Performing the action
-            this.performDisabledAction();
+    // Check if the access level exists
+    if (userAccessListFromStorage && userAccessListFromStorage.length > 0 && userAccessListFromStorage.findIndex(obj => obj.CompanyId == this.OverallCookieAccessible.GetCompanyId() && obj.ModuleCode == this.SelectedModuleCode && obj.UserRoleCode == this.OverallCookieAccessible.GetUserRole())) {
+
+      
+    } else {
+      // Getting the access list
+      this.staffModel.GetTabDetailsBasedOnModuleCode(this.SelectedModuleCode, this.OverallCookieAccessible.GetUserRole(), this.OverallCookieAccessible.GetCompanyId()).then(
+        (data) => {
+          // Getting the access list
+          let userAccessList: AccessSubTabDetails[] = <AccessSubTabDetails[]>data;
+
+          // Check whether to check only the tab
+          if (this.IsTab == true) {
+            // Check whether access level exists
+            let tabAccessLevelIndex = userAccessList.findIndex(obj => obj.SubTabCode == this.SelectedModuleAccessCode);
+            if (tabAccessLevelIndex !== -1 && userAccessList[tabAccessLevelIndex].EnableAccess == false) {
+              // Performing the action
+              this.performDisabledAction();
+            }
+          } else {
+            // Check for the access level feature code
+            let tabAccessLevelIndex = userAccessList.findIndex(obj => obj.SubTabCode == this.SelectedModuleAccessCode);
+
+            if (tabAccessLevelIndex !== -1) {
+              // Getting the feature access code
+              let featureAccessCode = userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList.findIndex(obj => obj.Code == this.SelectedFeatureAccessCode)
+
+              // Checking the ADD access
+              if (featureAccessCode != -1 && this.ActionState == 'ADD' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].AddAccess == false) {
+                // Performing the action
+                this.performDisabledAction();
+              }
+              // End of Checking the ADD access
+
+              // Checking the EDIT access
+              else if (featureAccessCode != -1 && this.ActionState == 'EDIT' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].EditAccess == false) {
+                // Performing the action
+                this.performDisabledAction();
+              }
+              // End of Checking the EDIT access
+
+              // Checking the DELETE access
+              else if (featureAccessCode != -1 && this.ActionState == 'DELETE' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].DeleteAccess == false) {
+                // Performing the action
+                this.performDisabledAction();
+              }
+              // End of Checking the DELETE access
+
+              // Checking the VIEW access
+              else if (featureAccessCode != -1 && this.ActionState == 'VIEW' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].ViewAccess == false) {
+                // Performing the action
+                this.performDisabledAction();
+              }
+              // End of Checking the VIEW access
+            }
+            // End of Check for the access level feature code
           }
-        } else {
-          // Check for the access level feature code
-          let tabAccessLevelIndex = userAccessList.findIndex(obj => obj.SubTabCode == this.SelectedModuleAccessCode);
+          // End of Check whether to check only the tab
 
-          if (tabAccessLevelIndex !== -1) {
-            // Getting the feature access code
-            let featureAccessCode = userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList.findIndex(obj => obj.Code == this.SelectedFeatureAccessCode)
-
-            // Checking the ADD access
-            if (featureAccessCode != -1 && this.ActionState == 'ADD' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].AddAccess == false) {
-              // Performing the action
-              this.performDisabledAction();
-            }
-            // End of Checking the ADD access
-
-            // Checking the EDIT access
-            else if (featureAccessCode != -1 && this.ActionState == 'EDIT' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].EditAccess == false) {
-              // Performing the action
-              this.performDisabledAction();
-            }
-            // End of Checking the EDIT access
-
-            // Checking the DELETE access
-            else if (featureAccessCode != -1 && this.ActionState == 'DELETE' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].DeleteAccess == false) {
-              // Performing the action
-              this.performDisabledAction();
-            }
-            // End of Checking the DELETE access
-
-            // Checking the VIEW access
-            else if (featureAccessCode != -1 && this.ActionState == 'VIEW' && userAccessList[tabAccessLevelIndex].AccessLevelFeatureDetailsList[featureAccessCode].ViewAccess == false) {
-              // Performing the action
-              this.performDisabledAction();
-            }
-            // End of Checking the VIEW access
-          }
-          // End of Check for the access level feature code
         }
-        // End of Check whether to check only the tab
-
-      }
-    );
-    // End of Getting the access list
+      );
+      // End of Getting the access list
+    }
+    // End of Check if the access level exists
   }
 
   // Performing the action
