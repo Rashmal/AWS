@@ -8,7 +8,8 @@
 
     <!-- Accordion section -->
     <p-accordion [multiple]="true" [activeIndex]="[0,1,4]">
-        <p-accordionTab header="Client / Customer">
+        <p-accordionTab header="Client / Customer" appAccessLevelVerification SelectedModuleCode="CLIEN"
+            SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLGI" [IsTab]="false" ActionState="VIEW">
             <!--Client Customer-->
             <div class="row gen_info_item">
                 <!--Input and label-->
@@ -80,7 +81,9 @@
             <!--End of Client Customer-->
 
         </p-accordionTab>
-        <p-accordionTab header="Billing Address">
+        <p-accordionTab header="Billing Address" appAccessLevelVerification SelectedModuleCode="CLIEN"
+            SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLIBIAD" [IsTab]="false"
+            ActionState="VIEW">
             <!--Billing Address-->
             <div class="row gen_info_item">
                 <!--Input and label-->
@@ -165,7 +168,9 @@
             </div>
             <!--End of Billing Address-->
         </p-accordionTab>
-        <p-accordionTab header="Relationship">
+        <p-accordionTab header="Relationship" appAccessLevelVerification SelectedModuleCode="CLIEN"
+            SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLIREL" [IsTab]="false"
+            ActionState="VIEW">
             <!--Relationship-->
             <div class="row gen_info_item">
                 <!--Input and label-->
@@ -431,7 +436,9 @@
             <!--End of Relationship-->
 
         </p-accordionTab>
-        <p-accordionTab header="Contacts">
+        <p-accordionTab header="Contacts" appAccessLevelVerification SelectedModuleCode="CLIEN"
+            SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLICON" [IsTab]="false"
+            ActionState="VIEW">
             <!--Contacts-->
             <div class="">
                 <div class="row">
@@ -450,7 +457,9 @@
                                     <th class="header_col" style="width:30%">
                                         Contact
                                     </th>
-                                    <th class="header_col" style="width:10%">
+                                    <th appAccessLevelVerification SelectedModuleCode="CLIEN"
+                                        SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLICON"
+                                        [IsTab]="false" ActionState="DELETE" class="header_col" style="width:10%">
                                         Action
                                     </th>
                                 </tr>
@@ -480,7 +489,9 @@
                                             (focusout)="contactValueFocusOut(contact,rowIndex)"
                                             (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
                                     </td>
-                                    <td class="action_button">
+                                    <td appAccessLevelVerification SelectedModuleCode="CLIEN"
+                                        SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLICON"
+                                        [IsTab]="false" ActionState="DELETE" class="action_button">
                                         <button pTooltip="Delete" tooltipPosition="top" class="red_btn"
                                             [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             (click)="onDeleteContact(contact)">
@@ -503,7 +514,9 @@
             </div>
             <!--End of Contacts-->
         </p-accordionTab>
-        <p-accordionTab header="Social Media">
+        <p-accordionTab header="Social Media" appAccessLevelVerification SelectedModuleCode="CLIEN"
+            SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLISOM" [IsTab]="false"
+            ActionState="VIEW">
             <!--Social Media-->
             <div class="">
                 <div class="row">
@@ -518,7 +531,9 @@
                                     <th class="header_col" style="width:25%">
                                         Setting
                                     </th>
-                                    <th class="header_col" style="width:10%">
+                                    <th class="header_col" style="width:10%" appAccessLevelVerification SelectedModuleCode="CLIEN"
+                                    SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLISOM"
+                                    [IsTab]="false" ActionState="DELETE">
                                         Action
                                     </th>
                                 </tr>
@@ -539,7 +554,9 @@
                                             [(ngModel)]="socialMedia.Setting"
                                             (blur)="onBlurEvent('SOCIAL$MEDIA$DETAILS',rowSMIndex,null,socialMedia)" />
                                     </td>
-                                    <td class="action_button">
+                                    <td class="action_button" appAccessLevelVerification SelectedModuleCode="CLIEN"
+                                    SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLISOM"
+                                    [IsTab]="false" ActionState="DELETE">
                                         <button pTooltip="Delete" tooltipPosition="top" class="red_btn"
                                             [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             (click)="onDeleteSocialMedia(socialMedia)">
