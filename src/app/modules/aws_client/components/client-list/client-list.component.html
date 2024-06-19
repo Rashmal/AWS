@@ -3,7 +3,8 @@
     <!--Filter Section-->
     <div class="filter_section row">
         <!--Add new item-->
-        <div class="col-lg-3 add_new">
+        <div class="col-lg-3 add_new" appAccessLevelVerification SelectedModuleCode="CLIEN"
+            SelectedModuleAccessCode="ClientList" SelectedFeatureAccessCode="CLILST" [IsTab]="false" ActionState="ADD">
             <button (click)="onClickClientModifications('NEW', 0)" pTooltip="Add new client" tooltipPosition="top">+ Add
                 New Client</button>
         </div>
@@ -33,7 +34,7 @@
     <!--End of Filter Section-->
 
     <!--Client list table-->
-    <p-table styleClass="p-datatable-striped"  [value]="clientList"  [tableStyle]="{'min-width': '50rem'}">
+    <p-table styleClass="p-datatable-striped" [value]="clientList" [tableStyle]="{'min-width': '50rem'}">
         <ng-template pTemplate="header" class="table_header">
             <tr class="table_header_row">
                 <th class="header_col created_details">Created By</th>
@@ -57,9 +58,10 @@
                 </td>
                 <td [pTooltip]="client.FullName" tooltipPosition="top">{{client.FullName}}</td>
                 <td class="contact_details">
-                    <div class="contact_item" *ngFor="let contact of client.Contacts" [style.display]="contact.ContactValue.trim().length == 0 ? 'none' : ''">
+                    <div class="contact_item" *ngFor="let contact of client.Contacts"
+                        [style.display]="contact.ContactValue.trim().length == 0 ? 'none' : ''">
                         <span>{{contact.ContactType.Name}}: </span><span [pTooltip]="contact.ContactValue"
-                        tooltipPosition="top">{{contact.ContactValue}}</span>
+                            tooltipPosition="top">{{contact.ContactValue}}</span>
                     </div>
                 </td>
                 <td [pTooltip]="client.PaymentTerm" tooltipPosition="top">{{client.PaymentTerm}}</td>
@@ -68,14 +70,19 @@
                 <td [pTooltip]="client.ExpenseAccount" tooltipPosition="top">{{client.ExpenseAccount}}</td>
                 <td class="action_button">
                     <button pTooltip="View" tooltipPosition="top" class="green_btn"
-                        (click)="onClickClientModifications('VIEW', client.Id)"><i class="fa fa-eye"
+                        (click)="onClickClientModifications('VIEW', client.Id)" appAccessLevelVerification
+                        SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ClientList"
+                        SelectedFeatureAccessCode="CLILST" [IsTab]="false" ActionState="VIEW"><i class="fa fa-eye"
                             aria-hidden="true"></i></button>
                     <button pTooltip="Edit" tooltipPosition="top" class="blue_btn"
-                        (click)="onClickClientModifications('EDIT', client.Id)"><i class="fa fa-pencil"
+                        (click)="onClickClientModifications('EDIT', client.Id)" appAccessLevelVerification
+                        SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ClientList"
+                        SelectedFeatureAccessCode="CLILST" [IsTab]="false" ActionState="EDIT"><i class="fa fa-pencil"
                             aria-hidden="true"></i></button>
                     <button pTooltip="Delete" tooltipPosition="top" class="red_btn"
-                        (click)="onRemoveCLientCustomer(client)"><i class="fa fa-trash"
-                            aria-hidden="true"></i></button>
+                        (click)="onRemoveCLientCustomer(client)" appAccessLevelVerification SelectedModuleCode="CLIEN"
+                        SelectedModuleAccessCode="ClientList" SelectedFeatureAccessCode="CLILST" [IsTab]="false"
+                        ActionState="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </td>
             </tr>
         </ng-template>

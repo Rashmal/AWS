@@ -229,7 +229,7 @@
     }
 
     .module_display_section_btn {
-        justify-content: space-between;
+        justify-content: center;
         display: flex;
         align-items: center;
         padding: 5px;
@@ -277,6 +277,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-right: 2px;
         }
         .button_green {
             height: 30px;
