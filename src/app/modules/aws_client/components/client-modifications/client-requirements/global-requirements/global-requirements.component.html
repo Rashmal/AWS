@@ -1,5 +1,5 @@
 <!--delete confirmation-->
-<div class="popup_content">
+<div class="popup_content" >
     <!-- When the client requirements are empty -->
     <div *ngIf="globalClientRequirements.length == 0">
         <span>There are no global client requirements</span>
@@ -7,7 +7,9 @@
     <!-- End of When the client requirements are empty -->
 
     <!-- Table data section -->
-    <p-table [value]="globalClientRequirements" dataKey="code">
+    <p-table appAccessLevelVerification SelectedModuleCode="CLIEN"
+    SelectedModuleAccessCode="ClientReq" SelectedFeatureAccessCode="CLGLRQ"
+    [IsTab]="false" ActionState="VIEW" [value]="globalClientRequirements" dataKey="code">
         <!-- Table header section -->
         <ng-template pTemplate="header">
             <tr class="table_header_row">
@@ -49,11 +51,17 @@
                     <!-- Buttons section -->
                     <div class="btn_panel">
                         <div>
-                            <button class="button_blue" pTooltip="Add To Local" tooltipPosition="top"
+                            <button
+                            appAccessLevelVerification SelectedModuleCode="CLIEN"
+                                            SelectedModuleAccessCode="ClientReq" SelectedFeatureAccessCode="CLIRTS"
+                                            [IsTab]="false" ActionState="ADD" ActionState="DISABLE"
+                             class="button_blue" pTooltip="Add To Local" tooltipPosition="top"
                                 (click)="addToLocalClientRequirement(globalClientRequirement)">Add To Local</button>
                         </div>
                         <div>
-                            <button class="button_red" pTooltip="Delete" tooltipPosition="top"
+                            <button appAccessLevelVerification SelectedModuleCode="CLIEN"
+                            SelectedModuleAccessCode="ClientReq" SelectedFeatureAccessCode="CLGLRQ"
+                            [IsTab]="false" ActionState="DELETE" ActionState="DISABLE"class="button_red" pTooltip="Delete" tooltipPosition="top"
                                 (click)="deleteGlobalClientRequirement(globalClientRequirement)">Delete</button>
                         </div>
                     </div>

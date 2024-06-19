@@ -27,19 +27,23 @@
                         <div *ngIf="type.Id != 0">
                             <!-- Update button when in edit mode -->
                             <button pTooltip="Update" tooltipPosition="top" *ngIf="editingIndex == rowIndex"
-                                class="button_blue" (click)="onClickUpdateItem(type)">Update</button>
+                                class="button_blue" (click)="onClickUpdateItem(type)" >Update</button>
                             <!-- Edit button when not in edit mode -->
                             <button pTooltip="Edit" tooltipPosition="top" *ngIf="editingIndex != rowIndex"
-                                class="button_blue" (click)="onClickEditItem(rowIndex)">Edit</button>
+                                class="button_blue" (click)="onClickEditItem(rowIndex)"
+                                appAccessLevelVerification SelectedModuleCode="CLIEN"
+                                SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLRET" [IsTab]="false" ActionState="EDIT" ActionType="DISABLE">Edit</button>
                         </div>
                         <div *ngIf="type.Id != 0">
                             <!-- Delete button -->
-                            <button pTooltip="Delete" tooltipPosition="top" class="button_red"
+                            <button appAccessLevelVerification SelectedModuleCode="CLIEN"
+                            SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLRET" [IsTab]="false" ActionState="DELETE" ActionType="DISABLE" pTooltip="Delete" tooltipPosition="top" class="button_red"
                                 (click)="onClickDeleteItem(type)">Delete</button>
                         </div>
                         <div *ngIf="type.Id == 0">
                             <!-- Button to add a new type -->
-                            <button pTooltip="Add new" tooltipPosition="top" class="button_blue_l"
+                            <button appAccessLevelVerification SelectedModuleCode="CLIEN"
+                            SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLRET" [IsTab]="false" ActionState="ADD" ActionType="DISABLE" pTooltip="Add new" tooltipPosition="top" class="button_blue_l"
                                 (click)="onClickAddNew(type)">Add A New Type</button>
                         </div>
                     </div>

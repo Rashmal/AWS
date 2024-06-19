@@ -107,7 +107,7 @@
                             <!--Input area-->
                             <p-dropdown [options]="accessibleModules" class="width_50" autoWidth="false"
                                 placeholder="Select an option" [(ngModel)]="selectedAccModule" optionLabel="Name"
-                                (onChange)="onChangeAccessibleModule()" />
+                                (onChange)="onChangeAccessibleModule(1)" />
                             <!--End of Input area-->
                         </div>
                         <!--End of Input and label-->
@@ -133,7 +133,7 @@
                             </div>
 
                             <!--Tab features-->
-                            <div class="features_list">
+                            <div *ngIf="tab.EnableAccess" class="features_list">
                                 <!--Single feature-->
                                 <div class="feature_item" *ngFor="let feature of tab.AccessLevelFeatureDetailsList">
                                     <div>

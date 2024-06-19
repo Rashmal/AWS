@@ -143,7 +143,8 @@ export class AccessLevelsComponent {
     }
 
     //On changeAccessible Module
-    onChangeAccessibleModule() {
+    onChangeAccessibleModule(pageNum: number) {
+        this.filter.CurrentPage = pageNum;
         //Get sub tab list
         this.userRoleModel.GetTabDetailsBasedOnModuleUserRole(this.overallCookieInterface.GetCompanyId(), this.selectedRoleId, this.filter, this.selectedAccModule.Id).then(
             (subTabs: SubTabDetails[]) => {
@@ -162,7 +163,9 @@ export class AccessLevelsComponent {
             (data: Module[]) => {
                 //Check data is not undefined
                 if (data) {
+                    this.selectedAccModule = null;
                     this.accessibleModules = data;
+                    
                 }
 
             }
@@ -267,6 +270,7 @@ export class AccessLevelsComponent {
     //on change module list paginator
     onPageChange(event: any) {
         this.filter.CurrentPage = event.page + 1;
+        this.onChangeAccessibleModule(this.filter.CurrentPage);
     }
     // Handles adding a new role.
     onClickAddNewRole() {
