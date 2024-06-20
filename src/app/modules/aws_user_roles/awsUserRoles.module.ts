@@ -11,6 +11,8 @@ import { DropdownModule } from "primeng/dropdown";
 import { InputSwitchModule } from "primeng/inputswitch";
 import { PaginatorModule } from "primeng/paginator";
 import { TableModule } from "primeng/table";
+import { AuthenticationModule } from '../authentication/authentication.module';
+
 
 @NgModule({
     declarations: [
@@ -28,7 +30,8 @@ import { TableModule } from "primeng/table";
         TabViewComponent,
         AccordionModule,
         InputSwitchModule,
-        PaginatorModule
+        PaginatorModule,
+        AuthenticationModule
     ]
 })
 
