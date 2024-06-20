@@ -21,14 +21,16 @@
                     <button [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="button_blue_s"
                         (click)="onClickConfigResource()"><i class="fa fa-cog" aria-hidden="true"
                             appAccessLevelVerification SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ImgDcFi"
-                            SelectedFeatureAccessCode="CLRET" [IsTab]="false" ActionState="VIEW" ActionType="DISABLE"></i></button>
+                            SelectedFeatureAccessCode="CLRET" [IsTab]="false" ActionState="VIEW"
+                            ActionType="DISABLE"></i></button>
                 </div>
                 <!--End of Input and label-->
             </div>
             <!--End of File types-->
             <!--File uploader-->
             <div appAccessLevelVerification SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ImgDcFi"
-            SelectedFeatureAccessCode="CLIDF" [IsTab]="false" ActionState="ADD"  class="row gen_info_item" *ngIf="!(selectedClientId == 0 || modificationMode == 'VIEW')">
+                SelectedFeatureAccessCode="CLIDF" [IsTab]="false" ActionState="ADD" class="row gen_info_item"
+                *ngIf="!(selectedClientId == 0 || modificationMode == 'VIEW')">
                 <!--Input and label-->
                 <div class="col-12">
                     <!-- Container for the file upload area, applying the drag-and-drop directive -->
@@ -98,11 +100,11 @@
             <!--Hr-->
             <!--File List-->
             <div class="row gen_info_item" appAccessLevelVerification SelectedModuleCode="CLIEN"
-            SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLFLST" [IsTab]="false"
-            ActionState="VIEW" >
+                SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLFLST" [IsTab]="false"
+                ActionState="VIEW">
 
                 <!--Input and label-->
-                <div class="col-12 flex input_area" >
+                <div class="col-12 flex input_area">
                     <!--Label-->
                     <label class="input_lbl">Filter by file type:</label>
                     <!--End of Label-->
@@ -114,8 +116,9 @@
                     <button pTooltip="Add/Edit config" tooltipPosition="top"
                         [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'" class="button_blue_s"
                         (click)="onClickConfigResource()"><i class="fa fa-cog" aria-hidden="true"
-                        appAccessLevelVerification SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ImgDcFi"
-                            SelectedFeatureAccessCode="CLRET" [IsTab]="false" ActionState="VIEW" ActionType="DISABLE"></i></button>
+                            appAccessLevelVerification SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ImgDcFi"
+                            SelectedFeatureAccessCode="CLRET" [IsTab]="false" ActionState="VIEW"
+                            ActionType="DISABLE"></i></button>
 
 
 
@@ -150,27 +153,25 @@
                                         <label class="lbl_class">Caption:</label>
                                         <textarea [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                             class="input_class" [(ngModel)]="fileItem.Caption"
-                                            (blur)="onChangeImageFileProperty(fileItem)"
-                                            appAccessLevelVerification SelectedModuleCode="CLIEN"
-            SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLFLST" [IsTab]="false"
-            ActionState="EDIT" ActionType="DISABLE"
-                                            ></textarea>
+                                            (blur)="onChangeImageFileProperty(fileItem)" appAccessLevelVerification
+                                            SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ImgDcFi"
+                                            SelectedFeatureAccessCode="CLFLST" [IsTab]="false" ActionState="EDIT"
+                                            ActionType="DISABLE"></textarea>
                                     </div>
                                     <div class="label_input_div">
                                         <label class="lbl_class">Internal Notes:</label>
                                         <textarea [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                             class="input_class" [(ngModel)]="fileItem.InternalNotes"
-                                            (blur)="onChangeImageFileProperty(fileItem)"
-                                            appAccessLevelVerification SelectedModuleCode="CLIEN"
-            SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLFLST" [IsTab]="false"
-            ActionState="EDIT" ActionType="DISABLE"
-                                            ></textarea>
+                                            (blur)="onChangeImageFileProperty(fileItem)" appAccessLevelVerification
+                                            SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ImgDcFi"
+                                            SelectedFeatureAccessCode="CLFLST" [IsTab]="false" ActionState="EDIT"
+                                            ActionType="DISABLE"></textarea>
                                     </div>
                                     <div class="label_input_div_spe">
                                         <label class="lbl_class">Resource Type:</label>
                                         <div class="input_drp" appAccessLevelVerification SelectedModuleCode="CLIEN"
-                                        SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLFLST" [IsTab]="false"
-                                        ActionState="EDIT" ActionType="DISABLE">
+                                            SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLFLST"
+                                            [IsTab]="false" ActionState="EDIT" ActionType="DISABLE">
                                             <!--Config Types-->
                                             <p-dropdown [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                                 appendTo="body" [options]="resourceTypes"
@@ -182,10 +183,10 @@
                                             <button pTooltip="Add/Edit Config" tooltipPosition="top"
                                                 [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                                 class="button_blue_s" (click)="onClickConfigResource()"
-                                                appAccessLevelVerification SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ImgDcFi"
-                            SelectedFeatureAccessCode="CLRET" [IsTab]="false" ActionState="VIEW" ActionType="DISABLE"><i
-                                                    class="fa fa-cog" aria-hidden="true"
-                                                    ></i></button>
+                                                appAccessLevelVerification SelectedModuleCode="CLIEN"
+                                                SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLRET"
+                                                [IsTab]="false" ActionState="VIEW" ActionType="DISABLE"><i
+                                                    class="fa fa-cog" aria-hidden="true"></i></button>
                                             <!--End of Setting icon-->
                                         </div>
                                     </div>
@@ -193,32 +194,32 @@
 
                                 <td class="action_button">
                                     <div class="action_button_div paddingTop21">
-                                        <button appAccessLevelVerification SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ImgDcFi"
-                                        SelectedFeatureAccessCode="CLFLST" [IsTab]="false" ActionState="VIEW" 
-                                         pTooltip="Preview" tooltipPosition="top"
+                                        <button appAccessLevelVerification SelectedModuleCode="CLIEN"
+                                            SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLFLST"
+                                            [IsTab]="false" ActionState="VIEW" pTooltip="Preview" tooltipPosition="top"
                                             (click)="imagePreviewer(fileItem)" class="green_btn"><i class="fa fa-eye"
                                                 aria-hidden="true"></i></button>
-                                        <button appAccessLevelVerification SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ImgDcFi"
-                                        SelectedFeatureAccessCode="CLFLST" [IsTab]="false" ActionState="EDIT"
-                                         pTooltip="Rotate" tooltipPosition="top"
+                                        <button appAccessLevelVerification SelectedModuleCode="CLIEN"
+                                            SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLFLST"
+                                            [IsTab]="false" ActionState="EDIT" pTooltip="Rotate" tooltipPosition="top"
                                             [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                             class="yellow_btn" (click)="rotateImage(fileItem, 'ACLW')"><i
                                                 class="fa fa-undo" aria-hidden="true"></i></button>
-                                        <button appAccessLevelVerification SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ImgDcFi"
-                                        SelectedFeatureAccessCode="CLFLST" [IsTab]="false" ActionState="EDIT"
-                                         pTooltip="Rotate" tooltipPosition="top"
+                                        <button appAccessLevelVerification SelectedModuleCode="CLIEN"
+                                            SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLFLST"
+                                            [IsTab]="false" ActionState="EDIT" pTooltip="Rotate" tooltipPosition="top"
                                             [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                             class="yellow_btn" (click)="rotateImage(fileItem, 'CLW')"><i
                                                 class="fa fa-repeat" aria-hidden="true"></i></button>
-                                        <button appAccessLevelVerification SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ImgDcFi"
-                                        SelectedFeatureAccessCode="CLFLST" [IsTab]="false" ActionState="VIEW"
-                                         pTooltip="Download" tooltipPosition="top"
+                                        <button appAccessLevelVerification SelectedModuleCode="CLIEN"
+                                            SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLFLST"
+                                            [IsTab]="false" ActionState="VIEW" pTooltip="Download" tooltipPosition="top"
                                             [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                             class="blue_btn" (click)="downloadItems(fileItem)"><i class="fa fa-download"
                                                 aria-hidden="true"></i></button>
-                                        <button appAccessLevelVerification SelectedModuleCode="CLIEN" SelectedModuleAccessCode="ImgDcFi"
-                                        SelectedFeatureAccessCode="CLFLST" [IsTab]="false" ActionState="DELETE"
-                                         pTooltip="Delete" tooltipPosition="top"
+                                        <button appAccessLevelVerification SelectedModuleCode="CLIEN"
+                                            SelectedModuleAccessCode="ImgDcFi" SelectedFeatureAccessCode="CLFLST"
+                                            [IsTab]="false" ActionState="DELETE" pTooltip="Delete" tooltipPosition="top"
                                             [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                             class="red_btn" (click)="removeImageDocFile(fileItem)"><i
                                                 class="fa fa-trash" aria-hidden="true"></i></button>
