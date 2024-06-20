@@ -2,7 +2,8 @@
 <div class="card flex justify-content-center gen_info_main" *ngIf="staffDetails">
     <!-- Accordion section -->
     <p-accordion [multiple]="true" [activeIndex]="[0,1]">
-        <p-accordionTab header="Basic Information">
+        <p-accordionTab appAccessLevelVerification SelectedModuleCode="STAFF" SelectedModuleAccessCode="GeneralInfo"
+            SelectedFeatureAccessCode="STFBIN" [IsTab]="false" ActionState="VIEW" header="Basic Information">
             <!--Client Customer-->
             <div class="row gen_info_item">
 
@@ -103,7 +104,8 @@
             <!--End of Client Customer-->
 
         </p-accordionTab>
-        <p-accordionTab header="Address">
+        <p-accordionTab appAccessLevelVerification SelectedModuleCode="STAFF" SelectedModuleAccessCode="GeneralInfo"
+            SelectedFeatureAccessCode="STFADR" [IsTab]="false" ActionState="VIEW" header="Address">
             <!--Billing Address-->
             <div class="row gen_info_item">
                 <!--Input and label-->

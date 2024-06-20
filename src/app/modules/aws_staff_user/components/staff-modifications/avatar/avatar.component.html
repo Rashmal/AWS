@@ -2,7 +2,8 @@
 <div class="card flex justify-content-center gen_info_main">
     <!-- Accordion section -->
     <p-accordion [multiple]="true" [activeIndex]="[0,1]">
-        <p-accordionTab header="Avatar">
+        <p-accordionTab appAccessLevelVerification SelectedModuleCode="STAFF" SelectedModuleAccessCode="Avatar"
+            SelectedFeatureAccessCode="STFAVT" [IsTab]="false" ActionState="VIEW" header="Avatar">
             <!--Avatar-->
             <div class="row gen_info_item">
                 <!--Input and label-->
@@ -16,14 +17,20 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex avatar_action"
                     *ngIf="modificationMode !== 'VIEW' && selectedStaffId !== ''">
                     <!--Label-->
-                    <label class="input_lbl">Change Avatar</label>
+                    <label appAccessLevelVerification SelectedModuleCode="STAFF" SelectedModuleAccessCode="Avatar"
+                        SelectedFeatureAccessCode="STFAVT" [IsTab]="false" ActionState="EDIT" class="input_lbl">Change
+                        Avatar</label>
                     <!--End of Label-->
 
                     <!-- Hidden file input element that supports multiple file selection of any type -->
                     <input type="file" #fileInput accept="image/png, image/gif, image/jpeg"
                         (change)="onFileSelected($event)" hidden>
-                    <button class="select_file_btn" (click)="fileInput.click()">Select File</button>
-                    <button class="remove_btn" (click)="removeAvatar()">Remove Avatar</button>
+                    <button appAccessLevelVerification SelectedModuleCode="STAFF" SelectedModuleAccessCode="Avatar"
+                        SelectedFeatureAccessCode="STFAVT" [IsTab]="false" ActionState="EDIT" class="select_file_btn"
+                        (click)="fileInput.click()">Select File</button>
+                    <button appAccessLevelVerification SelectedModuleCode="STAFF" SelectedModuleAccessCode="Avatar"
+                        SelectedFeatureAccessCode="STFAVT" [IsTab]="false" ActionState="DELETE" class="remove_btn"
+                        (click)="removeAvatar()">Remove Avatar</button>
                 </div>
                 <!--End of Input and label-->
             </div>

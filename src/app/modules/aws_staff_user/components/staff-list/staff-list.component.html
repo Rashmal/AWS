@@ -3,7 +3,8 @@
     <!--Filter Section-->
     <div class="filter_section row">
         <!--Add new item-->
-        <div class="col-lg-3 add_new">
+        <div class="col-lg-3 add_new" appAccessLevelVerification SelectedModuleCode="STAFF"
+            SelectedModuleAccessCode="StaffList" SelectedFeatureAccessCode="STFLST" [IsTab]="false" ActionState="ADD">
             <button (click)="onClickClientModifications('NEW', 0)" pTooltip="Add new client" tooltipPosition="top">+ Add
                 New User</button>
         </div>
@@ -18,7 +19,8 @@
         <!--Search by name-->
         <div class="col-lg-3 filter_item">
             <label>User name : </label>
-            <input type="text" [(ngModel)]="filter.SearchQuery" placeholder="Search..." (change)="onChangeFilter('SEARCH')" />
+            <input type="text" [(ngModel)]="filter.SearchQuery" placeholder="Search..."
+                (change)="onChangeFilter('SEARCH')" />
         </div>
         <!--End of Search by name-->
 
@@ -75,14 +77,19 @@
                         {{staff.DateOfBirth | date : 'MMM d, y'}}</div>
                 </td>
                 <td class="action_button">
-                    <button pTooltip="View" tooltipPosition="top" class="green_btn"
+                    <button appAccessLevelVerification SelectedModuleCode="STAFF" SelectedModuleAccessCode="StaffList"
+                        SelectedFeatureAccessCode="STFLST" [IsTab]="false" ActionState="VIEW" pTooltip="View"
+                        tooltipPosition="top" class="green_btn"
                         (click)="onClickClientModifications('VIEW', staff.Id)"><i class="fa fa-eye"
                             aria-hidden="true"></i></button>
-                    <button pTooltip="Edit" tooltipPosition="top" class="blue_btn"
-                        (click)="onClickClientModifications('EDIT', staff.Id)"><i class="fa fa-pencil"
-                            aria-hidden="true"></i></button>
-                    <button pTooltip="Delete" tooltipPosition="top" class="red_btn"
-                        (click)="onRemoveCLientCustomer(staff)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button appAccessLevelVerification SelectedModuleCode="STAFF" SelectedModuleAccessCode="StaffList"
+                        SelectedFeatureAccessCode="STFLST" [IsTab]="false" ActionState="EDIT" pTooltip="Edit"
+                        tooltipPosition="top" class="blue_btn" (click)="onClickClientModifications('EDIT', staff.Id)"><i
+                            class="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button appAccessLevelVerification SelectedModuleCode="STAFF" SelectedModuleAccessCode="StaffList"
+                        SelectedFeatureAccessCode="STFLST" [IsTab]="false" ActionState="DELETE" pTooltip="Delete"
+                        tooltipPosition="top" class="red_btn" (click)="onRemoveCLientCustomer(staff)"><i
+                            class="fa fa-trash" aria-hidden="true"></i></button>
                 </td>
             </tr>
             <!-- End of Body columns -->

@@ -278,7 +278,12 @@ p-table {
     pointer-events: none !important;
 }
 
-::ng-deep p-inputswitch{
+::ng-deep p-inputswitch {
     display: flex;
     align-items: center;
+}
+
+.p-disabled,
+.p-disabled * {
+    opacity: 0.6;
 }

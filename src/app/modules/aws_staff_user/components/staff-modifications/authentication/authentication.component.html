@@ -2,7 +2,8 @@
 <div class="card flex justify-content-center gen_info_main">
     <!-- Accordion section -->
     <p-accordion [multiple]="true" [activeIndex]="[0,1]">
-        <p-accordionTab header="Basic Information">
+        <p-accordionTab appAccessLevelVerification SelectedModuleCode="STAFF" SelectedModuleAccessCode="Authentication"
+            SelectedFeatureAccessCode="STFAUT" [IsTab]="false" ActionState="VIEW" header="Basic Information">
             <!--Client Customer-->
             <div class="row gen_info_item">
 
@@ -26,7 +27,8 @@
                     <!--End of Label-->
                     <!--Input area-->
                     <input class="input_field" type="password" [(ngModel)]="userPromptNewPassword"
-                        onKeyPress="if(value.length==20) return false;" [disabled]="(selectedStaffId == '') || modificationMode == 'VIEW'" />
+                        onKeyPress="if(value.length==20) return false;"
+                        [disabled]="(selectedStaffId == '') || modificationMode == 'VIEW'" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->
@@ -74,8 +76,12 @@
                 <!-- End of Error Message -->
 
                 <!-- Change password button -->
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 flex input_area change_pass" *ngIf="modificationMode !== 'VIEW' && (selectedStaffId !== '')">
-                    <button (click)="onClickChangePassword()" pTooltip="Change Password" tooltipPosition="top">Change
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 flex input_area change_pass"
+                    *ngIf="modificationMode !== 'VIEW' && (selectedStaffId !== '')">
+                    <button appAccessLevelVerification SelectedModuleCode="STAFF"
+                        SelectedModuleAccessCode="Authentication" SelectedFeatureAccessCode="STFAUT" [IsTab]="false"
+                        ActionState="EDIT" (click)="onClickChangePassword()" pTooltip="Change Password"
+                        tooltipPosition="top">Change
                         Password</button>
                 </div>
                 <!-- End of Change password button -->
