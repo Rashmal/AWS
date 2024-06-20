@@ -19,7 +19,12 @@ import { AuthGuard } from './guards/auth.guard';
                 children: [
                     { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'dashboard', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
-                    { path: 'global', loadChildren: () => import('./modules/global_notes/globalNotes.module').then(m => m.GlobalNotesModule) },
+                    { 
+                        path: 'global', 
+                        loadChildren: () => import('./modules/global_notes/globalNotes.module').then(m => m.GlobalNotesModule),
+                        canActivate: [AuthGuard],
+                        data: { moduleCode: 'STAT1' }
+                    },
                     { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
                     { path: 'utilities', loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },
                     { path: 'blocks', loadChildren: () => import('./demo/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
@@ -39,9 +44,19 @@ import { AuthGuard } from './guards/auth.guard';
                     { path: 'request', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'repository', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'trello', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
-                    { path: 'client', loadChildren: () => import('./modules/aws_client/awsClient.module').then(m => m.AWSClientModule) },
+                    { 
+                        path: 'client', 
+                        loadChildren: () => import('./modules/aws_client/awsClient.module').then(m => m.AWSClientModule),
+                        canActivate: [AuthGuard],
+                        data: { moduleCode: 'CLIEN' }
+                     },
                     { path: 'company', loadChildren: () => import('./modules/aws_company/awsCompany.module').then(m => m.AWSCompanyModule) },
-                    { path: 'staff', loadChildren: () => import('./modules/aws_staff_user/awsStaffUser.module').then(m => m.AWSStaffUserModule) },
+                    { 
+                        path: 'staff', 
+                        loadChildren: () => import('./modules/aws_staff_user/awsStaffUser.module').then(m => m.AWSStaffUserModule),
+                        canActivate: [AuthGuard],
+                        data: { moduleCode: 'STAFF' }
+                    },
                     {
                         path: 'user_roles',
                         loadChildren: () => import('./modules/aws_user_roles/awsUserRoles.module').then(m => m.AWSUserRolesModule),
