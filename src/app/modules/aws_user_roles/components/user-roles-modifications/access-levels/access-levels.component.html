@@ -3,14 +3,18 @@
     <!--User roles and accordions-->
     <div class="row roles_accordions">
         <!--user roles-->
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-2 user_roles">
+        <div appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
+            SelectedFeatureAccessCode="URALUR" ActionState="VIEW"
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-2 user_roles">
             <!--Header-->
             <div class="user_roles_header">
                 <!--Label-->
                 <label>User Roles</label>
                 <!--End of Label-->
                 <!--Add new button-->
-                <button class="add_new" (click)="onClickAddNewRole()">+</button>
+                <button appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
+                    SelectedFeatureAccessCode="URALUR" ActionState="ADD" class="add_new"
+                    (click)="onClickAddNewRole()">+</button>
                 <!--End of Add new button-->
 
             </div>
@@ -42,11 +46,25 @@
 
                 <!--Button panel-->
                 <div class="btn_panel">
-                    <button *ngIf="role.Id != editingUserRole" class="btn_green" (click)="onClickDuplicateRole(role)"><i
+                    <button appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
+                        SelectedFeatureAccessCode="URALUR" ActionState="ADD"
+                        *ngIf="role.Id != editingUserRole" class="btn_green" (click)="onClickDuplicateRole(role)"><i
                             class="fa fa-files-o" aria-hidden="true"></i></button>
-                    <button *ngIf="role.Id != editingUserRole" class="btn_blue" (click)="onClickEditRole(role.Id)"><i
+                    <button
+                    appAccessLevelVerification
+                SelectedModuleCode="USRL"
+                SelectedModuleAccessCode="AccessLevels"
+                SelectedFeatureAccessCode="URALUR"
+                ActionState="EDIT"
+                     *ngIf="role.Id != editingUserRole" class="btn_blue" (click)="onClickEditRole(role.Id)"><i
                             class="fa fa-pencil" aria-hidden="true"></i></button>
-                    <button *ngIf="role.Id != editingUserRole" class="btn_red" (click)="onClickDeleteRole(role)"><i
+                    <button
+                    appAccessLevelVerification
+                SelectedModuleCode="USRL"
+                SelectedModuleAccessCode="AccessLevels"
+                SelectedFeatureAccessCode="URALUR"
+                ActionState="DELETE"
+                     *ngIf="role.Id != editingUserRole" class="btn_red" (click)="onClickDeleteRole(role)"><i
                             class="fa fa-trash" aria-hidden="true"></i></button>
 
                     <button *ngIf="role.Id == editingUserRole" class="btn_blue" (click)="onClickUpdateRole(role)"><i
@@ -66,7 +84,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-10 access_accordions">
 
             <p-accordion [multiple]="true" [activeIndex]="[0,1]">
-                <p-accordionTab header="Module Access Levels">
+                <p-accordionTab appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
+                SelectedFeatureAccessCode="URALMA" ActionState="VIEW" header="Module Access Levels">
 
                     <!--Module access row-->
                     <div class="row gen_info_item">
@@ -79,7 +98,8 @@
                             <label class="input_lbl">{{module.Name}}</label>
                             <!--End of Label-->
                             <!--Input area-->
-                            <p-inputSwitch [(ngModel)]="module.IsDisable" (onChange)="onChangeModuleAccess(module)" />
+                            <p-inputSwitch appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
+                            SelectedFeatureAccessCode="URALMA" ActionState="EDIT" [(ngModel)]="module.IsDisable" (onChange)="onChangeModuleAccess(module)" />
                             <!--End of Input area-->
 
                         </div>
@@ -90,10 +110,11 @@
 
                 </p-accordionTab>
 
-                <p-accordionTab header="Module Feature Access Levels">
+                <p-accordionTab appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
+                SelectedFeatureAccessCode="URALFA" ActionState="VIEW" header="Module Feature Access Levels">
                     <!--Module selector and header-->
                     <div class="row gen_info_item">
-                        <label class="input_lbl_hdr">Access levels for the role (View Only)</label>
+                        <label class="input_lbl_hdr">Access levels for the role</label>
                     </div>
                     <!--End of Module selector and header-->
 
@@ -124,7 +145,8 @@
                             <div class="sub_tab">
 
                                 <!--Input area-->
-                                <p-inputSwitch [(ngModel)]="tab.EnableAccess"
+                                <p-inputSwitch appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
+                                SelectedFeatureAccessCode="URALFA" ActionState="EDIT" [(ngModel)]="tab.EnableAccess"
                                     (onChange)="onChangeSubTabAccessLevel(tab)" />
                                 <!--End of Input area-->
                                 <!--Label-->

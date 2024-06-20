@@ -96,7 +96,7 @@
                                                 <button appAccessLevelVerification SelectedModuleCode="CLIEN"
                                                     SelectedModuleAccessCode="ClientReq"
                                                     SelectedFeatureAccessCode="CLRQFD" [IsTab]="false"
-                                                    ActionState="VIEW" ActionState="DISABLE" class="blue_btn"
+                                                    ActionState="VIEW" class="blue_btn"
                                                     pTooltip="Download" tooltipPosition="top"
                                                     [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                                     (click)="downloadClientRequirementAttachment(item)">
@@ -124,7 +124,7 @@
                                         <div class="action_button_upl">
                                             <button appAccessLevelVerification SelectedModuleCode="CLIEN"
                                                 SelectedModuleAccessCode="ClientReq" SelectedFeatureAccessCode="CLFILE"
-                                                [IsTab]="false" ActionState="DELETE" ActionState="DISABLE"
+                                                [IsTab]="false" ActionState="DELETE"
                                                 pTooltip="Upload" tooltipPosition="top"
                                                 (click)="clickOnUploadRequirementFile(clientRequirement)"
                                                 [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
@@ -144,7 +144,7 @@
                                                 <button appAccessLevelVerification SelectedModuleCode="CLIEN"
                                                     SelectedModuleAccessCode="ClientReq"
                                                     SelectedFeatureAccessCode="CLIREQ" [IsTab]="false"
-                                                    ActionState="DELETE" ActionState="DISABLE" pTooltip="Delete"
+                                                    ActionState="DELETE" pTooltip="Delete"
                                                     tooltipPosition="top"
                                                     [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                                     class="red_btn"
@@ -154,7 +154,7 @@
                                                 <button appAccessLevelVerification SelectedModuleCode="CLIEN"
                                                     SelectedModuleAccessCode="ClientReq"
                                                     SelectedFeatureAccessCode="CLRSRT" [IsTab]="false"
-                                                    ActionState="EDIT" ActionState="DISABLE" pTooltip="Rank up"
+                                                    ActionState="EDIT" pTooltip="Rank up"
                                                     tooltipPosition="top"
                                                     [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                                     class="grey_btn margin_lr_5"
@@ -164,7 +164,7 @@
                                                 <button appAccessLevelVerification SelectedModuleCode="CLIEN"
                                                     SelectedModuleAccessCode="ClientReq"
                                                     SelectedFeatureAccessCode="CLRSRT" [IsTab]="false"
-                                                    ActionState="EDIT" ActionState="DISABLE" pTooltip="Rank down"
+                                                    ActionState="EDIT" pTooltip="Rank down"
                                                     tooltipPosition="top"
                                                     [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                                     class="grey_btn"
@@ -180,7 +180,7 @@
                                                     appAccessLevelVerification SelectedModuleCode="CLIEN"
                                                     SelectedModuleAccessCode="ClientReq"
                                                     SelectedFeatureAccessCode="CLGLRQ" [IsTab]="false"
-                                                    ActionState="ADD" ActionState="DISABLE" 
+                                                    ActionState="ADD" 
                                                 pTooltip="Add to global" tooltipPosition="top"
                                                     (click)="clickOnAddToGlobal(clientRequirement)" class="blue_btn_spe"
                                                     [disabled]="selectedClientId == 0 || clientRequirement.Title == '' || modificationMode == 'VIEW'">Add
@@ -213,7 +213,7 @@
                                                 appAccessLevelVerification SelectedModuleCode="CLIEN"
                                                     SelectedModuleAccessCode="ClientReq"
                                                     SelectedFeatureAccessCode="CLRAUR" [IsTab]="false"
-                                                    ActionState="DELETE" ActionState="DISABLE" 
+                                                    ActionState="DELETE" 
                                                 pTooltip="Delete" tooltipPosition="top" class="red_btn"
                                                     [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                                     (click)="removeClientRequirementRole(clientRequirement, roleIndex)">
@@ -230,7 +230,7 @@
                                             appAccessLevelVerification SelectedModuleCode="CLIEN"
                                                     SelectedModuleAccessCode="ClientReq"
                                                     SelectedFeatureAccessCode="CLRAUR" [IsTab]="false"
-                                                    ActionState="EDIT" ActionState="DISABLE" 
+                                                    ActionState="EDIT" 
                                             pTooltip="Select roles" tooltipPosition="top"
                                                 [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                                 class="green_btn" (click)="onClickUserRole(clientRequirement,rowIndex)">
@@ -285,7 +285,7 @@
                                                 appAccessLevelVerification SelectedModuleCode="CLIEN"
                                                 SelectedModuleAccessCode="ClientReq"
                                                 SelectedFeatureAccessCode="CLRGLF" [IsTab]="false"
-                                                ActionState="VIEW" ActionState="DISABLE" 
+                                                ActionState="VIEW" 
                                                 pTooltip="Download" tooltipPosition="top" class="blue_btn"
                                                     [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                                     (click)="downloadGlobalFileAttachment(globalFile)">
@@ -295,7 +295,7 @@
                                                 appAccessLevelVerification SelectedModuleCode="CLIEN"
                                                 SelectedModuleAccessCode="ClientReq"
                                                 SelectedFeatureAccessCode="CLRGLF" [IsTab]="false"
-                                                ActionState="DELETE" ActionState="DISABLE"  
+                                                ActionState="DELETE"  
                                                 pTooltip="Delete" tooltipPosition="top" class="red_btn"
                                                     [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                                     (click)="removeGlobalFile(globalFile)">
@@ -321,7 +321,7 @@
                         <button  appAccessLevelVerification SelectedModuleCode="CLIEN"
                         SelectedModuleAccessCode="ClientReq"
                         SelectedFeatureAccessCode="CLRGLF" [IsTab]="false"
-                        ActionState="ADD" ActionState="DISABLE"  pTooltip="Add new global files" tooltipPosition="top" class="long_txt_btn full_width"
+                        ActionState="ADD"  pTooltip="Add new global files" tooltipPosition="top" class="long_txt_btn full_width"
                             (click)="clickOnUploadGlobalFile()"
                             [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'">Add New Global
                             Files</button>
