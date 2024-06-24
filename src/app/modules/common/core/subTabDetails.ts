@@ -4,7 +4,7 @@ export interface SubTabDetails{
     Id: number;
     Name: string;
     EnableAccess: boolean;
-    TotalRecords: number;
+    Total: number;
     AccessLevelFeatureDetailsList: AccessLevelFeatureDetails[];
    
 }

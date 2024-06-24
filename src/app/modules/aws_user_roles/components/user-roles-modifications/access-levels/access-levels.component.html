@@ -5,7 +5,7 @@
         <!--user roles-->
         <div appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
             SelectedFeatureAccessCode="URALUR" ActionState="VIEW"
-            class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-2 user_roles">
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 user_roles">
             <!--Header-->
             <div class="user_roles_header">
                 <!--Label-->
@@ -81,7 +81,7 @@
         <!--End of user roles-->
 
         <!-- Accordion section -->
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-10 access_accordions">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 access_accordions">
 
             <p-accordion [multiple]="true" [activeIndex]="[0,1]">
                 <p-accordionTab appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
@@ -223,9 +223,9 @@
                         <!--End of Input and label-->
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
-                            *ngIf="subTabs && subTabs.length > 0 && subTabs[0].TotalRecords > filter.RecordsPerPage"
+                            *ngIf="subTabs && subTabs.length > 0 && subTabs[0].Total > filter.RecordsPerPage"
                             [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event)"
-                            [totalRecords]="(subTabs.length>0)? subTabs[0].TotalRecords:0"></p-paginator>
+                            [totalRecords]="(subTabs.length>0)? subTabs[0].Total:0"></p-paginator>
                         <!-- End of Pagination section -->
 
                     </div>
