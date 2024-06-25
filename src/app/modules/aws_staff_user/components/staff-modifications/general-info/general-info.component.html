@@ -42,7 +42,7 @@
 
                     <!--Input area-->
                     <input class="input_field" type="text" [(ngModel)]="staffDetails.Email"
-                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
+                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-zA-Z0-9@._]*$"
                         [disabled]="modificationMode == 'VIEW' || modificationMode == 'EDIT'"
                         (blur)="onBlurEvent('STAFF$DETAILS')" />
                     <!--End of Input area-->
@@ -73,7 +73,7 @@
                     <label class="input_lbl">Date of Birth</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="datetime-local" [(ngModel)]="staffDetails.DateOfBirth"
+                    <input class="input_field" type="date" [(ngModel)]="staffDetails.DateOfBirth"
                         onKeyPress="if(value.length==20) return false;" inputrestriction="^[a-z A-Z 0-9 #]*$"
                         [disabled]="(!staffDetails.Email) ||  modificationMode == 'VIEW'"
                         (blur)="onBlurEvent('STAFF$DETAILS')" />

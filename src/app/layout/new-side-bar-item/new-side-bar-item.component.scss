@@ -26,7 +26,18 @@
     
 }
 
-
+.color_icons{
+    .item_icon{
+        i{
+            color: #A330CC;
+        }
+    }
+    .item_label{
+        span{
+            color: #A330CC;
+        }
+    }
+}
 
 .full_width{
     width: 100%;

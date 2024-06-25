@@ -3,7 +3,7 @@
 <a (click)="itemClick($event)" class="menu_item_main" [routerLink]="item.RedirectUrl" routerLinkActive="active-route" pRipple>
     <!--Single Item section-->
     <div class="single_item" [pTooltip]="item.Name"
-    tooltipPosition="right">
+    tooltipPosition="right" [ngClass]="index%2 != 0 ? 'color_icons' : ''">
         <!--Item icon-->
         <div class="item_icon" [ngClass]="mouseEnter ? 'auto_width margin_left_13' : 'full_width '">
             <i [ngClass]="item.ModuleIcon" class="layout-menuitem-icon"></i>

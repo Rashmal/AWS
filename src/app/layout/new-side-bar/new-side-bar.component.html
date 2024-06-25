@@ -5,8 +5,8 @@
     <div class="flex_center_static">
         <div [pTooltip]="item.Name" tooltipPosition="right" *ngFor="let item of staticMenuItems; let i = index"
             [style.width]="item.ModuleCode == 'STAT1' ? '95%':  item.ModuleCode == 'STAT4' ? '45%' : 'auto'"
-            [ngClass]="[!mouseEnter ? 'menu_item_main' : 'menu_item_expand', (item.ModuleCode == 'STAT4' && mouseEnter)?'req_new_ind':'']"
-            [style.margin-top.px]="i == 0 ? 10 : 0"
+            [ngClass]="[!mouseEnter ? 'menu_item_main' : 'menu_item_expand', (item.ModuleCode == 'STAT4' && mouseEnter)?'req_new_ind':'',  i%2 == 0 ? mouseEnter && item.ModuleCode == 'STAT1' ? '' : 'color_icons' : '']"
+            [style.margin-top.px]="i == 0 && !mouseEnter ? 10 : 0"
             [style.margin-bottom.px]="item.ModuleCode == 'STAT1' && mouseEnter ? 10 : 0">
             <a (click)="itemClick($event,item)" [routerLink]="item.RedirectUrl" routerLinkActive="active-route" pRipple
                 [ngClass]="item.ModuleCode == 'STAT1' ? 'gbl_n_icon' : item.ModuleCode == 'STAT4' ? 'req_new' : ''">
