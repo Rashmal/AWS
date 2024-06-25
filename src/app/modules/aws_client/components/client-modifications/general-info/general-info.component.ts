@@ -825,6 +825,7 @@ export class GeneralInfoComponent implements OnInit {
 
     // Focus out event of contact values
     contactValueFocusOut(contactObject: Contact, rowIndex: number) {
+        debugger
         // Getting the current value
         let currentValue = contactObject.ContactValue;
         // Replace all ( , ) with empty
@@ -839,7 +840,7 @@ export class GeneralInfoComponent implements OnInit {
             // Check if the rest numbers are more than 4
             if (restNumbers.length > 4) {
                 rest1stSet = restNumbers.substring(0, 4);
-                rest2ndSet = restNumbers.substring(5);
+                rest2ndSet = restNumbers.substring(4);
             } else {
                 rest1stSet = restNumbers;
             }

@@ -61,7 +61,7 @@ export class AccessLevelsComponent {
         ModuleId: 0,
         ParentId: 0,
         PriorityId: 0,
-        RecordsPerPage: 4,
+        RecordsPerPage: 2,
         SearchQuery: '',
         SortColumn: '',
         SortDirection: 'DESC',

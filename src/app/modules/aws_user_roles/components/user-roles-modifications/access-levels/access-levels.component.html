@@ -223,7 +223,7 @@
                         <!--End of Input and label-->
                         <!-- Pagination section -->
                         <p-paginator class="paginator_sec" #modulePaginator
-                        *ngIf="subTabs && subTabs.length > 0 && subTabs[0].Total > filter.RecordsPerPage"
+                            *ngIf="subTabs && subTabs.length > 0 && subTabs[0].Total > filter.RecordsPerPage"
                             [rows]="filter.RecordsPerPage" (onPageChange)="onPageChange($event)"
                             [totalRecords]="(subTabs.length>0)? subTabs[0].Total:0"></p-paginator>
                         <!-- End of Pagination section -->

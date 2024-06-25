@@ -39,7 +39,6 @@ export class AccessLevelVerificationDirective {
   }
 
   ngOnInit(): void {
-    debugger
     // Getting the access list
     this.staffModel.GetTabDetailsBasedOnModuleCode(this.SelectedModuleCode, this.OverallCookieAccessible.GetUserRole(), this.OverallCookieAccessible.GetCompanyId()).then(
       (data) => {
