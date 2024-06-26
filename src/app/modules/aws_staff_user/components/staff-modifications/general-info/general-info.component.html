@@ -73,10 +73,10 @@
                     <label class="input_lbl">Date of Birth</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="date" [(ngModel)]="staffDetails.DateOfBirth"
+                    <input class="input_field" type="date" [(ngModel)]="formattedDate"
                         onKeyPress="if(value.length==20) return false;" inputrestriction="^[a-z A-Z 0-9 #]*$"
                         [disabled]="(!staffDetails.Email) ||  modificationMode == 'VIEW'"
-                        (blur)="onBlurEvent('STAFF$DETAILS')" />
+                        (change)="onChangeInput()" />
                     <!--End of Input area-->
                 </div>
                 <!--End of Input and label-->

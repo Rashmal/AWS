@@ -45,7 +45,8 @@ export class GeneralInfoComponent implements OnInit {
     displayUserRolesList: SelectItem[] = [];
     // Store the error messages
     errorMessagesList: IErrorMessage[] = [];
-
+    // Store date of birth locally
+    formattedDate: string = '';
     // Store the products list
     constructor(private location: Location, private commonService: CommonService,
         private staffService: StaffService, private commonStaffService: CommonStaffService,
@@ -56,6 +57,7 @@ export class GeneralInfoComponent implements OnInit {
         this.clientModel = new ClientModel(this.clientService);
         this.overallCookieInterface = new OverallCookieModel();
         this.staffModel = new StaffModel(this.staffService);
+        
     }
 
     ngOnInit(): void {
@@ -103,6 +105,33 @@ export class GeneralInfoComponent implements OnInit {
         }
     }
 
+    // Utility function to format Date to YYYY-MM-DD
+    formatDate(date: Date): string {
+        date = new Date(date);
+        const year = date.getFullYear();
+        const month = ('0' + (date.getMonth() + 1)).slice(-2);
+        const day = ('0' + date.getDate()).slice(-2);
+        return `${year}-${month}-${day}`;
+    }
+
+    // Utility function to convert YYYY-MM-DD string to Date object
+    parseDate(dateString: string): Date {
+        const parts = dateString.split('-');
+        const year = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1; // Month is 0-based in Date
+        const day = parseInt(parts[2], 10);
+        return new Date(year, month, day);
+    }
+
+    // On change date of birth
+    onChangeInput() {
+        this.staffDetails.DateOfBirth = this.parseDate(this.formattedDate);
+        //Add one date coz input set one day before selection
+        this.staffDetails.DateOfBirth.setDate(this.staffDetails.DateOfBirth.getDate() + 1);
+        // Save data
+        this.onBlurEvent('STAFF$DETAILS');
+    }
+
     // Getting all the user roles
     GetAllUserRoles() {
         // Calling the object model to access the service
@@ -131,8 +160,12 @@ export class GeneralInfoComponent implements OnInit {
         // Calling the object model to access the service
         this.staffModel.GetStaffDetails(this.selectedStaffId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
+                
                 // Getting the list of social media list
                 this.staffDetails = <StaffDetails>data;
+                // Format the date when initializing the component
+                this.formattedDate = this.formatDate(this.staffDetails.DateOfBirth);
+                debugger
             }
         );
         // End of Calling the object model to access the service
