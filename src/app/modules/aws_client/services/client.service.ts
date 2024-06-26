@@ -53,10 +53,25 @@ export class ClientService {
   private GetClientRequirementUrl = API$DOMAIN + 'api/Client/GetClientRequirement';
   private GetAllSocialMediaListUrl = API$DOMAIN + 'api/Client/GetAllSocialMediaList';
   private GetFileBlobDataUrl = API$DOMAIN + 'api/Common/GetFileBlobData';
+  private CheckEmailExistsUrl = API$DOMAIN + 'api/Client/CheckEmailExists';
 
   // Constructor
   constructor(private http: HttpClient, private router: Router) {
 
+  }
+
+  // Check if the client email exists
+  CheckEmailExists(userEmail: string, companyId: number) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString())
+      .set("userEmail", userEmail.toString());
+
+    return this.http.get<boolean>(this.CheckEmailExistsUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('CheckEmailExists', error)
+      })
+    );
   }
 
   // Getting the social media list

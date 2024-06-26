@@ -152,6 +152,21 @@ export class ManageBugFixesComponent {
         this.endDate = new Date(this.bugFix.EndDate);
         // Stop loading
         this.showLoading = false;
+
+        // Setting the default selection
+        if (!(this.bugFixId && this.bugFixId != '')) {
+          this.bugFix.PriorityId = this.viewPriorityDropdownList[0].value;
+        }
+
+        // Setting the default selection
+        if (!(this.bugFix && this.bugFix.Id != '')) {
+          this.bugFix.StatusId = this.viewStatusDropdownList[0].value;
+        }
+
+        // Setting the default selection
+        if (!(this.bugFix && this.bugFix.Id != '')) {
+          this.bugFix.ModuleId = this.viewModulesDropdownList[0].value;
+        }
       }
     );
     // End of Getting the Bug Fix details by ID
@@ -159,14 +174,92 @@ export class ManageBugFixesComponent {
 
   // Initialize default data
   initDefaultData() {
-    // Getting all the priority list
-    this.getAllPriorityList();
-    // Getting all the status list
-    this.getAllStatusList();
-    // Getting all the module list
-    this.getAllModulesList();
-    // Getting all the staff list
-    this.getAllStaffList();
+    // // Getting all the priority list
+    // this.getAllPriorityList();
+    // // Getting all the status list
+    // this.getAllStatusList();
+    // // Getting all the module list
+    // this.getAllModulesList();
+    // // Getting all the staff list
+    // this.getAllStaffList();
+
+    // Calling the modal to retrieve all the data
+    this.commonModel.GetAllDefaultData(this.overallCookieInterface.GetCompanyId(), "BG").then(
+      result => {
+        //------------------ Priority setting -----------------------
+        // Getting the staff list
+        let priorityListLocal: Priority[] = <Priority[]>result[0];
+        // Loop through the list
+        for (let i = 0; i < priorityListLocal.length; i++) {
+          // Setting the option
+          this.viewPriorityDropdownList.push({
+            label: priorityListLocal[i].Name,
+            value: +priorityListLocal[i].Id
+          });
+        }
+        // End of Loop through the list
+        //------------------ End of Priority setting -----------------------
+
+        //------------------ Status setting -----------------------
+        // Getting the staff list
+        let statusListLocal: Status[] = <Status[]>result[1];
+        // Loop through the list
+        for (let i = 0; i < statusListLocal.length; i++) {
+          // Setting the option
+          this.viewStatusDropdownList.push({
+            label: statusListLocal[i].Name,
+            value: +statusListLocal[i].Id
+          });
+        }
+        // End of Loop through the list
+        //------------------ End of Status setting -----------------------
+
+        //------------------ Module setting -----------------------
+        // Getting the staff list
+        let modulesListLocal: Status[] = <Status[]>result[2];
+        // Loop through the list
+        for (let i = 0; i < modulesListLocal.length; i++) {
+          // Setting the option
+          this.viewModulesDropdownList.push({
+            label: modulesListLocal[i].Name,
+            value: +modulesListLocal[i].Id
+          });
+        }
+        // End of Loop through the list
+        //------------------ End of Module setting -----------------------
+
+        //------------------ Staff setting -----------------------
+        // Clear the list
+        this.viewManagedStaffDropdownList = [];
+        this.viewRequestedStaffDropdownList = [];
+        // Getting the staff list
+        let staffListLocal: BasicUserDetails[] = <BasicUserDetails[]>result[3];
+        // Setting the option
+        this.viewManagedStaffDropdownList = staffListLocal;
+        this.viewRequestedStaffDropdownList = staffListLocal;
+        //------------------ End of Staff setting -----------------------
+
+        if (this.bugFixId && this.bugFixId != '') {
+          this.getEnhancementDetailsById();
+        } else {
+          // Setting the default selection
+          if (!(this.bugFixId && this.bugFixId != '')) {
+            this.bugFix.PriorityId = this.viewPriorityDropdownList[0].value;
+          }
+
+          // Setting the default selection
+          if (!(this.bugFix && this.bugFix.Id != '')) {
+            this.bugFix.StatusId = this.viewStatusDropdownList[0].value;
+          }
+
+          // Setting the default selection
+          if (!(this.bugFix && this.bugFix.Id != '')) {
+            this.bugFix.ModuleId = this.viewModulesDropdownList[0].value;
+          }
+        }
+      }
+
+    );
   }
 
   // Getting all the staff list

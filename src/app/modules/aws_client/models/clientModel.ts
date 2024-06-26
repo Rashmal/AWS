@@ -509,4 +509,19 @@ export class ClientModel {
         // return the promise
         return promise;
     }
+
+    // Check if the client email exists
+    CheckEmailExists(userEmail: string, companyId: number) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.clientService.CheckEmailExists(userEmail, companyId).subscribe(
+                data => {
+                    let returnData = <boolean>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
 }

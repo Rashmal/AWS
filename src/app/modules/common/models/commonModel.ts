@@ -1,4 +1,4 @@
-import { Subscription } from "rxjs";
+import { Subscription, forkJoin } from "rxjs";
 import { CommonService } from "../services/common.service";
 import { Priority } from "../core/priority";
 import { Status } from "../core/status";
@@ -361,6 +361,30 @@ export class CommonModel {
                     // Resolve the promise
                     resolve(returnData);
                 })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+    // Getting the initial data list
+    GetAllDefaultData(companyId: number, moduleCode: string) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(
+                forkJoin(this.commonService.GetPriorityList(companyId), this.commonService.GetStatusList(moduleCode, companyId),
+                    this.commonService.GetModuleList(companyId), this.commonService.GetAllStaffList(companyId)).subscribe(
+                        data => {
+                            let returnData = <any[]>data;
+                            // Resolve the promise
+                            resolve(returnData);
+                        }
+                    )
+                // this.commonService.GetAllRoleDetails().subscribe(
+                //         data => {
+                //             let returnData = <RoleDetails[]>data;
+                //             // Resolve the promise
+                //             resolve(returnData);
+                //         })
             );
         });
         // return the promise

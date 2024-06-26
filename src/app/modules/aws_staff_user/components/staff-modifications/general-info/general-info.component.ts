@@ -13,6 +13,8 @@ import { UserRole } from 'src/app/modules/common/core/userRole';
 import { CommonClientService } from 'src/app/modules/aws_client/services/common-client.service';
 import { CommonStaffService } from '../../../services/common-staff.service';
 import { IErrorMessage } from 'src/app/modules/common/core/iErrorMessage';
+import { ClientModel } from 'src/app/modules/aws_client/models/clientModel';
+import { ClientService } from 'src/app/modules/aws_client/services/client.service';
 
 @Component({
     selector: 'app-general-info',
@@ -33,6 +35,8 @@ export class GeneralInfoComponent implements OnInit {
     commonModel: CommonModel;
     //Store staff model
     staffModel !: StaffModel;
+    // Store the client model
+    clientModel!: ClientModel;
     // Store the staff details
     staffDetails!: StaffDetails;
     // Store all the user roles list
@@ -44,10 +48,12 @@ export class GeneralInfoComponent implements OnInit {
 
     // Store the products list
     constructor(private location: Location, private commonService: CommonService,
-        private staffService: StaffService, private commonStaffService: CommonStaffService
+        private staffService: StaffService, private commonStaffService: CommonStaffService,
+        private clientService: ClientService
     ) {
         // Initialize the model
         this.commonModel = new CommonModel(this.commonService);
+        this.clientModel = new ClientModel(this.clientService);
         this.overallCookieInterface = new OverallCookieModel();
         this.staffModel = new StaffModel(this.staffService);
     }
@@ -177,7 +183,7 @@ export class GeneralInfoComponent implements OnInit {
             // End of Check if the email is in the correct format
 
             // Check if the email already exists
-            this.commonModel.CheckEmailExistsService(this.staffDetails.Email).then(
+            this.clientModel.CheckEmailExists(this.staffDetails.Email, this.overallCookieInterface.GetCompanyId()).then(
                 (exists) => {
                     // Check if the email exists
                     if (exists == true) {
