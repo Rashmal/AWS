@@ -2,7 +2,7 @@ import { Subscription } from "rxjs";
 import { ClientService } from "../services/client.service";
 import { Filter } from "../../common/core/filters";
 import { ClientCustomer, DisplayClientDetails } from "../core/client";
-import { Contact } from "../core/contact";
+import { Contact, ContactDetails } from "../core/contact";
 import { BusinessAddress } from "../core/businessAddress";
 import { SocialMedia } from "../core/socialMedia";
 import { RelationshipDetails } from "../core/relationshipDetails";
@@ -121,9 +121,24 @@ export class ClientModel {
     }
 
     // Setting the Contact details
-    SetContactDetails(contact: Contact, actionType: string, customerId: number, companyId: number) {
+    SetContact(contact: Contact, actionType: string, customerId: number, companyId: number) {
         var promise = new Promise((resolve, reject) => {
-            this.allSubscriptions.push(this.clientService.SetContactDetails(contact, actionType, customerId, companyId).subscribe(
+            this.allSubscriptions.push(this.clientService.SetContact(contact, actionType, customerId, companyId).subscribe(
+                data => {
+                    let returnData = <number>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
+     // Setting the Contact details
+     SetContactDetails(contact: ContactDetails, actionType: string, contactId: number, companyId: number) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.clientService.SetContactDetails(contact, actionType, contactId, companyId).subscribe(
                 data => {
                     let returnData = <number>data;
                     // Resolve the promise

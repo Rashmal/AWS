@@ -3,9 +3,13 @@
     <!-- Header section -->
     <div class="col-12 no_side_padding header_section">
         <!-- Header title -->
-        <span class="module_title">
+        <div class="module_title">
             Clients
-        </span>
+        </div>
+        <!--Back to list button-->
+        <button *ngIf="!checkRoute()" class="back_btn" (click)="goBackToList()"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back to List</button>
+        <!--End of Back to list button-->
+
         <!-- End of Header title -->
     </div>
     <!-- End of Header section -->

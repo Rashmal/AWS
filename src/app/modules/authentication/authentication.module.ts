@@ -7,12 +7,14 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputrestrictionDirective } from '../common/directives/inputrestriction.directive';
 import { AccessLevelVerificationDirective } from '../common/directives/access-level-verification.directive';
+import { RestrictNegativeDirective } from '../common/directives/restrict-negative.directive';
 
 @NgModule({
     declarations: [
         LoginComponent,
         InputrestrictionDirective,
-        AccessLevelVerificationDirective
+        AccessLevelVerificationDirective, 
+        RestrictNegativeDirective
     ],
     imports: [
         CommonModule,
@@ -22,7 +24,8 @@ import { AccessLevelVerificationDirective } from '../common/directives/access-le
     ],
     exports:[
         InputrestrictionDirective,
-        AccessLevelVerificationDirective
+        AccessLevelVerificationDirective,
+        RestrictNegativeDirective
     ]
 })
 export class AuthenticationModule { }

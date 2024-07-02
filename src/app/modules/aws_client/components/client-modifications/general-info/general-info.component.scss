@@ -26,12 +26,49 @@
                 width: 100%;
 
             }
+
+            .gen_info_sugg {
+                background-color: #ffffff;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                min-height: 30px;
+                min-width: 250px;
+                position: absolute;
+                z-index: 99;
+                padding: 10px;
+            }
         }
+
 
         .input_area_switch {
             display: flex !important;
         }
 
+    }
+    .single_contact{
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        button {
+            height: 30px;
+            width: 33px;
+            border-radius: 3px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 5px;
+            i {
+                color: #fff;
+            }
+        }
+
+        .red_btn {
+            background-color: #DB2828;
+        }
+    }
+    .single_contact_ct{
+        margin-bottom: 5px;
     }
 }
 
@@ -41,6 +78,9 @@
 
 .width_50 {
     width: 50%;
+}
+.margin_bot_10{
+    margin-bottom: 10px;
 }
 
 :host ::ng-deep .p-cell-editing {
@@ -163,41 +203,47 @@
         background-color: #2185D0;
         color: #fff !important;
     }
-    .p-accordion-content{
+
+    .p-accordion-content {
         background-color: #f7f7f7;
     }
 }
 
-::ng-deep p-table .table_header_row{
-    background-color: #2185D0  !important;
-    th{
+::ng-deep p-table .table_header_row {
+    background-color: #2185D0 !important;
+
+    th {
         background-color: transparent;
         color: #ffffff;
         padding: 5px;
         height: 30px;
     }
-    .header_col{
+
+    .header_col {
         text-align: center;
         min-width: 130px;
     }
-    .created_details{
+
+    .created_details {
         min-width: 200px;
     }
- 
+
 }
 
 ::ng-deep p-table {
-    .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+    .p-datatable.p-datatable-striped .p-datatable-tbody>tr:nth-child(even) {
         background-color: #EDF7FF;
     }
-    .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(odd) {
+
+    .p-datatable.p-datatable-striped .p-datatable-tbody>tr:nth-child(odd) {
         background-color: #ffffff;
     }
-   
-    .p-datatable .p-datatable-tbody > tr:hover{
-        background-color:  #c8e4fb !important;
+
+    .p-datatable .p-datatable-tbody>tr:hover {
+        background-color: #c8e4fb !important;
     }
-    .p-datatable .p-datatable-tbody > tr > td{
+
+    .p-datatable .p-datatable-tbody>tr>td {
         padding: 5px;
         vertical-align: top;
     }

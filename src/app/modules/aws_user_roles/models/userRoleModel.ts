@@ -37,6 +37,22 @@ export class UserRolesModel{
         // return the promise
         return promise;
     }
+
+     // Getting all the user roles
+     CheckUserRoleExist(companyId: number, roleName: string) {
+        var promise = new Promise((resolve, reject) => {
+            this.allSubscriptions.push(this.clientService.CheckUserRoleExist(companyId, roleName).subscribe(
+                data => {
+                    let returnData = <boolean>data;
+                    // Resolve the promise
+                    resolve(returnData);
+                })
+            );
+        });
+        // return the promise
+        return promise;
+    }
+
      // Set user role details
      SetUserRoles(companyId: number, userRole: UserRole, actionType: string) {
         var promise = new Promise((resolve, reject) => {

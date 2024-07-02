@@ -7,17 +7,82 @@
     <!-- End of Error message -->
 
     <!-- Accordion section -->
-    <p-accordion [multiple]="true" [activeIndex]="[0,1,4]">
+    <p-accordion [multiple]="true" [activeIndex]="[0, 1, 4]">
         <p-accordionTab header="Client / Customer" appAccessLevelVerification SelectedModuleCode="CLIEN"
             SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLGI" [IsTab]="false" ActionState="VIEW">
             <!--Client Customer-->
-            <div class="row gen_info_item">
+            <div class="row gen_info_item" *ngIf="false && modificationMode === 'NEW'">
                 <!--Input and label-->
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
                     <!--Label-->
                     <label class="input_lbl">Business Name / Surname</label>
                     <!--End of Label-->
                     <!--Input area-->
+                    <!--Editing and view-->
+                    <input class="input_field" type="text" [(ngModel)]="clientCustomer.BusinessName"
+                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
+                        [disabled]="modificationMode == 'VIEW'" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
+                    <!-- <input *ngIf="modificationMode !== 'NEW'" class="input_field" type="text"
+                        [(ngModel)]="clientCustomer.BusinessName" onKeyPress="if(value.length==100) return false;"
+                        inputrestriction="^[a-z A-Z 0-9]*$" [disabled]="modificationMode == 'VIEW'"
+                        (blur)="onBlurEvent('CLIENT$CUSTOMER')" /> -->
+                    <!--End of Editing and view-->
+
+                    <!--Only in add new-->
+                    <!-- <input *ngIf="modificationMode === 'NEW'" class="input_field" type="text"
+                        [(ngModel)]="clientCustomer.BusinessName" onKeyPress="if(value.length==100) return false;"
+                        inputrestriction="^[a-z A-Z 0-9]*$" [disabled]="modificationMode == 'VIEW'"
+                        (click)="onClickBusinessName()" (change)="onChangeBusinessName()"
+                        (blur)="onBlurBusinessName()" /> -->
+
+                    <!--End of Only in add new-->
+
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+            </div>
+            <div class="row gen_info_item" *ngIf="false && modificationMode === 'NEW'">
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-6 flex input_area">
+                    <!--Label-->
+                    <label class="input_lbl margin_bot_10">Similar Records</label>
+                    <!--End of Label-->
+                    <!--Gen info suggesting dropdown-->
+
+                    <p-table styleClass="p-datatable-striped" [value]="products"
+                        [tableStyle]="{ 'min-width': '50rem' }">
+                        <ng-template pTemplate="header">
+                            <tr class="table_header_row">
+                                <th>Status</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-product>
+                            <tr>
+                                <td>{{ product.code }}</td>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.category }}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                    <!--End of Gen info suggesting dropdown-->
+
+
+                    <!--End of Input area-->
+                </div>
+                <!--End of Input and label-->
+            </div>
+            <div class="row gen_info_item">
+                <!--Input and label-->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 flex input_area">
+
+                    <!--Label-->
+                    <label class="input_lbl">Business Name / Surname</label>
+                    <!--End of Label-->
+                    <!--Input area-->
+
                     <input class="input_field" type="text" [(ngModel)]="clientCustomer.BusinessName"
                         onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
                         [disabled]="modificationMode == 'VIEW'" (blur)="onBlurEvent('CLIENT$CUSTOMER')" />
@@ -106,11 +171,18 @@
                     <label class="input_lbl">Street Number and Name</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9 / _]*$"
+                    <input *ngIf="false && streetNameEditing" class="input_field" type="text" inputrestriction="^[a-z A-Z 0-9 / _]*$"
                         onKeyPress="if(value.length==100) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="businessAddress.StreetName" (blur)="onBlurEvent('BUSINESS$ADDRESS')" />
                     <!--End of Input area-->
+                    <input class="input_field" type="text" [(ngModel)]="businessAddress.StreetName"
+                        onKeyPress="if(value.length==100) return false;" inputrestriction="^[a-z A-Z 0-9]*$"
+                        [disabled]="modificationMode == 'VIEW'" (click)="onClickStreetName()"
+                        (change)="onChangeStreetName()" (blur)="onBlurStreetName()" />
+                    <div class="gen_info_sugg" *ngIf="false && streetNameEditing">
+
+                    </div>
                 </div>
                 <!--End of Input and label-->
                 <!--Input and label-->
@@ -179,7 +251,8 @@
                     <label class="input_lbl">Office Job</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="number" onKeyPress="if(value.length==20) return false;"
+                    <input class="input_field" type="number" appRestrictNegative
+                        onKeyPress="if(value.length==20) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.OfficeJob" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -192,7 +265,8 @@
                     <label class="input_lbl">Work Credit</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="number" onKeyPress="if(value.length==20) return false;"
+                    <input class="input_field" type="number" appRestrictNegative
+                        onKeyPress="if(value.length==20) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.WorkCredit" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -262,7 +336,7 @@
                     <label class="input_lbl">Client Terms</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="number" inputrestriction="^[0-9]*$"
+                    <input class="input_field" type="number" appRestrictNegative inputrestriction="^[0-9]*$"
                         onKeyPress="if(value.length==20) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.ClientTerms" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
@@ -275,7 +349,8 @@
                     <label class="input_lbl">Default Deposit</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="number" onKeyPress="if(value.length==20) return false;"
+                    <input class="input_field" type="number" appRestrictNegative
+                        onKeyPress="if(value.length==20) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.DefaultDeposit" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
                     <!--End of Input area-->
@@ -287,7 +362,7 @@
                     <label class="input_lbl">Month Day Alert</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="number" inputrestriction="^[0-9]*$"
+                    <input class="input_field" type="number" appRestrictNegative inputrestriction="^[0-9]*$"
                         onKeyPress="if(value.length==10) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.MonthDayAlert" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
@@ -329,7 +404,7 @@
                     <label class="input_lbl">Supplier Terms</label>
                     <!--End of Label-->
                     <!--Input area-->
-                    <input class="input_field" type="number" inputrestriction="^[0-9]*$"
+                    <input class="input_field" type="number" appRestrictNegative inputrestriction="^[0-9]*$"
                         onKeyPress="if(value.length==20) return false;"
                         [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                         [(ngModel)]="relationshipDetails.SupplierTerms" (blur)="onBlurEvent('RELATIONSHIP$DETAILS')" />
@@ -443,8 +518,8 @@
             <div class="">
                 <div class="row">
                     <div class="col-12 col-lg-9">
-                        <p-table class="contacts_tbl" [value]="contactList" dataKey="Id"
-                            [tableStyle]="{ 'min-width': '50rem' }">
+                        <p-table styleClass="p-datatable-striped" class="contacts_tbl" [value]="contactList"
+                            dataKey="Id" [tableStyle]="{ 'min-width': '50rem' }">
                             <ng-template pTemplate="header">
                                 <tr class="table_header_row">
 
@@ -471,29 +546,42 @@
                                             onKeyPress="if(value.length==100) return false;"
                                             [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             [(ngModel)]="contact.Name"
-                                            (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
+                                            (blur)="onBlurEventContact('CONTACT$DETAILS',rowIndex,contact)" />
                                     </td>
                                     <td>
-                                        <p-dropdown [options]="displayContactTypeList" class="width_50"
-                                            autoWidth="false" appendTo="body" placeholder="Select an option"
-                                            [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
-                                            [(ngModel)]="contact.ContactType.Id"
-                                            (onChange)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
+                                        <div *ngFor="let details of contact.ContactDetails; let iv = index"
+                                            class="single_contact_ct">
+                                            <p-dropdown [options]="displayContactTypeList" class="width_50"
+                                                autoWidth="false" appendTo="body" placeholder="Select an option"
+                                                [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                                                [(ngModel)]="details.ContactType.Id"
+                                                (onChange)="onBlurEventContact('CONTACT$TYPE',rowIndex,contact, iv)" />
+                                        </div>
+
                                     </td>
                                     <td>
-                                        <input class="input_field" type="text"
-                                            onKeyPress="if(value.length==50) return false;"
-                                            [inputrestriction]="(contact.ContactType.Id == 1)?'^[0-9]*$':(contact.ContactType.Id == 2)?'^[0-9]*$':(contact.ContactType.Id == 3)?'^[0-9]*$':(contact.ContactType.Id == 4)?'^[0-9]*$':(contact.ContactType.Id == 5)?'^[a-z A-Z 0-9 @ . _ -]*$':(contact.ContactType.Id == 6)?'a-z A-Z 0-9 . _ -':(contact.ContactType.Id == 7)?'^[0-9]*$':(contact.ContactType.Id == 8)?'^[0-9]*$':(contact.ContactType.Id == 9)?'a-z A-Z 0-9 @ . _ -':''"
-                                            [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
-                                            [(ngModel)]="contact.ContactValue"
-                                            (focusout)="contactValueFocusOut(contact,rowIndex)"
-                                            (blur)="onBlurEvent('CONTACT$DETAILS',rowIndex,contact)" />
+                                        <div *ngFor="let details of contact.ContactDetails; let iv = index"
+                                            class="single_contact">
+                                            <input class="input_field" type="text"
+                                                onKeyPress="if(value.length==50) return false;"
+                                                [inputrestriction]="(details.ContactType.Id == 1)?'^[0-9]*$':(details.ContactType.Id == 2)?'^[0-9]*$':(details.ContactType.Id == 3)?'^[0-9]*$':(details.ContactType.Id == 4)?'^[0-9]*$':(details.ContactType.Id == 5)?'^[a-z A-Z 0-9 @ . _ -]*$':(details.ContactType.Id == 6)?'a-z A-Z 0-9 . _ -':(details.ContactType.Id == 7)?'^[0-9]*$':(details.ContactType.Id == 8)?'^[0-9]*$':(details.ContactType.Id == 9)?'a-z A-Z 0-9 @ . _ -':''"
+                                                [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                                                [(ngModel)]="details.ContactValue"
+                                                (focusout)="contactValueFocusOut(details,rowIndex, iv)"
+                                                (blur)="onBlurEventContact('CONTACT$VALUE',rowIndex,contact, iv)" />
+                                            <button pTooltip="Delete this" tooltipPosition="top" class="red_btn"
+                                                [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW' || details.Id === 0"
+                                                (click)="onDeleteContactDetails(details, contact.Id)">
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+
                                     </td>
                                     <td appAccessLevelVerification SelectedModuleCode="CLIEN"
                                         SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLICON"
                                         [IsTab]="false" ActionState="DELETE" class="action_button">
                                         <button pTooltip="Delete" tooltipPosition="top" class="red_btn"
-                                            [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
+                                            [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW' || contact.Id === 0"
                                             (click)="onDeleteContact(contact)">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </button>
@@ -521,8 +609,8 @@
             <div class="">
                 <div class="row">
                     <div class="col-12 col-lg-6">
-                        <p-table class="contacts_tbl" [value]="socialMediaList" dataKey="Id"
-                            [tableStyle]="{ 'min-width': '50rem' }">
+                        <p-table styleClass="p-datatable-striped" class="contacts_tbl" [value]="socialMediaList"
+                            dataKey="Id" [tableStyle]="{ 'min-width': '50rem' }">
                             <ng-template pTemplate="header">
                                 <tr class="table_header_row">
                                     <th class="header_col" style="width:25%">
@@ -531,9 +619,9 @@
                                     <th class="header_col" style="width:25%">
                                         Setting
                                     </th>
-                                    <th class="header_col" style="width:10%" appAccessLevelVerification SelectedModuleCode="CLIEN"
-                                    SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLISOM"
-                                    [IsTab]="false" ActionState="DELETE">
+                                    <th class="header_col" style="width:10%" appAccessLevelVerification
+                                        SelectedModuleCode="CLIEN" SelectedModuleAccessCode="GeneralInfo"
+                                        SelectedFeatureAccessCode="CLISOM" [IsTab]="false" ActionState="DELETE">
                                         Action
                                     </th>
                                 </tr>
@@ -555,8 +643,8 @@
                                             (blur)="onBlurEvent('SOCIAL$MEDIA$DETAILS',rowSMIndex,null,socialMedia)" />
                                     </td>
                                     <td class="action_button" appAccessLevelVerification SelectedModuleCode="CLIEN"
-                                    SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLISOM"
-                                    [IsTab]="false" ActionState="DELETE">
+                                        SelectedModuleAccessCode="GeneralInfo" SelectedFeatureAccessCode="CLISOM"
+                                        [IsTab]="false" ActionState="DELETE">
                                         <button pTooltip="Delete" tooltipPosition="top" class="red_btn"
                                             [disabled]="(!clientCustomer.BusinessName) || modificationMode == 'VIEW'"
                                             (click)="onDeleteSocialMedia(socialMedia)">

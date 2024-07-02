@@ -793,7 +793,8 @@
 
         <!-- Pagination section -->
         <p-paginator #modulePaginator
-            [ngClass]="(displayModuleList && displayModuleList.length > 0 && localModuleDropdownSelection == -1 && displayModuleList[0].Total > 10)?'':'display_hide'"
+        *ngIf="displayModuleList && displayModuleList.length > 0 && localModuleDropdownSelection == -1 && displayModuleList[0].Total > modulesFilter.RecordsPerPage"
+            
             [rows]="modulesFilter.RecordsPerPage" (onPageChange)="onPageChange($event)"
             [totalRecords]="(displayModuleList.length>0)? displayModuleList[0].Total:0"></p-paginator>
         <!-- End of Pagination section -->

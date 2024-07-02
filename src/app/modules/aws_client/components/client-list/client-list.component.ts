@@ -10,6 +10,7 @@ import { OverallCookieInterface } from 'src/app/modules/common/core/overallCooki
 import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
+import { ContactDetails } from '../../core/contact';
 
 
 @Component({
@@ -65,6 +66,7 @@ export class ClientListComponent implements OnInit {
     constructor(private route: Router, private clientService: ClientService, public dialogService: DialogService) {
         this.clientModel = new ClientModel(this.clientService);
         this.overallCookieInterface = new OverallCookieModel();
+        this.companyId = this.overallCookieInterface.GetCompanyId();
     }
 
     ngOnInit(): void {
@@ -105,6 +107,10 @@ export class ClientListComponent implements OnInit {
 
     //On change filter
     onChangeFilter(type: string) {
+        if (this.filter.RecordsPerPage < 1) {
+            this.filter.RecordsPerPage = 1;
+        }
+        this.filter.CurrentPage = 1;
         this.getDisplayClientList();
     }
 
@@ -140,5 +146,41 @@ export class ClientListComponent implements OnInit {
                 );
             }
         });
+    }
+
+    // Focus out event of contact values
+    returnPhoneNumberWithBrackets(contactObject: ContactDetails) {
+        //Check for phone numbers
+        if (contactObject.ContactType.Code === 'FAX' || contactObject.ContactType.Code === 'HP' || contactObject.ContactType.Code === 'BLP' || contactObject.ContactType.Code === 'PH' || contactObject.ContactType.Code === 'BP' || contactObject.ContactType.Code === 'MP') {
+            // Getting the current value
+            let currentValue = contactObject.ContactValue;
+            // Replace all ( , ) with empty
+            currentValue = currentValue.replaceAll("(", "").replaceAll(")", "").replaceAll(" ", "");
+            // Check if the value has more than 2 numbers
+            if (currentValue.length > 2) {
+                // Getting the first 2 numbers
+                let first2Numbers = currentValue[0] + '' + currentValue[1];
+                let restNumbers = currentValue.substring(2);
+                let rest1stSet = "";
+                let rest2ndSet = "";
+                // Check if the rest numbers are more than 4
+                if (restNumbers.length > 4) {
+                    rest1stSet = restNumbers.substring(0, 4);
+                    rest2ndSet = restNumbers.substring(4);
+                } else {
+                    rest1stSet = restNumbers;
+                }
+                // End of Check if the rest numbers are more than 4
+
+                // Setting the new format
+                return "(" + first2Numbers + ") " + rest1stSet + " " + rest2ndSet;
+            } else {
+                // Setting the new format
+                return "(" + currentValue + ") ";
+            }
+            // End of Check if the value has more than 2 numbers
+        } else {
+            return contactObject.ContactValue;
+        }
     }
 }

@@ -24,12 +24,28 @@ export class UserRolesService {
   private SetSubTabFeatureAccessLevelUrl = API$DOMAIN + 'api/Staff/SetSubTabFeatureAccessLevel';
 
 
+  private CheckUserRoleExistUrl = API$DOMAIN + 'api/Staff/CheckUserRoleExist';
 
 
 
   constructor(private http: HttpClient, private router: Router) {
 
   }
+
+  // Check user role exist
+  CheckUserRoleExist(companyId: number, roleName: string) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString())
+      .set("roleName", roleName.toString());
+
+    return this.http.get<boolean>(this.CheckUserRoleExistUrl, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('CheckUserRoleExist', error)
+      })
+    );
+  }
+
 
   //SetTabDetailsAccessLevelBasedOnModuleUserRole(int subTabId, bool accessLevel, int companyId)
 

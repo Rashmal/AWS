@@ -19,14 +19,14 @@
         <!--Search by name-->
         <div class="col-lg-3 filter_item">
             <label>Client name : </label>
-            <input type="text" [(ngModel)]="filter.SearchQuery" (change)="onChangeFilter('SEARCH')" />
+            <input type="text" [(ngModel)]="filter.SearchQuery" (change)="onChangeFilter('SEARCH')" placeholder="Search..." />
         </div>
         <!--End of Search by name-->
 
         <!--Items per page-->
         <div class="col-lg-3 filter_item">
             <label>Records Per Page : </label>
-            <input type="number" min="1" [(ngModel)]="filter.RecordsPerPage" (change)="onChangeFilter('RPP')" />
+            <input type="number" min="1" pattern="^[1-9]\d*$"  [(ngModel)]="filter.RecordsPerPage" (change)="onChangeFilter('RPP')" />
         </div>
         <!--Items per page-->
 
@@ -37,6 +37,7 @@
     <p-table styleClass="p-datatable-striped" [value]="clientList" [tableStyle]="{'min-width': '50rem'}">
         <ng-template pTemplate="header" class="table_header">
             <tr class="table_header_row">
+                <th class="text_align_left">No.</th>
                 <th class="header_col created_details">Created By</th>
 
                 <th class="header_col">Full Name</th>
@@ -48,8 +49,10 @@
                 <th class="header_col">Action</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-client>
+        <ng-template pTemplate="body" let-client let-rowIndex="rowIndex">
             <tr class="table_body">
+                <td>{{(rowIndex+1)+(this.filter.CurrentPage == 1 ? 0 :
+                                this.filter.RecordsPerPage*(this.filter.CurrentPage-1))}}</td>
                 <td class="created_details">
                     <div [pTooltip]="client.CreatedBy" tooltipPosition="top">{{client.CreatedBy}}</div>
                     <div class="created_date_txt" [pTooltip]="client.CreatedDate | date : 'MMM d, y, h:mm:ss a'"
@@ -58,10 +61,18 @@
                 </td>
                 <td [pTooltip]="client.FullName" tooltipPosition="top">{{client.FullName}}</td>
                 <td class="contact_details">
-                    <div class="contact_item" *ngFor="let contact of client.Contacts"
-                        [style.display]="contact.ContactValue.trim().length == 0 ? 'none' : ''">
-                        <span>{{contact.ContactType.Name}}: </span><span [pTooltip]="contact.ContactValue"
-                            tooltipPosition="top">{{contact.ContactValue}}</span>
+                    <div  *ngFor="let contact of client.Contacts"
+                        >
+                        <div *ngIf="contact.ContactDetails.length > 0">
+                            {{contact.Name}}
+                        </div>
+                        <div class="contact_item" *ngFor="let contactDetails of contact.ContactDetails"
+                            [style.display]="contactDetails.ContactValue.trim().length == 0 ? 'none' : ''">
+                            <i class="fa fa-circle" aria-hidden="true"></i>
+                            <span>{{contactDetails.ContactType.Name}}: </span><span [pTooltip]="contactDetails.ContactValue"
+                                tooltipPosition="top">{{returnPhoneNumberWithBrackets(contactDetails)}}</span>
+                        </div>
+                        
                     </div>
                 </td>
                 <td [pTooltip]="client.PaymentTerm" tooltipPosition="top">{{client.PaymentTerm}}</td>
@@ -85,10 +96,15 @@
                         ActionState="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </td>
             </tr>
+           
         </ng-template>
     </p-table>
     <!--End of Client list table-->
-
+    <div *ngIf="clientList.length == 0">
+        <div colspan="9" class="empty_content">
+            There are no items matching this filter criteria.
+        </div>
+    </div>
     <!-- Pagination section -->
     <p-paginator class="paginator_sec" #modulePaginator
         *ngIf="clientList && clientList.length > 0 && clientList[0].TotalRecords > filter.RecordsPerPage"

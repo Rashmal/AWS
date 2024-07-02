@@ -333,8 +333,13 @@
                         <td class="approval_btn_col">
                             <div class="approval_btns" *ngIf="productData.ApproveState == 0">
                                 <button class="approve_btn marginRight5"
+                                appAccessLevelVerification SelectedModuleCode="STAT1" SelectedModuleAccessCode="BugFixes"
+                                SelectedFeatureAccessCode="BCDH" [IsTab]="false" ActionState="EDIT" ActionType="DISABLE"
                                     (click)="approveOnClick(productData.Id)">Approve</button>
-                                <button class="decline_btn" (click)="declineOnClick(productData.Id)">Decline</button>
+                                <button 
+                                appAccessLevelVerification SelectedModuleCode="STAT1" SelectedModuleAccessCode="BugFixes"
+                                SelectedFeatureAccessCode="BCDH" [IsTab]="false" ActionState="DELETE" ActionType="DISABLE"
+                                class="decline_btn" (click)="declineOnClick(productData.Id)">Decline</button>
                             </div>
                             <div class="approval_btns" *ngIf="productData.ApproveState !== 0">
                                 <span *ngIf="productData.ApproveState == 0">PENDING APPROVAL</span>

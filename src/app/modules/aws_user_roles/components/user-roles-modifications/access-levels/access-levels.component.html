@@ -35,44 +35,51 @@
                 <!--End of Button panel-->
 
             </div>
+            <!--New user role error message-->
+            <div class="error_message" *ngIf="errorMessage != ''">
+                {{errorMessage}}
+            </div>
+            <!--End of New user role error message-->
 
-            <div *ngFor="let role of userRoles" class="user_role">
-                <!--Label-->
-                <label *ngIf="role.Id != editingUserRole" (click)="selectUserRole(role)"
-                    [ngClass]="role.Id == selectedRoleId ? 'user_role_selected' : ''">{{role.Name}}</label>
-                <input *ngIf="role.Id == editingUserRole" [(ngModel)]="role.Name" value="General Manager"
-                    class="input_ur" />
-                <!--End of Label-->
 
-                <!--Button panel-->
-                <div class="btn_panel">
-                    <button appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
-                        SelectedFeatureAccessCode="URALUR" ActionState="ADD"
-                        *ngIf="role.Id != editingUserRole" class="btn_green" (click)="onClickDuplicateRole(role)"><i
-                            class="fa fa-files-o" aria-hidden="true"></i></button>
-                    <button
-                    appAccessLevelVerification
-                SelectedModuleCode="USRL"
-                SelectedModuleAccessCode="AccessLevels"
-                SelectedFeatureAccessCode="URALUR"
-                ActionState="EDIT"
-                     *ngIf="role.Id != editingUserRole" class="btn_blue" (click)="onClickEditRole(role.Id)"><i
-                            class="fa fa-pencil" aria-hidden="true"></i></button>
-                    <button
-                    appAccessLevelVerification
-                SelectedModuleCode="USRL"
-                SelectedModuleAccessCode="AccessLevels"
-                SelectedFeatureAccessCode="URALUR"
-                ActionState="DELETE"
-                     *ngIf="role.Id != editingUserRole" class="btn_red" (click)="onClickDeleteRole(role)"><i
-                            class="fa fa-trash" aria-hidden="true"></i></button>
+            <div *ngFor="let role of userRoles" class="loop_ur">
 
-                    <button *ngIf="role.Id == editingUserRole" class="btn_blue" (click)="onClickUpdateRole(role)"><i
-                            class="fa fa-check" aria-hidden="true"></i></button>
-                    <button *ngIf="role.Id == editingUserRole" class="btn_red" (click)="onClickCancelRole()"><i
-                            class="fa fa-times" aria-hidden="true"></i></button>
+                <div class="user_role flex_center">
+                    <!--Label-->
+                    <label *ngIf="role.Id != editingUserRole" (click)="selectUserRole(role)"
+                        [ngClass]="role.Id == selectedRoleId ? 'user_role_selected' : ''">{{role.Name}}</label>
+                    <input *ngIf="role.Id == editingUserRole" [(ngModel)]="role.Name" value="General Manager"
+                        class="input_ur" />
+                    <!--End of Label-->
+
+                    <!--Button panel-->
+                    <div class="btn_panel">
+                        <button appAccessLevelVerification SelectedModuleCode="USRL"
+                            SelectedModuleAccessCode="AccessLevels" SelectedFeatureAccessCode="URALUR" ActionState="ADD"
+                            *ngIf="role.Id != editingUserRole" class="btn_green" (click)="onClickDuplicateRole(role)"><i
+                                class="fa fa-files-o" aria-hidden="true"></i></button>
+                        <button appAccessLevelVerification SelectedModuleCode="USRL"
+                            SelectedModuleAccessCode="AccessLevels" SelectedFeatureAccessCode="URALUR"
+                            ActionState="EDIT" *ngIf="role.Id != editingUserRole" class="btn_blue"
+                            (click)="onClickEditRole(role.Id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                        <button appAccessLevelVerification SelectedModuleCode="USRL"
+                            SelectedModuleAccessCode="AccessLevels" SelectedFeatureAccessCode="URALUR"
+                            ActionState="DELETE" *ngIf="role.Id != editingUserRole" class="btn_red"
+                            (click)="onClickDeleteRole(role)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
+                        <button *ngIf="role.Id == editingUserRole" class="btn_blue" (click)="onClickUpdateRole(role)"><i
+                                class="fa fa-check" aria-hidden="true"></i></button>
+                        <button *ngIf="role.Id == editingUserRole" class="btn_red" (click)="onClickCancelRole()"><i
+                                class="fa fa-times" aria-hidden="true"></i></button>
+                    </div>
+                    <!--End of Button panel-->
                 </div>
-                <!--End of Button panel-->
+                <!--New user role error message-->
+                <div class="error_message" *ngIf="errorMessageUpdate != '' && role.Id == editingUserRole">
+                    {{errorMessageUpdate}}
+                </div>
+                <!--End of New user role error message-->
+
 
             </div>
 
@@ -84,8 +91,9 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 access_accordions">
 
             <p-accordion [multiple]="true" [activeIndex]="[0,1]">
-                <p-accordionTab appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
-                SelectedFeatureAccessCode="URALMA" ActionState="VIEW" header="Module Access Levels">
+                <p-accordionTab appAccessLevelVerification SelectedModuleCode="USRL"
+                    SelectedModuleAccessCode="AccessLevels" SelectedFeatureAccessCode="URALMA" ActionState="VIEW"
+                    header="Module Access Levels">
 
                     <!--Module access row-->
                     <div class="row gen_info_item">
@@ -98,8 +106,10 @@
                             <label class="input_lbl">{{module.Name}}</label>
                             <!--End of Label-->
                             <!--Input area-->
-                            <p-inputSwitch appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
-                            SelectedFeatureAccessCode="URALMA" ActionState="EDIT" [(ngModel)]="module.IsDisable" (onChange)="onChangeModuleAccess(module)" />
+                            <p-inputSwitch appAccessLevelVerification SelectedModuleCode="USRL"
+                                SelectedModuleAccessCode="AccessLevels" SelectedFeatureAccessCode="URALMA"
+                                ActionState="EDIT" [(ngModel)]="module.IsDisable"
+                                (onChange)="onChangeModuleAccess(module)" />
                             <!--End of Input area-->
 
                         </div>
@@ -110,8 +120,9 @@
 
                 </p-accordionTab>
 
-                <p-accordionTab appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
-                SelectedFeatureAccessCode="URALFA" ActionState="VIEW" header="Module Feature Access Levels">
+                <p-accordionTab appAccessLevelVerification SelectedModuleCode="USRL"
+                    SelectedModuleAccessCode="AccessLevels" SelectedFeatureAccessCode="URALFA" ActionState="VIEW"
+                    header="Module Feature Access Levels">
                     <!--Module selector and header-->
                     <div class="row gen_info_item">
                         <label class="input_lbl_hdr">Access levels for the role</label>
@@ -145,8 +156,9 @@
                             <div class="sub_tab">
 
                                 <!--Input area-->
-                                <p-inputSwitch appAccessLevelVerification SelectedModuleCode="USRL" SelectedModuleAccessCode="AccessLevels"
-                                SelectedFeatureAccessCode="URALFA" ActionState="EDIT" [(ngModel)]="tab.EnableAccess"
+                                <p-inputSwitch appAccessLevelVerification SelectedModuleCode="USRL"
+                                    SelectedModuleAccessCode="AccessLevels" SelectedFeatureAccessCode="URALFA"
+                                    ActionState="EDIT" [(ngModel)]="tab.EnableAccess"
                                     (onChange)="onChangeSubTabAccessLevel(tab)" />
                                 <!--End of Input area-->
                                 <!--Label-->
@@ -184,7 +196,10 @@
                                                 [disabled]="checkIfDefaultDisabled(tab,feature,'E').value" />
                                             <!--End of Input area-->
                                             <!--Label-->
-                                            <label class="lbl">Edit</label>
+                                            <label class="lbl"
+                                                [pTooltip]="feature.Name === 'Change Date History' ? 'Approve' : ''"
+                                                tooltipPosition="top">{{feature.Name === 'Change Date History' ?
+                                                'Approve' : 'Edit'}}</label>
                                             <!--End of Label-->
                                         </div>
 
@@ -195,7 +210,10 @@
                                                 [disabled]="checkIfDefaultDisabled(tab,feature,'D').value" />
                                             <!--End of Input area-->
                                             <!--Label-->
-                                            <label class="lbl">Delete</label>
+                                            <label class="lbl"
+                                                [pTooltip]="feature.Name === 'Change Date History' ? 'Decline' : ''"
+                                                tooltipPosition="top">{{feature.Name === 'Change Date History' ?
+                                                'Decline' : 'Delete'}}</label>
                                             <!--End of Label-->
 
                                         </div>

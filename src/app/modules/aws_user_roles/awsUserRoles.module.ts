@@ -12,6 +12,7 @@ import { InputSwitchModule } from "primeng/inputswitch";
 import { PaginatorModule } from "primeng/paginator";
 import { TableModule } from "primeng/table";
 import { AuthenticationModule } from '../authentication/authentication.module';
+import { TooltipModule } from "primeng/tooltip";
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AuthenticationModule } from '../authentication/authentication.module';
         AccordionModule,
         InputSwitchModule,
         PaginatorModule,
-        AuthenticationModule
+        AuthenticationModule,
+        TooltipModule
     ]
 })
 

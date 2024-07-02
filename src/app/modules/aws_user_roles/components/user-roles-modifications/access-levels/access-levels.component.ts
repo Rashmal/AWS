@@ -83,6 +83,9 @@ export class AccessLevelsComponent {
     newUserRoleName = '';
     // Store dynamic dialog ref
     ref: DynamicDialogRef | undefined;
+    // Store error message
+    errorMessage = '';
+    errorMessageUpdate = '';
 
     //Store accessible module list for dropdown
     accessibleModules: Module[] = [];
@@ -165,7 +168,7 @@ export class AccessLevelsComponent {
                 if (data) {
                     this.selectedAccModule = null;
                     this.accessibleModules = data;
-                    
+
                 }
 
             }
@@ -264,6 +267,17 @@ export class AccessLevelsComponent {
         );
     }
 
+    //Get system user roles
+    checkUserRoleExist(roleName: string) {
+        //Call services to get user roles
+        this.userRoleModel.CheckUserRoleExist(this.overallCookieInterface.GetCompanyId(), roleName).then(
+            (data: boolean) => {
+                //Check data is not undefined
+
+            }
+        );
+    }
+
     //On bluer event of input
     onBlurEvent(type: string) { }
 
@@ -311,31 +325,67 @@ export class AccessLevelsComponent {
 
     // Handles updating role details.
     onClickUpdateRole(role: UserRole) {
-        //Call services to update role
-        this.userRoleModel.SetUserRoles(this.overallCookieInterface.GetCompanyId(), role, 'UPDATE').then(
-            (data) => {
-                // Update role logic here
-                this.editingUserRole = -1;
-                //Refresh user role list
-                this.getAllUserRoles();
-            }
-        );
+        if (role.Name != '' && role.Name.trim().length > 0) {
+            //Call services to get user roles
+            this.userRoleModel.CheckUserRoleExist(this.overallCookieInterface.GetCompanyId(), role.Name).then(
+                (data: boolean) => {
+                    if (!data) {
+                        //Call services to add role
+                        //Call services to update role
+                        this.userRoleModel.SetUserRoles(this.overallCookieInterface.GetCompanyId(), role, 'UPDATE').then(
+                            (data) => {
+                                // Update role logic here
+                                this.editingUserRole = -1;
+                                this.errorMessageUpdate = '';
+                                //Refresh user role list
+                                this.getAllUserRoles();
+                            }
+                        );
+                    }
+                    else {
+                        this.errorMessageUpdate = 'Role name already exist!'
+                    }
+
+                }
+            );
+        } else {
+             this.errorMessageUpdate = 'Role name can not be empty!'
+        }
+
 
     }
 
     // Handles creating a new role.
     onClickCreateRole() {
+        if (this.newUserRoleName != '' && this.newUserRoleName.trim().length > 0) {
+            //Call services to get user roles
+            this.userRoleModel.CheckUserRoleExist(this.overallCookieInterface.GetCompanyId(), this.newUserRoleName).then(
+                (data: boolean) => {
+                    if (!data) {
+                        //Call services to add role
+                        this.userRoleModel.SetUserRoles(this.overallCookieInterface.GetCompanyId(), { Id: 0, Name: this.newUserRoleName }, 'NEW').then(
+                            (data) => {
 
-        //Call services to add role
-        this.userRoleModel.SetUserRoles(this.overallCookieInterface.GetCompanyId(), { Id: 0, Name: this.newUserRoleName }, 'NEW').then(
-            (data) => {
+                                this.editingUserRole = -1;
+                                this.userRoleModState = 'INITIAL';
+                                this.errorMessage = '';
+                                //Refresh user role list
+                                this.getAllUserRoles();
+                            }
+                        );
+                    }
+                    else {
+                        this.errorMessage = 'Role name already exist!'
+                    }
 
-                this.editingUserRole = -1;
-                this.userRoleModState = 'INITIAL';
-                //Refresh user role list
-                this.getAllUserRoles();
-            }
-        );
+                }
+            );
+        } else {
+            this.errorMessage = 'Role name can not be empty!'
+        }
+
+
+
 
 
     }
@@ -346,6 +396,9 @@ export class AccessLevelsComponent {
         this.editingUserRole = -1;
         this.userRoleModState = 'INITIAL';
         this.newUserRoleName = '';
+        this.errorMessageUpdate = '';
+        this.errorMessage = '';
+
     }
 
     // Handles duplicating an existing role.

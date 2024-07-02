@@ -129,6 +129,7 @@ export class StaffModel {
         return promise;
     }
 
+   
     // Getting the staff avatar
     GetStaffAvatar(staffId: string, companyId: number) {
         var promise = new Promise((resolve, reject) => {

@@ -3,7 +3,13 @@ import { ContactType } from "../../common/core/contactType";
 export interface Contact {
     Id: number;
     Name: string;
-    ContactValue: string;
-    ContactType: ContactType;
+    ContactDetails: ContactDetails[];
     TotalRecords ?: number;
 }
+
+export interface ContactDetails{
+    Id: number;
+    ContactValue: string;
+    ContactType: ContactType;
+}
+

@@ -8,11 +8,14 @@
     .header_section {
         padding: 0;
         margin-bottom: 10px;
+        display: flex;
+        align-items: center;
         .module_title {
             font-size: 20pt;
             color: #2867af;
             letter-spacing: 0px;
             font-weight: bold;
+            margin-right: 20px;
         }
     }
     .top_bar_common {
@@ -30,6 +33,23 @@
     }
 }
 
+.back_btn{
+    
+        height: 30px;
+        width: max-content;
+        border-radius: 3px;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #21ba45;
+        padding: 0px 10px;
+        color: #fff;
+    i{
+        color: #fff;
+        margin-right: 10px;
+    }
+}
 
 @media (max-width: 991px) {
     .top_bar_common{

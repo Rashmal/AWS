@@ -27,7 +27,7 @@
         <!--Items per page-->
         <div class="col-lg-3 filter_item">
             <label>Records Per Page : </label>
-            <input type="number" min="1" [(ngModel)]="filter.RecordsPerPage" (change)="onChangeFilter('RPP')" />
+            <input type="number" min="1" pattern="^[1-9]\d*$"  [(ngModel)]="filter.RecordsPerPage" (change)="onChangeFilter('RPP')" />
         </div>
         <!--Items per page-->
 
@@ -40,6 +40,7 @@
         <ng-template pTemplate="header" class="table_header">
             <!-- Header columns -->
             <tr class="table_header_row">
+                <th class="text_align_left">No.</th>
                 <th class="header_col text_align_left">Full Name</th>
                 <th class="header_col text_align_left">User Role</th>
                 <th class="header_col created_details text_align_left">Created On</th>
@@ -54,9 +55,11 @@
         <!-- End of Table header section -->
 
         <!-- Table body section -->
-        <ng-template pTemplate="body" let-staff>
+        <ng-template pTemplate="body" let-staff let-rowIndex="rowIndex">
             <!-- Body columns -->
             <tr class="table_body">
+                <td>{{(rowIndex+1)+(this.filter.CurrentPage == 1 ? 0 :
+                                this.filter.RecordsPerPage*(this.filter.CurrentPage-1))}}</td>
                 <td class="created_details">
                     <div [pTooltip]="staff.FullName" tooltipPosition="top">{{staff.FullName}}</div>
                 </td>
@@ -93,11 +96,16 @@
                 </td>
             </tr>
             <!-- End of Body columns -->
+           
         </ng-template>
         <!-- End of Table body section -->
     </p-table>
     <!--End of Client list table-->
-
+    <div *ngIf="staffList.length == 0">
+        <div colspan="9" class="empty_content">
+            There are no items matching this filter criteria.
+        </div>
+    </div>
     <!-- Pagination section -->
     <p-paginator class="paginator_sec" #modulePaginator
         *ngIf="staffList && staffList.length > 0 && staffList[0].Total > filter.RecordsPerPage"

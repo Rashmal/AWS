@@ -5,8 +5,10 @@
         [ngClass]="[(SelectedTab && SelectedTab.value && SelectedTab.value == tabObject.value)?'selected-tab':'', (tabObject.value=='Deals 11')?'disabled_tab':'',(TabViewType=='SUB')?'sub tab-section':'tab-section']"
         (click)="onclickTabView(i)">
         <span>{{tabObject.label}}</span>
-        <span *ngIf="tabObject.value == 'SystemEnhancement'" class="noti_count">{{countSE}}</span>
-        <span *ngIf="tabObject.value == 'BugFixes'" class="noti_count">{{countBF}}</span>
+        <span *ngIf="tabObject.value == 'SystemEnhancement'" class="noti_count"  pTooltip="New System Enhancement requests"
+        tooltipPosition="top">{{countSE}}</span>
+        <span *ngIf="tabObject.value == 'BugFixes'" class="noti_count"  pTooltip="New Bug Fixes requests"
+        tooltipPosition="top">{{countBF}}</span>
     </div>
 </div>
 <!-- End of Main section -->

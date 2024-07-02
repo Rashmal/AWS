@@ -113,6 +113,7 @@ export class ImagesFilesDocsComponent implements OnInit {
         // Initialize the model
         this.clientModel = new ClientModel(this.clientService);
         this.overallCookieInterface = new OverallCookieModel();
+        this.companyId = this.overallCookieInterface.GetCompanyId();
     }
 
     ngOnInit(): void {
@@ -179,6 +180,7 @@ export class ImagesFilesDocsComponent implements OnInit {
         });
         // Perform an action on close the popup
         this.ref.onClose.subscribe((configs: any[]) => {
+            debugger
             this.getAllResourceFileTypes();
         });
     }
@@ -263,7 +265,7 @@ export class ImagesFilesDocsComponent implements OnInit {
                     removeLastItem = true;
                 }
                 this.clientModel
-                    .RemoveImageDocFile(item.Id, this.selectedClientId, 0)
+                    .RemoveImageDocFile(item.Id, this.selectedClientId, this.overallCookieInterface.GetCompanyId())
                     .then((data) => {
                         this.getAllFiles(removeLastItem);
                     });

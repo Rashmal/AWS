@@ -13,11 +13,12 @@ import { API$DOMAIN } from 'src/app/core/apiConfigurations';
 import { OverallCookieInterface } from '../../core/overallCookieInterface';
 import { OverallCookieModel } from '../../core/overallCookieModel';
 import { AuthenticationModule } from 'src/app/modules/authentication/authentication.module';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
     selector: 'app-tab-view',
     standalone: true,
-    imports: [CommonModule, FormsModule, AuthenticationModule],
+    imports: [CommonModule, FormsModule, AuthenticationModule, TooltipModule],
     templateUrl: './tab-view.component.html',
     styleUrl: './tab-view.component.scss',
 })

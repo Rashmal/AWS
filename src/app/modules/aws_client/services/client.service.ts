@@ -6,7 +6,7 @@ import { Filter } from '../../common/core/filters';
 import { Observable, catchError } from 'rxjs';
 import { ErrorMessage } from '../../common/core/errorMessage';
 import { ClientCustomer, DisplayClientDetails } from '../core/client';
-import { Contact } from '../core/contact';
+import { Contact, ContactDetails } from '../core/contact';
 import { BusinessAddress } from '../core/businessAddress';
 import { SocialMedia } from '../core/socialMedia';
 import { RelationshipDetails } from '../core/relationshipDetails';
@@ -27,6 +27,7 @@ export class ClientService {
   private GetClientCustomerUrl = API$DOMAIN + 'api/Client/GetClientCustomer';
   private SetBillingAddressUrl = API$DOMAIN + 'api/Client/SetBillingAddress';
   private GetBillingAddressUrl = API$DOMAIN + 'api/Client/GetBillingAddress';
+  private SetContactUrl = API$DOMAIN + 'api/Client/SetContact';
   private SetContactDetailsUrl = API$DOMAIN + 'api/Client/SetContactDetails';
   private GetContactListDetailsUrl = API$DOMAIN + 'api/Client/GetContactListDetails';
   private SetSocialMediaDetailsUrl = API$DOMAIN + 'api/Client/SetSocialMediaDetails';
@@ -174,12 +175,27 @@ export class ClientService {
   }
 
   // Setting the Contact details
-  SetContactDetails(contact: Contact, actionType: string, customerId: number, companyId: number) {
+  SetContact(contact: Contact, actionType: string, customerId: number, companyId: number) {
     // Setting the params
     let my_params = new HttpParams()
       .set("companyId", companyId.toString())
       .set("actionType", actionType.toString())
       .set("customerId", customerId.toString());
+
+    return this.http.post<number>(this.SetContactUrl, contact, { params: my_params }).pipe(
+      catchError(error => {
+        return this.handleError('SetContact', error)
+      })
+    );
+  }
+
+  // Setting the Contact details
+  SetContactDetails(contact: ContactDetails, actionType: string, contactId: number, companyId: number) {
+    // Setting the params
+    let my_params = new HttpParams()
+      .set("companyId", companyId.toString())
+      .set("actionType", actionType.toString())
+      .set("contactId", contactId.toString());
 
     return this.http.post<number>(this.SetContactDetailsUrl, contact, { params: my_params }).pipe(
       catchError(error => {

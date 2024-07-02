@@ -124,6 +124,10 @@
                             .lbl {
                                 margin-left: 10px;
                                 min-width: 50px;
+                                width: 50px;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
                             }
                         }
                     }
@@ -254,10 +258,10 @@
                     }
                 }
             }
-            .user_role:nth-child(odd) {
+            .loop_ur:nth-child(odd) {
                 background-color: #ffffff;
             }
-            .user_role:nth-child(even) {
+            .loop_ur:nth-child(even) {
                 background-color: #EDF7FF;
             }
             .user_role:hover {
@@ -274,6 +278,20 @@
             }
         }
     }
+}
+
+.error_message{
+    color: #DB2828;
+    display: flex;
+    text-align: center;
+    height: 25px;
+    align-items: center;
+}
+
+.flex_center{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .margin_bot_n {

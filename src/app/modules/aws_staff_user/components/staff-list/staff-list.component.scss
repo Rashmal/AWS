@@ -38,7 +38,10 @@
 .text_align_left {
     text-align: left !important;
 }
-
+.empty_content{
+    padding: 10px;
+    text-align: center;
+}
 ::ng-deep p-table .table_header_row {
     background-color: #dddddd !important;
     th {

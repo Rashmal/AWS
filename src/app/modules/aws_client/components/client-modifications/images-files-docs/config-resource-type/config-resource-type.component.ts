@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ResourceType } from 'src/app/modules/aws_client/core/resourceType';
 import { ClientModel } from 'src/app/modules/aws_client/models/clientModel';
 import { ClientService } from 'src/app/modules/aws_client/services/client.service';
+import { DeleteConfirmationComponent } from 'src/app/modules/common/components/delete-confirmation/delete-confirmation.component';
 import { Filter } from 'src/app/modules/common/core/filters';
 import { OverallCookieInterface } from 'src/app/modules/common/core/overallCookieInterface';
 import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
@@ -11,6 +12,7 @@ import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieMod
     selector: 'app-config-resource-type',
     templateUrl: './config-resource-type.component.html',
     styleUrl: './config-resource-type.component.scss',
+    providers: [DialogService],
 })
 export class ConfigResourceTypeComponent implements OnInit {
     // Store the client model
@@ -41,9 +43,11 @@ export class ConfigResourceTypeComponent implements OnInit {
     overallCookieInterface: OverallCookieInterface;
 
     constructor(
-        public ref: DynamicDialogRef,
+        public refLocal: DynamicDialogRef,
+        public refDel: DynamicDialogRef,
         private config: DynamicDialogConfig,
-        private clientService: ClientService
+        private clientService: ClientService,
+        public dialogService: DialogService,
     ) {
         // Initialize the model
         this.clientModel = new ClientModel(this.clientService);
@@ -94,7 +98,7 @@ export class ConfigResourceTypeComponent implements OnInit {
                 resource,
                 type,
                 this.selectedClientId,
-                0
+                this.overallCookieInterface.GetCompanyId()
             )
             .then((data: number) => {
 
@@ -107,8 +111,9 @@ export class ConfigResourceTypeComponent implements OnInit {
     editingIndex = -1;
     //On  click cancel
     onClickCancel() {
+        
         //Send data to component
-        this.ref.close([]);
+        this.refLocal.close([]);
     }
 
     //on change module list paginator
@@ -130,7 +135,17 @@ export class ConfigResourceTypeComponent implements OnInit {
 
     //Remove resource
     onClickDeleteItem(resource: ResourceType) {
-        this.setResource('REMOVE', resource);
+         // Open popup to confirm action
+         this.refDel = this.dialogService.open(DeleteConfirmationComponent, {
+            header: 'Delete confirmation',
+        });
+        // Perform an action on close the popup
+        this.refDel.onClose.subscribe((confirmation: boolean) => {
+            if (confirmation) {
+                this.setResource('REMOVE', resource);
+            }
+        });
+       
     }
 
     //On click add new

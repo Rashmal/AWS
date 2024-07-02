@@ -17,7 +17,7 @@ import { OverallCookieInterface } from 'src/app/modules/common/core/overallCooki
 import { OverallCookieModel } from 'src/app/modules/common/core/overallCookieModel';
 import { BusinessAddress } from '../../../core/businessAddress';
 import { RelationshipDetails } from '../../../core/relationshipDetails';
-import { Contact } from '../../../core/contact';
+import { Contact, ContactDetails } from '../../../core/contact';
 import { Filter } from 'src/app/modules/common/core/filters';
 import { ContactType } from 'src/app/modules/common/core/contactType';
 import { SocialMedia } from '../../../core/socialMedia';
@@ -124,6 +124,10 @@ export class GeneralInfoComponent implements OnInit {
     socialMediaList: SocialMedia[] = [];
     // Store dynamic dialog ref
     ref: DynamicDialogRef | undefined;
+    // Business name editing
+    businessNameEditing = false;
+    streetNameEditing = false;
+
 
     constructor(public dialogService: DialogService, private location: Location, private clientService: ClientService,
         private commonService: CommonService, private commonClientService: CommonClientService) {
@@ -216,12 +220,17 @@ export class GeneralInfoComponent implements OnInit {
         this.contactList.push(
             {
                 Id: 0,
-                ContactType: {
-                    Id: 0,
-                    Code: '',
-                    Name: ''
-                },
-                ContactValue: '',
+                ContactDetails: [
+                    {
+                        Id: 0,
+                        ContactType: {
+                            Id: 0,
+                            Code: '',
+                            Name: ''
+                        },
+                        ContactValue: '',
+                    }
+                ],
                 Name: '',
                 TotalRecords: 0
             }
@@ -282,6 +291,36 @@ export class GeneralInfoComponent implements OnInit {
             // getting the Client Social Media details based on the selected client Id
             this.GetSocialMediaListDetails();
         }
+    }
+
+    //Click to edit business name
+    onClickBusinessName() {
+        this.businessNameEditing = true;
+    }
+
+    //Changing on business name
+    onChangeBusinessName() {
+
+    }
+
+    //focus out of business name
+    onBlurBusinessName() {
+        this.businessNameEditing = false;
+    }
+
+    //Click to edit business name
+    onClickStreetName() {
+        this.streetNameEditing = true;
+    }
+
+    //Changing on business name
+    onChangeStreetName() {
+
+    }
+
+    //focus out of business name
+    onBlurStreetName() {
+        this.streetNameEditing = false;
     }
 
     // getting the Client Customer details based on the selected client Id
@@ -578,10 +617,10 @@ export class GeneralInfoComponent implements OnInit {
                     break;
                 case 'CONTACT$DETAILS':
                     // Check if the values are not empty
-                    if (!(contactObject && contactObject.ContactValue == '' && contactObject.ContactType.Id == 0)) {
-                        // Update the contact list details object
-                        this.updateContactListDetailsObject(contactObject, currentIndex);
-                    }
+                    // if (!(contactObject && contactObject.ContactValue == '' && contactObject.ContactType.Id == 0)) {
+                    //     // Update the contact list details object
+                    //     this.updateContactListDetailsObject(contactObject, currentIndex);
+                    // }
                     // End of Check if the values are not empty
                     break;
                 case 'SOCIAL$MEDIA$DETAILS':
@@ -596,6 +635,33 @@ export class GeneralInfoComponent implements OnInit {
             // End of Check the event
         }
         // End of Check if the business name is not empty
+    }
+
+    //On blur event of fields in contact areas
+    onBlurEventContact(type: string, index: number, contact: Contact, valueIndex ?: number){
+        switch(type){
+            case 'CONTACT$DETAILS':
+                if(contact.Name != "" && contact.Name.trim().length > 0){
+                    //Set contact details
+                    this.updateContactListDetailsObject(contact, index);
+                }
+                
+            break;
+            case 'CONTACT$TYPE':
+                if(contact.Name != "" && contact.Name.trim().length > 0){
+                    //Set contact details
+                    this.updateContactDetailListObject(contact.ContactDetails[valueIndex], contact.Id, index);
+                }
+               
+            break;
+            case 'CONTACT$VALUE':
+                if(contact.Name != "" && contact.Name.trim().length > 0){
+                    //Set contact details
+                    this.updateContactDetailListObject(contact.ContactDetails[valueIndex], contact.Id, index);
+                }
+               
+            break;
+        }
     }
 
     // Update the client customer object
@@ -662,12 +728,17 @@ export class GeneralInfoComponent implements OnInit {
             this.contactList.push(
                 {
                     Id: 0,
-                    ContactType: {
-                        Id: 0,
-                        Code: '',
-                        Name: ''
-                    },
-                    ContactValue: '',
+                    ContactDetails: [
+                        {
+                            Id: 0,
+                            ContactType: {
+                                Id: 0,
+                                Code: '',
+                                Name: ''
+                            },
+                            ContactValue: '',
+                        }
+                    ],
                     Name: '',
                     TotalRecords: 0
                 }
@@ -676,10 +747,46 @@ export class GeneralInfoComponent implements OnInit {
         // End of Check if the action is new
 
         // Calling the object model to access the service
-        this.clientModel.SetContactDetails(contactObject, actionState, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
+        this.clientModel.SetContact(contactObject, actionState, this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
             (data) => {
                 // Setting the business address Id
                 this.contactList[currentIndex].Id = <number>data;
+                /// Getting all the contacts list
+                this.getAllContactList();
+            }
+        );
+        // End of Calling the object model to access the service
+    }
+
+    // Update the contact list details object
+    updateContactDetailListObject(contactObject: ContactDetails, contactId: number, contactIndex: number) {
+        // Check the action state
+        let actionState = (contactObject.Id == 0) ? "NEW" : "UPDATE";
+
+        // Check if the action is new
+        if (actionState == "NEW") {
+            // Adding another contact object to the list
+            this.contactList[contactIndex].ContactDetails.push(
+               
+                        {
+                            Id: 0,
+                            ContactType: {
+                                Id: 0,
+                                Code: '',
+                                Name: ''
+                            },
+                            ContactValue: '',
+                        }
+                
+            );
+        }
+        // End of Check if the action is new
+
+        // Calling the object model to access the service
+        this.clientModel.SetContactDetails(contactObject, actionState, contactId, this.overallCookieInterface.GetCompanyId()).then(
+            (data) => {
+                // Setting the business address Id
+                //this.contactList[currentIndex].Id = <number>data;
                 /// Getting all the contacts list
                 this.getAllContactList();
             }
@@ -732,7 +839,28 @@ export class GeneralInfoComponent implements OnInit {
         this.ref.onClose.subscribe((confirmation: boolean) => {
             if (confirmation) {
                 // Calling the object model to access the service
-                this.clientModel.SetContactDetails(contactObject, "REMOVE", this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
+                this.clientModel.SetContact(contactObject, "REMOVE", this.selectedClientId, this.overallCookieInterface.GetCompanyId()).then(
+                    (data) => {
+                        /// Getting all the contacts list
+                        this.getAllContactList();
+                    }
+                );
+                // End of Calling the object model to access the service
+            }
+        });
+    }
+
+    // On delete function for contact
+    onDeleteContactDetails(contactObject: ContactDetails, contactId: number) {
+        // Open popup to confirm action
+        this.ref = this.dialogService.open(DeleteConfirmationComponent, {
+            header: 'Delete confirmation'
+        });
+        // Perform an action on close the popup
+        this.ref.onClose.subscribe((confirmation: boolean) => {
+            if (confirmation) {
+                // Calling the object model to access the service
+                this.clientModel.SetContactDetails(contactObject, "REMOVE", contactId, this.overallCookieInterface.GetCompanyId()).then(
                     (data) => {
                         /// Getting all the contacts list
                         this.getAllContactList();
@@ -750,28 +878,51 @@ export class GeneralInfoComponent implements OnInit {
             (data) => {
                 // Getting the list of contacts
                 this.contactList = <Contact[]>data;
+                
+                // Loop through the list
+                for (let i = 0; i < this.contactList.length; i++) {
+                  
+                    //Loop through the contact details list
+                    for(let j = 0; j < this.contactList[i].ContactDetails.length; j++){
+                        let conDetTypeId = this.contactList[i].ContactDetails[j].ContactType.Id;
+                        if (conDetTypeId == 1 || conDetTypeId == 2 || conDetTypeId == 3 || conDetTypeId == 4 || conDetTypeId == 7 || conDetTypeId == 8) {
+                            // Update the field
+                            this.contactValueFocusOut(this.contactList[i].ContactDetails[j], i, j);
+                        }
+                    }
+                    
+                        this.contactList[i].ContactDetails.push( {
+                            Id: 0,
+                            ContactType: {
+                                Id: 0,
+                                Code: '',
+                                Name: ''
+                            },
+                            ContactValue: '',
+                        });
+                    
+                }
+                // End of Loop through the list
+
                 // Adding another contact object to the list
                 this.contactList.push(
                     {
                         Id: 0,
-                        ContactType: {
-                            Id: 0,
-                            Code: '',
-                            Name: ''
-                        },
-                        ContactValue: '',
+                        ContactDetails: [
+                            {
+                                Id: 0,
+                                ContactType: {
+                                    Id: 0,
+                                    Code: '',
+                                    Name: ''
+                                },
+                                ContactValue: '',
+                            }
+                        ],
                         Name: '',
                         TotalRecords: 0
                     }
                 );
-                // Loop through the list
-                for (let i = 0; i < this.contactList.length; i++) {
-                    if (this.contactList[i].ContactType.Id == 1 || this.contactList[i].ContactType.Id == 2 || this.contactList[i].ContactType.Id == 3 || this.contactList[i].ContactType.Id == 4 || this.contactList[i].ContactType.Id == 7 || this.contactList[i].ContactType.Id == 8) {
-                        // Update the field
-                        this.contactValueFocusOut(this.contactList[i], i);
-                    }
-                }
-                // End of Loop through the list
             }
         );
         // End of Calling the object model to access the service
@@ -824,9 +975,11 @@ export class GeneralInfoComponent implements OnInit {
     }
 
     // Focus out event of contact values
-    contactValueFocusOut(contactObject: Contact, rowIndex: number) {
+    contactValueFocusOut(contactObject: ContactDetails, rowIndex: number, detIndex: number) {
         debugger
-        // Getting the current value
+        //Check for phone numbers
+        if(contactObject.ContactType.Code === 'FAX' || contactObject.ContactType.Code === 'HP' || contactObject.ContactType.Code === 'BLP' || contactObject.ContactType.Code === 'PH' || contactObject.ContactType.Code === 'BP' || contactObject.ContactType.Code === 'MP'){
+            // Getting the current value
         let currentValue = contactObject.ContactValue;
         // Replace all ( , ) with empty
         currentValue = currentValue.replaceAll("(", "").replaceAll(")", "").replaceAll(" ", "");
@@ -847,11 +1000,12 @@ export class GeneralInfoComponent implements OnInit {
             // End of Check if the rest numbers are more than 4
 
             // Setting the new format
-            this.contactList[rowIndex].ContactValue = "(" + first2Numbers + ") " + rest1stSet + " " + rest2ndSet;
+            this.contactList[rowIndex].ContactDetails[detIndex].ContactValue = "(" + first2Numbers + ") " + rest1stSet + " " + rest2ndSet;
         } else {
             // Setting the new format
-            this.contactList[rowIndex].ContactValue = "(" + currentValue + ") ";
+            this.contactList[rowIndex].ContactDetails[detIndex].ContactValue = "(" + currentValue + ") ";
         }
         // End of Check if the value has more than 2 numbers
+        }
     }
 }

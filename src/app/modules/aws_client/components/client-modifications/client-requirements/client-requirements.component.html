@@ -397,7 +397,7 @@
                                         <input appAccessLevelVerification SelectedModuleCode="CLIEN"
                                             SelectedModuleAccessCode="ClientReq" SelectedFeatureAccessCode="CLIRTS"
                                             [IsTab]="false" ActionState="EDIT" ActionState="DISABLE"
-                                            class="input_field " type="number"
+                                            class="input_field " type="number" appRestrictNegative
                                             [disabled]="selectedClientId == 0 || modificationMode == 'VIEW'"
                                             onKeyPress="if(value.length==20) return false;"
                                             inputrestriction="^[a-z A-Z 0-9 _ -]*$" [(ngModel)]="hoursOthersRates.Rate"

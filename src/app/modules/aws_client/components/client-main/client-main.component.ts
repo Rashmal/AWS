@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { SelectItem } from 'primeng/api';
+import {Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-client-main',
@@ -9,17 +9,23 @@ import { SelectItem } from 'primeng/api';
 })
 export class ClientMainComponent {
 
- 
+  hideButton: boolean = false;
 
   // Constructor
-  constructor() { }
-
-  // Ng on init
+  constructor(private route: Router){}
   ngOnInit() {
     
-
-   
   }
 
+  
+
+  goBackToList(){
+    this.route.navigate(
+      ['/layout/client/client_main/client_list']
+    )
+  }
+  checkRoute(){
+    return this.route.url === '/layout/client/client_main/client_list';
+  }
    
 }

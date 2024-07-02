@@ -74,6 +74,7 @@ export class StaffListComponent implements OnInit {
         this.clientModel = new ClientModel(this.clientService);
         this.staffModel = new StaffModel(this.staffService);
         this.overallCookieInterface = new OverallCookieModel();
+        this.companyId = this.overallCookieInterface.GetCompanyId();
     }
 
     ngOnInit(): void {
@@ -114,6 +115,9 @@ export class StaffListComponent implements OnInit {
 
     //On change filter
     onChangeFilter(type: string) {
+        if (this.filter.RecordsPerPage < 1) {
+            this.filter.RecordsPerPage = 1;
+          }
         this.filter.CurrentPage = 1;
         this.getDisplayStaffList();
     }
